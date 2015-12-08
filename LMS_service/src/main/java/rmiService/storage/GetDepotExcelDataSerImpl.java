@@ -34,7 +34,7 @@ public class GetDepotExcelDataSerImpl extends UnicastRemoteObject implements Get
 	public ArrayList<DepotExcelPO> getDepotExcel(String city)
 			throws RemoteException {
 		// TODO 自动生成的方法存根
-		sql = "SELECT * from '"+city+"' 库存信息 ";
+		sql = "SELECT * from '"+city+"库存信息‘";
 		ArrayList<DepotExcelPO> excelPO = new ArrayList<DepotExcelPO>();
 		try {
 			Class.forName(DRIVER);
