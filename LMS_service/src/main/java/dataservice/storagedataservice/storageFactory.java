@@ -19,4 +19,6 @@ public interface storageFactory extends Remote{
 	public UsedSpaceDataSer createUsedSpaceDataSer() throws RemoteException;
 	
 	public OutDepotDataSer createOutDepotDataSer() throws RemoteException;
+	
+	public GetDepotExcelDataSer createGetDepotExcelDataSer() throws RemoteException;
 }
