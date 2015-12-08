@@ -18,11 +18,10 @@ public class GetPayment implements GetPaymentSer{
 	private ArrayList<PaymentPO> list1;
 	private int size=0;
 	private String str,str1,str2;
-	@Override
 	public ArrayList<PaymentPO> getAllPay(String end) {
 		// TODO Auto-generated method stub
-		list=new ArrayList<>();
-		list1=new ArrayList<>();
+		list=new ArrayList<String>();
+		list1=new ArrayList<PaymentPO>();
 		PaymentPO po;
 		try {
 			documentsFactory documentsFactory=(documentsFactory)Naming.lookup("rmi://127.0.0.1:6600/docFactory");
@@ -50,11 +49,10 @@ public class GetPayment implements GetPaymentSer{
 		return list1;
 	}
 
-	@Override
 	public ArrayList<PaymentPO> getAllPay(String start, String end) {
 		// TODO Auto-generated method stub
-		list=new ArrayList<>();
-		list1=new ArrayList<>();
+		list=new ArrayList<String>();
+		list1=new ArrayList<PaymentPO>();
 		PaymentPO po;
 		try {
 			documentsFactory documentsFactory=(documentsFactory)Naming.lookup("rmi://114.212.42.143:6600/docFactory");

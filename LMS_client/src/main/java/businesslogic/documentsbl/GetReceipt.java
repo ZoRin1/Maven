@@ -16,12 +16,10 @@ public class GetReceipt implements GetReceiptSer{
 	private ArrayList<String> list;
 	private ArrayList<ReceiptPO> list1;
 	private int size=0;
-	private String str;
-	@Override
 	public ArrayList<ReceiptPO> getReceipts(String selling, String date) {
 		// TODO Auto-generated method stub
-		list=new ArrayList<>();
-		list1=new ArrayList<>();
+		list=new ArrayList<String>();
+		list1=new ArrayList<ReceiptPO>();
 		ReceiptPO po;
 		try {
 			documentsFactory documentsFactory=(documentsFactory)Naming.lookup("rmi://127.0.0.1:6600/docFactory");
@@ -49,10 +47,9 @@ public class GetReceipt implements GetReceiptSer{
 		return list1;
 	}
 
-	@Override
 	public ArrayList<ReceiptPO> getAllReceipts(String end) {
-		list=new ArrayList<>();
-		list1=new ArrayList<>();
+		list=new ArrayList<String>();
+		list1=new ArrayList<ReceiptPO>();
 		ReceiptPO po;
 		try {
 			documentsFactory documentsFactory=(documentsFactory)Naming.lookup("rmi://127.0.0.1:6600/docFactory");
@@ -78,11 +75,10 @@ public class GetReceipt implements GetReceiptSer{
 		return list1;
 	}
 
-	@Override
 	public ArrayList<ReceiptPO> getAllReceipts(String start, String end) {
 		// TODO Auto-generated method stub
-		list=new ArrayList<>();
-		list1=new ArrayList<>();
+		list=new ArrayList<String>();
+		list1=new ArrayList<ReceiptPO>();
 		ReceiptPO po;
 		try {
 			documentsFactory documentsFactory=(documentsFactory)Naming.lookup("rmi://114.212.42.143:6600/docFactory");

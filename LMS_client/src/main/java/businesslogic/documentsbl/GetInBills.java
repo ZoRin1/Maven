@@ -17,12 +17,11 @@ public class GetInBills implements GetInBillsSer{
 	private ArrayList<InBillsPO> list1;
 	private int size=0;
 	private String str,str1,str2;
-	@Override
 	public ArrayList<InBillsPO> getInBill(String account, String start,
 			String end) {
 		// TODO Auto-generated method stub
-		list=new ArrayList<>();
-		list1=new ArrayList<>();
+		list=new ArrayList<String>();
+		list1=new ArrayList<InBillsPO>();
 		InBillsPO po;
 		try {
 			documentsFactory documentsFactory=(documentsFactory)Naming.lookup("rmi://127.0.0.1:6600/docFactory");
@@ -49,11 +48,10 @@ public class GetInBills implements GetInBillsSer{
 		}
 		return list1;
 	}
-	@Override
 	public ArrayList<InBillsPO> getAllInBills(String account, String end) {
 		// TODO Auto-generated method stub
-		list=new ArrayList<>();
-		list1=new ArrayList<>();
+		list=new ArrayList<String>();
+		list1=new ArrayList<InBillsPO>();
 		InBillsPO po;
 		try {
 			documentsFactory documentsFactory=(documentsFactory)Naming.lookup("rmi://114.212.42.143:6600/docFactory");
