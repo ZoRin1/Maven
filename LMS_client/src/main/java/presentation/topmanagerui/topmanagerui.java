@@ -21,9 +21,9 @@ import presentation.mainui.mainui;
 public class topmanagerui extends JFrame{
 	private String[] args;
 	private JButton outjButton;
-	 topmanagerJpanel topmanagerJpanel;
-	private topmanagerOperationJpanel operationJpanel;
-	private JButton b1,b2,b3,b4,b5;
+	 private topmanagerJpanel topmanagerJpanel;
+	topmanagerOperationJpanel operationJpanel;
+	JButton b1,b2,b3,b4,b5;
 	private JButton tuichuButton;
 	private JButton zuixiaohuaButton;
 	public topmanagerui(String s,String [] args) {
@@ -157,8 +157,8 @@ public class topmanagerui extends JFrame{
 				topmanagerui.setVisible(false);
 			}
 		});
-b2.addActionListener(new ActionListener() {
-			
+		b2.addActionListener(new ActionListener() {
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
@@ -166,15 +166,21 @@ b2.addActionListener(new ActionListener() {
 				topmanagerui.setVisible(false);
 			}
 		});
-b3.addActionListener(new ActionListener() {
-	
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		new b3topmanagerui("总经理——审批单据", topmanagerui);
-		topmanagerui.setVisible(false);
-	}
-});
+		b3.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				topmanagerJpanel.remove(operationJpanel);
+				topmanagerui.b1.setEnabled(false);
+				topmanagerui.b2.setEnabled(false);
+				topmanagerui.b3.setEnabled(false);
+				topmanagerui.b4.setEnabled(false);
+				topmanagerui.b5.setEnabled(false);
+				new b3JPanel(topmanagerui, topmanagerJpanel);
+				topmanagerJpanel.repaint();
+			}
+		});
 		b4.addActionListener(new ActionListener() {
 			
 			@Override
