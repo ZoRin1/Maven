@@ -18,7 +18,7 @@ public class createDocument implements createDocumentBlSer{
 		// TODO Auto-generated method stub
 		String code=null;
 		try {
-			documentsFactory documentsFactory=(documentsFactory)Naming.lookup("rmi://127.0.0.1:6600/docFactory");
+			documentsFactory documentsFactory=(documentsFactory)Naming.lookup("rmi://114.212.42.143:6600/docFactory");
 			GetDocCodeDataSer getDocCodeDataSer=documentsFactory.createGetDocCodeDataSer();
 			code=getDocCodeDataSer.getDocCode(doName);
 		} catch (MalformedURLException e) {

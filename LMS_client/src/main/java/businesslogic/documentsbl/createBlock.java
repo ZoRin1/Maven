@@ -18,7 +18,7 @@ public class createBlock implements createBlockBlSer{
 		// TODO Auto-generated method stub
 		boolean a=true;
 		try {
-			documentsFactory documentsFactory=(documentsFactory)Naming.lookup("rmi://127.0.0.1:6600/docFactory");
+			documentsFactory documentsFactory=(documentsFactory)Naming.lookup("rmi://114.212.42.143:6600/docFactory");
 			addDocummentInfoDataSer addDocummentInfoDataSer=documentsFactory.createaddDocummentInfoDataSer();
 			a=addDocummentInfoDataSer.addDocumentInfo(po);
 		} catch (MalformedURLException e) {

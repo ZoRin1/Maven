@@ -18,7 +18,7 @@ public class stockDepotPanel1 extends JPanel{
 	
 	
 	private ImageIcon frameIcon =new ImageIcon("picture/操作面板.png");
-	private JButton returnButton;
+	private JButton returnButton,excelButton;
 	private JLabel j1;
 	private stockDepotJTable1 stockTable1;
 	private JButton hangyun,qiyun;
@@ -49,7 +49,9 @@ public class stockDepotPanel1 extends JPanel{
 	private void  init(){
 		ImageIcon returnIcon=new ImageIcon("picture/返回.png");
 		ImageIcon kuangjia = new ImageIcon("picture/库存图片/铁运区.png");
+		ImageIcon Excel = new ImageIcon("picture/小导出EXCEL.png");
 		returnButton=new JButton(returnIcon);
+		excelButton = new JButton(Excel);
 		hangyun = new JButton();
 		hangyun.setBounds(20, 15, 38, 15);
 		hangyun.setContentAreaFilled(false);
@@ -77,9 +79,12 @@ public class stockDepotPanel1 extends JPanel{
 		
 		returnButton.setBounds(662, 575,48,48);
 		returnButton.setContentAreaFilled(false);
+		excelButton.setBounds(581, 575, 47, 47);
+		excelButton.setContentAreaFilled(false);
 		
 		this.add(j1);
 		this.add(returnButton);
+		this.add(excelButton);
 		j1.add(stockTable1.getScrollPane());
 		j1.add(qiyun);
 		j1.add(hangyun);
@@ -103,6 +108,14 @@ public class stockDepotPanel1 extends JPanel{
 				ui.getB6().setEnabled(true);
 				icwarehousemanJpanel.add(ui.getOperationJpanel());
 				icwarehousemanJpanel.repaint();
+			}
+		});
+		excelButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO 自动生成的方法存根
+				
 			}
 		});
 		hangyun.addActionListener(new ActionListener() {

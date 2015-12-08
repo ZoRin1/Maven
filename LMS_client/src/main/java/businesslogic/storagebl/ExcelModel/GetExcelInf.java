@@ -21,7 +21,7 @@ public class GetExcelInf {
 	
 	public ArrayList<DepotExcelPO> getExcel(String city){
 		try {
-			storageFactory stoFactory = (storageFactory)Naming.lookup("rmi://127.0.0.1:6600/stoFactory");
+			storageFactory stoFactory = (storageFactory)Naming.lookup("rmi://114.212.42.143:6600/stoFactory");
 			GetDepotExcelDataSer getExcel = stoFactory.createGetDepotExcelDataSer();
 			excelPOList = getExcel.getDepotExcel(city);
 		} catch (MalformedURLException e) {

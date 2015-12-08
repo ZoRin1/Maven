@@ -15,7 +15,7 @@ public class InDepotBL {
 	
 	public void inDepotExcel(String inDepotCode,String inDepotDate,DepotPO depo,String city){
 		try {
-			storageFactory stoFactory = (storageFactory)Naming.lookup("rmi://127.0.0.1:6600/stoFactory");
+			storageFactory stoFactory = (storageFactory)Naming.lookup("rmi://114.212.42.143:6600/stoFactory");
 			InDepotDataSer inDepot = stoFactory.createInDepotDataSer();
 			inDepot.inDepotExcel(inDepotCode, inDepotDate, depo, city);
 		} catch (MalformedURLException e) {

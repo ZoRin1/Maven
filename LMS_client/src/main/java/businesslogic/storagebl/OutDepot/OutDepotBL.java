@@ -15,7 +15,7 @@ public class OutDepotBL {
 	private DepotPO po;
 	public void outDepot(DepotVO depo,String city){
 		try {
-			storageFactory stoFactory = (storageFactory)Naming.lookup("rmi://127.0.0.1:6600/stoFactory");
+			storageFactory stoFactory = (storageFactory)Naming.lookup("rmi://114.212.42.143:6600/stoFactory");
 			OutDepotDataSer outDepot = stoFactory.createOutDepotDataSer();
 			po = new DepotPO(depo.getQu(),depo.getPai(),depo.getJia(),depo.getWei());
 			outDepot.outDepot(po, city);

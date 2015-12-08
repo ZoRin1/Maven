@@ -17,7 +17,7 @@ public class getPosition implements GetPositionBlSer{
 	public DepotVO getPOsition(String city, int qu) {
 		// TODO Auto-generated method stub
 		try {
-			storageFactory stoFactory = (storageFactory)Naming.lookup("rmi://127.0.0.1:6600/stoFactory");
+			storageFactory stoFactory = (storageFactory)Naming.lookup("rmi://114.212.42.143:6600/stoFactory");
 			GetDepotDataSer getDepot  = stoFactory.createGetDepotDataSer();
 			DepotPO po = getDepot.getDepot(city, qu);
 	        vo = new DepotVO(po.getQu(),po.getPai(),po.getJia(),po.getWei());

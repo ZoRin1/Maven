@@ -16,7 +16,7 @@ public class spaceBL implements usedSpaceBlSer{
 	
 	public spaceBL(){
 		try {
-			stoFactory = (storageFactory)Naming.lookup("rmi://127.0.0.1:6600/stoFactory");
+			stoFactory = (storageFactory)Naming.lookup("rmi://114.212.42.143:6600/stoFactory");
 			used = stoFactory.createUsedSpaceDataSer();
 		} catch (MalformedURLException e) {
 			// TODO 自动生成的 catch 块

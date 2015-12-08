@@ -13,7 +13,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import po.storagePO.DepotExcelPO;
 
 public class OutExcel {
-	
+	//ip:114.212.42.143
 	private String addresss;
 //	private ArrayList<DepotExcelPO> list;
 	private List<DepotExcelPO> Depotlist;

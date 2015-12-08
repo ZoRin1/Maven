@@ -51,7 +51,7 @@ public class CheckBL implements check_inventoryBlSer{
 	public ArrayList<InDepotInfVO> inventory(String account, String start, String end) {
 		// TODO 自动生成的方法存根
 		try {
-			documentsFactory documentsFactory=(documentsFactory)Naming.lookup("rmi://127.0.0.1:6600/docFactory");
+			documentsFactory documentsFactory=(documentsFactory)Naming.lookup("rmi://114.212.42.143:6600/docFactory");
 			getCodeDataSer getCodeDataSer=documentsFactory.createGetCodeDataSer();
 			ArrayList<String>Sto= getCodeDataSer.getStoCode(account,"入库单", start, end);
 			getDocumentInfoDataSer getDocumentInfoDataSer=documentsFactory.createGetDocumentInfoDataSer();
