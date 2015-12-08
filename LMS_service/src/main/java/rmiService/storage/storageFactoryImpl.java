@@ -6,6 +6,7 @@ import java.rmi.server.UnicastRemoteObject;
 import dataservice.storagedataservice.Check_inventoryDataSer;
 import dataservice.storagedataservice.GetCountDataSer;
 import dataservice.storagedataservice.GetDepotDataSer;
+import dataservice.storagedataservice.GetDepotExcelDataSer;
 import dataservice.storagedataservice.InDepotDataSer;
 import dataservice.storagedataservice.OutDepotDataSer;
 import dataservice.storagedataservice.ReturnSpaceDataSer;
@@ -71,6 +72,13 @@ public class storageFactoryImpl extends UnicastRemoteObject implements storageFa
 	public OutDepotDataSer createOutDepotDataSer() throws RemoteException {
 		// TODO 自动生成的方法存根
 		return new OutDepotDataSerImpl();
+	}
+
+	@Override
+	public GetDepotExcelDataSer createGetDepotExcelDataSer()
+			throws RemoteException {
+		// TODO 自动生成的方法存根
+		return new GetDepotExcelDataSerImpl();
 	}
 
 }
