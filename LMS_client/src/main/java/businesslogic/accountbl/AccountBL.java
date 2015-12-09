@@ -22,7 +22,6 @@ public class AccountBL implements AccountBLSer {
 		try {
 			ip = new ipConfig();
 			String ipp = ip.getIP();
-			System.out.println(ipp);
 			accountFactory accountFactory =(accountFactory)Naming.lookup("rmi://"+ipp+"/accFactory");
 			this.accountDataSer = accountFactory.createAccountDataSer();
 		} catch (MalformedURLException e) {
