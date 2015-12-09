@@ -17,15 +17,15 @@ public class documentJpanel extends JPanel{
 	public documentJpanel(courierui courierui,courierJpanel courierJpanel,String account) {
 		// TODO Auto-generated constructor stub
 		this.account=account;
-		init();
+		init(courierui);
 	 	courierJpanel.add(this);
 		registListener(courierui,courierJpanel,this);
 	}
-	private void init(){
+	private void init(courierui courierui){
 		ImageIcon i1 = new ImageIcon("picture/财务图片/单据反馈框架.png");
 		jLabel = new JLabel(i1);
 		jLabel.setBounds(0, 0, 723, 566);
-		jLabel.add(new documentJtable(this,account).getScrollPane());
+		jLabel.add(new documentJtable(courierui,this,account).getScrollPane());
 		
 		returnButton=new JButton(returnIcon);
 		returnButton.setBounds(662, 575,48,48);

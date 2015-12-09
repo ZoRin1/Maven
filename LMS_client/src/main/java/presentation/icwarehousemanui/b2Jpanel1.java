@@ -207,6 +207,7 @@ public class b2Jpanel1 extends JPanel{
 						new failDialog(ui, "失败", true);
 					}
 					else {
+						returnButton.setEnabled(false);
 						getPosition=new getPosition();
 						String stateList[]=state.split("-");	
 						DepotVO vo=getPosition.getPOsition(stateList[1], Integer.parseInt(t6.getText()));

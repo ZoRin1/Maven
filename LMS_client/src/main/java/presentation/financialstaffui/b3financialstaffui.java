@@ -91,7 +91,7 @@ public class b3financialstaffui extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				new b3b2Jpanel1(b3financialstaffui, financialstaffJpanel);
+				new b3b2Jpanel1(b3financialstaffui, financialstaffJpanel,account);
 				financialstaffJpanel.remove(operationJpanel);
 				b1.setEnabled(false);
 				b2.setEnabled(false);

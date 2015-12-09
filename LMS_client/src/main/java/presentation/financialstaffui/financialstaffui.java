@@ -29,7 +29,7 @@ public class financialstaffui extends JFrame{
 	private JButton zuixiaohuaButton;
 	
 	//这是暂时的ID和State
-	private String account;
+	private String account="1515";
 	private String state;
 	public financialstaffui(String s,String [] args) {
 		// TODO Auto-generated constructor stub

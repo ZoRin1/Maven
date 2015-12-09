@@ -11,26 +11,26 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class b3b2Jpanel1 extends JPanel{
-	
 	private ImageIcon frameIcon =new ImageIcon("picture/操作面板.png");
 	private JButton returnButton;
 	private ImageIcon returnIcon=new ImageIcon("picture/返回.png");
 	private JLabel j1;
 	private b3b2Jpanel1JTable b3b2Jpanel1JTable;
-	
-	public b3b2Jpanel1(b3financialstaffui b3financialstaffui,financialstaffJpanel financialstaffJpanel) {
+	private String account;
+	public b3b2Jpanel1(b3financialstaffui b3financialstaffui,financialstaffJpanel financialstaffJpanel,String account) {
 		// TODO Auto-generated constructor stub
-		init();
+		this.account=account;
+		init(b3financialstaffui);
 		financialstaffJpanel.add(this);
 		registListener(b3financialstaffui,financialstaffJpanel,this);
 	}
-	private void init(){
+	private void init(b3financialstaffui b3financialstaffui){
 		Font font=new Font("幼圆",Font.BOLD,20);
 		ImageIcon i1 = new ImageIcon("picture/财务图片/单据反馈框架.png");
 		j1 = new JLabel(i1);
 		j1.setBounds(0, 0, 723, 566);
 		
-		b3b2Jpanel1JTable = new b3b2Jpanel1JTable(this);
+		b3b2Jpanel1JTable = new b3b2Jpanel1JTable(b3financialstaffui,this,account);
 
 		returnButton=new JButton(returnIcon);
 		returnButton.setBounds(662, 575,48,48);
