@@ -16,7 +16,6 @@ public class ipConfig {
 			BufferedReader reader = new BufferedReader(new FileReader(new File("rmi_ip")));
 			ip = reader.readLine();
 			reader.close();
-			System.out.println(ip);
 		} catch (FileNotFoundException e) {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
