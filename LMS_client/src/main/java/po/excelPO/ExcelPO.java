@@ -1,5 +1,7 @@
 package po.excelPO;
 
-public class ExcelPO {
+import java.io.Serializable;
+
+public class ExcelPO implements Serializable{
 
 }

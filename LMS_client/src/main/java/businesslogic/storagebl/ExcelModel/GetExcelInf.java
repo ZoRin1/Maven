@@ -27,6 +27,7 @@ public class GetExcelInf {
 			String ipp = ip.getIP();
 			storageFactory stoFactory = (storageFactory)Naming.lookup("rmi://"+ipp+"/stoFactory");
 			GetDepotExcelDataSer getExcel = stoFactory.createGetDepotExcelDataSer();
+			System.out.println(city);
 			excelPOList = getExcel.getDepotExcel(city);
 		} catch (MalformedURLException e) {
 			// TODO 自动生成的 catch 块
