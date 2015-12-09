@@ -15,7 +15,7 @@ import vo.orgVO.MiddleOrgVO;
 public class MiddleBL implements MiddleOrgBLSer {
 	
 	private MiddleOrgDataSer middleOrgDataSer;
-	private ipConfig ip;
+	private ipConfig ip=new ipConfig();
 	
 	public MiddleBL() {
 		// TODO Auto-generated constructor stub
