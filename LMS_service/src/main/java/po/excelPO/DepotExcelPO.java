@@ -1,8 +1,8 @@
-package po.storagePO;
+package po.excelPO;
 
 import java.io.Serializable;
 
-public class DepotExcelPO implements Serializable{
+public class DepotExcelPO extends ExcelPO implements Serializable{
 	
 	private int qu;
 	private int pai;
@@ -56,6 +56,22 @@ public class DepotExcelPO implements Serializable{
 	public void setDate(String date) {
 		this.date = date;
 	}
-	
-	
+	public Object getData(int index){
+		switch(index){
+		case 0:
+			return getCode();
+		case 1:
+			return getDate();
+		case 2:
+			return getQu();
+		case 3:
+			return getPai();
+		case 4:
+			return getJia();
+		case 5:
+			return getWei();
+		default:
+			return null;
+		}
+	}
 }

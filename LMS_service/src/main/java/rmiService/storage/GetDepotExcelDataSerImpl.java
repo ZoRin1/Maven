@@ -9,8 +9,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import po.excelPO.DepotExcelPO;
 import po.financePO.AccountPO;
-import po.storagePO.DepotExcelPO;
 import dataservice.storagedataservice.GetDepotExcelDataSer;
 
 public class GetDepotExcelDataSerImpl extends UnicastRemoteObject implements GetDepotExcelDataSer{

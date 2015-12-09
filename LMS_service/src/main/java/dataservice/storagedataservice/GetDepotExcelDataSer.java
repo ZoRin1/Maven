@@ -4,7 +4,8 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-import po.storagePO.DepotExcelPO;
+import po.excelPO.DepotExcelPO;
+
 
 public interface GetDepotExcelDataSer extends Remote{
 	
