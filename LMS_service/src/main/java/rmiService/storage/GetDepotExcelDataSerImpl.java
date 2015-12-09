@@ -42,7 +42,8 @@ public class GetDepotExcelDataSerImpl extends UnicastRemoteObject implements Get
 			PreparedStatement preparedStatement=connection.prepareStatement(sql);
 			ResultSet resultSet=preparedStatement.executeQuery();
 			while(resultSet.next()){
-				DepotExcelPO po = new DepotExcelPO(Integer.parseInt(resultSet.getString(1)), Integer.parseInt(resultSet.getString(2)), Integer.parseInt(resultSet.getString(3)), Integer.parseInt(resultSet.getString(4)), resultSet.getString(5), resultSet.getString(6));
+				//DepotExcelPO po = new DepotExcelPO(Integer.parseInt(resultSet.getString(1)), Integer.parseInt(resultSet.getString(2)), Integer.parseInt(resultSet.getString(3)), Integer.parseInt(resultSet.getString(4)), resultSet.getString(5), resultSet.getString(6));
+				DepotExcelPO po = new DepotExcelPO(resultSet.getInt(1),resultSet.getInt(2),resultSet.getInt(3),resultSet.getInt(4), resultSet.getString(5), resultSet.getString(6));
 				excelPO.add(po);
 			}
 			connection.close();
