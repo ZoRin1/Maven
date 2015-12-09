@@ -7,6 +7,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import po.financePO.AccountPO;
+import presentation.mainui.ipConfig;
 import dataservice.financedataservice.GetAccountDataSer;
 import dataservice.financedataservice.financeFactory;
 import vo.financeVO.AccountVO;
@@ -14,6 +15,12 @@ import businesslogicservice.financeblservice.GetAccountBlSer;
 
 public class CheckAccountBL implements GetAccountBlSer{
 
+	private ipConfig ip;
+	
+	public CheckAccountBL(){
+		ip = new ipConfig();
+	}
+	
 	@Override
 	public ArrayList<AccountVO> getAccount() {
 		// TODO 自动生成的方法存根
@@ -22,7 +29,8 @@ public class CheckAccountBL implements GetAccountBlSer{
 		AccountVO v1;
 		AccountPO p1;
 		try {
-			financeFactory finFactory = (financeFactory)Naming.lookup("rmi://127.0.0.1:6600/finFactory");
+			String ipp = ip.getIP();
+			financeFactory finFactory = (financeFactory)Naming.lookup("rmi://"+ipp+"/finFactory");
 			GetAccountDataSer getAccount = finFactory.createGetAccountDataSer();
 			po = getAccount.getAccount();
 			for(int i = 0 ; i <po.size();i++){

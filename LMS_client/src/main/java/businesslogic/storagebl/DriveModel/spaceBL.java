@@ -5,6 +5,7 @@ import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
+import presentation.mainui.ipConfig;
 import dataservice.storagedataservice.UsedSpaceDataSer;
 import dataservice.storagedataservice.storageFactory;
 import businesslogicservice.storageblservice.usedSpaceBlSer;
@@ -13,10 +14,13 @@ public class spaceBL implements usedSpaceBlSer{
 
 	private storageFactory stoFactory;
 	private UsedSpaceDataSer used;
+	private ipConfig ip;
 	
 	public spaceBL(){
+		ip = new ipConfig();
 		try {
-			stoFactory = (storageFactory)Naming.lookup("rmi://114.212.42.143:6600/stoFactory");
+			String ipp = ip.getIP();
+			stoFactory = (storageFactory)Naming.lookup("rmi://"+ipp+"/stoFactory");
 			used = stoFactory.createUsedSpaceDataSer();
 		} catch (MalformedURLException e) {
 			// TODO 自动生成的 catch 块

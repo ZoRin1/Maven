@@ -7,6 +7,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import po.financePO.BooksPO;
+import presentation.mainui.ipConfig;
 import dataservice.financedataservice.GetBooksDataSer;
 import dataservice.financedataservice.financeFactory;
 import vo.financeVO.BooksVO;
@@ -16,12 +17,19 @@ public class GetBooksBL implements GetBooksBlSer{
 	
 	private BooksVO vo;
 	private ArrayList<BooksPO> booksPoList;
+	private ipConfig ip;
+	
+	public GetBooksBL(){
+		super();
+		ip = new ipConfig();
+	}
 
 	@Override
 	public ArrayList<BooksPO> getBooks() {
 		// TODO 自动生成的方法存根
 		try {
-			financeFactory finFactory = (financeFactory)Naming.lookup("rmi://127.0.0.1:6600/finFactory");
+			String ipp = ip.getIP();
+			financeFactory finFactory = (financeFactory)Naming.lookup("rmi://"+ipp+"/finFactory");
 			GetBooksDataSer getBooks = finFactory.createGetBooksDataSer();
 			booksPoList = getBooks.Books();
 		} catch (MalformedURLException e) {

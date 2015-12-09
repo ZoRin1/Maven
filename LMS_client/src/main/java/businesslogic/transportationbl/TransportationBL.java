@@ -11,17 +11,20 @@ import dataservice.transportationdataservice.TransportationDataSer;
 import dataservice.transportationdataservice.TransportationFactory;
 import po.transpotationPO.RoutePO;
 import presentation.icclerkui.icclerkui;
+import presentation.mainui.ipConfig;
 import vo.transportationVO.RouteVO;
 
 public class TransportationBL implements TransportationBLSer {
 	
 	private TransportationDataSer transportationDataSer;
-
+	private ipConfig ip;
 
 	public TransportationBL() {
 		// TODO Auto-generated constructor stub
+		ip = new ipConfig();
 		try {
-			TransportationFactory transportationFactory = (TransportationFactory)Naming.lookup("rmi://114.212.42.143:6600/traFactory");
+			String ipp = ip.getIP();
+			TransportationFactory transportationFactory = (TransportationFactory)Naming.lookup("rmi://"+ipp+"/traFactory");
 			this.transportationDataSer = transportationFactory.createTransportationDataSer();
 		} catch (MalformedURLException e) {
 			// TODO 自动生成的 catch 块

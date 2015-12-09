@@ -8,14 +8,21 @@ import java.rmi.RemoteException;
 import dataservice.storagedataservice.OutDepotDataSer;
 import dataservice.storagedataservice.storageFactory;
 import po.storagePO.DepotPO;
+import presentation.mainui.ipConfig;
 import vo.storageVO.DepotVO;
 
 public class OutDepotBL {
 	
 	private DepotPO po;
+	private ipConfig ip;
+	
+	public OutDepotBL(){
+		ip = new ipConfig();
+	}
 	public void outDepot(DepotVO depo,String city){
 		try {
-			storageFactory stoFactory = (storageFactory)Naming.lookup("rmi://114.212.42.143:6600/stoFactory");
+			String ipp = ip.getIP();
+			storageFactory stoFactory = (storageFactory)Naming.lookup("rmi://"+ipp+"/stoFactory");
 			OutDepotDataSer outDepot = stoFactory.createOutDepotDataSer();
 			po = new DepotPO(depo.getQu(),depo.getPai(),depo.getJia(),depo.getWei());
 			outDepot.outDepot(po, city);

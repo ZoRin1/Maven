@@ -8,14 +8,21 @@ import java.rmi.RemoteException;
 import dataservice.storagedataservice.InDepotDataSer;
 import dataservice.storagedataservice.storageFactory;
 import po.storagePO.DepotPO;
+import presentation.mainui.ipConfig;
 import vo.storageVO.DepotVO;
 
 public class InDepotBL {
 	
+	private ipConfig ip;
+	
+	public InDepotBL(){
+		ip = new ipConfig();
+	}
 	
 	public void inDepotExcel(String inDepotCode,String inDepotDate,DepotPO depo,String city){
 		try {
-			storageFactory stoFactory = (storageFactory)Naming.lookup("rmi://114.212.42.143:6600/stoFactory");
+			String ipp = ip.getIP();
+			storageFactory stoFactory = (storageFactory)Naming.lookup("rmi://"+ipp+"/stoFactory");
 			InDepotDataSer inDepot = stoFactory.createInDepotDataSer();
 			inDepot.inDepotExcel(inDepotCode, inDepotDate, depo, city);
 		} catch (MalformedURLException e) {

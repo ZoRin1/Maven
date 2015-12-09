@@ -10,6 +10,7 @@ import dataservice.documentsdataservice.documentsFactory;
 import dataservice.documentsdataservice.getCodeDataSer;
 import dataservice.documentsdataservice.getDocumentInfoDataSer;
 import po.documentsPO.InBillsPO;
+import presentation.mainui.ipConfig;
 import businesslogicservice.modelservice.storageInfo.GetInBillsSer;
 
 public class GetInBills implements GetInBillsSer{
@@ -17,6 +18,12 @@ public class GetInBills implements GetInBillsSer{
 	private ArrayList<InBillsPO> list1;
 	private int size=0;
 	private String str,str1,str2;
+	private ipConfig ip;
+	
+	public GetInBills(){
+		super();
+		ip = new ipConfig();
+	}
 	public ArrayList<InBillsPO> getInBill(String account, String start,
 			String end) {
 		// TODO Auto-generated method stub
@@ -24,7 +31,8 @@ public class GetInBills implements GetInBillsSer{
 		list1=new ArrayList<InBillsPO>();
 		InBillsPO po;
 		try {
-			documentsFactory documentsFactory=(documentsFactory)Naming.lookup("rmi://127.0.0.1:6600/docFactory");
+			String ipp = ip.getIP();
+			documentsFactory documentsFactory=(documentsFactory)Naming.lookup("rmi://"+ipp+"/docFactory");
 			getCodeDataSer getCodeDataSer=documentsFactory.createGetCodeDataSer();
 			getDocumentInfoDataSer getDocumentInfoDataSer=documentsFactory.createGetDocumentInfoDataSer();
 			list=getCodeDataSer.getStoCode(account, "入库单", start, end);
@@ -54,7 +62,8 @@ public class GetInBills implements GetInBillsSer{
 		list1=new ArrayList<InBillsPO>();
 		InBillsPO po;
 		try {
-			documentsFactory documentsFactory=(documentsFactory)Naming.lookup("rmi://114.212.42.143:6600/docFactory");
+			String ipp = ip.getIP();
+			documentsFactory documentsFactory=(documentsFactory)Naming.lookup("rmi://"+ipp+"/docFactory");
 			getCodeDataSer getCodeDataSer=documentsFactory.createGetCodeDataSer();
 			getDocumentInfoDataSer getDocumentInfoDataSer=documentsFactory.createGetDocumentInfoDataSer();
 			list=getCodeDataSer.getStoCode(account, "入库单", null, end);

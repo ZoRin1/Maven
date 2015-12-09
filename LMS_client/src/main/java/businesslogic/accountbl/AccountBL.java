@@ -9,15 +9,21 @@ import businesslogicservice.accountblservice.AccountBLSer;
 import dataservice.accountdataservice.AccountDataSer;
 import dataservice.accountdataservice.accountFactory;
 import po.accountPO.AccountInfoPO;
+import presentation.mainui.ipConfig;
 import vo.accountVO.AccountNumberVO;
 
 public class AccountBL implements AccountBLSer {
 	private AccountDataSer accountDataSer;
+	private ipConfig ip;
 	
 	
 	public AccountBL(){
+		
 		try {
-			accountFactory accountFactory =(accountFactory)Naming.lookup("rmi://114.212.42.143:6600/accFactory");
+			ip = new ipConfig();
+			String ipp = ip.getIP();
+			System.out.println(ipp);
+			accountFactory accountFactory =(accountFactory)Naming.lookup("rmi://"+ipp+"/accFactory");
 			this.accountDataSer = accountFactory.createAccountDataSer();
 		} catch (MalformedURLException e) {
 			// TODO 自动生成的 catch 块

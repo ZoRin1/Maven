@@ -11,6 +11,7 @@ import dataservice.documentsdataservice.getCodeDataSer;
 import dataservice.documentsdataservice.getDocumentInfoDataSer;
 import businesslogicservice.modelservice.financeInfo.GetPaymentSer;
 import po.documentsPO.PaymentPO;
+import presentation.mainui.ipConfig;
 
 
 public class GetPayment implements GetPaymentSer{
@@ -18,13 +19,20 @@ public class GetPayment implements GetPaymentSer{
 	private ArrayList<PaymentPO> list1;
 	private int size=0;
 	private String str,str1,str2;
+	private ipConfig ip;
+	
+	public GetPayment(){
+		super();
+		ip = new ipConfig();
+	}
 	public ArrayList<PaymentPO> getAllPay(String end) {
 		// TODO Auto-generated method stub
 		list=new ArrayList<String>();
 		list1=new ArrayList<PaymentPO>();
 		PaymentPO po;
 		try {
-			documentsFactory documentsFactory=(documentsFactory)Naming.lookup("rmi://127.0.0.1:6600/docFactory");
+			String ipp = ip.getIP();
+			documentsFactory documentsFactory=(documentsFactory)Naming.lookup("rmi://"+ipp+"/docFactory");
 			getCodeDataSer getCodeDataSer=documentsFactory.createGetCodeDataSer();
 			getDocumentInfoDataSer getDocumentInfoDataSer=documentsFactory.createGetDocumentInfoDataSer();
 			list=getCodeDataSer.getCode("付款单", null, end);
@@ -55,7 +63,8 @@ public class GetPayment implements GetPaymentSer{
 		list1=new ArrayList<PaymentPO>();
 		PaymentPO po;
 		try {
-			documentsFactory documentsFactory=(documentsFactory)Naming.lookup("rmi://114.212.42.143:6600/docFactory");
+			String ipp = ip.getIP();
+			documentsFactory documentsFactory=(documentsFactory)Naming.lookup("rmi://"+ipp+"/docFactory");
 			getCodeDataSer getCodeDataSer=documentsFactory.createGetCodeDataSer();
 			getDocumentInfoDataSer getDocumentInfoDataSer=documentsFactory.createGetDocumentInfoDataSer();
 			list=getCodeDataSer.getCode("付款单",start, end);

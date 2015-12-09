@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import po.financePO.ProfitPO;
+import presentation.mainui.ipConfig;
 import dataservice.financedataservice.ProfitListDataSer;
 import dataservice.financedataservice.financeFactory;
 import vo.financeVO.ProfitVO;
@@ -17,10 +18,12 @@ import businesslogicservice.financeblservice.ProfitListBlSer;
 public class ProfitListBL implements ProfitListBlSer{
 	
 	private ArrayList<ProfitVO> voList;
+	private ipConfig ip;
 	
 	public ProfitListBL(){
 		super();
 		voList = new ArrayList<ProfitVO>();
+		ip = new ipConfig();
 	}
 	
 	
@@ -33,7 +36,8 @@ public class ProfitListBL implements ProfitListBlSer{
 		now = sdf.format(date);
 		ProfitVO vo;
 		try {
-			financeFactory finFactory  = (financeFactory)Naming.lookup("rmi://127.0.0.1:6600/finFactory");
+			String ipp = ip.getIP();
+			financeFactory finFactory  = (financeFactory)Naming.lookup("rmi://"+ipp+"/finFactory");
 			ProfitListDataSer profitList = finFactory.createProfitListDataSer();
 			ArrayList<ProfitPO> poList = profitList.ProList(now);
 			for(int i = 0 ; i < poList.size();i++){

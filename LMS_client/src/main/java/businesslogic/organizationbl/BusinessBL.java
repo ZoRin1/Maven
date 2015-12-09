@@ -12,17 +12,21 @@ import dataservice.organizationdataservice.organizationFactory;
 import po.orgPO.BussinessOrgPO;
 import po.orgPO.DriverPO;
 import po.orgPO.VehiclePO;
+import presentation.mainui.ipConfig;
 import vo.orgVO.BussinessOrgVO;
 import vo.orgVO.DriverVO;
 import vo.orgVO.VehicleVO;
 
 public class BusinessBL implements BussinessOrgBLSer {
 	private BussinessOrgDataSer bussinessOrgDataSer;
+	private ipConfig ip;
 
  public BusinessBL() {
-		// TODO Auto-generated constructor stub				
+		// TODO Auto-generated constructor stub			
+	 ip = new ipConfig();
 		try {
-			organizationFactory organizationFactory = (organizationFactory)Naming.lookup("rmi://114.212.42.143:6600/orgFactory");
+			String ipp = ip.getIP();
+			organizationFactory organizationFactory = (organizationFactory)Naming.lookup("rmi://"+ipp+"/orgFactory");
 			this.bussinessOrgDataSer = organizationFactory.createBussinessOrgDataSer();
 		} catch (MalformedURLException e) {
 			// TODO 自动生成的 catch 块

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import po.documentsPO.InBillsPO;
 import po.documentsPO.OutbillsPO;
+import presentation.mainui.ipConfig;
 import dataservice.documentsdataservice.documentsFactory;
 import dataservice.documentsdataservice.getCodeDataSer;
 import dataservice.documentsdataservice.getDocumentInfoDataSer;
@@ -18,12 +19,19 @@ import businesslogicservice.storageblservice.check_inventoryBlSer;
 
 public class CheckBL implements check_inventoryBlSer{
 	
+	private ipConfig ip;
+	
+	public CheckBL(){
+		super();
+		ip = new ipConfig();
+	}
 	
 	@Override
 	public ArrayList<SimpleInDepotInfVO> check(String account, String start, String end) {
 		// TODO 自动生成的方法存根
 		try {
-			documentsFactory documentsFactory=(documentsFactory)Naming.lookup("rmi://127.0.0.1:6600/docFactory");
+			String ipp = ip.getIP();
+			documentsFactory documentsFactory=(documentsFactory)Naming.lookup("rmi://"+ipp+"/docFactory");
 			getCodeDataSer getCodeDataSer=documentsFactory.createGetCodeDataSer();
 			ArrayList<String>Sto= getCodeDataSer.getStoCode(account,"入库单", start, end);
 			getDocumentInfoDataSer getDocumentInfoDataSer=documentsFactory.createGetDocumentInfoDataSer();
@@ -51,7 +59,8 @@ public class CheckBL implements check_inventoryBlSer{
 	public ArrayList<InDepotInfVO> inventory(String account, String start, String end) {
 		// TODO 自动生成的方法存根
 		try {
-			documentsFactory documentsFactory=(documentsFactory)Naming.lookup("rmi://114.212.42.143:6600/docFactory");
+			String ipp = ip.getIP();
+			documentsFactory documentsFactory=(documentsFactory)Naming.lookup("rmi://"+ipp+"/docFactory");
 			getCodeDataSer getCodeDataSer=documentsFactory.createGetCodeDataSer();
 			ArrayList<String>Sto= getCodeDataSer.getStoCode(account,"入库单", start, end);
 			getDocumentInfoDataSer getDocumentInfoDataSer=documentsFactory.createGetDocumentInfoDataSer();

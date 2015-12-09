@@ -5,6 +5,7 @@ import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
+import presentation.mainui.ipConfig;
 import businesslogicservice.organizationblservice.FinanceOrgBLSer;
 import dataservice.organizationdataservice.FinanceOrgDataSer;
 import dataservice.organizationdataservice.organizationFactory;
@@ -12,11 +13,14 @@ import dataservice.organizationdataservice.organizationFactory;
 public class FinanceBL implements FinanceOrgBLSer {
 	
 	private FinanceOrgDataSer financeOrgDataSer;
+	private ipConfig ip;
 	
 	public FinanceBL() {
 		// TODO Auto-generated constructor stub
+		ip = new ipConfig();
 		try {
-			organizationFactory organizationFactory = (organizationFactory)Naming.lookup("rmi://114.212.42.143:6600/orgFactory");
+			String ipp = ip.getIP();
+			organizationFactory organizationFactory = (organizationFactory)Naming.lookup("rmi://"+ipp+"/orgFactory");
 			this.financeOrgDataSer = organizationFactory.createFinanceOrgDataSer();
 		} catch (MalformedURLException e) {
 			// TODO 自动生成的 catch 块

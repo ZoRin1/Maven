@@ -6,6 +6,7 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
 import po.documentsPO.InBillsPO;
+import presentation.mainui.ipConfig;
 import dataservice.documentsdataservice.documentsFactory;
 import dataservice.documentsdataservice.getDocumentInfoDataSer;
 import vo.storageVO.DepotVO;
@@ -21,10 +22,13 @@ public class UpdateSpace implements UpdateSpaceSer{
 	private int jia;
 	private int wei;
 	private InBillsPO po;
+	private ipConfig ip;
 	public UpdateSpace(String InDepotCode,String city) {
 		super();
+		ip = new ipConfig();
 		try {
-			documentsFactory documentsFactory=(documentsFactory)Naming.lookup("rmi://127.0.0.1:6600/docFactory");
+			String ipp = ip.getIP();
+			documentsFactory documentsFactory=(documentsFactory)Naming.lookup("rmi://"+ipp+"/docFactory");
 			getDocumentInfoDataSer getDocumentInfoDataSer=documentsFactory.createGetDocumentInfoDataSer();
 			po=getDocumentInfoDataSer.getInDepotInfo("入库单", InDepotCode);
 		} catch (MalformedURLException e) {

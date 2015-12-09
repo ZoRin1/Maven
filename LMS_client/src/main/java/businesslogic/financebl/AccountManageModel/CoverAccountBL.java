@@ -9,19 +9,24 @@ import java.util.ArrayList;
 import dataservice.financedataservice.CoverDataSer;
 import dataservice.financedataservice.financeFactory;
 import po.financePO.AccountPO;
+import presentation.mainui.ipConfig;
 
 public class CoverAccountBL {
 	
 	ArrayList<AccountPO> PO;
+	
+	private ipConfig ip;
 
 	public CoverAccountBL(ArrayList<AccountPO> pO) {
 		super();
 		PO = pO;
+		ip = new ipConfig();
 	}
 	
 	public boolean CoverAccount(){
 		try {
-			financeFactory finFactory = (financeFactory)Naming.lookup("rmi://127.0.0.1:6600/finFactory");
+			String ipp = ip.getIP();
+			financeFactory finFactory = (financeFactory)Naming.lookup("rmi://"+ipp+"/finFactory");
 			CoverDataSer cover = finFactory.createCoverDataSer();
 			cover.coverAccount(PO);
 		} catch (MalformedURLException e) {
