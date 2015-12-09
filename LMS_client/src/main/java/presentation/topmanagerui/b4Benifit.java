@@ -4,13 +4,17 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import businesslogic.financebl.ProfitListModel.ProfitListBL;
+import businesslogic.financebl.ProfitModel.ProfitController;
 import presentation.financialstaffui.b1b2Jpanel1JTable;
 import vo.financeVO.ProfitVO;
 
@@ -20,7 +24,7 @@ public class b4Benifit extends JPanel {
 	private JButton returnButton;
 	private ImageIcon returnIcon=new ImageIcon("picture/返回.png");
 	private JLabel j1;
-	private ArrayList<ProfitVO> profitList;
+	private ArrayList<ProfitVO> voList;
 	
 	public b4Benifit(b4topmanagerui b4ui,topmanagerJpanel tjpl) {
 		// TODO Auto-generated constructor stub
@@ -36,7 +40,7 @@ public class b4Benifit extends JPanel {
 		j1 = new JLabel(i1);
 		j1.setBounds(0, 0, 723, 571);
 		
-		b4BenifitTable b4table = new b4BenifitTable(b4ui, tjpl, profitList);
+		b4BenifitTable b4table = new b4BenifitTable(b4ui, tjpl, voList);
 		
 		returnButton=new JButton(returnIcon);
 		returnButton.setBounds(662, 575,48,48);
@@ -53,33 +57,33 @@ public class b4Benifit extends JPanel {
 
 	//得到成本收益集合的方法
 	public void getProfit(){
-//			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
-//			String date = df.format(new Date());
-//			proController = new ProfitController();
-//			profitList = new ProfitListBL();
-//			vo = proController.returnPro(date);
-//			ArrayList<ProfitVO> tempList = profitList.getProList();
-//			voList.add(vo);
-//			for(int i =0 ; i<tempList.size();i++){
-//				voList.add(tempList.get(i));
-//			}
-			profitList = new ArrayList<ProfitVO>();
-			ProfitVO v1 = new ProfitVO(2.3, 5.5, "2015-10-17 13:56:20");
-			ProfitVO v2 = new ProfitVO(2, 5.5, "2015-10-17 13:56:20");
-			ProfitVO v3 = new ProfitVO(2.3, 5.5, "2015-10-17 13:56:20");
-			ProfitVO v4 = new ProfitVO(2.3, 5.5, "2015-10-17 13:56:20");
-			ProfitVO v5 = new ProfitVO(2.3, 5.5, "2015-10-17 13:56:20");
-			ProfitVO v6 = new ProfitVO(2.3, 5.5, "2015-10-17 13:56:20");
-			ProfitVO v7 = new ProfitVO(2.3, 5.5, "2015-10-17 13:56:20");
-			ProfitVO v8 = new ProfitVO(2.3, 5.5, "2015-10-17 13:56:20");
-			profitList.add(v1);
-			profitList.add(v2);
-			profitList.add(v3);
-			profitList.add(v4);
-			profitList.add(v5);
-			profitList.add(v6);
-			profitList.add(v7);
-			profitList.add(v8);
+			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+			String date = df.format(new Date());
+			ProfitController proController = new ProfitController();
+			ProfitListBL profitListBL = new ProfitListBL();
+			ProfitVO vo = proController.returnPro(date);
+			ArrayList<ProfitVO> tempList = profitListBL.getProList();
+			voList.add(vo);
+			for(int i =0 ; i<tempList.size();i++){
+				voList.add(tempList.get(i));
+			}
+//			profitList = new ArrayList<ProfitVO>();
+//			ProfitVO v1 = new ProfitVO(2.3, 5.5, "2015-10-17 13:56:20");
+//			ProfitVO v2 = new ProfitVO(2, 5.5, "2015-10-17 13:56:20");
+//			ProfitVO v3 = new ProfitVO(2.3, 5.5, "2015-10-17 13:56:20");
+//			ProfitVO v4 = new ProfitVO(2.3, 5.5, "2015-10-17 13:56:20");
+//			ProfitVO v5 = new ProfitVO(2.3, 5.5, "2015-10-17 13:56:20");
+//			ProfitVO v6 = new ProfitVO(2.3, 5.5, "2015-10-17 13:56:20");
+//			ProfitVO v7 = new ProfitVO(2.3, 5.5, "2015-10-17 13:56:20");
+//			ProfitVO v8 = new ProfitVO(2.3, 5.5, "2015-10-17 13:56:20");
+//			profitList.add(v1);
+//			profitList.add(v2);
+//			profitList.add(v3);
+//			profitList.add(v4);
+//			profitList.add(v5);
+//			profitList.add(v6);
+//			profitList.add(v7);
+//			profitList.add(v8);
 		}
 	//得到成本收益集合的方法
 		

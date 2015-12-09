@@ -28,6 +28,15 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.TableCellEditor;
 
 import businesslogic.documentsbl.documentController;
+import po.documentsPO.GetOrderPO;
+import po.documentsPO.InBillsPO;
+import po.documentsPO.LoadingPO;
+import po.documentsPO.OrderPO;
+import po.documentsPO.PaymentPO;
+import po.documentsPO.ReceiptPO;
+import po.documentsPO.YDispatchPO;
+import po.documentsPO.YReceivePO;
+import po.documentsPO.ZLoadingPO;
 import presentation.adminui.MyTable;
 import presentation.adminui.adminui;
 
@@ -50,7 +59,7 @@ public class b3JPanel extends JPanel {
 		tjpl.add(this);
 	}
 	private void init(topmanagerui tui,topmanagerJpanel tjpl){
-		documentController documentController = new documentController();
+		final documentController documentController = new documentController();
 		ArrayList<String> documents = documentController.showList();
 		
 			data = new String[documents.size()][3];
@@ -87,7 +96,74 @@ public class b3JPanel extends JPanel {
 				 public void mouseClicked(MouseEvent e) {
 					 if(e.getClickCount()==1){										
 						int r = table.getSelectedRow();
-						JOptionPane.showMessageDialog(null, "单据详情，待会儿完成");						
+						String name = (String)table.getValueAt(r, 1);
+						String code = (String)table.getValueAt(r, 0);
+						switch (name) {
+						case "收件单":{
+							GetOrderPO po = (GetOrderPO) documentController.getBufferedInfo(code, "收件单");
+							String message = DocumentsToString.getOrderPO(po);
+							JOptionPane.showMessageDialog(null, message);	
+							break;
+						}
+//						case "入库单":{
+//							InBillsPO po = (InBillsPO) documentController.getBufferedInfo(code, "收件单");
+//							String message = DocumentsToString.inBillsPO(po);
+//							JOptionPane.showMessageDialog(null, message);	
+//							break;
+//						}
+						case "营业厅装车单":{
+							LoadingPO po = (LoadingPO) documentController.getBufferedInfo(code, "营业厅装车单");
+							String message = DocumentsToString.loadingPO(po);
+							JOptionPane.showMessageDialog(null, message);	
+							break;
+						}
+						case "寄件单":{
+							OrderPO po = (OrderPO) documentController.getBufferedInfo(code, "寄件单");
+							String message = DocumentsToString.orderPO(po);
+							JOptionPane.showMessageDialog(null, message);	
+							break;
+						}
+						case "付款":{
+							PaymentPO po = (PaymentPO) documentController.getBufferedInfo(code, "付款单");
+							String message = DocumentsToString.payMentPO(po);
+							JOptionPane.showMessageDialog(null, message);	
+							break;
+						}
+						case "收款单":{
+							ReceiptPO po = (ReceiptPO) documentController.getBufferedInfo(code, "收款单");
+							String message = DocumentsToString.receiptPO(po);
+							JOptionPane.showMessageDialog(null, message);	
+							break;
+						}
+						case "派件单":{
+							YDispatchPO po = (YDispatchPO) documentController.getBufferedInfo(code, "派件单");
+							String message = DocumentsToString.yDispatchPO(po);
+							JOptionPane.showMessageDialog(null, message);	
+							break;
+						}
+						case "营业厅接收单":{
+							YReceivePO po = (YReceivePO) documentController.getBufferedInfo(code, "营业厅接收单");
+							String message = DocumentsToString.yReceivePO(po);
+							JOptionPane.showMessageDialog(null, message);	
+							break;
+						}
+						case "中转中心转运单":{
+							ZLoadingPO po = (ZLoadingPO) documentController.getBufferedInfo(code, "中转中心转运单");
+							String message = DocumentsToString.zLoadingPO(po);
+							JOptionPane.showMessageDialog(null, message);	
+							break;
+						}
+						case "中转中心接收单":{
+							GetOrderPO po = (GetOrderPO) documentController.getBufferedInfo(code, "中转中心接收单");
+							String message = DocumentsToString.getOrderPO(po);
+							JOptionPane.showMessageDialog(null, message);	
+							break;
+						}
+						default:{
+							break;
+						}
+						}
+											
 				 }
 			}
 			});		
