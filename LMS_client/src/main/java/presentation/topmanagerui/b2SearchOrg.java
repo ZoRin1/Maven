@@ -98,7 +98,7 @@ public class b2SearchOrg extends JPanel {
 				public void keyTyped(KeyEvent e) {
 					// TODO Auto-generated method stub
 					int keyChar=e.getKeyChar();
-					if ((keyChar>=KeyEvent.VK_0 && keyChar<=KeyEvent.VK_9 )||keyChar == KeyEvent.VK_SUBTRACT) {
+					if ((keyChar>=KeyEvent.VK_0 && keyChar<=KeyEvent.VK_9 )||keyChar == KeyEvent.VK_MINUS) {
 
 					} else {
 					e.consume(); 
