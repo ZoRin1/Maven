@@ -9,19 +9,23 @@ import java.util.ArrayList;
 import dataservice.storagedataservice.GetDepotExcelDataSer;
 import dataservice.storagedataservice.storageFactory;
 import po.storagePO.DepotExcelPO;
+import presentation.mainui.ipConfig;
 
 public class GetExcelInf {
 	
 	private ArrayList<DepotExcelPO> excelPOList;
+	private ipConfig ip;
 	
 	public GetExcelInf(){
 		super();
 		excelPOList = new ArrayList<DepotExcelPO>();
+		ip = new ipConfig();
 	}
 	
 	public ArrayList<DepotExcelPO> getExcel(String city){
 		try {
-			storageFactory stoFactory = (storageFactory)Naming.lookup("rmi://114.212.42.143:6600/stoFactory");
+			String ipp = ip.getIP();
+			storageFactory stoFactory = (storageFactory)Naming.lookup("rmi://"+ipp+"/stoFactory");
 			GetDepotExcelDataSer getExcel = stoFactory.createGetDepotExcelDataSer();
 			excelPOList = getExcel.getDepotExcel(city);
 		} catch (MalformedURLException e) {

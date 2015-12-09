@@ -6,6 +6,7 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+import presentation.mainui.ipConfig;
 import dataservice.documentsdataservice.documentsFactory;
 import dataservice.documentsdataservice.getBufferedCodeDataSer;
 import dataservice.documentsdataservice.getNotPassDocCode;
@@ -13,12 +14,20 @@ import businesslogicservice.documentsblservice.showBufferedListBlSer;
 
 public class showBufferedList implements showBufferedListBlSer{
 	//总经理的审批单据里显示所有单据使用
+	
+	private ipConfig ip;
+	
+	public showBufferedList(){
+		ip = new ipConfig();
+	}
+	
 	@Override
 	public ArrayList<String> showList() {
 		// TODO Auto-generated method stub
 		ArrayList<String> list=new ArrayList<>();
 		try {
-		documentsFactory documentsFactory=(documentsFactory)Naming.lookup("rmi://127.0.0.1:6600/docFactory");
+			String ipp = ip.getIP();
+		documentsFactory documentsFactory=(documentsFactory)Naming.lookup("rmi://"+ipp+"/docFactory");
 		getBufferedCodeDataSer getBufferedCodeDataSer=documentsFactory.createGetBudderedCodeDataSer();
 		list=getBufferedCodeDataSer.getCode();
 	} catch (MalformedURLException e) {
@@ -39,7 +48,8 @@ public class showBufferedList implements showBufferedListBlSer{
 		// TODO Auto-generated method stub
 		ArrayList<String> list=new ArrayList<>();
 		try {
-		documentsFactory documentsFactory=(documentsFactory)Naming.lookup("rmi://127.0.0.1:6600/docFactory");
+			String ipp = ip.getIP();
+		documentsFactory documentsFactory=(documentsFactory)Naming.lookup("rmi://"+ipp+"/docFactory");
 		getNotPassDocCode getNotPassDocCode=documentsFactory.createGetNotPassDocCode();
 		list=getNotPassDocCode.getNotPassDocCode(account);
 		return list;

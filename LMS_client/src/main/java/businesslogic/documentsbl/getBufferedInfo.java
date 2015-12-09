@@ -6,19 +6,25 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
 
+
 import po.documentsPO.DocumentPO;
+import presentation.mainui.ipConfig;
 import dataservice.documentsdataservice.documentsFactory;
 import dataservice.documentsdataservice.getBufferedInfoDataSer;
 import businesslogicservice.documentsblservice.getBufferedInfoBlSer;
 
 public class getBufferedInfo implements getBufferedInfoBlSer{
 
+	private ipConfig ip;
+	
 	@Override
 	public DocumentPO getBufferedInfo(String code, String doName) {
 		// TODO Auto-generated method stub
 		DocumentPO po=new DocumentPO();
+		ip = new ipConfig();
 		try {
-		documentsFactory documentsFactory=(documentsFactory)Naming.lookup("rmi://127.0.0.1:6600/docFactory");
+			String ipp = ip.getIP();
+		documentsFactory documentsFactory=(documentsFactory)Naming.lookup("rmi://"+ipp+"/docFactory");
 		getBufferedInfoDataSer getBufferedInfoDataSer=documentsFactory.createGetBufferedInfoDataSer();
 		po=getBufferedInfoDataSer.getBufferedInfo(code, doName);
 		return po;

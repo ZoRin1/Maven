@@ -7,18 +7,23 @@ import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
+import presentation.mainui.ipConfig;
 import dataservice.documentsdataservice.GetDocCodeDataSer;
 import dataservice.documentsdataservice.documentsFactory;
 import businesslogicservice.documentsblservice.createDocumentBlSer;
 
 public class createDocument implements createDocumentBlSer{
+	
+	private ipConfig ip;
 
 	@Override
 	public String createDocument(String doName) {
 		// TODO Auto-generated method stub
 		String code=null;
+		ip = new ipConfig();
 		try {
-			documentsFactory documentsFactory=(documentsFactory)Naming.lookup("rmi://114.212.42.143:6600/docFactory");
+			String ipp = ip.getIP();
+			documentsFactory documentsFactory=(documentsFactory)Naming.lookup("rmi://"+ipp+"/docFactory");
 			GetDocCodeDataSer getDocCodeDataSer=documentsFactory.createGetDocCodeDataSer();
 			code=getDocCodeDataSer.getDocCode(doName);
 		} catch (MalformedURLException e) {

@@ -9,17 +9,19 @@ import businesslogicservice.organizationblservice.MiddleOrgBLSer;
 import dataservice.organizationdataservice.MiddleOrgDataSer;
 import dataservice.organizationdataservice.organizationFactory;
 import po.orgPO.MiddleOrgPO;
+import presentation.mainui.ipConfig;
 import vo.orgVO.MiddleOrgVO;
 
 public class MiddleBL implements MiddleOrgBLSer {
 	
 	private MiddleOrgDataSer middleOrgDataSer;
+	private ipConfig ip;
 	
 	public MiddleBL() {
 		// TODO Auto-generated constructor stub
-		
 		try {
-			organizationFactory organizationFactory = (organizationFactory)Naming.lookup("rmi://114.212.42.143:6600/orgFactory");
+			String ipp = ip.getIP();
+			organizationFactory organizationFactory = (organizationFactory)Naming.lookup("rmi://"+ipp+"/orgFactory");
 			this.middleOrgDataSer = organizationFactory.createMiddleOrgDataSer();
 		} catch (MalformedURLException e) {
 			// TODO 自动生成的 catch 块
