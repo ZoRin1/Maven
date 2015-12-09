@@ -18,7 +18,8 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.filechooser.FileSystemView;
 
-import po.storagePO.DepotExcelPO;
+import po.excelPO.DepotExcelPO;
+import po.excelPO.ExcelPO;
 import vo.storageVO.InDepotInfVO;
 import businesslogic.storagebl.CheckModel.CheckController;
 import businesslogic.storagebl.DriveModel.spaceBL;
@@ -164,7 +165,17 @@ public class stockDepotPanel extends JPanel{
 				outExcel = new OutExcel();
 				String[] temp = state.split("-");
 				arrList = getInf.getExcel(temp[1]);
-				outExcel.outExcel(address, arrList);
+//				outExcel.outExcel(address, arrList);
+				
+				ArrayList<ExcelPO> fatherList = new ArrayList<ExcelPO>();
+				for(int i = 0 ; i < arrList.size();i++){
+					ExcelPO p1 = arrList.get(i);
+					fatherList.add(p1);
+				}
+				
+				String[] name = {"入库单编号","入库日期","区","排","架","位"};
+//				outExcel.outExcel("库存快照表", name, address, arrList);
+				outExcel.outExcel("库存快照表", name, address, fatherList);
 			}
 		});
 		tieyun.addActionListener(new ActionListener() {

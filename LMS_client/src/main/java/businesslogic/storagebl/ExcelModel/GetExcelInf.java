@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 import dataservice.storagedataservice.GetDepotExcelDataSer;
 import dataservice.storagedataservice.storageFactory;
-import po.storagePO.DepotExcelPO;
+import po.excelPO.DepotExcelPO;
 import presentation.mainui.ipConfig;
 
 public class GetExcelInf {

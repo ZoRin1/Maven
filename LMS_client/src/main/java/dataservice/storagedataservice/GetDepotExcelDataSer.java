@@ -2,7 +2,7 @@ package dataservice.storagedataservice;
 
 import java.util.ArrayList;
 
-import po.storagePO.DepotExcelPO;
+import po.excelPO.DepotExcelPO;
 
 public interface GetDepotExcelDataSer {
 	
