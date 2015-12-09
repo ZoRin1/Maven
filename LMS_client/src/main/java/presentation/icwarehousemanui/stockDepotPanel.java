@@ -20,6 +20,7 @@ import javax.swing.filechooser.FileSystemView;
 
 import po.excelPO.DepotExcelPO;
 import po.excelPO.ExcelPO;
+import presentation.financialstaffui.FileChooser;
 import vo.storageVO.InDepotInfVO;
 import businesslogic.storagebl.CheckModel.CheckController;
 import businesslogic.storagebl.DriveModel.spaceBL;
@@ -51,6 +52,7 @@ public class stockDepotPanel extends JPanel{
 	private GetExcelInf getInf;
 	private OutExcel outExcel;
 	private ArrayList<DepotExcelPO> arrList;
+	private FileChooser file;
 	public stockDepotPanel(icwarehousemanui icwarehousemanui,icwarehousemanJpanel icwarehousemanJpanel,String account,String state){
 		this.account = account;
 		this.state = state;
@@ -146,19 +148,21 @@ public class stockDepotPanel extends JPanel{
 					// TODO 自动生成的 catch 块
 					e.printStackTrace();
 				}
-				int result = 0;
-				JFileChooser fileChooser = new JFileChooser();
-				FileSystemView fsv = FileSystemView.getFileSystemView(); //注意了，这里重要的一句
-				fileChooser.setCurrentDirectory(fsv.getHomeDirectory());
-				fileChooser.setDialogTitle("请选择导出的文件路径...");
-				fileChooser.setApproveButtonText("确定");
-//				fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-				fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);//只能选择目录
-				result = fileChooser.showOpenDialog(icwarehousemanui);
-				if (JFileChooser.APPROVE_OPTION == result){
-					address = fileChooser.getSelectedFile().getPath();
-					System.out.println("path: "+address);
-				}
+//				int result = 0;
+//				JFileChooser fileChooser = new JFileChooser();
+//				FileSystemView fsv = FileSystemView.getFileSystemView(); //注意了，这里重要的一句
+//				fileChooser.setCurrentDirectory(fsv.getHomeDirectory());
+//				fileChooser.setDialogTitle("请选择导出的文件路径...");
+//				fileChooser.setApproveButtonText("确定");
+////				fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+//				fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);//只能选择目录
+//				result = fileChooser.showOpenDialog(icwarehousemanui);
+//				if (JFileChooser.APPROVE_OPTION == result){
+//					address = fileChooser.getSelectedFile().getPath();
+//					System.out.println("path: "+address);
+//				}
+				file = new FileChooser(icwarehousemanui);
+				address = file.getAddress();
 				
 				//这里实现了导出EXCEL
 				getInf = new GetExcelInf();
