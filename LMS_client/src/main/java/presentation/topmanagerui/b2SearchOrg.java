@@ -211,10 +211,18 @@ public class b2SearchOrg extends JPanel {
 					
 						
 					}else{
-						JOptionPane.showMessageDialog(null, "未找到，请输入营业厅编号");
-						tjpl.remove(b2SearchOrg);
-						new b2SearchOrg(b2ui, tjpl, org);
-						tjpl.repaint();
+						if (org.equals("营业厅")) {
+							JOptionPane.showMessageDialog(null, "未找到，请输入营业厅编号");
+							tjpl.remove(b2SearchOrg);
+							new b2SearchOrg(b2ui, tjpl, org);
+							tjpl.repaint();
+						}else {
+							JOptionPane.showMessageDialog(null, "未找到，请输入中转中心编号");
+							tjpl.remove(b2SearchOrg);
+							new b2SearchOrg(b2ui, tjpl, org);
+							tjpl.repaint();
+						}
+						
 					}
 				}else {
 					if (org.equals("营业厅")) {

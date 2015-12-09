@@ -11,6 +11,7 @@ import java.util.Date;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import businesslogic.financebl.ProfitListModel.ProfitListBL;
@@ -24,7 +25,8 @@ public class b4Benifit extends JPanel {
 	private JButton returnButton;
 	private ImageIcon returnIcon=new ImageIcon("picture/返回.png");
 	private JLabel j1;
-	private ArrayList<ProfitVO> voList;
+	private ArrayList<ProfitVO> voList = new ArrayList<>();
+	private ProfitVO  vo;
 	
 	public b4Benifit(b4topmanagerui b4ui,topmanagerJpanel tjpl) {
 		// TODO Auto-generated constructor stub
@@ -39,8 +41,14 @@ public class b4Benifit extends JPanel {
 		ImageIcon i1 = new ImageIcon("picture/财务图片/成本收益表框架.png");
 		j1 = new JLabel(i1);
 		j1.setBounds(0, 0, 723, 571);
+		if (!voList.isEmpty()) {
+			b4BenifitTable b4table = new b4BenifitTable(b4ui, tjpl, voList);
+			j1.add(b4table.getScrollPane());
+			this.add(j1);
+		}else {
+			JOptionPane.showMessageDialog(null, "未找到相关数据");
+		}
 		
-		b4BenifitTable b4table = new b4BenifitTable(b4ui, tjpl, voList);
 		
 		returnButton=new JButton(returnIcon);
 		returnButton.setBounds(662, 575,48,48);
@@ -48,9 +56,9 @@ public class b4Benifit extends JPanel {
 
 	 	this.setBounds(260, 60, 730,650);
 
-	 	j1.add(b4table.getScrollPane());
+	 	
 	 	this.add(returnButton);
-	 	this.add(j1);
+	 	
 	 	this.setLayout(null);
 	 	this.setOpaque(false);
 	}
@@ -61,11 +69,15 @@ public class b4Benifit extends JPanel {
 			String date = df.format(new Date());
 			ProfitController proController = new ProfitController();
 			ProfitListBL profitListBL = new ProfitListBL();
-			ProfitVO vo = proController.returnPro(date);
-			ArrayList<ProfitVO> tempList = profitListBL.getProList();
-			voList.add(vo);
-			for(int i =0 ; i<tempList.size();i++){
-				voList.add(tempList.get(i));
+			vo = proController.returnPro(date);
+			if (vo != null) {
+				ArrayList<ProfitVO> tempList = profitListBL.getProList();
+				voList.add(vo);
+				for(int i =0 ; i<tempList.size();i++){
+					voList.add(tempList.get(i));
+			}
+			
+			
 			}
 //			profitList = new ArrayList<ProfitVO>();
 //			ProfitVO v1 = new ProfitVO(2.3, 5.5, "2015-10-17 13:56:20");
