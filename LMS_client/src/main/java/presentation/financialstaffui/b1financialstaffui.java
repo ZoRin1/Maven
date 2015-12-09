@@ -163,6 +163,7 @@ public class b1financialstaffui extends JFrame{
 		proController = new ProfitController();
 		profitList = new ProfitListBL();
 		vo = proController.returnPro(date);
+		proController.addPro();
 		ArrayList<ProfitVO> tempList = profitList.getProList();
 		voList.add(vo);
 		for(int i =0 ; i<tempList.size();i++){
