@@ -12,6 +12,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
 import po.excelPO.DepotExcelPO;
 import po.excelPO.ExcelPO;
+import po.excelPO.ProfitExcelPO;
 
 public class OutExcel {
 	//ip:114.212.42.143
@@ -107,6 +108,13 @@ public class OutExcel {
         			row.createCell(j).setCellValue(po.getData(j).toString());
     			}else if(po.getData(j) instanceof Integer){
         			row.createCell(j).setCellValue(Integer.parseInt(po.getData(j).toString()));
+    			}
+    		}else if(fatherPO instanceof ProfitExcelPO){
+    			ProfitExcelPO po = (ProfitExcelPO)fatherPO;
+    			if(po.getData(j) instanceof Double){
+           			row.createCell(j).setCellValue(Double.parseDouble(po.getData(j).toString()));
+    			}else if(po.getData(j) instanceof String){
+    				row.createCell(j).setCellValue(Integer.parseInt(po.getData(j).toString()));
     			}
     		}
     	}
