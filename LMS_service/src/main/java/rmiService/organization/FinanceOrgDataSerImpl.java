@@ -31,13 +31,16 @@ public class FinanceOrgDataSerImpl extends UnicastRemoteObject implements Financ
 	public String[] find() throws RemoteException{
 		// TODO 自动生成的方法存根
 		sql="select financer from 财务部信息";
+		String string[]=null;
 		try {
 			Class.forName(DRIVER);
 			Connection connection=DriverManager.getConnection(URL, USER, PASSWORD);
 			PreparedStatement preparedStatement=connection.prepareStatement(sql);
 			ResultSet resultSet=preparedStatement.executeQuery();
-			resultSet.next();
-			return resultSet.getString(1).split(",");
+			if (resultSet.next()) {
+				string=resultSet.getString(1).split(",");
+			}			
+			return string;
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
