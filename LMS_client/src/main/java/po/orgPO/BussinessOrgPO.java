@@ -34,12 +34,12 @@ public class BussinessOrgPO implements Serializable {
 		this.vehicle = vehicle;
 		this.driver = driver;
 		
-		for(AccountInfoPO po:assisant){
-			po.setState(2+"-"+Mcity+"-"+city+"-营业厅"+"-"+codeNumberOfMiddle+"-"+codeNumber);
-		}
-		for(AccountInfoPO po:courier){
-			po.setState(1+"-"+Mcity+"-"+city+"-营业厅"+"-"+codeNumberOfMiddle+"-"+codeNumber);
-		}
+//		for(AccountInfoPO po:assisant){
+//			po.setState(2+"-"+Mcity+"-"+city+"-营业厅"+"-"+codeNumberOfMiddle+"-"+codeNumber);
+//		}
+//		for(AccountInfoPO po:courier){
+//			po.setState(1+"-"+Mcity+"-"+city+"-营业厅"+"-"+codeNumberOfMiddle+"-"+codeNumber);
+//		}
 	}
 	
 	public String getMcity() {

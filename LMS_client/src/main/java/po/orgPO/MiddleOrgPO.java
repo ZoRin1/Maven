@@ -38,13 +38,13 @@ public class MiddleOrgPO implements Serializable {
 //		this.vehicle = vehicle;
 //		this.driver = driver;
 		
-		for(AccountInfoPO po:assisant){
-			po.setState(3+"-"+city+"-中转中心"+"-"+codeNumber);
-		}
-		
-		for(AccountInfoPO po:storger){
-			po.setState(4+"-"+city+"-中转中心"+"-"+codeNumber);
-		}
+//		for(AccountInfoPO po:assisant){
+//			po.setState(3+"-"+city+"-中转中心"+"-"+codeNumber);
+//		}
+//		
+//		for(AccountInfoPO po:storger){
+//			po.setState(4+"-"+city+"-中转中心"+"-"+codeNumber);
+//		}
 	}
 
 	public String getCity() {

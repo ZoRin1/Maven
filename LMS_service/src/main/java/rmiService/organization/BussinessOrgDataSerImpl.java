@@ -45,20 +45,25 @@ public class BussinessOrgDataSerImpl extends UnicastRemoteObject implements Buss
 			PreparedStatement preparedStatement=connection.prepareStatement(sql);
 			ResultSet resultSet=preparedStatement.executeQuery();
 			resultSet.next();
-			String assisantString[]=resultSet.getString(1).split(",");
-			for (int i = 0; i < assisantString.length; i++) {
-				sql="select name from 帐号表 where ID ='"+assisantString[i]+"'";
-				preparedStatement=connection.prepareStatement(sql);
-				resultSet=preparedStatement.executeQuery();
-				resultSet.next();
-				assisantList.add(assisantString[i]+"-"+resultSet.getString(1));
+			if (resultSet.getString(1)!=null) {
+				String assisantString[]=resultSet.getString(1).split(",");
+				for (int i = 0; i < assisantString.length; i++) {
+					sql="select name from 帐号表 where ID ='"+assisantString[i]+"'";
+					preparedStatement=connection.prepareStatement(sql);
+					resultSet=preparedStatement.executeQuery();
+					resultSet.next();
+					assisantList.add(assisantString[i]+"-"+resultSet.getString(1));
+				}
+				String assisantarray[]=new String[assisantList.size()];
+				for (int i = 0; i < assisantarray.length; i++) {
+					assisantarray[i]=assisantList.get(i);
+				}
+				connection.close();
+				return assisantarray;
 			}
-			String assisantarray[]=new String[assisantList.size()];
-			for (int i = 0; i < assisantarray.length; i++) {
-				assisantarray[i]=assisantList.get(i);
-			}
-			connection.close();
-			return assisantarray;
+			else {
+				return null;
+			}				
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -150,20 +155,25 @@ public class BussinessOrgDataSerImpl extends UnicastRemoteObject implements Buss
 			PreparedStatement preparedStatement=connection.prepareStatement(sql);
 			ResultSet resultSet=preparedStatement.executeQuery();
 			resultSet.next();
-			String courierString[]=resultSet.getString(1).split(",");
-			for (int i = 0; i < courierString.length; i++) {
-				sql="select name from 帐号表 where ID ='"+courierString[i]+"'";
-				preparedStatement=connection.prepareStatement(sql);
-				resultSet=preparedStatement.executeQuery();
-				resultSet.next();
-				courierList.add(courierString[i]+"-"+resultSet.getString(1));
+			if (resultSet.getString(1)!=null) {
+				String courierString[]=resultSet.getString(1).split(",");
+				for (int i = 0; i < courierString.length; i++) {
+					sql="select name from 帐号表 where ID ='"+courierString[i]+"'";
+					preparedStatement=connection.prepareStatement(sql);
+					resultSet=preparedStatement.executeQuery();
+					resultSet.next();
+					courierList.add(courierString[i]+"-"+resultSet.getString(1));
+				}
+				String courierarray[]=new String[courierList.size()];
+				for (int i = 0; i < courierarray.length; i++) {
+					courierarray[i]=courierList.get(i);
+				}
+				connection.close();
+				return courierarray;
+			}else {
+				return null;
 			}
-			String courierarray[]=new String[courierList.size()];
-			for (int i = 0; i < courierarray.length; i++) {
-				courierarray[i]=courierList.get(i);
-			}
-			connection.close();
-			return courierarray;
+			
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -254,9 +264,14 @@ public class BussinessOrgDataSerImpl extends UnicastRemoteObject implements Buss
 			PreparedStatement preparedStatement=connection.prepareStatement(sql);
 			ResultSet resultSet=preparedStatement.executeQuery();
 			resultSet.next();
-			String vehicleString[]=resultSet.getString(1).split(",");
-			connection.close();
-			return vehicleString;
+			if (resultSet.getString(1)!=null) {
+				String vehicleString[]=resultSet.getString(1).split(",");
+				connection.close();
+				return vehicleString;	
+			}else {
+				return null;
+			}
+			
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -377,9 +392,14 @@ public class BussinessOrgDataSerImpl extends UnicastRemoteObject implements Buss
 			PreparedStatement preparedStatement=connection.prepareStatement(sql);
 			ResultSet resultSet=preparedStatement.executeQuery();
 			resultSet.next();
-			String vehicleString[]=resultSet.getString(1).split(",");
-			connection.close();
-			return vehicleString;
+			if (resultSet.getString(1)!=null) {
+				String vehicleString[]=resultSet.getString(1).split(",");
+				connection.close();
+				return vehicleString;
+			}else {
+				return null;
+			}
+			
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
