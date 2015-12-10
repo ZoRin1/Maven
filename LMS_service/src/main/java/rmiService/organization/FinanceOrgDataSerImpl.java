@@ -38,8 +38,18 @@ public class FinanceOrgDataSerImpl extends UnicastRemoteObject implements Financ
 			PreparedStatement preparedStatement=connection.prepareStatement(sql);
 			ResultSet resultSet=preparedStatement.executeQuery();
 			if (resultSet.next()) {
-				string=resultSet.getString(1).split(",");
-			}			
+				if (resultSet.getString(1)!=null) {
+					string=resultSet.getString(1).split(",");
+					for (int i = 0; i < string.length; i++) {
+						sql="select name from 帐号表";
+						preparedStatement=connection.prepareStatement(sql);
+						resultSet=preparedStatement.executeQuery();
+						resultSet.next();
+						string[i]=string[i]+"-"+resultSet.getString(1);
+					}
+					}				
+			}
+			connection.close();
 			return string;
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -61,7 +71,12 @@ public class FinanceOrgDataSerImpl extends UnicastRemoteObject implements Financ
 			PreparedStatement preparedStatement=connection.prepareStatement(sql);
 			ResultSet resultSet=preparedStatement.executeQuery();
 			resultSet.next();
-			sql="update 财务部信息 set financer = '"+resultSet.getString(1)+Long.toString(ID)+",'";
+			if (resultSet.getString(1)==null) {
+				sql="update 财务部信息 set financer = '"+Long.toString(ID)+",'";
+			}
+			else {
+				sql="update 财务部信息 set financer = '"+resultSet.getString(1)+Long.toString(ID)+",'";
+			}		
 			preparedStatement=connection.prepareStatement(sql);
 			preparedStatement.executeUpdate();
 			sql="update 帐号表 set state ='5-"+resultSet.getString(3)+"-财务部-"+resultSet.getString(2)+"' where ID='"+ID+"'";
@@ -100,7 +115,13 @@ public class FinanceOrgDataSerImpl extends UnicastRemoteObject implements Financ
 			for (int i = 0; i < financerList.size(); i++) {
 				financer=financer+financerList.get(i)+",";
 			}
-			sql="update 财务部信息 set financer= '"+financer+"'";
+			if (financer.equals("")) {
+				sql="update 财务部信息 set financer= null";
+			}
+			else {
+				sql="update 财务部信息 set financer= '"+financer+"'";
+			}
+			
 			preparedStatement=connection.prepareStatement(sql);
 			preparedStatement.executeUpdate();
 			sql="update 帐号表 set state ='0' where ID='"+ID+"'";

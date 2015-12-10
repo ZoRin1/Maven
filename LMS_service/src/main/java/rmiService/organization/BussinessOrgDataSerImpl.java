@@ -85,7 +85,7 @@ public class BussinessOrgDataSerImpl extends UnicastRemoteObject implements Buss
 				PreparedStatement preparedStatement=connection.prepareStatement(sql);
 				ResultSet resultSet=preparedStatement.executeQuery();
 				resultSet.next();
-				if (resultSet.getString(1)==null) {
+				if (resultSet.getString(3)==null) {
 					sql="update 营业厅信息 set assisant='"+Long.toString(bID)+",' where codeNumberOfMiddle ='"+IDString[0]+"' and codeNumber ='"+ID+"'";
 				}else {
 					sql="update 营业厅信息 set assisant='"+resultSet.getString(3)+Long.toString(bID)+",' where codeNumberOfMiddle ='"+IDString[0]+"' and codeNumber ='"+ID+"'";
@@ -191,7 +191,7 @@ public class BussinessOrgDataSerImpl extends UnicastRemoteObject implements Buss
 	public boolean addCourier(String ID, long bID) throws RemoteException{
 		// TODO 自动生成的方法存根
 		String IDString[]=ID.split("-");
-		sql="select courier from 营业厅信息 where codeNumber ='"+ID+"'";
+		sql="select courier,mcity,city from 营业厅信息 where codeNumber ='"+ID+"'";
 			try {
 				Class.forName(DRIVER);
 				Connection connection=DriverManager.getConnection(URL, USER, PASSWORD);
@@ -207,7 +207,7 @@ public class BussinessOrgDataSerImpl extends UnicastRemoteObject implements Buss
 				}
 					preparedStatement=connection.prepareStatement(sql);
 				preparedStatement.executeUpdate();
-				sql="update 帐号表 set state = '1-"+resultSet.getString(1)+"-"+resultSet.getString(2)+"-营业厅-"+IDString[0]+"' where ID ='"+bID+"'";
+				sql="update 帐号表 set state = '1-"+resultSet.getString(3)+"-"+resultSet.getString(2)+"-营业厅-"+IDString[0]+"' where ID ='"+bID+"'";
 				preparedStatement=connection.prepareStatement(sql);
 				preparedStatement.executeUpdate();
 				connection.close();
@@ -273,7 +273,7 @@ public class BussinessOrgDataSerImpl extends UnicastRemoteObject implements Buss
 			PreparedStatement preparedStatement=connection.prepareStatement(sql);
 			ResultSet resultSet=preparedStatement.executeQuery();
 			resultSet.next();
-			if (!resultSet.getString(1).equals("")) {
+			if (resultSet.getString(1)!=null) {
 				String vehicleString[]=resultSet.getString(1).split(",");
 				connection.close();
 				return vehicleString;	
@@ -407,7 +407,7 @@ public class BussinessOrgDataSerImpl extends UnicastRemoteObject implements Buss
 			PreparedStatement preparedStatement=connection.prepareStatement(sql);
 			ResultSet resultSet=preparedStatement.executeQuery();
 			resultSet.next();
-			if (!resultSet.getString(1).equals("")) {
+			if (resultSet.getString(1)!=null) {
 				String vehicleString[]=resultSet.getString(1).split(",");
 				connection.close();
 				return vehicleString;

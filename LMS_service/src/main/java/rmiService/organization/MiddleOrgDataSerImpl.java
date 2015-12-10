@@ -39,7 +39,7 @@ public class MiddleOrgDataSerImpl extends UnicastRemoteObject implements MiddleO
 			PreparedStatement preparedStatement=connection.prepareStatement(sql);
 			ResultSet resultSet=preparedStatement.executeQuery();
 			resultSet.next();
-			if (!resultSet.getString(1).equals("")) {
+			if (resultSet.getString(1)!=null) {
 				String assisantString[]=resultSet.getString(1).split(",");
 				for (int i = 0; i < assisantString.length; i++) {
 					sql="select name from 帐号表 where ID ='"+assisantString[i]+"'";
@@ -78,7 +78,12 @@ public class MiddleOrgDataSerImpl extends UnicastRemoteObject implements MiddleO
 				PreparedStatement preparedStatement=connection.prepareStatement(sql);
 				ResultSet resultSet=preparedStatement.executeQuery();
 				resultSet.next();
-				sql="update 中转中心信息 set assisant='"+resultSet.getString(2)+Long.toString(bID)+",' where codeNumber ='"+ID+"'";
+				if (resultSet.getString(2)!=null) {
+					sql="update 中转中心信息 set assisant='"+resultSet.getString(2)+Long.toString(bID)+",' where codeNumber ='"+ID+"'";
+				}
+				else {
+					sql="update 中转中心信息 set assisant='"+Long.toString(bID)+",' where codeNumber ='"+ID+"'";
+				}
 				preparedStatement=connection.prepareStatement(sql);
 				preparedStatement.executeUpdate();
 				sql="update 帐号表 set state = '3-"+resultSet.getString(1)+"-中转中心-"+ID+"' where ID ='"+bID+"'";
@@ -146,7 +151,7 @@ public class MiddleOrgDataSerImpl extends UnicastRemoteObject implements MiddleO
 			PreparedStatement preparedStatement=connection.prepareStatement(sql);
 			ResultSet resultSet=preparedStatement.executeQuery();
 			resultSet.next();
-			if (!resultSet.getString(1).equals("")) {
+			if (resultSet.getString(1)!=null) {
 				String storgerString[]=resultSet.getString(1).split(",");
 				for (int i = 0; i < storgerString.length; i++) {
 					sql="select name from 帐号表 where ID ='"+storgerString[i]+"'";
@@ -185,7 +190,12 @@ public class MiddleOrgDataSerImpl extends UnicastRemoteObject implements MiddleO
 			PreparedStatement preparedStatement=connection.prepareStatement(sql);
 			ResultSet resultSet=preparedStatement.executeQuery();
 			resultSet.next();
-			sql="update 中转中心信息 set storger='"+resultSet.getString(2)+Long.toString(bID)+",' where codeNumber ='"+ID+"'";
+			if (resultSet.getString(2)!=null) {
+				sql="update 中转中心信息 set storger='"+resultSet.getString(2)+Long.toString(bID)+",' where codeNumber ='"+ID+"'";
+			}
+			else {
+				sql="update 中转中心信息 set storger='"+Long.toString(bID)+",' where codeNumber ='"+ID+"'";
+			}
 			preparedStatement=connection.prepareStatement(sql);
 			preparedStatement.executeUpdate();
 			sql="update 帐号表 set state = '4-"+resultSet.getString(1)+"-中转中心-"+ID+"' where ID ='"+bID+"'";

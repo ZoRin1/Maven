@@ -68,7 +68,7 @@ public class BusinessBL implements BussinessOrgBLSer {
 	@Override
 	public boolean addCourier(String ID, long bID) {
 		// TODO 自动生成的方法存根
-		return false;
+		return bussinessOrgDataSer.addCourier(ID, bID);
 	}
 
 	@Override

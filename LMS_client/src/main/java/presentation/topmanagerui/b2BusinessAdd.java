@@ -121,7 +121,6 @@ public class b2BusinessAdd extends JPanel {
 						bianHao = "001";
 					}
 					String mCity = middleController.GetInfo(zhong);
-					System.out.println(mCity);
 					BussinessOrgVO vo = new BussinessOrgVO(mCity, di, zhong + "-" +bianHao, zhong, null, null, null, null);
 					boolean result = businessController.addBussinessHall(bianHao, vo);
 					if (result) {

@@ -71,7 +71,14 @@ public class b3JPanel extends JPanel {
 				data[i][2] = "";
 			}
 			
-			table = new JTable(data,columnsName);
+			table = new JTable(data,columnsName){
+				public boolean isCellEditable(int row, int column) {
+					   if (column == 0||column==1) {//让column为2那一列不可用
+					    return false;
+					   } else
+					    return true;
+					  }
+					 };
 			Font font = new Font("幼圆", Font.BOLD, 20);
 			table.setForeground(Color.GRAY);
 			table.setFont(font);
@@ -94,7 +101,7 @@ public class b3JPanel extends JPanel {
 
 			table.addMouseListener(new MouseAdapter() {				
 				 public void mouseClicked(MouseEvent e) {
-					 if(e.getClickCount()==1){										
+					 if(e.getClickCount()==2){										
 						int r = table.getSelectedRow();
 						String name = (String)table.getValueAt(r, 1);
 						String code = (String)table.getValueAt(r, 0);
@@ -123,7 +130,7 @@ public class b3JPanel extends JPanel {
 							JOptionPane.showMessageDialog(null, message);	
 							break;
 						}
-						case "付款":{
+						case "付款单":{
 							PaymentPO po = (PaymentPO) documentController.getBufferedInfo(code, "付款单");
 							String message = DocumentsToString.payMentPO(po);
 							JOptionPane.showMessageDialog(null, message);	
