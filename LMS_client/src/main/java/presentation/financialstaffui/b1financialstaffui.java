@@ -169,25 +169,9 @@ public class b1financialstaffui extends JFrame{
 		for(int i =0 ; i<tempList.size();i++){
 			voList.add(tempList.get(i));
 		}
-//		voList = new ArrayList<ProfitVO>();
-//		ProfitVO v1 = new ProfitVO(2.3, 5.5, "2015-10-17 13:56:20");
-//		ProfitVO v2 = new ProfitVO(2, 5.5, "2015-10-17 13:56:20");
-//		ProfitVO v3 = new ProfitVO(2.3, 5.5, "2015-10-17 13:56:20");
-//		ProfitVO v4 = new ProfitVO(2.3, 5.5, "2015-10-17 13:56:20");
-//		ProfitVO v5 = new ProfitVO(2.3, 5.5, "2015-10-17 13:56:20");
-//		ProfitVO v6 = new ProfitVO(2.3, 5.5, "2015-10-17 13:56:20");
-//		ProfitVO v7 = new ProfitVO(2.3, 5.5, "2015-10-17 13:56:20");
-//		ProfitVO v8 = new ProfitVO(2.3, 5.5, "2015-10-17 13:56:20");
-//		voList.add(v1);
-//		voList.add(v2);
-//		voList.add(v3);
-//		voList.add(v4);
-//		voList.add(v5);
-//		voList.add(v6);
-//		voList.add(v7);
-//		voList.add(v8);
 	}
 	//得到成本收益集合的方法
+	
 	
 }
 

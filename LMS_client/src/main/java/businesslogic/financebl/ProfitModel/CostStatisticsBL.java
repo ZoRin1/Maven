@@ -35,6 +35,16 @@ public class CostStatisticsBL implements EarnOrPayBlSer{
 		}
 		return Allpay;
 	}
+	//得到所有的付款单
+	public ArrayList<ReceiptVO> getInBills(String end){
+		ArrayList<ReceiptVO> get = getReceipt.getAllReceivables(end);
+		return get;
+	}
+	//得到所有的收款单
+	public ArrayList<PaymentVO> getPayBills(String end){
+		ArrayList<PaymentVO> pay = getPayBills.getAllPay(end);
+		return pay;
+	}
 	//得到成本收益
 	public double CalculateCost(){
 		return 0;
