@@ -18,7 +18,6 @@ public class GetPayment implements GetPaymentSer{
 	private ArrayList<String> list;
 	private ArrayList<PaymentPO> list1;
 	private int size=0;
-	private String str,str1,str2;
 	private ipConfig ip;
 	
 	public GetPayment(){
@@ -38,10 +37,9 @@ public class GetPayment implements GetPaymentSer{
 			list=getCodeDataSer.getCode("付款单", null, end);
 			size=list.size();
 			for(int i=0;i<size;i++){
-				str=list.get(i);
-				str1=str.substring(0, 10);
-				str2=str.substring(11);
-				po=(PaymentPO) getDocumentInfoDataSer.getDocumentInfo(str1, str2);
+				String str[]=list.get(i).split(",");
+				
+				po=(PaymentPO) getDocumentInfoDataSer.getDocumentInfo(str[0], str[1]);
 				list1.add(po);
 			}
 		} catch (MalformedURLException e) {
@@ -70,10 +68,8 @@ public class GetPayment implements GetPaymentSer{
 			list=getCodeDataSer.getCode("付款单",start, end);
 			size=list.size();
 			for(int i=0;i<size;i++){
-				str=list.get(i);
-				str1=str.substring(0, 10);
-				str2=str.substring(11);
-				po=(PaymentPO) getDocumentInfoDataSer.getDocumentInfo(str1, str2);
+				String str[]=list.get(i).split(",");
+				po=(PaymentPO) getDocumentInfoDataSer.getDocumentInfo(str[0], str[1]);
 				list1.add(po);
 			}
 		} catch (MalformedURLException e) {
