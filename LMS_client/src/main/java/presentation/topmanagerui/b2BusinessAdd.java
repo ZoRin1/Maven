@@ -121,12 +121,18 @@ public class b2BusinessAdd extends JPanel {
 						bianHao = "001";
 					}
 					String mCity = middleController.GetInfo(zhong);
-					BussinessOrgVO vo = new BussinessOrgVO(mCity, di, bianHao, zhong, null, null, null, null);
-					businessController.addBussinessHall(bianHao, vo);
-					JOptionPane.showMessageDialog(tjpl, "修改成功,机构编号为" + bianHao);
-					tjpl.remove(b2BusinessAdd);
-					new b2SearchOrg(b2ui, tjpl, org);
-					tjpl.repaint();
+					System.out.println(mCity);
+					BussinessOrgVO vo = new BussinessOrgVO(mCity, di, zhong + "-" +bianHao, zhong, null, null, null, null);
+					boolean result = businessController.addBussinessHall(bianHao, vo);
+					if (result) {
+						JOptionPane.showMessageDialog(tjpl, "创建成功,机构编号为"+ zhong + "-" + bianHao);
+						tjpl.remove(b2BusinessAdd);
+						new b2SearchOrg(b2ui, tjpl, org);
+						tjpl.repaint();
+					}else {
+						JOptionPane.showMessageDialog(tjpl, "修改失败,已存在同名营业厅");
+					}
+					
 				}
 				
 			}

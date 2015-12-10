@@ -143,16 +143,25 @@ public class b5DistanceConst extends JPanel {
 				TransportationController transportationController = new TransportationController();
 				
 				if (!ch1 && ! ch2 && dis && !same) {
-					RouteVO route = new RouteVO(qiDianCity.getSelectedItem() + "-" + zhongDianCity.getSelectedItem(), 
+					RouteVO route1 = new RouteVO(qiDianCity.getSelectedItem() + "-" + zhongDianCity.getSelectedItem(), 
 							Double.parseDouble(juLiF.getText()));
-					boolean b2= transportationController.changeDistance(route);
-					if (b2) {
-						
+					RouteVO route2 = new RouteVO(zhongDianCity.getSelectedItem() + "-" + qiDianCity.getSelectedItem(), 
+							Double.parseDouble(juLiF.getText()));
+					boolean b1= transportationController.changeDistance(route1);
+					boolean b2 = transportationController.changeDistance(route2);
+					
+					if (b1 == false) {
+						b1 = transportationController.addRoute(route1);
+					}
+					if (b2 == false) {
+						b2 = transportationController.addRoute(route2); 
+					}
+					if (b1 && b2) {
+						JOptionPane.showMessageDialog(b5ui, "修改成功！");
 						tjpl.remove(distanceConst);
 						tjpl.add(b5ui.operationJpanel);
 						b5ui.b1.setEnabled(true);
 						b5ui.b2.setEnabled(true);
-
 						tjpl.repaint();
 					}else {
 						JOptionPane.showMessageDialog(b5ui, "修改失败，请重试");

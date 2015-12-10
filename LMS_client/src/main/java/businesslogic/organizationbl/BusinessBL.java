@@ -147,7 +147,7 @@ public class BusinessBL implements BussinessOrgBLSer {
 	@Override
 	public boolean addBussinessHall(String ID, BussinessOrgVO vo) {
 		// TODO 自动生成的方法存根
-		return this.bussinessOrgDataSer.addBussinessHall(ID, new BussinessOrgPO(null, vo.getCity(), 
+		return this.bussinessOrgDataSer.addBussinessHall(ID, new BussinessOrgPO(vo.getMcity(), vo.getCity(), 
 				vo.getCodeNumber(), vo.getCodeNemberOfMiddle(), null, null, null, null));
 	}
 

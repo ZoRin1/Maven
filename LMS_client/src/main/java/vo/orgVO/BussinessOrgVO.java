@@ -13,6 +13,14 @@ import vo.accountVO.AccountNumberVO;
  */
 public class BussinessOrgVO {
 	private String Mcity;//所属中转中心城市
+	public String getMcity() {
+		return Mcity;
+	}
+
+	public void setMcity(String mcity) {
+		Mcity = mcity;
+	}
+
 	private String city;//机构所在城市
 	private String codeNumber;//机构编号，3位
 	private String codeNemberOfMiddle;//所属中转中心编号；3位

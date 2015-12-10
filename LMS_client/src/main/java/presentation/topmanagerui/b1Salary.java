@@ -30,7 +30,7 @@ public class b1Salary extends JPanel {
 	public b1Salary(topmanagerui tui,topmanagerJpanel tjpl,b1topmanagerui b1ui,int employee) {
 		init(employee);
 		tjpl.add(this);
-		registListener(tjpl, b1ui, this);
+		registListener(tjpl, b1ui, this,employee);
 		
 		
 	}
@@ -127,7 +127,7 @@ public class b1Salary extends JPanel {
 	
 
 	
-	private void registListener(final topmanagerJpanel tjpl,final b1topmanagerui b1ui,final b1Salary salary) {
+	private void registListener(final topmanagerJpanel tjpl,final b1topmanagerui b1ui,final b1Salary salary,final int employee) {
 		
 		returnButton.addActionListener(new ActionListener() {
 			
@@ -168,18 +168,29 @@ public class b1Salary extends JPanel {
 					JOptionPane.showMessageDialog(null, "请输入正确的提成工资策略数值");
 				}
 				if (bAnYue && bJiCi && bTIiCheng) {
-					b1ui.setTitle("总经理--工资管理");
-					tjpl.remove(salary);
-					tjpl.add(b1ui.operationJpanel);
+					TransportationController t = new TransportationController();
+					double[] salarys = new double[3];
+					salarys[0] = Double.parseDouble(anYueF.getText());
+					salarys[1] = Double.parseDouble(jiCiF.getText());
+					salarys[2] = Double.parseDouble(tiChengF.getText());
+					boolean result = t.changeSalary(employee, salarys);
+					if (result) {
+						JOptionPane.showMessageDialog(b1ui, "修改成功！");
+						b1ui.setTitle("总经理--工资管理");
+						tjpl.remove(salary);
+						tjpl.add(b1ui.operationJpanel);												
+						b1ui.b1.setEnabled(true);
+						b1ui.b2.setEnabled(true);
+						b1ui.b3.setEnabled(true);
+						b1ui.b4.setEnabled(true);
+						b1ui.b5.setEnabled(true);
+						b1ui.b6.setEnabled(true);
+						tjpl.repaint();
+					}else {
+						JOptionPane.showMessageDialog(b1ui, "修改失败，请重试！");
+					}
 					
-					JOptionPane.showMessageDialog(b1ui, "修改成功！");
-					b1ui.b1.setEnabled(true);
-					b1ui.b2.setEnabled(true);
-					b1ui.b3.setEnabled(true);
-					b1ui.b4.setEnabled(true);
-					b1ui.b5.setEnabled(true);
-					b1ui.b6.setEnabled(true);
-					tjpl.repaint();
+					
 				}
 				
 			}
