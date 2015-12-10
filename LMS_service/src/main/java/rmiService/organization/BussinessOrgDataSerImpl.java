@@ -38,14 +38,14 @@ public class BussinessOrgDataSerImpl extends UnicastRemoteObject implements Buss
 		// TODO 自动生成的方法存根
 		ArrayList<String> assisantList=new ArrayList<String>();
 		String IDString[]=ID.split("-");
-		sql="select assisant from 营业厅信息 where codeNumberOfMiddle ='"+IDString[0]+"' and codeNumber ='"+IDString[1]+"'";
+		sql="select assisant from 营业厅信息 where  codeNumber ='"+ID+"'";
 		try {
 			Class.forName(DRIVER);
 			Connection connection=DriverManager.getConnection(URL, USER, PASSWORD);
 			PreparedStatement preparedStatement=connection.prepareStatement(sql);
 			ResultSet resultSet=preparedStatement.executeQuery();
 			resultSet.next();
-			if (!resultSet.getString(1).equals("")) {
+			if (resultSet.getString(1)!=null) {
 				String assisantString[]=resultSet.getString(1).split(",");
 				for (int i = 0; i < assisantString.length; i++) {
 					sql="select name from 帐号表 where ID ='"+assisantString[i]+"'";
@@ -78,7 +78,7 @@ public class BussinessOrgDataSerImpl extends UnicastRemoteObject implements Buss
 	public boolean addBussinessman(String ID, long bID) throws RemoteException{
 		// TODO 自动生成的方法存根
 		String IDString[]=ID.split("-");
-		sql="select mcity,city,assisant from 营业厅信息 where codeNumberOfMiddle ='"+IDString[0]+"' and codeNumber ='"+IDString[1]+"'";
+		sql="select mcity,city,assisant from 营业厅信息 where  codeNumber ='"+ID+"'";
 			try {
 				Class.forName(DRIVER);
 				Connection connection=DriverManager.getConnection(URL, USER, PASSWORD);
@@ -86,9 +86,9 @@ public class BussinessOrgDataSerImpl extends UnicastRemoteObject implements Buss
 				ResultSet resultSet=preparedStatement.executeQuery();
 				resultSet.next();
 				if (resultSet.getString(1)==null) {
-					sql="update 营业厅信息 set assisant='"+Long.toString(bID)+",' where codeNumberOfMiddle ='"+IDString[0]+"' and codeNumber ='"+IDString[1]+"'";
+					sql="update 营业厅信息 set assisant='"+Long.toString(bID)+",' where codeNumberOfMiddle ='"+IDString[0]+"' and codeNumber ='"+ID+"'";
 				}else {
-					sql="update 营业厅信息 set assisant='"+resultSet.getString(3)+Long.toString(bID)+",' where codeNumberOfMiddle ='"+IDString[0]+"' and codeNumber ='"+IDString[1]+"'";
+					sql="update 营业厅信息 set assisant='"+resultSet.getString(3)+Long.toString(bID)+",' where codeNumberOfMiddle ='"+IDString[0]+"' and codeNumber ='"+ID+"'";
 				}			
 				preparedStatement=connection.prepareStatement(sql);
 				preparedStatement.executeUpdate();
@@ -111,7 +111,7 @@ public class BussinessOrgDataSerImpl extends UnicastRemoteObject implements Buss
 	public boolean removeBussinessman(String ID, long bID) throws RemoteException{
 		// TODO 自动生成的方法存根
 		String IDString[]=ID.split("-");
-		sql="select assisant from 营业厅信息 where codeNumberOfMiddle ='"+IDString[0]+"' and codeNumber ='"+IDString[1]+"'";
+		sql="select assisant from 营业厅信息 where  codeNumber ='"+ID+"'";
 			try {
 				Class.forName(DRIVER);
 				Connection connection=DriverManager.getConnection(URL, USER, PASSWORD);
@@ -129,7 +129,7 @@ public class BussinessOrgDataSerImpl extends UnicastRemoteObject implements Buss
 				for (int i = 0; i < assisantList.size(); i++) {
 					assisant=assisant+assisantList.get(i)+",";
 				}
-				sql="update 营业厅信息 set assisant='"+assisant+",' where codeNumberOfMiddle ='"+IDString[0]+"' and codeNumber ='"+IDString[1]+"'";
+				sql="update 营业厅信息 set assisant='"+assisant+",' where codeNumberOfMiddle ='"+IDString[0]+"' and codeNumber ='"+ID+"'";
 				preparedStatement=connection.prepareStatement(sql);
 				preparedStatement.executeUpdate();
 				sql="update 帐号表 set state ='0' where ID='"+bID+"'";
@@ -151,15 +151,14 @@ public class BussinessOrgDataSerImpl extends UnicastRemoteObject implements Buss
 	public String[] getCourierList(String ID, long bID)throws RemoteException {
 		// TODO 自动生成的方法存根
 		ArrayList<String> courierList=new ArrayList<String>();
-		String IDString[]=ID.split("-");
-		sql="select courier from 营业厅信息 where codeNumberOfMiddle ='"+IDString[0]+"' and codeNumber ='"+IDString[1]+"'";
+		sql="select courier from 营业厅信息 where codeNumber ='"+ID+"'";
 		try {
 			Class.forName(DRIVER);
 			Connection connection=DriverManager.getConnection(URL, USER, PASSWORD);
 			PreparedStatement preparedStatement=connection.prepareStatement(sql);
 			ResultSet resultSet=preparedStatement.executeQuery();
 			resultSet.next();
-			if (!resultSet.getString(1).equals("")) {
+			if (resultSet.getString(1)!=null) {
 				String courierString[]=resultSet.getString(1).split(",");
 				for (int i = 0; i < courierString.length; i++) {
 					sql="select name from 帐号表 where ID ='"+courierString[i]+"'";
@@ -192,7 +191,7 @@ public class BussinessOrgDataSerImpl extends UnicastRemoteObject implements Buss
 	public boolean addCourier(String ID, long bID) throws RemoteException{
 		// TODO 自动生成的方法存根
 		String IDString[]=ID.split("-");
-		sql="select courier from 营业厅信息 where codeNumberOfMiddle ='"+IDString[0]+"' and codeNumber ='"+IDString[1]+"'";
+		sql="select courier from 营业厅信息 where codeNumber ='"+ID+"'";
 			try {
 				Class.forName(DRIVER);
 				Connection connection=DriverManager.getConnection(URL, USER, PASSWORD);
@@ -200,15 +199,15 @@ public class BussinessOrgDataSerImpl extends UnicastRemoteObject implements Buss
 				ResultSet resultSet=preparedStatement.executeQuery();
 				resultSet.next();
 				if (resultSet.getString(1)==null) {
-					sql="update 营业厅信息 set courier='"+Long.toString(bID)+",' where codeNumberOfMiddle ='"+IDString[0]+"' and codeNumber ='"+IDString[1]+"'";
+					sql="update 营业厅信息 set courier='"+Long.toString(bID)+",' where codeNumberOfMiddle ='"+IDString[0]+"' and codeNumber ='"+ID+"'";
 					
 				}else {
-					sql="update 营业厅信息 set courier='"+resultSet.getString(1)+Long.toString(bID)+",' where codeNumberOfMiddle ='"+IDString[0]+"' and codeNumber ='"+IDString[1]+"'";
+					sql="update 营业厅信息 set courier='"+resultSet.getString(1)+Long.toString(bID)+",' where codeNumberOfMiddle ='"+IDString[0]+"' and codeNumber ='"+ID+"'";
 					
 				}
 					preparedStatement=connection.prepareStatement(sql);
 				preparedStatement.executeUpdate();
-				sql="update 帐号表 set state = '1-"+resultSet.getString(1)+"-"+resultSet.getString(2)+"-营业厅-"+ID+"' where ID ='"+bID+"'";
+				sql="update 帐号表 set state = '1-"+resultSet.getString(1)+"-"+resultSet.getString(2)+"-营业厅-"+IDString[0]+"' where ID ='"+bID+"'";
 				preparedStatement=connection.prepareStatement(sql);
 				preparedStatement.executeUpdate();
 				connection.close();
@@ -227,7 +226,7 @@ public class BussinessOrgDataSerImpl extends UnicastRemoteObject implements Buss
 	public boolean removeCourier(String ID, long bID) throws RemoteException{
 		// TODO 自动生成的方法存根
 		String IDString[]=ID.split("-");
-		sql="select courier from 营业厅信息 where codeNumberOfMiddle ='"+IDString[0]+"' and codeNumber ='"+IDString[1]+"'";
+		sql="select courier from 营业厅信息 where codeNumberOfMiddle ='"+IDString[0]+"' and codeNumber ='"+ID+"'";
 			try {
 				Class.forName(DRIVER);
 				Connection connection=DriverManager.getConnection(URL, USER, PASSWORD);
@@ -245,7 +244,7 @@ public class BussinessOrgDataSerImpl extends UnicastRemoteObject implements Buss
 				for (int i = 0; i < courierList.size(); i++) {
 					courier=courier+courierList.get(i)+",";
 				}
-				sql="update 营业厅信息 set courier='"+courier+",' where codeNumberOfMiddle ='"+IDString[0]+"' and codeNumber ='"+IDString[1]+"'";
+				sql="update 营业厅信息 set courier='"+courier+",' where codeNumberOfMiddle ='"+IDString[0]+"' and codeNumber ='"+ID+"'";
 				preparedStatement=connection.prepareStatement(sql);
 				preparedStatement.executeUpdate();
 				sql="update 帐号表 set state ='0' where ID='"+bID+"'";
@@ -267,7 +266,7 @@ public class BussinessOrgDataSerImpl extends UnicastRemoteObject implements Buss
 	public String[] getVehicleList(String ID) throws RemoteException{
 		// TODO 自动生成的方法存根
 		String IDString[]=ID.split("-");
-		sql="select vehicle from 营业厅信息 where codeNumberOfMiddle ='"+IDString[0]+"' and codeNumber ='"+IDString[1]+"'";
+		sql="select vehicle from 营业厅信息 where codeNumberOfMiddle ='"+IDString[0]+"' and codeNumber ='"+ID+"'";
 		try {
 			Class.forName(DRIVER);
 			Connection connection=DriverManager.getConnection(URL, USER, PASSWORD);
@@ -325,15 +324,15 @@ public class BussinessOrgDataSerImpl extends UnicastRemoteObject implements Buss
 			PreparedStatement preparedStatement=connection.prepareStatement(sql);
 			preparedStatement.executeUpdate();
 			String IDString[]=ID.split("-");
-			sql="select vehicle from 营业厅信息 where codeNumberOfMiddle ='"+IDString[0]+"' and codeNumber ='"+IDString[1]+"'";			
+			sql="select vehicle from 营业厅信息 where codeNumberOfMiddle ='"+IDString[0]+"' and codeNumber ='"+ID+"'";			
 				preparedStatement=connection.prepareStatement(sql);
 					ResultSet resultSet=preparedStatement.executeQuery();
 					resultSet.next();
 					if (resultSet.getString(1)==null) {
-						sql="update 营业厅信息 set vehicle='"+po.getCodeVehicle()+",' where codeNumberOfMiddle ='"+IDString[0]+"' and codeNumber ='"+IDString[1]+"'";
+						sql="update 营业厅信息 set vehicle='"+po.getCodeVehicle()+",' where codeNumberOfMiddle ='"+IDString[0]+"' and codeNumber ='"+ID+"'";
 						
 					}else {
-						sql="update 营业厅信息 set vehicle='"+resultSet.getString(1)+po.getCodeVehicle()+",' where codeNumberOfMiddle ='"+IDString[0]+"' and codeNumber ='"+IDString[1]+"'";
+						sql="update 营业厅信息 set vehicle='"+resultSet.getString(1)+po.getCodeVehicle()+",' where codeNumberOfMiddle ='"+IDString[0]+"' and codeNumber ='"+ID+"'";
 						
 					}
 					preparedStatement=connection.prepareStatement(sql);
@@ -360,7 +359,7 @@ public class BussinessOrgDataSerImpl extends UnicastRemoteObject implements Buss
 			PreparedStatement preparedStatement=connection.prepareStatement(sql);
 			preparedStatement.executeUpdate();
 			String IDString[]=ID.split("-");
-			sql="select vehicle from 营业厅信息 where codeNumberOfMiddle ='"+IDString[0]+"' and codeNumber ='"+IDString[1]+"'";
+			sql="select vehicle from 营业厅信息 where codeNumberOfMiddle ='"+IDString[0]+"' and codeNumber ='"+ID+"'";
 			preparedStatement=connection.prepareStatement(sql);
 					ResultSet resultSet=preparedStatement.executeQuery();
 					resultSet.next();
@@ -375,7 +374,7 @@ public class BussinessOrgDataSerImpl extends UnicastRemoteObject implements Buss
 					for (int i = 0; i < vehicleList.size(); i++) {
 						vehicle=vehicle+vehicleList.get(i)+",";
 					}
-					sql="update 营业厅信息 set vehicle='"+vehicle+",' where codeNumberOfMiddle ='"+IDString[0]+"' and codeNumber ='"+IDString[1]+"'";
+					sql="update 营业厅信息 set vehicle='"+vehicle+",' where codeNumberOfMiddle ='"+IDString[0]+"' and codeNumber ='"+ID+"'";
 					preparedStatement=connection.prepareStatement(sql);
 					preparedStatement.executeUpdate();
 					connection.close();
@@ -401,7 +400,7 @@ public class BussinessOrgDataSerImpl extends UnicastRemoteObject implements Buss
 	public String[] getDriverList(String ID) throws RemoteException{
 		// TODO 自动生成的方法存根
 		String IDString[]=ID.split("-");
-		sql="select driver from 营业厅信息 where codeNumberOfMiddle ='"+IDString[0]+"' and codeNumber ='"+IDString[1]+"'";
+		sql="select driver from 营业厅信息 where codeNumberOfMiddle ='"+IDString[0]+"' and codeNumber ='"+ID+"'";
 		try {
 			Class.forName(DRIVER);
 			Connection connection=DriverManager.getConnection(URL, USER, PASSWORD);
@@ -459,15 +458,15 @@ public class BussinessOrgDataSerImpl extends UnicastRemoteObject implements Buss
 			PreparedStatement preparedStatement=connection.prepareStatement(sql);
 			preparedStatement.executeUpdate();
 			String IDString[]=ID.split("-");
-			sql="select driver from 营业厅信息 where codeNumberOfMiddle ='"+IDString[0]+"' and codeNumber ='"+IDString[1]+"'";			
+			sql="select driver from 营业厅信息 where codeNumberOfMiddle ='"+IDString[0]+"' and codeNumber ='"+ID+"'";			
 				preparedStatement=connection.prepareStatement(sql);
 					ResultSet resultSet=preparedStatement.executeQuery();
 					resultSet.next();
 					if (resultSet.getString(1)==null) {
-						sql="update 营业厅信息 set driver='"+po.getCodeDriver()+",' where codeNumberOfMiddle ='"+IDString[0]+"' and codeNumber ='"+IDString[1]+"'";
+						sql="update 营业厅信息 set driver='"+po.getCodeDriver()+",' where codeNumberOfMiddle ='"+IDString[0]+"' and codeNumber ='"+ID+"'";
 						
 					}else {
-						sql="update 营业厅信息 set driver='"+resultSet.getString(1)+po.getCodeDriver()+",' where codeNumberOfMiddle ='"+IDString[0]+"' and codeNumber ='"+IDString[1]+"'";
+						sql="update 营业厅信息 set driver='"+resultSet.getString(1)+po.getCodeDriver()+",' where codeNumberOfMiddle ='"+IDString[0]+"' and codeNumber ='"+ID+"'";
 						
 					}
 					preparedStatement=connection.prepareStatement(sql);
@@ -494,7 +493,7 @@ public class BussinessOrgDataSerImpl extends UnicastRemoteObject implements Buss
 			PreparedStatement preparedStatement=connection.prepareStatement(sql);
 			preparedStatement.executeUpdate();
 			String IDString[]=ID.split("-");
-			sql="select driver from 营业厅信息 where codeNumberOfMiddle ='"+IDString[0]+"' and codeNumber ='"+IDString[1]+"'";
+			sql="select driver from 营业厅信息 where codeNumberOfMiddle ='"+IDString[0]+"' and codeNumber ='"+ID+"'";
 			preparedStatement=connection.prepareStatement(sql);
 					ResultSet resultSet=preparedStatement.executeQuery();
 					resultSet.next();
@@ -509,7 +508,7 @@ public class BussinessOrgDataSerImpl extends UnicastRemoteObject implements Buss
 					for (int i = 0; i < driverList.size(); i++) {
 						driver=driver+driverList.get(i)+",";
 					}
-					sql="update 营业厅信息 set driver='"+driver+",' where codeNumberOfMiddle ='"+IDString[0]+"' and codeNumber ='"+IDString[1]+"'";
+					sql="update 营业厅信息 set driver='"+driver+",' where codeNumberOfMiddle ='"+IDString[0]+"' and codeNumber ='"+ID+"'";
 					preparedStatement=connection.prepareStatement(sql);
 					preparedStatement.executeUpdate();
 					connection.close();
@@ -647,9 +646,8 @@ public class BussinessOrgDataSerImpl extends UnicastRemoteObject implements Buss
 	@Override
 	public String getInfo(String ID) throws RemoteException{
 		// TODO 自动生成的方法存根
-		String s[]=ID.split("-");
 		String cityString=null;
-		sql="select city from 营业厅信息 where codeNumberOfMiddle ='"+s[0]+"' and codeNumber ='"+s[1]+"'";
+		sql="select city from 营业厅信息 where  codeNumber ='"+ID+"'";
 		try {
 			Class.forName(DRIVER);
 			Connection connection=DriverManager.getConnection(URL, USER, PASSWORD);

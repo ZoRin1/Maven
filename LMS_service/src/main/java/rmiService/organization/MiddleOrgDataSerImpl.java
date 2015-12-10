@@ -254,7 +254,7 @@ public class MiddleOrgDataSerImpl extends UnicastRemoteObject implements MiddleO
 			PreparedStatement preparedStatement=connection.prepareStatement(sql);
 			ResultSet resultSet=preparedStatement.executeQuery();
 			resultSet.next();
-			if (!resultSet.getString(1).equals("")) {
+			if (resultSet.getString(1)!=null) {
 				String bussinessHallString[]=resultSet.getString(1).split(",");
 				for (int i = 0; i < bussinessHallString.length; i++) {
 					sql="select city from 营业厅信息 where codeNumber ='"+bussinessHallString[i]+"'";
