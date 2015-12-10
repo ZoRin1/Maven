@@ -31,11 +31,13 @@ public class bhclerkui extends JFrame{
 	private bhclerkJpanel bhclerkJpanel;
 	
 	//设置两个暂时的账号和状态
-		private String account="111";
-		private String state="3-南京-仙林营业厅-001-001";
+		private String account;
+		private String state;
 		
-	public bhclerkui(String s,String[] args) {
+	public bhclerkui(String s,String[] args,String account,String state) {
 		super(s);
+		this.account=account;
+		this.state=state;
 		this.args=args;
 		init();
 		registListener(this,bhclerkJpanel);

@@ -230,19 +230,19 @@ class mainFrame extends JFrame{
 								mf.dispose();
 								break;
 							case "2":
-//								new bhclerkui("营业厅业务员界面",args,account,state);
+								new bhclerkui("营业厅业务员界面",args,account,state);
 								mf.dispose();
 								break;
 							case "3":
-//								new icclerkui("中转中心业务员界面",args,account,state);
+							new icclerkui("中转中心业务员界面",args,account,state);
 								mf.dispose();
 								break;
 							case "4":
-//								new icwarehousemanui("中转中心仓库管理员界面",args,account,state);
+								new icwarehousemanui("中转中心仓库管理员界面",args,account,state);
 								mf.dispose();
 								break;
 							case "5":
-//								new financialstaffui("财务人员界面",args,account,state);
+								new financialstaffui("财务人员界面",args,account,state);
 								mf.dispose();
 								break;
 		
@@ -326,7 +326,7 @@ b2.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					// TODO Auto-generated method stub
 
-					new bhclerkui("营业厅业务员界面",args);
+					new bhclerkui("营业厅业务员界面",args,"111","3-南京-仙林营业厅-001-001");
 					mf.dispose();
 				}
 			});
@@ -344,7 +344,7 @@ b4.addActionListener(new ActionListener() {
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 
-		new financialstaffui("财务人员界面",args);
+		new financialstaffui("财务人员界面",args,"1515","");
 		mf.dispose();
 	}
 });
@@ -353,7 +353,7 @@ b5.addActionListener(new ActionListener() {
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 
-		new icclerkui("中转中心业务员界面",args);
+		new icclerkui("中转中心业务员界面",args,"111","3-南京-南京中转中心-001");
 		mf.dispose();
 	}
 });
@@ -362,7 +362,7 @@ b6.addActionListener(new ActionListener() {
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 
-		new icwarehousemanui("中转中心仓库管理员界面",args);
+		new icwarehousemanui("中转中心仓库管理员界面",args,"1515","4-南京-中转中心-001");
 		mf.dispose();
 	}
 });

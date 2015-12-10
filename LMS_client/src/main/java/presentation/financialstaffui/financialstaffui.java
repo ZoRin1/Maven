@@ -29,11 +29,13 @@ public class financialstaffui extends JFrame{
 	private JButton zuixiaohuaButton;
 	
 	//这是暂时的ID和State
-	private String account="1515";
+	private String account;
 	private String state;
-	public financialstaffui(String s,String [] args) {
+	public financialstaffui(String s,String [] args,String account,String state) {
 		// TODO Auto-generated constructor stub
 		super(s);
+		this.account=account;
+		this.state=state;
 		this.args=args;
 		init();
 		registListener(this,financialstaffJpanel);

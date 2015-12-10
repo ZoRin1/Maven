@@ -27,12 +27,14 @@ public class icclerkui extends JFrame{
 	private JButton zuixiaohuaButton;
 		
 	//设置两个暂时的账号和状态
-	private String account="111";
-	private String state="3-南京-南京中转中心-001";
+	private String account;
+	private String state;
 	
-	public icclerkui(String s,String [] args) {
+	public icclerkui(String s,String [] args,String account,String state) {
 		// TODO Auto-generated constructor stub
 		super(s);
+		this.account=account;
+		this.state=state;
 		this.args=args;
 		init();
 		registListener(this);

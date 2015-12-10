@@ -28,8 +28,8 @@ import presentation.mainui.mainui;
 import vo.storageVO.InDepotInfVO;
 
 public class icwarehousemanui extends JFrame{
-	private String account="1515";
-	private String state="4-南京-中转中心-001";
+	private String account;
+	private String state;
 	private JLabel warnJLabel;
 	private String[] args;
 	private JButton outjButton;
@@ -68,9 +68,11 @@ public class icwarehousemanui extends JFrame{
 	private stockDepotPanel stock;
 	//以下是2015/11/26日添加的界面
 	private JLabel checkDepot;
-	public icwarehousemanui(String s,String [] args) {
+	public icwarehousemanui(String s,String [] args,String account,String state) {
 		// TODO Auto-generated constructor stub
 		super(s);
+		this.account=account;
+		this.state=state;
 		this.args=args;
 		init();
 		registListener(this);
