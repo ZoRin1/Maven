@@ -31,14 +31,23 @@ public class TransportationDataSerImpl extends UnicastRemoteObject implements Tr
 	@Override
 	public boolean updateDistance(RoutePO route) throws RemoteException{
 		// TODO 自动生成的方法存根
-		sql="update 线路 set distance='"+route.getDistance()+"' where line ='"+route.getLine()+"'";
+
 		try {
+			sql="select * from 线路 where line='"+route.getLine()+"'";
 			Class.forName(DRIVER);
 			Connection connection=DriverManager.getConnection(URL, USER, PASSWORD);
 			PreparedStatement preparedStatement=connection.prepareStatement(sql);
-			preparedStatement.executeUpdate();
-			connection.close();
-			return true;
+			ResultSet resultSet=preparedStatement.executeQuery();
+			if (resultSet.next()) {
+				sql="update 线路 set distance='"+route.getDistance()+"' where line ='"+route.getLine()+"'";
+				preparedStatement=connection.prepareStatement(sql);
+				preparedStatement.executeUpdate();
+				connection.close();
+				return true;
+			}else {
+				return false;
+			}
+			
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -45,7 +45,7 @@ public class BussinessOrgDataSerImpl extends UnicastRemoteObject implements Buss
 			PreparedStatement preparedStatement=connection.prepareStatement(sql);
 			ResultSet resultSet=preparedStatement.executeQuery();
 			resultSet.next();
-			if (resultSet.getString(1)!=null) {
+			if (!resultSet.getString(1).equals("")) {
 				String assisantString[]=resultSet.getString(1).split(",");
 				for (int i = 0; i < assisantString.length; i++) {
 					sql="select name from 帐号表 where ID ='"+assisantString[i]+"'";
@@ -85,7 +85,11 @@ public class BussinessOrgDataSerImpl extends UnicastRemoteObject implements Buss
 				PreparedStatement preparedStatement=connection.prepareStatement(sql);
 				ResultSet resultSet=preparedStatement.executeQuery();
 				resultSet.next();
-				sql="update 营业厅信息 set assisant='"+resultSet.getString(3)+Long.toString(bID)+",' where codeNumberOfMiddle ='"+IDString[0]+"' and codeNumber ='"+IDString[1]+"'";
+				if (resultSet.getString(1)==null) {
+					sql="update 营业厅信息 set assisant='"+Long.toString(bID)+",' where codeNumberOfMiddle ='"+IDString[0]+"' and codeNumber ='"+IDString[1]+"'";
+				}else {
+					sql="update 营业厅信息 set assisant='"+resultSet.getString(3)+Long.toString(bID)+",' where codeNumberOfMiddle ='"+IDString[0]+"' and codeNumber ='"+IDString[1]+"'";
+				}			
 				preparedStatement=connection.prepareStatement(sql);
 				preparedStatement.executeUpdate();
 				sql="update 帐号表 set state = '2-"+resultSet.getString(1)+"-"+resultSet.getString(2)+"-营业厅-"+ID+"' where ID ='"+bID+"'";
@@ -155,7 +159,7 @@ public class BussinessOrgDataSerImpl extends UnicastRemoteObject implements Buss
 			PreparedStatement preparedStatement=connection.prepareStatement(sql);
 			ResultSet resultSet=preparedStatement.executeQuery();
 			resultSet.next();
-			if (resultSet.getString(1)!=null) {
+			if (!resultSet.getString(1).equals("")) {
 				String courierString[]=resultSet.getString(1).split(",");
 				for (int i = 0; i < courierString.length; i++) {
 					sql="select name from 帐号表 where ID ='"+courierString[i]+"'";
@@ -195,8 +199,14 @@ public class BussinessOrgDataSerImpl extends UnicastRemoteObject implements Buss
 				PreparedStatement preparedStatement=connection.prepareStatement(sql);
 				ResultSet resultSet=preparedStatement.executeQuery();
 				resultSet.next();
-				sql="update 营业厅信息 set courier='"+resultSet.getString(1)+Long.toString(bID)+",' where codeNumberOfMiddle ='"+IDString[0]+"' and codeNumber ='"+IDString[1]+"'";
-				preparedStatement=connection.prepareStatement(sql);
+				if (resultSet.getString(1)==null) {
+					sql="update 营业厅信息 set courier='"+Long.toString(bID)+",' where codeNumberOfMiddle ='"+IDString[0]+"' and codeNumber ='"+IDString[1]+"'";
+					
+				}else {
+					sql="update 营业厅信息 set courier='"+resultSet.getString(1)+Long.toString(bID)+",' where codeNumberOfMiddle ='"+IDString[0]+"' and codeNumber ='"+IDString[1]+"'";
+					
+				}
+					preparedStatement=connection.prepareStatement(sql);
 				preparedStatement.executeUpdate();
 				sql="update 帐号表 set state = '1-"+resultSet.getString(1)+"-"+resultSet.getString(2)+"-营业厅-"+ID+"' where ID ='"+bID+"'";
 				preparedStatement=connection.prepareStatement(sql);
@@ -264,7 +274,7 @@ public class BussinessOrgDataSerImpl extends UnicastRemoteObject implements Buss
 			PreparedStatement preparedStatement=connection.prepareStatement(sql);
 			ResultSet resultSet=preparedStatement.executeQuery();
 			resultSet.next();
-			if (resultSet.getString(1)!=null) {
+			if (!resultSet.getString(1).equals("")) {
 				String vehicleString[]=resultSet.getString(1).split(",");
 				connection.close();
 				return vehicleString;	
@@ -319,7 +329,13 @@ public class BussinessOrgDataSerImpl extends UnicastRemoteObject implements Buss
 				preparedStatement=connection.prepareStatement(sql);
 					ResultSet resultSet=preparedStatement.executeQuery();
 					resultSet.next();
-					sql="update 营业厅信息 set vehicle='"+resultSet.getString(1)+po.getCodeVehicle()+",' where codeNumberOfMiddle ='"+IDString[0]+"' and codeNumber ='"+IDString[1]+"'";
+					if (resultSet.getString(1)==null) {
+						sql="update 营业厅信息 set vehicle='"+po.getCodeVehicle()+",' where codeNumberOfMiddle ='"+IDString[0]+"' and codeNumber ='"+IDString[1]+"'";
+						
+					}else {
+						sql="update 营业厅信息 set vehicle='"+resultSet.getString(1)+po.getCodeVehicle()+",' where codeNumberOfMiddle ='"+IDString[0]+"' and codeNumber ='"+IDString[1]+"'";
+						
+					}
 					preparedStatement=connection.prepareStatement(sql);
 					preparedStatement.executeUpdate();
 					connection.close();
@@ -392,7 +408,7 @@ public class BussinessOrgDataSerImpl extends UnicastRemoteObject implements Buss
 			PreparedStatement preparedStatement=connection.prepareStatement(sql);
 			ResultSet resultSet=preparedStatement.executeQuery();
 			resultSet.next();
-			if (resultSet.getString(1)!=null) {
+			if (!resultSet.getString(1).equals("")) {
 				String vehicleString[]=resultSet.getString(1).split(",");
 				connection.close();
 				return vehicleString;
@@ -447,7 +463,13 @@ public class BussinessOrgDataSerImpl extends UnicastRemoteObject implements Buss
 				preparedStatement=connection.prepareStatement(sql);
 					ResultSet resultSet=preparedStatement.executeQuery();
 					resultSet.next();
-					sql="update 营业厅信息 set driver='"+resultSet.getString(1)+po.getCodeDriver()+",' where codeNumberOfMiddle ='"+IDString[0]+"' and codeNumber ='"+IDString[1]+"'";
+					if (resultSet.getString(1)==null) {
+						sql="update 营业厅信息 set driver='"+po.getCodeDriver()+",' where codeNumberOfMiddle ='"+IDString[0]+"' and codeNumber ='"+IDString[1]+"'";
+						
+					}else {
+						sql="update 营业厅信息 set driver='"+resultSet.getString(1)+po.getCodeDriver()+",' where codeNumberOfMiddle ='"+IDString[0]+"' and codeNumber ='"+IDString[1]+"'";
+						
+					}
 					preparedStatement=connection.prepareStatement(sql);
 					preparedStatement.executeUpdate();
 					connection.close();
@@ -511,21 +533,35 @@ public class BussinessOrgDataSerImpl extends UnicastRemoteObject implements Buss
 	@Override
 	public boolean addBussinessHall(String ID, BussinessOrgPO po) throws RemoteException{
 		// TODO 自动生成的方法存根
-		sql="insert into 营业厅信息 (city,mcity,codeNumber,codeNumberOfMiddle) values ('"+po.getCity()+"','"+po.getMcity()+"','"+po.getCodeNumber()+"','"+po.getCodeNumberOfMiddle()+"')";
 		try {
+			sql="select city from 营业厅信息 where city='"+po.getCity()+"'";
 			Class.forName(DRIVER);
 			Connection connection=DriverManager.getConnection(URL, USER, PASSWORD);
 			PreparedStatement preparedStatement=connection.prepareStatement(sql);
-			preparedStatement.executeUpdate();
-			sql="select bussinessHall from 中转中心信息 where codeNumber ='"+po.getCodeNumberOfMiddle()+"'";
-			preparedStatement=connection.prepareStatement(sql);
 			ResultSet resultSet=preparedStatement.executeQuery();
-			resultSet.next();
-			sql="update 中转中心信息 set bussinessHall='"+resultSet.getString(1)+po.getCodeNumber()+",' where codeNumber ='"+po.getCodeNumberOfMiddle()+"'";
-			preparedStatement=connection.prepareStatement(sql);
-			preparedStatement.executeUpdate();
-			connection.close();
-			return true;
+			if (resultSet.next()) {
+				return false;
+			}
+			else {
+				sql="insert into 营业厅信息 (city,mcity,codeNumber,codeNumberOfMiddle) values ('"+po.getCity()+"','"+po.getMcity()+"','"+po.getCodeNumber()+"','"+po.getCodeNumberOfMiddle()+"')";
+				preparedStatement=connection.prepareStatement(sql);
+				preparedStatement.executeUpdate();
+				sql="select bussinessHall from 中转中心信息 where codeNumber ='"+po.getCodeNumberOfMiddle()+"'";
+				preparedStatement=connection.prepareStatement(sql);
+				resultSet=preparedStatement.executeQuery();
+				resultSet.next();
+				if (resultSet.getString(1)==null) {
+					sql="update 中转中心信息 set bussinessHall='"+po.getCodeNumber()+",' where codeNumber ='"+po.getCodeNumberOfMiddle()+"'";
+				}
+				else {
+					sql="update 中转中心信息 set bussinessHall='"+resultSet.getString(1)+po.getCodeNumber()+",' where codeNumber ='"+po.getCodeNumberOfMiddle()+"'";
+				}			
+				preparedStatement=connection.prepareStatement(sql);
+				preparedStatement.executeUpdate();
+				connection.close();
+				return true;
+			}
+			
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

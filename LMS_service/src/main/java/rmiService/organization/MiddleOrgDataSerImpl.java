@@ -39,7 +39,7 @@ public class MiddleOrgDataSerImpl extends UnicastRemoteObject implements MiddleO
 			PreparedStatement preparedStatement=connection.prepareStatement(sql);
 			ResultSet resultSet=preparedStatement.executeQuery();
 			resultSet.next();
-			if (resultSet.getString(1)!=null) {
+			if (!resultSet.getString(1).equals("")) {
 				String assisantString[]=resultSet.getString(1).split(",");
 				for (int i = 0; i < assisantString.length; i++) {
 					sql="select name from 帐号表 where ID ='"+assisantString[i]+"'";
@@ -146,7 +146,7 @@ public class MiddleOrgDataSerImpl extends UnicastRemoteObject implements MiddleO
 			PreparedStatement preparedStatement=connection.prepareStatement(sql);
 			ResultSet resultSet=preparedStatement.executeQuery();
 			resultSet.next();
-			if (resultSet.getString(1)!=null) {
+			if (!resultSet.getString(1).equals("")) {
 				String storgerString[]=resultSet.getString(1).split(",");
 				for (int i = 0; i < storgerString.length; i++) {
 					sql="select name from 帐号表 where ID ='"+storgerString[i]+"'";
@@ -254,7 +254,7 @@ public class MiddleOrgDataSerImpl extends UnicastRemoteObject implements MiddleO
 			PreparedStatement preparedStatement=connection.prepareStatement(sql);
 			ResultSet resultSet=preparedStatement.executeQuery();
 			resultSet.next();
-			if (resultSet.getString(1)!=null) {
+			if (!resultSet.getString(1).equals("")) {
 				String bussinessHallString[]=resultSet.getString(1).split(",");
 				for (int i = 0; i < bussinessHallString.length; i++) {
 					sql="select city from 营业厅信息 where codeNumber ='"+bussinessHallString[i]+"'";
