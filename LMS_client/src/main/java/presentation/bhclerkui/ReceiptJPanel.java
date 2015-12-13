@@ -66,7 +66,7 @@ public class ReceiptJPanel extends JPanel{
 		this.add(code);
 		
 		code1=new JLabel();
-		code2=new documentController().getDocCode("收款单");
+		code2=new documentController().getDocCode("收款单",account2);
 		code1.setText(code2);
 		code1.setForeground(Color.white);
 		code1.setFont(font);

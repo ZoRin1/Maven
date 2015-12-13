@@ -373,7 +373,7 @@ public class b1Jpanel1 extends JPanel{
 				if (isFull()) {
 					courierJpanel.remove(b1Jpanel1);
 					double sizeList[]={Double.parseDouble(chicun1Field.getText()),Double.parseDouble(chicun2Field.getText()),Double.parseDouble(chicun3Field.getText())};
-					new b1Jpanel2(courierui, courierJpanel, b1Jpanel1,new OrderPO(null, "寄件单", account, null, jijianrennameField.getText(), jijianrenzhuzhiField.getText(), jijianrendanweiField.getText(), jijianrendianhuaField.getText(), jijianrenshoujiField.getText(), shoujianrennameField.getText(), shoujianrenzhuzhiField.getText(), shoujianrendanweiField.getText(), shoujianrendianhuaField.getText(), shoujianrenshoujiField.getText(), Integer.parseInt(jianshuField.getText()), Double.parseDouble(zhongliangField.getText()), Double.parseDouble(tijiField.getText()), neijianpinmingField.getText(), sizeList, 0,(String)kuaidizhongleiBox.getSelectedItem()));
+					new b1Jpanel2(courierui, courierJpanel, b1Jpanel1,new OrderPO(null, "寄件单", account, null, jijianrennameField.getText(), jijianrenzhuzhiField.getText(), jijianrendanweiField.getText(), jijianrendianhuaField.getText(), jijianrenshoujiField.getText(), shoujianrennameField.getText(), shoujianrenzhuzhiField.getText(), shoujianrendanweiField.getText(), shoujianrendianhuaField.getText(), shoujianrenshoujiField.getText(), Integer.parseInt(jianshuField.getText()), Double.parseDouble(zhongliangField.getText()), Double.parseDouble(tijiField.getText()), neijianpinmingField.getText(), sizeList, 0,(String)kuaidizhongleiBox.getSelectedItem()),account);
 					courierJpanel.repaint();
 				}
 				else {
@@ -411,8 +411,10 @@ class b1Jpanel2 extends JPanel{
 	private String riqi;
 	private ImageIcon returnIcon=new ImageIcon("picture/返回.png");
 	private ImageIcon yesIcon=new ImageIcon("picture/确定.png");
-	public b1Jpanel2(courierui courierui,courierJpanel courierJpanel,b1Jpanel1 b1Jpanel1,OrderPO orderPO) {
+	private String account;
+	public b1Jpanel2(courierui courierui,courierJpanel courierJpanel,b1Jpanel1 b1Jpanel1,OrderPO orderPO,String account) {
 		// TODO Auto-generated constructor stub
+		this.account=account;
 		this.orderPO=orderPO;
 		init();
 	 	courierJpanel.add(this);
@@ -429,7 +431,7 @@ class b1Jpanel2 extends JPanel{
 		dingdannumberJLabel.setForeground(Color.white);
 		dingdannumberJLabel.setFont(font);
 		dingdannumberJLabel.setBounds(350, 150, 300, 30);
-		dingdannumberJLabel.setText(documentController.getDocCode("寄件单"));
+		dingdannumberJLabel.setText(documentController.getDocCode("寄件单",account));
 		
 		cankaobaojiaJLabel=new JLabel("参考报价:");
 		cankaobaojiaJLabel.setForeground(Color.white);

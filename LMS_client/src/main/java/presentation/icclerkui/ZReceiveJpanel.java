@@ -75,7 +75,7 @@ public class ZReceiveJpanel extends JPanel{
 		this.add(code);
 		
 		code1=new JLabel();
-		code2=new documentController().getDocCode("中转中心接收单");
+		code2=new documentController().getDocCode("中转中心接收单",account);
 		code1.setText(code2);
 		code1.setForeground(Color.white);
 		code1.setFont(font);

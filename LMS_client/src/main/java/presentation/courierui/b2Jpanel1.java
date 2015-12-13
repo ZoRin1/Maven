@@ -181,7 +181,7 @@ class b2Jpanel2 extends JPanel{
 		shoujiandanbianhaonumJLabel.setForeground(Color.white);
 		shoujiandanbianhaonumJLabel.setFont(font);
 		shoujiandanbianhaonumJLabel.setBounds(280, 200, 250, 30);
-		shoujiandanbianhaonumJLabel.setText(documentController.getDocCode("收件单"));
+		shoujiandanbianhaonumJLabel.setText(documentController.getDocCode("收件单",account));
 		shoujianrenJLabel=new JLabel("收件人:");
 		shoujianrenJLabel.setForeground(Color.white);
 		shoujianrenJLabel.setFont(font);

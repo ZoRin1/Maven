@@ -83,7 +83,7 @@ public class b1Jpanel2 extends JPanel{
 		j7.setBounds(368, 269, 105, 27);
 		j8.setBounds(368, 360, 105, 27);
 		
-		t1 = new JLabel(documentController.getDocCode("出库单"));
+		t1 = new JLabel(documentController.getDocCode("出库单",account));
 		t2 = new JLabel(code);
 		t3 = new JTextField();
 		t4 = new JTextField();

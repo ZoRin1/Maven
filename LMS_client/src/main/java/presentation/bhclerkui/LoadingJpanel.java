@@ -75,7 +75,7 @@ public class LoadingJpanel extends JPanel{
 		this.add(code);
 		
 		code1=new JLabel();
-		code2=new documentController().getDocCode("营业厅装车单");
+		code2=new documentController().getDocCode("营业厅装车单",account);
 		code1.setText(code2);
 		code1.setForeground(Color.white);
 		code1.setFont(font);

@@ -93,7 +93,7 @@ public class b2Jpanel1 extends JPanel{
 		j10.setBounds(236,409, 16, 18);
 		j11.setBounds(430,409, 16, 18);
 		
-		t1 = new JLabel(documentController.getDocCode("入库单"));
+		t1 = new JLabel(documentController.getDocCode("入库单",account));
 		t2 = new JLabel("入库单");
 		t3 = new JTextField();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

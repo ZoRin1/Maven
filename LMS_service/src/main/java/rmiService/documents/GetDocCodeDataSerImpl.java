@@ -29,11 +29,12 @@ public class GetDocCodeDataSerImpl extends UnicastRemoteObject implements GetDoc
 	}
 
 	@Override
-	public String getDocCode(String doName) throws RemoteException{
+	public String getDocCode(String doName,String account) throws RemoteException{
 		// TODO Auto-generated method stub		
 		try {
 			if (doName.equals("出库单")||doName.equals("入库单")) {
-				sql="select code from "+doName;
+				sql="select code from "+doName+" where left(code,5)='"+account+"'";
+//				sql="select code from "+doName;
 				Connection connection=DriverManager.getConnection(URL, USER, PASSWORD);
 				PreparedStatement preparedStatement=connection.prepareStatement(sql);
 				ResultSet resultSet=preparedStatement.executeQuery();
@@ -41,19 +42,23 @@ public class GetDocCodeDataSerImpl extends UnicastRemoteObject implements GetDoc
 						int codenum=Integer.parseInt(resultSet.getString(1));
 						codenum=codenum+1;
 						String code=Integer.toString(codenum);
-						while (code.length()!=10) {
+					while (code.length()!=5) {
+//						while (code.length()!=10) {
 							code="0"+code;
 						}
 						connection.close();
-						return code;
+						return account+code;
+//						return code;
 					}
 					else {
 						connection.close();
-						return "0000000001";
+					return account+"00001";
+//						return "0000000001";
 					}
 			}
 			else {
-				sql="select code from b"+doName;
+				sql="select code from b"+doName+" where left(code,5)='"+account+"'";
+//				sql="select code from b"+doName;
 				Connection connection=DriverManager.getConnection(URL, USER, PASSWORD);
 				PreparedStatement preparedStatement=connection.prepareStatement(sql);
 				ResultSet resultSet=preparedStatement.executeQuery();
@@ -61,14 +66,17 @@ public class GetDocCodeDataSerImpl extends UnicastRemoteObject implements GetDoc
 					int codenum=Integer.parseInt(resultSet.getString(1));
 					codenum=codenum+1;
 					String code=Integer.toString(codenum);
-					while (code.length()!=10) {
+					while (code.length()!=5) {
+//					while (code.length()!=10) {
 						code="0"+code;
 					}
 					connection.close();
-					return code;
+//					return code;
+					return account+code;
 				}
 				else {
-					sql="select code from "+doName;
+					sql="select code from "+doName+" where left(code,5)='"+account+"'";
+//					sql="select code from "+doName;
 					connection=DriverManager.getConnection(URL, USER, PASSWORD);
 					preparedStatement=connection.prepareStatement(sql);
 					resultSet=preparedStatement.executeQuery();
@@ -76,15 +84,18 @@ public class GetDocCodeDataSerImpl extends UnicastRemoteObject implements GetDoc
 							int codenum=Integer.parseInt(resultSet.getString(1));
 							codenum=codenum+1;
 							String code=Integer.toString(codenum);
-							while (code.length()!=10) {
+							while (code.length()!=5) {
+//							while (code.length()!=10) {
 								code="0"+code;
 							}
 							connection.close();
-							return code;
+//							return code;
+							return account+code;
 						}
 						else {
 							connection.close();
-							return "0000000001";
+						return account+"00001";
+//							return "0000000001";
 						}		
 			}	
 			}

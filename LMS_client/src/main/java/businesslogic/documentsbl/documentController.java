@@ -1,6 +1,7 @@
 package businesslogic.documentsbl;
 
 import java.util.ArrayList;
+
 import po.documentsPO.DocumentPO;
 import po.documentsPO.InBillsPO;
 import po.documentsPO.PaymentPO;
@@ -8,9 +9,9 @@ import po.documentsPO.ReceiptPO;
 
 public class documentController {
 	//创建单据时获得单据编号（所有单据都要经过这一步）
-	public String getDocCode(String doName) {
+	public String getDocCode(String doName,String account) {
 		createDocument cr=new createDocument();
-		return cr.createDocument(doName);
+		return cr.createDocument(doName,account);
 	}
 	
 	//将po存入数据库（所有单据都要经过这一步）

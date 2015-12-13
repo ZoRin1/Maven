@@ -66,7 +66,7 @@ public class b3b1Jpanel1 extends JPanel{
 		bianhaoJLabel.setFont(font);
 		bianhaoJLabel.setBounds(50, 50, 150, 30);
 		bianhaonumberJLabel=new JLabel();
-		bianhaonumberJLabel.setText(documentController.getDocCode("付款单"));
+		bianhaonumberJLabel.setText(documentController.getDocCode("付款单",account));
 		bianhaonumberJLabel.setForeground(Color.white);
 		bianhaonumberJLabel.setFont(font);
 		bianhaonumberJLabel.setBounds(200, 50, 150, 30);

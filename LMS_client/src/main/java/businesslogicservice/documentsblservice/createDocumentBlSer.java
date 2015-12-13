@@ -8,5 +8,5 @@ public interface createDocumentBlSer {
 	 * @author XiongKaiQi
 	 *
 	 */
-	public String createDocument(String doName);
+	public String createDocument(String doName,String account);
 }

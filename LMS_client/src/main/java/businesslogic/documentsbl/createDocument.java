@@ -17,7 +17,7 @@ public class createDocument implements createDocumentBlSer{
 	private ipConfig ip;
 
 	@Override
-	public String createDocument(String doName) {
+	public String createDocument(String doName,String account) {
 		// TODO Auto-generated method stub
 		String code=null;
 		ip = new ipConfig();
@@ -25,7 +25,7 @@ public class createDocument implements createDocumentBlSer{
 			String ipp = ip.getIP();
 			documentsFactory documentsFactory=(documentsFactory)Naming.lookup("rmi://"+ipp+"/docFactory");
 			GetDocCodeDataSer getDocCodeDataSer=documentsFactory.createGetDocCodeDataSer();
-			code=getDocCodeDataSer.getDocCode(doName);
+			code=getDocCodeDataSer.getDocCode(doName,account);
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
