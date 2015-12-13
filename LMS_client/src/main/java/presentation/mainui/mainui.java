@@ -215,48 +215,53 @@ class mainFrame extends JFrame{
 						new loginFailDialog(mf, "登陆失败", true);
 					}
 					else {
-						accountLoginController=new AccountLoginController();
-						long ID=Long.parseLong(accountnumberJTextField.getText());
-						String account=accountnumberJTextField.getText();
-						String state=accountLoginController.login(ID, String.valueOf(passwordField.getPassword()));
-						if (state==null) {
+						if(accountnumberJTextField.getText().charAt(0)=='0'){
 							new loginFailDialog(mf, "登陆失败", true);
 						}
 						else {
-							String s[]=state.split("-");
-							switch (s[0]) {
-							case "1":
-								new courierui("快递员界面",args,account);
-								mf.dispose();
-								break;
-							case "2":
-								new bhclerkui("营业厅业务员界面",args,account,state);
-								mf.dispose();
-								break;
-							case "3":
-							new icclerkui("中转中心业务员界面",args,account,state);
-								mf.dispose();
-								break;
-							case "4":
-								new icwarehousemanui("中转中心仓库管理员界面",args,account,state);
-								mf.dispose();
-								break;
-							case "5":
-								new financialstaffui("财务人员界面",args,account,state);
-								mf.dispose();
-								break;
-		
-							case "6":
-								new topmanagerui("总经理界面",args);
-								mf.dispose();
-								break;
-							case "7":
-								new adminui("管理员界面",args);
-								mf.dispose();
-								break;
-							default :
+							accountLoginController=new AccountLoginController();
+							long ID=Long.parseLong(accountnumberJTextField.getText());
+							String account=accountnumberJTextField.getText();
+							String state=accountLoginController.login(ID, String.valueOf(passwordField.getPassword()));
+							if (state==null) {
 								new loginFailDialog(mf, "登陆失败", true);
-								break;					
+							}
+							else {
+								String s[]=state.split("-");
+								switch (s[0]) {
+								case "1":
+									new courierui("快递员界面",args,account);
+									mf.dispose();
+									break;
+								case "2":
+									new bhclerkui("营业厅业务员界面",args,account,state);
+									mf.dispose();
+									break;
+								case "3":
+								new icclerkui("中转中心业务员界面",args,account,state);
+									mf.dispose();
+									break;
+								case "4":
+									new icwarehousemanui("中转中心仓库管理员界面",args,account,state);
+									mf.dispose();
+									break;
+								case "5":
+									new financialstaffui("财务人员界面",args,account,state);
+									mf.dispose();
+									break;
+			
+								case "6":
+									new topmanagerui("总经理界面",args);
+									mf.dispose();
+									break;
+								case "7":
+									new adminui("管理员界面",args);
+									mf.dispose();
+									break;
+								default :
+									new loginFailDialog(mf, "登陆失败", true);
+									break;					
+								}
 							}
 						}
 					}			
