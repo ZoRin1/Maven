@@ -90,7 +90,7 @@ public class b4Management extends JPanel {
 	 	this.setOpaque(false);
 	}
 
-	private void registListener(b4topmanagerui  b4ui,topmanagerJpanel tjpl,b4Management b4Management) {
+	private void registListener(final b4topmanagerui  b4ui,final topmanagerJpanel tjpl,final b4Management b4Management) {
 		returnButton.addActionListener(new ActionListener() {
 
 			@Override

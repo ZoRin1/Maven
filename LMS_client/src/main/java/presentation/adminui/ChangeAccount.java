@@ -17,6 +17,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import po.accountPO.AccountInfoPO;
 import businesslogic.accountbl.AccountInfoController;
 import vo.accountVO.AccountNumberVO;
 
@@ -212,11 +213,13 @@ private void init(AccountNumberVO accountNumberVO){
 				//暂时不用
 				//正常使用时启用
 				if(bMiMa && bXinMing && bDianHua && bShenFenZhengHao){
+					AccountInfoController accountInfoController = new AccountInfoController();
+					AccountNumberVO vo = accountInfoController.getInfo(Long.parseLong(zhangHaoNo.getText()));
 					AccountNumberVO accountNumberVO = new AccountNumberVO(xinMingF.getText(), 
 							Long.parseLong(zhangHaoNo.getText()), miMaF.getText(),
-							null, dianHuaF.getText(), shenFenZhengHaoMaF.getText(), 
-							null);
-					AccountInfoController accountInfoController = new AccountInfoController();
+							vo.getState(), dianHuaF.getText(), shenFenZhengHaoMaF.getText(), 
+							vo.getDate());
+					
 					boolean result = accountInfoController.changeInfo(Long.parseLong(zhangHaoNo.getText()), accountNumberVO);
 					if (result) {
 						JOptionPane.showMessageDialog(aui, "修改成功");
@@ -226,6 +229,8 @@ private void init(AccountNumberVO accountNumberVO){
 						aui.searchButton.setEnabled(true);
 						aui.addaccountButton.setEnabled(true);
 						aui.repaint();
+					}else {
+						JOptionPane.showMessageDialog(null, "修改失败，请重试");
 					}
 
 				}

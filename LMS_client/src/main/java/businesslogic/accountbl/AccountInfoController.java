@@ -19,7 +19,7 @@ public class AccountInfoController {
 
 	public boolean deleteAccount(long ID) {
 		// TODO 自动生成的方法存根
-		return deleteAccount(ID);
+		return aBL.deleteAccount(ID);
 	}
 
 

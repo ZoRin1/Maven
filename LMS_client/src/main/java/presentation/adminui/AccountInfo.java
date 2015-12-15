@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import businesslogic.accountbl.AccountInfoController;
 import vo.accountVO.AccountNumberVO;
 
 public class AccountInfo extends JPanel {
@@ -119,7 +120,7 @@ public class AccountInfo extends JPanel {
 		zhuCeRiQiI = new JLabel(accountNumberVO.getDate());
 		zhuCeRiQiI.setForeground(Color.WHITE);
 		zhuCeRiQiI.setFont(font);
-		zhuCeRiQiI.setBounds(240, 390, 180, 40);
+		zhuCeRiQiI.setBounds(240, 390, 400, 40);
 		this.add(zhuCeRiQiI);
 		
 		//到时候再加图片
@@ -129,6 +130,7 @@ public class AccountInfo extends JPanel {
 		change.setBorderPainted(true);
 		change.setBounds(120, 470, 160, 50);
 		this.add(change);
+		
 
 		delete = new JButton("删除");
 		delete.setForeground(Color.BLACK);
@@ -136,6 +138,9 @@ public class AccountInfo extends JPanel {
 		delete.setBorderPainted(true);
 		delete.setBounds(310, 470, 160, 50);
 		this.add(delete);
+		if (!accountNumberVO.getState().equals("0") ){
+			delete.setEnabled(false);
+		}
 
 		returnButton = new JButton(returnIcon);
 		returnButton.setBounds(500, 470, 48, 48);
@@ -185,15 +190,23 @@ public class AccountInfo extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				Object[] options = {"确定","取消"};
-				int result = JOptionPane.showOptionDialog(null, "删除账号", "删除账号", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, 
+				int choose = JOptionPane.showOptionDialog(null, "删除账号", "删除账号", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, 
 						null, options, options[1]);
-				if (result == 0) {
-					apl.remove(accountInfo);
-					apl.add(aui.operationJpanel);					
-					aui.accountField.setEditable(true);
-					aui.searchButton.setEnabled(true);
-					aui.addaccountButton.setEnabled(true);
-					aui.repaint();
+				if (choose == 0) {
+					AccountInfoController accountInfoController = new AccountInfoController();
+					boolean result =accountInfoController.deleteAccount(accountNumberVO.getID());
+					if (result) {
+						JOptionPane.showMessageDialog(null, "删除成功");
+						apl.remove(accountInfo);
+						apl.add(aui.operationJpanel);					
+						aui.accountField.setEditable(true);
+						aui.searchButton.setEnabled(true);
+						aui.addaccountButton.setEnabled(true);
+						aui.repaint();
+					}else {
+						JOptionPane.showMessageDialog(null, "失败成功，请重试");
+					}
+					
 				}
 			}
 		});

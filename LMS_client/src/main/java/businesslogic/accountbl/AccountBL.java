@@ -9,6 +9,7 @@ import businesslogicservice.accountblservice.AccountBLSer;
 import dataservice.accountdataservice.AccountDataSer;
 import dataservice.accountdataservice.accountFactory;
 import po.accountPO.AccountInfoPO;
+import po.financePO.AccountPO;
 import presentation.mainui.ipConfig;
 import vo.accountVO.AccountNumberVO;
 
@@ -67,7 +68,14 @@ public class AccountBL implements AccountBLSer {
 	@Override
 	public String[] getAccount(long ID) {
 		// TODO 自动生成的方法存根
-		return null;
+		AccountInfoPO po = this.accountDataSer.find(ID);
+		if (po == null) {
+			return null;
+		}else {
+			String[] result = new String[1];
+			result[0] = String.valueOf(ID) +"-"+ po.getName();
+			return result;
+		}
 	}
 
 	@Override

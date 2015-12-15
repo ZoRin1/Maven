@@ -76,7 +76,7 @@ public class AddAccount extends JPanel {
 		zhangHaoNo.addKeyListener(new NumberFieldListener());
 		this.add(zhangHaoNo);
 		
-		zhangHaoTiShi = new JLabel("1开头的7位数字");
+		zhangHaoTiShi = new JLabel("非0开头的5位数字");
 		zhangHaoTiShi.setFont(font);
 		zhangHaoTiShi.setForeground(Color.WHITE);
 		zhangHaoTiShi.setBounds(340, 150, 240, 40);
@@ -201,9 +201,9 @@ public class AddAccount extends JPanel {
 				aat.shenFenZhengHaoMaTiShi.setForeground(Color.WHITE);
 				
 				boolean bZhangHao = false;
-				String zh = zhangHao.getText();
+				String zh = zhangHaoNo.getText();
 				char[] temp = zh.toCharArray();
-				if (zh.length() == 11 && temp[0] != '1') {
+				if (zh.length() == 5 && temp[0] != '0') {
 					bZhangHao = true;
 				}
 				
@@ -231,32 +231,31 @@ public class AddAccount extends JPanel {
 				
 				//暂时不用
 				//正常使用时启用
-				if(bMiMa && bXinMing && bDianHua && bShenFenZhengHao){
+				if(bZhangHao&&bMiMa && bXinMing && bDianHua && bShenFenZhengHao){
 					SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
 					String date = df.format(new Date());
 					AccountNumberVO accountNumberVO = new AccountNumberVO(xinMingF.getText(), 
 							Long.parseLong(zhangHaoNo.getText()), miMaF.getText(),
-							null, dianHuaF.getText(), shenFenZhengHaoMaF.getText(), 
+							"0", dianHuaF.getText(), shenFenZhengHaoMaF.getText(), 
 							date);
 					AccountInfoController accountInfoController = new AccountInfoController();
-					boolean bExist = (accountInfoController.getInfo(Long.parseLong("001")) != null);
+					boolean bExist = (accountInfoController.getInfo(Long.parseLong(zhangHaoNo.getText())) != null);
 					if (bExist) {
 						JOptionPane.showMessageDialog(null, "账号已存在，请重新输入");
-					}
-					boolean result = accountInfoController.addAccount(Long.parseLong(zhangHaoNo.getText()), accountNumberVO);
-					if (result) {
-						JOptionPane.showMessageDialog(aui, "创建成功");
-						apl.remove(aat);
-						apl.add(aui.operationJpanel);
-						aui.accountField.setEditable(true);
-						aui.searchButton.setEnabled(true);
-						aui.addaccountButton.setEnabled(true);
-						aui.repaint();
 					}else {
-						JOptionPane.showMessageDialog(aui, "创建失败，请重试");
-					}
-										
-					
+						boolean result = accountInfoController.addAccount(Long.parseLong(zhangHaoNo.getText()), accountNumberVO);
+						if (result) {
+							JOptionPane.showMessageDialog(aui, "创建成功");
+							apl.remove(aat);
+							apl.add(aui.operationJpanel);
+							aui.accountField.setEditable(true);
+							aui.searchButton.setEnabled(true);
+							aui.addaccountButton.setEnabled(true);
+							aui.repaint();
+						}else {
+							JOptionPane.showMessageDialog(null, "创建失败，请重试");
+						}
+					}														
 				}
 				
 			}

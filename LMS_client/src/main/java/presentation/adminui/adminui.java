@@ -212,24 +212,27 @@ public class adminui extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				//暂时不用，正常使用时启用
-				String Id = accountField.getText();
+				String Id = accountField.getText();			
 				if (!Id.equals("")) {
-					long ID = Long.parseLong(Id);
-					AccountInfoController accountInfoController = new AccountInfoController();
-					String[] result = accountInfoController.getAccount(ID);
-//					String[]temp = {"1002356-杨华安"};
-					if (result != null) {
-						apl.remove(aui.operationJpanel);
-						aui.searchButton.setEnabled(false);
-						aui.addaccountButton.setEnabled(false);
-						aui.accountField.setText("");
-						aui.accountField.setEditable(false);
-						new SearchAccount(aui, apl, result);
-						aui.repaint();
-					}else{
-						JOptionPane.showMessageDialog(aui, "未找到账号，请重新输入");
-					}
-					
+					if (Id.charAt(0)!='0') {
+						long ID = Long.parseLong(Id);
+						AccountInfoController accountInfoController = new AccountInfoController();
+						String[] result = accountInfoController.getAccount(ID);
+//						String[]temp = {"1002356-杨华安"};
+						if (result != null) {
+							apl.remove(aui.operationJpanel);
+							aui.searchButton.setEnabled(false);
+							aui.addaccountButton.setEnabled(false);
+							aui.accountField.setText("");
+							aui.accountField.setEditable(false);
+							new SearchAccount(aui, apl, result);
+							aui.repaint();
+						}else{
+							JOptionPane.showMessageDialog(aui, "未找到账号，请重新输入");
+						}
+					}else {
+						JOptionPane.showMessageDialog(aui, "请输入账号");
+					}					
 				}else {
 					JOptionPane.showMessageDialog(aui, "请输入账号");
 				}
