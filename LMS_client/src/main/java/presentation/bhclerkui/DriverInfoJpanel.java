@@ -58,7 +58,6 @@ public class DriverInfoJpanel extends JPanel{
 			final DriverInfoJpanel panel2) {
 		// TODO Auto-generated method stub
 		returnButton.addActionListener(new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				panel.remove(panel2);
@@ -74,10 +73,17 @@ public class DriverInfoJpanel extends JPanel{
 		});
 		yesButton.addActionListener(new ActionListener() {
 			
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				
+				panel.remove(panel2);
+				panel.add(ui.operationJpanel);
+				ui.carinformationbButton.setEnabled(true);
+				ui.cashdocumentbButton.setEnabled(true);
+				ui.documentreplyButton.setEnabled(true);
+				ui.driverinformationbButton.setEnabled(true);
+				ui.loaddocumentbButton.setEnabled(true);
+				ui.acceptdocumentbButton.setEnabled(true);
+				panel.repaint();
 			}
 		});
 	}

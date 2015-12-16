@@ -64,7 +64,7 @@ public class DriverInfoJpanelJTable {
 	private void initTable(){
 		//假设的数据
 		String[] inDepotName = new String[]{"司机编号"};
-		String[] list=new BhclerkController().getDriverList(account);
+		String[] list=null;//new BhclerkController().getDriverList(account);
 		int size=list.length;
 		String [][]inDepotValue=new String[size][1];
 		for(int i=0;i<size;i++){

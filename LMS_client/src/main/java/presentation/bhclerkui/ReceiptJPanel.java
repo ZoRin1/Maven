@@ -146,7 +146,6 @@ public class ReceiptJPanel extends JPanel{
 			final ReceiptJPanel panel2) {
 		// TODO Auto-generated method stub
 		returnButton.addActionListener(new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				panel.remove(panel2);
@@ -162,7 +161,6 @@ public class ReceiptJPanel extends JPanel{
 		});
 		yesButton.addActionListener(new ActionListener() {
 			
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				if(Account.getText().equals("")||tcode.getText().equals("")){
@@ -175,7 +173,7 @@ public class ReceiptJPanel extends JPanel{
 					name2=name.getText();
 					String[] list2=tcode.getText().split("，");//此处或许应该加以参数把英文逗号转为中文逗号或要求员工必须使用中文输入法
 					int size=list2.length;
-					TCode2=new ArrayList<>();
+					TCode2=new ArrayList<String>();
 					for(int i=0;i<size;i++){
 						TCode2.add(list[i]);
 					}

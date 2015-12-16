@@ -160,7 +160,6 @@ public class AcceptDocumentJpanel extends JPanel{
 	}
 	private void registListener(final bhclerkui ui,final bhclerkJpanel panel,final AcceptDocumentJpanel panel2){
 		returnButton.addActionListener(new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				ui.setTitle("快递员——寄件单创建 1");
@@ -177,7 +176,6 @@ public class AcceptDocumentJpanel extends JPanel{
 		});
 		yesButton.addActionListener(new ActionListener() {
 			
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				if(depart.getText().equals("")||arrive.getText().equals("")||tcode.getText().equals("")||State.getText().equals("")){
@@ -310,7 +308,6 @@ class DispatchJpanel extends JPanel{
 		
 		returnButton.addActionListener(new ActionListener() {
 			
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				panel.remove(dispatchJpanel);
@@ -320,7 +317,6 @@ class DispatchJpanel extends JPanel{
 		});
 		yesButton.addActionListener(new ActionListener() {
 			
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				if(tcode.getText().equals("")||Member.getText().equals("")){
