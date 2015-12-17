@@ -45,7 +45,7 @@ public class ChangeAccountDataSerImpl extends UnicastRemoteObject implements Cha
 				String temp = resultSet.getString(2);
 				addEarn = Double.parseDouble(temp)+earn;
 			}else{
-				
+				return -1;
 			}
 			
 			sql = "UPDATE 账户表"+" set sums='"+addEarn+"' where name='"+accountName+"'";
@@ -78,10 +78,10 @@ public class ChangeAccountDataSerImpl extends UnicastRemoteObject implements Cha
 				subPay = Double.parseDouble(temp)-earn;
 				
 				if(subPay<0){
-					
+					return -2;
 				}
 			}else{
-				
+				return -1;
 			}
 			
 			sql = "UPDATE 账户表"+" set sums="+subPay+" where name='"+accountName+"'";

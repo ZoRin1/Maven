@@ -20,11 +20,12 @@ public class changeTheAccount {
 	}
 	
 	public int addEarn(String accountName,double earn){
+		int sign=0;
 		try {
 			String ipp = ip.getIP();
 			financeFactory finFactory = (financeFactory)Naming.lookup("rmi://"+ipp+"/finFactory");
 			ChangeAccountDataSer change = finFactory.createChangeAccountDateSer();
-			change.changeEarn(accountName, earn);
+			sign = change.changeEarn(accountName, earn);
 		} catch (MalformedURLException e) {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
@@ -35,16 +36,17 @@ public class changeTheAccount {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
 		}
-		return 0;
+		return sign;
 	}
 	
 	
 	public int subPay(String accountName,double pay){
+		int sign = 0;
 		try {
 			String ipp = ip.getIP();
 			financeFactory finFactory = (financeFactory)Naming.lookup("rmi://"+ipp+"/finFactory");
 			ChangeAccountDataSer change = finFactory.createChangeAccountDateSer();
-			change.changePay(accountName, pay);
+			sign = change.changePay(accountName, pay);
 		} catch (MalformedURLException e) {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
@@ -55,6 +57,6 @@ public class changeTheAccount {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
 		}
-		return 0;
+		return sign;
 	}
 }

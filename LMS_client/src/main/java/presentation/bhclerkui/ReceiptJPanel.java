@@ -183,7 +183,11 @@ public class ReceiptJPanel extends JPanel{
 					
 					//此处增加相应账户的余额
 					accountManage = new AccountManageBL();
-					accountManage.ChangeEarn(account2, fund);
+					int sign = 0;
+					sign = accountManage.ChangeEarn(account2, fund);
+					if(sign==-1){
+						System.out.println("找不到账户");
+					}
 
 					//此处增加相应账户的余额
 					

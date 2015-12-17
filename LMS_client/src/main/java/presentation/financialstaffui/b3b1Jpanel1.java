@@ -229,8 +229,13 @@ public class b3b1Jpanel1 extends JPanel{
 					
 					//这里要加上改变账户余额的功能！！！
 					accountManage = new AccountManageBL();
-					accountManage.ChangePay(zhanghaoField.getText(), Double.parseDouble(jineField.getText()));
-
+					int sign=0;
+					sign = accountManage.ChangePay(zhanghaoField.getText(), Double.parseDouble(jineField.getText()));
+					if(sign==-1){
+						System.out.println("找不到账户");
+					}else if(sign==-2){
+						System.out.println("余额不足");
+					}
 					//这里要加上改变账户余额的功能！！
 					
 					
