@@ -26,6 +26,10 @@ import businesslogic.documentsbl.createDocument;
 import businesslogic.documentsbl.documentController;
 
 public class AcceptDocumentJpanel extends JPanel{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String date2;//接收日期
 	private String code2;//接收单编号
 	private String doName2;//单据名
@@ -202,6 +206,10 @@ public class AcceptDocumentJpanel extends JPanel{
 	 }
 }
 class DispatchJpanel extends JPanel{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String date2;//派件日期
 	private String code2;//派件单编号
 	private String code3;//对应订单编号
@@ -219,9 +227,7 @@ class DispatchJpanel extends JPanel{
 	private JTextField tcode;
 	private JLabel member;
 	private JTextField Member;
-	private JButton returnButton;
 	private JButton yesButton;
-	private ImageIcon returnIcon=new ImageIcon("picture/返回.png");
 	private ImageIcon yesIcon=new ImageIcon("picture/确定.png");
 	public DispatchJpanel(bhclerkui ui,bhclerkJpanel panel,AcceptDocumentJpanel panel2,String account){
 		this.account=account;
@@ -288,11 +294,6 @@ class DispatchJpanel extends JPanel{
 		Member.setFont(font);
 		this.add(Member);
 		
-		returnButton=new JButton(returnIcon);
-		returnButton.setBounds(662,575,48,48);
-		returnButton.setContentAreaFilled(false);
-		this.add(returnButton);
-		
 		yesButton=new JButton(yesIcon);
 		yesButton.setBounds(602, 575,48,48);
 		yesButton.setContentAreaFilled(false);
@@ -306,15 +307,6 @@ class DispatchJpanel extends JPanel{
 			final AcceptDocumentJpanel panel2,final DispatchJpanel dispatchJpanel) {
 		// TODO Auto-generated method stub
 		
-		returnButton.addActionListener(new ActionListener() {
-			
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				panel.remove(dispatchJpanel);
-				panel.add(panel2);
-				panel.repaint();
-			}
-		});
 		yesButton.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
@@ -348,6 +340,10 @@ class DispatchJpanel extends JPanel{
 	 }
 }
 class finishDialog2 extends JDialog{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private dialogJpanel jPanel;
 	private JLabel jLabel;
 	private JButton jButton;

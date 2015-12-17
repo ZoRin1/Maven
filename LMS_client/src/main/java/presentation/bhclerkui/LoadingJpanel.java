@@ -41,9 +41,7 @@ public class LoadingJpanel extends JPanel{
 	private JLabel code1;
 	private JLabel doName;
 	private JLabel departure;
-	private JTextField depart;
 	private JLabel arrival;
-	private JTextField arrive;
 	private JLabel jianzhuang;
 	private JTextField jianzhuangyuan;
 	private JLabel yayun;
@@ -66,6 +64,7 @@ public class LoadingJpanel extends JPanel{
 		registListener(ui,bhclerkJpanel,this);
 	}
 	public void init(){
+		String[] list=state.split("-");
 		Font font=new Font("幼圆",Font.BOLD,24);
 		code=new JLabel("单据编号：");
 		code.setForeground(Color.white);
@@ -87,27 +86,17 @@ public class LoadingJpanel extends JPanel{
 		doName.setBounds(360,30,175,27);
 		this.add(doName);
 		
-		departure=new JLabel("出发地：");
+		departure=new JLabel("出发地："+list[2]+list[3]);
 		departure.setForeground(Color.white);
 		departure.setFont(font);
-		departure.setBounds(30,97,100,27);
+		departure.setBounds(30,97,225,27);
 		this.add(departure);
 		
-		depart=new JTextField();
-		depart.setBounds(130,97,125,27);
-		depart.setFont(font);
-		this.add(depart);
-		
-		arrival=new JLabel("到达地：");
+		arrival=new JLabel("到达地："+list[1]+"中转中心");
 		arrival.setForeground(Color.white);
 		arrival.setFont(font);
-		arrival.setBounds(360,97,100,27);
+		arrival.setBounds(360,97,275,27);
 		this.add(arrival);
-		
-		arrive=new JTextField();
-		arrive.setBounds(460,97,125,27);
-		arrive.setFont(font);
-		this.add(arrive);
 		
 		jianzhuang=new JLabel("监装员：");
 		jianzhuang.setForeground(Color.white);
@@ -192,14 +181,12 @@ public class LoadingJpanel extends JPanel{
 				Date now = new Date();
 				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				date = dateFormat.format( now );
-				if(depart.getText().equals("")||arrive.getText().equals("")||jianzhuangyuan.getText().equals("")
+				if(jianzhuangyuan.getText().equals("")
 						||yayunyuan.getText().equals("")||Carcode.getText().equals("")||tcode.getText().equals("")){
 					new notFinishDialog(ui, "输入有误", true);
 					panel.repaint();
 				}
 				else{
-					departure2=depart.getText();
-					arrival2=arrive.getText();
 					supervisor=jianzhuangyuan.getText();
 					supercargo=yayunyuan.getText();
 					String[] list=tcode.getText().split("，");//此处或许应该加以参数把英文逗号转为中文逗号或要求员工必须使用中文输入法
@@ -212,7 +199,7 @@ public class LoadingJpanel extends JPanel{
 					documentController co=new documentController();
 					String str=df.format(co.getShortCost());
 					double charge=Double.parseDouble(str);
-					po=new LoadingPO(date, code2, "营业厅装车单", account, departure2, arrival2, supervisor, supercargo, codeList, charge);
+					po=new LoadingPO(date, code2, "营业厅装车单", account, list[2], list[1], supervisor, supercargo, codeList, charge);
 					new documentController().createBlock(po);
 					new finishDialog(ui, "装车单单创建完成", true, str);
 					panel.remove(panel2);
