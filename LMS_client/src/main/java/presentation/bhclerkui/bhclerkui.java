@@ -231,7 +231,7 @@ public class bhclerkui extends JFrame{
 				bhclerkui.driverinformationbButton.setEnabled(false);
 				bhclerkui.loaddocumentbButton.setEnabled(false);
 				bhclerkui.acceptdocumentbButton.setEnabled(false);
-				new CarInfoJpanel(bhclerkui,bhclerkJpanel,account);
+				new CarInfoJpanel(bhclerkui,bhclerkJpanel,account,state);
 				bhclerkJpanel.repaint();
 			}
 		});

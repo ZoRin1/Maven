@@ -1,13 +1,18 @@
 package presentation.bhclerkui;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Date;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -23,6 +28,7 @@ public class CarInfoJpanel3 extends JPanel{
 	private static final long serialVersionUID = 1L;
 	private VehicleVO vo;
 	private String account;
+	private String state;
 	
 	private ImageIcon frameIcon =new ImageIcon("picture/操作面板.png");
 	private JLabel carcode;
@@ -33,11 +39,11 @@ public class CarInfoJpanel3 extends JPanel{
 	private JTextField Time;
 	private JButton returnButton;
 	private JButton yesButton;
-	private ImageIcon deleteIcon=new ImageIcon("picture/删除.png");
 	private ImageIcon returnIcon=new ImageIcon("picture/返回.png");
 	private ImageIcon yesIcon=new ImageIcon("picture/确定.png");
-	public CarInfoJpanel3(bhclerkui ui,bhclerkJpanel panel,CarInfoJpanel panel2,String account){
+	public CarInfoJpanel3(bhclerkui ui,bhclerkJpanel panel,CarInfoJpanel panel2,String account,String state){
 		this.account=account;
+		this.state=state;
 		init();
 		panel.add(this);
 		registListener(ui,panel,panel2,this);
@@ -105,16 +111,84 @@ public class CarInfoJpanel3 extends JPanel{
 			
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
+				String[] split=state.split("-");
+				String[] list=new BhclerkController().getVehicleList(account);
+				String code1=split[4]+split[5]+Carcode.getText();
+				int length=list.length;
+				boolean a=false;
+				for(int i=0;i<length;i++){
+					if(code1.equals(list[i])){
+						a=true;
+						break;
+					}
+				}
 				if(Code.getText().equals("")||Time.getText().equals("")){
 					new notFinishDialog(ui,"输入有误",true);
 				}
+				else if(a){
+					new OverWriteDialog(ui, "输入有误", true);
+				}
 				else{
-//					vo=new VehicleVO(vo1.getCodeCity(), vo1.getCodeBussinessHall(), vo1.getCodeID(), Code.getText(), Time.getText());
-//					new BhclerkController().changeVehicle(account, vo);
+					vo=new VehicleVO(split[4], split[5], Carcode.getText(), Code.getText(), Time.getText());
+					new BhclerkController().addVehicle(account, vo);
+					new finishDialog2(ui, "车辆信息添加", true,"车辆信息" );
 					panel.remove(panel3);
-					panel.add(panel2);
+					new CarInfoJpanel(ui, panel, account,state);
 					panel.repaint();
 				}
+			}
+		});
+	}
+	public void paintComponent(Graphics g)  
+	{  
+			super.paintComponent(g);    
+			g.drawImage(frameIcon.getImage(),-7,-12,null);
+	 }
+}
+class OverWriteDialog extends JDialog{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private dialogJpanel jPanel;
+	private JLabel jLabel;
+	private JButton jButton;
+	public OverWriteDialog(JFrame frame,String title,boolean modal) {
+		super(frame,title,modal);
+		init();
+		registerListener();
+		this.setVisible(true);
+	}
+	private void init(){
+		ImageIcon yesIcon=new ImageIcon("picture/登录.png");
+		jLabel=new JLabel("车辆编号已存在，请检查后重新输入",jLabel.CENTER);
+		jLabel.setForeground(Color.white);
+		jLabel.setFont(new Font("幼圆",Font.BOLD,27));
+		jLabel.setBounds(0, 0, 500, 200);
+		
+		jButton=new JButton(yesIcon);
+		jButton.setContentAreaFilled(false);
+		jButton.setBounds(218,190, 64, 64);
+		
+		jPanel=new dialogJpanel();
+		jPanel.setLayout(null);
+		jPanel.add(jLabel);
+		jPanel.add(jButton);
+		this.add(jPanel);
+		this.setSize(500, 300);
+		Toolkit kitToolkit =Toolkit.getDefaultToolkit();
+		Dimension screenSize=kitToolkit.getScreenSize();
+		int screenWidth=screenSize.width;
+		int screenHeight=screenSize.height;
+		int dialogWidth=this.getWidth();
+		int dialogHeight=this.getHeight();
+		this.setLocation((screenWidth-dialogWidth)/2, (screenHeight-dialogHeight)/2);
+		this.setResizable(false);
+	}
+	private void registerListener(){
+		jButton.addActionListener(new ActionListener() {		
+			public void actionPerformed(ActionEvent e) {
+				OverWriteDialog.this.dispose();
 			}
 		});
 	}
