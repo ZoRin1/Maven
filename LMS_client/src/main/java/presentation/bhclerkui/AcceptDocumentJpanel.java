@@ -56,10 +56,10 @@ public class AcceptDocumentJpanel extends JPanel{
 	private ImageIcon returnIcon=new ImageIcon("picture/返回.png");
 	private ImageIcon yesIcon=new ImageIcon("picture/确定.png");
 	public AcceptDocumentJpanel(bhclerkui ui,bhclerkJpanel bhclerkJpanel,String account,String state) {
-		init();
 		ui.setTitle("营业厅业务员-接收单创建");
 		this.account=account;
 		state1=state;
+		init();
 		bhclerkJpanel.add(this);
 		registListener(ui,bhclerkJpanel,this);
 	}

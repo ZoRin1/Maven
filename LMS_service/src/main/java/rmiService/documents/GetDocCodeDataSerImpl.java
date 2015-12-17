@@ -34,7 +34,6 @@ public class GetDocCodeDataSerImpl extends UnicastRemoteObject implements GetDoc
 		try {
 			if (doName.equals("出库单")||doName.equals("入库单")) {
 				sql="select code from "+doName+" where left(code,5)='"+account+"'";
-//				sql="select code from "+doName;
 				Connection connection=DriverManager.getConnection(URL, USER, PASSWORD);
 				PreparedStatement preparedStatement=connection.prepareStatement(sql);
 				ResultSet resultSet=preparedStatement.executeQuery();
@@ -43,22 +42,18 @@ public class GetDocCodeDataSerImpl extends UnicastRemoteObject implements GetDoc
 						codenum=codenum+1;
 						String code=Integer.toString(codenum);
 					while (code.length()!=5) {
-//						while (code.length()!=10) {
 							code="0"+code;
 						}
 						connection.close();
 						return account+code;
-//						return code;
 					}
 					else {
 						connection.close();
 					return account+"00001";
-//						return "0000000001";
 					}
 			}
 			else {
 				sql="select code from b"+doName+" where left(code,5)='"+account+"'";
-//				sql="select code from b"+doName;
 				Connection connection=DriverManager.getConnection(URL, USER, PASSWORD);
 				PreparedStatement preparedStatement=connection.prepareStatement(sql);
 				ResultSet resultSet=preparedStatement.executeQuery();
@@ -67,16 +62,13 @@ public class GetDocCodeDataSerImpl extends UnicastRemoteObject implements GetDoc
 					codenum=codenum+1;
 					String code=Integer.toString(codenum);
 					while (code.length()!=5) {
-//					while (code.length()!=10) {
 						code="0"+code;
 					}
 					connection.close();
-//					return code;
 					return account+code;
 				}
 				else {
 					sql="select code from "+doName+" where left(code,5)='"+account+"'";
-//					sql="select code from "+doName;
 					connection=DriverManager.getConnection(URL, USER, PASSWORD);
 					preparedStatement=connection.prepareStatement(sql);
 					resultSet=preparedStatement.executeQuery();
@@ -85,17 +77,14 @@ public class GetDocCodeDataSerImpl extends UnicastRemoteObject implements GetDoc
 							codenum=codenum+1;
 							String code=Integer.toString(codenum);
 							while (code.length()!=5) {
-//							while (code.length()!=10) {
 								code="0"+code;
 							}
 							connection.close();
-//							return code;
 							return account+code;
 						}
 						else {
 							connection.close();
 						return account+"00001";
-//							return "0000000001";
 						}		
 			}	
 			}

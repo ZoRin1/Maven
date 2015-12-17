@@ -52,9 +52,10 @@ public class ReceiptJPanel extends JPanel{
 	
 	private AccountManageBL accountManage;
 	public ReceiptJPanel(bhclerkui ui,bhclerkJpanel bhclerkJpanel,String account,String state) {
-		init();
+
 		this.account2=account;
 		this.state=state;
+		init();
 		bhclerkJpanel.add(this);
 		registListener(ui,bhclerkJpanel,this);
 	}

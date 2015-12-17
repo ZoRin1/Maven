@@ -489,6 +489,7 @@ class b1Jpanel2 extends JPanel{
 		Date now = new Date(); 
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		riqi = dateFormat.format( now );
+//		cankaobaojianumberJLabel.setText(documentController.get);
 		this.add(dingdannumberJLabel);
 		this.add(dingdantiaoxingmahaoJLabel);
 		this.add(cankaobaojiaJLabel);

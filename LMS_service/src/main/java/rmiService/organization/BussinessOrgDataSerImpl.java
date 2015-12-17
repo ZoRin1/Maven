@@ -45,7 +45,7 @@ public class BussinessOrgDataSerImpl extends UnicastRemoteObject implements Buss
 			PreparedStatement preparedStatement=connection.prepareStatement(sql);
 			ResultSet resultSet=preparedStatement.executeQuery();
 			resultSet.next();
-			if (resultSet.getString(1)!=null) {
+			if (resultSet.getString(1)!=null||!resultSet.getString(1).equals("")) {
 				String assisantString[]=resultSet.getString(1).split(",");
 				for (int i = 0; i < assisantString.length; i++) {
 					sql="select name from 帐号表 where ID ='"+assisantString[i]+"'";
@@ -121,7 +121,7 @@ public class BussinessOrgDataSerImpl extends UnicastRemoteObject implements Buss
 				String assisantString[]=resultSet.getString(1).split(",");
 				ArrayList<String>assisantList=new ArrayList<String>();
 				for (int i = 0; i < assisantString.length; i++) {
-					if (!assisantString[i].equals(Long.toString(bID))) {
+					if (!assisantString[i].equals(Long.toString(bID))||!assisantString[i].equals("")) {
 						assisantList.add(assisantString[i]);
 					}
 				}
@@ -158,7 +158,7 @@ public class BussinessOrgDataSerImpl extends UnicastRemoteObject implements Buss
 			PreparedStatement preparedStatement=connection.prepareStatement(sql);
 			ResultSet resultSet=preparedStatement.executeQuery();
 			resultSet.next();
-			if (resultSet.getString(1)!=null) {
+			if (resultSet.getString(1)!=null&&!resultSet.getString(1).equals("")) {
 				String courierString[]=resultSet.getString(1).split(",");
 				for (int i = 0; i < courierString.length; i++) {
 					sql="select name from 帐号表 where ID ='"+courierString[i]+"'";
@@ -207,7 +207,7 @@ public class BussinessOrgDataSerImpl extends UnicastRemoteObject implements Buss
 				}
 					preparedStatement=connection.prepareStatement(sql);
 				preparedStatement.executeUpdate();
-				sql="update 帐号表 set state = '1-"+resultSet.getString(3)+"-"+resultSet.getString(2)+"-营业厅-"+IDString[0]+"' where ID ='"+bID+"'";
+				sql="update 帐号表 set state = '1-"+resultSet.getString(2)+"-"+resultSet.getString(3)+"-营业厅-"+ID+"' where ID ='"+bID+"'";
 				preparedStatement=connection.prepareStatement(sql);
 				preparedStatement.executeUpdate();
 				connection.close();
@@ -236,7 +236,7 @@ public class BussinessOrgDataSerImpl extends UnicastRemoteObject implements Buss
 				String courierString[]=resultSet.getString(1).split(",");
 				ArrayList<String>courierList=new ArrayList<String>();
 				for (int i = 0; i < courierString.length; i++) {
-					if (!courierString[i].equals(Long.toString(bID))) {
+					if (!courierString[i].equals(Long.toString(bID))&&!courierString[i].equals("")) {
 						courierList.add(courierString[i]);
 					}
 				}
@@ -273,7 +273,7 @@ public class BussinessOrgDataSerImpl extends UnicastRemoteObject implements Buss
 			PreparedStatement preparedStatement=connection.prepareStatement(sql);
 			ResultSet resultSet=preparedStatement.executeQuery();
 			resultSet.next();
-			if (resultSet.getString(1)!=null) {
+			if (resultSet.getString(1)!=null&&!resultSet.getString(1).equals("")) {
 				String vehicleString[]=resultSet.getString(1).split(",");
 				connection.close();
 				return vehicleString;	
@@ -366,7 +366,7 @@ public class BussinessOrgDataSerImpl extends UnicastRemoteObject implements Buss
 					String vehicleString[]=resultSet.getString(1).split(",");
 					ArrayList<String>vehicleList=new ArrayList<String>();
 					for (int i = 0; i < vehicleString.length; i++) {
-						if (!vehicleString[i].equals(codeVehicle)) {
+						if (!vehicleString[i].equals(codeVehicle)&&!vehicleString[i].equals("")) {
 							vehicleList.add(vehicleString[i]);
 						}
 					}
@@ -407,7 +407,7 @@ public class BussinessOrgDataSerImpl extends UnicastRemoteObject implements Buss
 			PreparedStatement preparedStatement=connection.prepareStatement(sql);
 			ResultSet resultSet=preparedStatement.executeQuery();
 			resultSet.next();
-			if (resultSet.getString(1)!=null) {
+			if (resultSet.getString(1)!=null&&!resultSet.getString(1).equals("")) {
 				String vehicleString[]=resultSet.getString(1).split(",");
 				connection.close();
 				return vehicleString;
@@ -500,7 +500,7 @@ public class BussinessOrgDataSerImpl extends UnicastRemoteObject implements Buss
 					String driverString[]=resultSet.getString(1).split(",");
 					ArrayList<String>driverList=new ArrayList<String>();
 					for (int i = 0; i < driverString.length; i++) {
-						if (!driverString[i].equals(codeDriver)) {
+						if (!driverString[i].equals(codeDriver)&&!driverString[i].equals("")) {
 							driverList.add(driverString[i]);
 						}
 					}

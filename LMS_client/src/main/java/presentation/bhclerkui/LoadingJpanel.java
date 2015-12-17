@@ -59,10 +59,9 @@ public class LoadingJpanel extends JPanel{
 	private ImageIcon returnIcon=new ImageIcon("picture/返回.png");
 	private ImageIcon yesIcon=new ImageIcon("picture/确定.png");
 	public LoadingJpanel(bhclerkui ui,bhclerkJpanel bhclerkJpanel,String account,String state) {
-		init();
 		this.account=account;
 		this.state=state;
-		ui.setTitle("营业厅业务员-装车单创建");
+		init();
 		bhclerkJpanel.add(this);
 		registListener(ui,bhclerkJpanel,this);
 	}
@@ -288,8 +287,8 @@ public class LoadingJpanel extends JPanel{
 		private String str;
 		public finishDialog(JFrame frame,String title,boolean modal,String str) {
 			super(frame,title,modal);
-			init();
 			this.str=str;
+			init();
 			registerListener();
 			this.setVisible(true);
 		}

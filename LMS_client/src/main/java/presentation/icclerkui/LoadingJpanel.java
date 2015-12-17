@@ -63,11 +63,11 @@ public class LoadingJpanel extends JPanel{
 	private ImageIcon returnIcon=new ImageIcon("picture/返回.png");
 	private ImageIcon yesIcon=new ImageIcon("picture/确定.png");
 	public LoadingJpanel(icclerkui ui,icclerkJpanel panel,String account,String state) {
-		init();
 		panel.add(this);
 		registListener(ui,panel,this);
 		this.account=account;
 		this.state=state;
+		init();
 	}
 	public void init(){
 		Font font=new Font("幼圆",Font.BOLD,24);

@@ -59,9 +59,9 @@ public class ZReceiveJpanel extends JPanel{
 	private ImageIcon returnIcon=new ImageIcon("picture/返回.png");
 	private ImageIcon yesIcon=new ImageIcon("picture/确定.png");
 	public ZReceiveJpanel(icclerkui ui,icclerkJpanel panel,String account,String state) {
-		init();
 		this.account=account;
 		state2=state;
+		init();
 		ui.setTitle("中转中心业务员-中转接收单创建");
 		panel.add(this);
 		registListener(ui,panel,this);

@@ -82,7 +82,7 @@ public class TransportationDataSerImpl extends UnicastRemoteObject implements Tr
 	@Override
 	public double findCost(int type) throws RemoteException{
 		// TODO 自动生成的方法存根
-		sql="select cost from 成本常量 where type ='"+type+"'";
+		sql="select cost from 成本常量 where type = "+type;
 		try {
 			Class.forName(DRIVER);
 			Connection connection=DriverManager.getConnection(URL, USER, PASSWORD);
