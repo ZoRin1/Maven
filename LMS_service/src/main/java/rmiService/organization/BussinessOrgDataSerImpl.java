@@ -45,7 +45,7 @@ public class BussinessOrgDataSerImpl extends UnicastRemoteObject implements Buss
 			PreparedStatement preparedStatement=connection.prepareStatement(sql);
 			ResultSet resultSet=preparedStatement.executeQuery();
 			resultSet.next();
-			if (resultSet.getString(1)!=null||!resultSet.getString(1).equals("")) {
+			if (resultSet.getString(1)!=null&&!resultSet.getString(1).equals("")) {
 				String assisantString[]=resultSet.getString(1).split(",");
 				for (int i = 0; i < assisantString.length; i++) {
 					sql="select name from 帐号表 where ID ='"+assisantString[i]+"'";
@@ -121,7 +121,7 @@ public class BussinessOrgDataSerImpl extends UnicastRemoteObject implements Buss
 				String assisantString[]=resultSet.getString(1).split(",");
 				ArrayList<String>assisantList=new ArrayList<String>();
 				for (int i = 0; i < assisantString.length; i++) {
-					if (!assisantString[i].equals(Long.toString(bID))||!assisantString[i].equals("")) {
+					if (!assisantString[i].equals(Long.toString(bID))&&!assisantString[i].equals("")) {
 						assisantList.add(assisantString[i]);
 					}
 				}
