@@ -56,7 +56,6 @@ public class AcceptDocumentJpanel extends JPanel{
 	private ImageIcon returnIcon=new ImageIcon("picture/返回.png");
 	private ImageIcon yesIcon=new ImageIcon("picture/确定.png");
 	public AcceptDocumentJpanel(bhclerkui ui,bhclerkJpanel bhclerkJpanel,String account,String state) {
-		ui.setTitle("营业厅业务员-接收单创建");
 		this.account=account;
 		state1=state;
 		init();
@@ -190,7 +189,7 @@ public class AcceptDocumentJpanel extends JPanel{
 					new documentController().createBlock(po);
 					new finishDialog2(ui, "接收单创建完成", true,"接收单");
 					panel.remove(panel2);
-					new DispatchJpanel(ui,panel,panel2,account,state1);
+					new DispatchJpanel(ui,panel,panel2,account);
 					panel.repaint();
 				}
 			}
@@ -224,7 +223,8 @@ class DispatchJpanel extends JPanel{
 	private JButton yesButton;
 	private ImageIcon returnIcon=new ImageIcon("picture/返回.png");
 	private ImageIcon yesIcon=new ImageIcon("picture/确定.png");
-	public DispatchJpanel(bhclerkui ui,bhclerkJpanel panel,AcceptDocumentJpanel panel2,String account,String state){
+	public DispatchJpanel(bhclerkui ui,bhclerkJpanel panel,AcceptDocumentJpanel panel2,String account){
+		this.account=account;
 		init();
 		panel.add(this);
 		registListener(ui,panel,panel2,this);

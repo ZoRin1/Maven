@@ -22,10 +22,12 @@ public class DriverInfoJpanel extends JPanel{
 	private String account;
 	private bhclerkui ui;
 	private bhclerkJpanel panel;
-	public DriverInfoJpanel(bhclerkui ui,bhclerkJpanel bhclerkJpanel,String account) {
+	private String state;
+	public DriverInfoJpanel(bhclerkui ui,bhclerkJpanel bhclerkJpanel,String account,String state) {
 		this.ui=ui;
 		this.panel=bhclerkJpanel;
 		this.account=account;
+		this.state=state;
 		init();
 		bhclerkJpanel.add(this);
 		registListener(ui,bhclerkJpanel,this);
@@ -98,7 +100,7 @@ public class DriverInfoJpanel extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				panel.remove(panel2);
-				new CarInfoJpanel3(ui, panel, panel2, account,state);
+				new DriverInfoJpanel3(ui, panel, panel2, account,state);
 				panel.repaint();
 			}
 		});

@@ -41,11 +41,8 @@ public class GetDocCodeDataSerImpl extends UnicastRemoteObject implements GetDoc
 						int codenum=Integer.parseInt(resultSet.getString(1));
 						codenum=codenum+1;
 						String code=Integer.toString(codenum);
-					while (code.length()!=5) {
-							code="0"+code;
-						}
 						connection.close();
-						return account+code;
+						return code;
 					}
 					else {
 						connection.close();
@@ -61,11 +58,8 @@ public class GetDocCodeDataSerImpl extends UnicastRemoteObject implements GetDoc
 					int codenum=Integer.parseInt(resultSet.getString(1));
 					codenum=codenum+1;
 					String code=Integer.toString(codenum);
-					while (code.length()!=5) {
-						code="0"+code;
-					}
 					connection.close();
-					return account+code;
+					return code;
 				}
 				else {
 					sql="select code from "+doName+" where left(code,5)='"+account+"'";
@@ -76,11 +70,8 @@ public class GetDocCodeDataSerImpl extends UnicastRemoteObject implements GetDoc
 							int codenum=Integer.parseInt(resultSet.getString(1));
 							codenum=codenum+1;
 							String code=Integer.toString(codenum);
-							while (code.length()!=5) {
-								code="0"+code;
-							}
 							connection.close();
-							return account+code;
+							return code;
 						}
 						else {
 							connection.close();

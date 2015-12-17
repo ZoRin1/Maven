@@ -111,7 +111,7 @@ public class addDocummentInfoDataSerImpl extends UnicastRemoteObject implements 
 			}
 			sql="insert into b中转中心转运单(code,doName,date,account,transcode,departure,arrival,name,codeList,carriage,examined) values ('"+zLoadingPO.getCode()+"','"+zLoadingPO.getDoName()+"','"+zLoadingPO.getDate()+"','"+zLoadingPO.getAccount()+"','"+zLoadingPO.getTranscode()+"','"+zLoadingPO.getDeparture()+"','"+zLoadingPO.getArrival()+"','"+zLoadingPO.getName2()+"','"+co+"','"+zLoadingPO.getCarriage()+"',0)";
 			break;
-		}
+    	}
 		try {
 			Class.forName(DRIVER);
 			Connection connection=DriverManager.getConnection(URL, USER, PASSWORD);

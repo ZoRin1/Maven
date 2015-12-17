@@ -64,10 +64,10 @@ public class LoadingJpanel extends JPanel{
 	private ImageIcon yesIcon=new ImageIcon("picture/确定.png");
 	public LoadingJpanel(icclerkui ui,icclerkJpanel panel,String account,String state) {
 		panel.add(this);
-		registListener(ui,panel,this);
 		this.account=account;
 		this.state=state;
 		init();
+		registListener(ui,panel,this);
 	}
 	public void init(){
 		Font font=new Font("幼圆",Font.BOLD,24);

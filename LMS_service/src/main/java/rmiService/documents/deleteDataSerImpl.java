@@ -103,11 +103,11 @@ public class deleteDataSerImpl extends UnicastRemoteObject implements deleteData
 				preparedStatement.executeUpdate();
 				break;
 			case "营业厅接收单":
-				sql="select code2,date,arrival from b收件单 where code='"+code+"'";
+				sql="select code2,date,arrival from b营业厅接收单 where code='"+code+"'";
 				preparedStatement=connection.prepareStatement(sql);
 				resultSet2=preparedStatement.executeQuery();
 				resultSet2.next();
-				String wuliu7=resultSet2.getString(2)+" 您的快递已到达"+resultSet2.getString(3);
+				String wuliu7=resultSet2.getString(2)+" 您的快递已到达"+resultSet2.getString(3)+"营业厅";
 				sql="update 物流信息 set wuliu7='"+wuliu7+"'  where code='"+resultSet2.getString(1)+"'";
 				preparedStatement=connection.prepareStatement(sql);
 				preparedStatement.executeUpdate();
@@ -129,9 +129,18 @@ public class deleteDataSerImpl extends UnicastRemoteObject implements deleteData
 				resultSet2=preparedStatement.executeQuery();
 				resultSet2.next();	
 				s=resultSet2.getString(2).split(",");
-				String wuliu2=resultSet2.getString(1)+" 您的快递已离开"+resultSet2.getString(3);
+				String wuliu26=resultSet2.getString(1)+" 您的快递已离开"+resultSet2.getString(3);
 				for (int i = 0; i < s.length; i++) {
-					sql="update 物流信息 set wuliu2='"+wuliu2+"' where code ='"+s[i]+"'";
+					sql="select wuliu2 from 物流信息 where code='"+s[i]+"'";
+					preparedStatement=connection.prepareStatement(sql);
+					resultSet2=preparedStatement.executeQuery();
+					resultSet2.next();
+					if (resultSet2.getString(1)!=null) {
+						sql="update 物流信息 set wuliu6='"+wuliu26+"中转中心' where code ='"+s[i]+"'";
+					}
+					else {
+						sql="update 物流信息 set wuliu2='"+wuliu26+"营业厅' where code ='"+s[i]+"'";
+					}
 					preparedStatement=connection.prepareStatement(sql);
 					preparedStatement.executeUpdate();
 				}
@@ -142,13 +151,13 @@ public class deleteDataSerImpl extends UnicastRemoteObject implements deleteData
 				resultSet2=preparedStatement.executeQuery();
 				resultSet2.next();	
 				s=resultSet2.getString(2).split(",");
-				String wuliu35=resultSet2.getString(1)+" 您的快递已到达"+resultSet2.getString(3);
+				String wuliu35=resultSet2.getString(1)+" 您的快递已到达"+resultSet2.getString(3)+"中转中心";
 				for (int i = 0; i < s.length; i++) {
-					sql="select wuliu3 from b营业厅装车单 where code='"+s[i]+"'";
+					sql="select wuliu3 from 物流信息 where code='"+s[i]+"'";
 					preparedStatement=connection.prepareStatement(sql);
 					resultSet2=preparedStatement.executeQuery();
 					resultSet2.next();
-					if (!resultSet2.getString(1).equals(null)) {
+					if (resultSet2.getString(1)!=null) {
 						sql="update 物流信息 set wuliu5='"+wuliu35+"' where code ='"+s[i]+"'";
 					}
 					else {
@@ -159,26 +168,17 @@ public class deleteDataSerImpl extends UnicastRemoteObject implements deleteData
 				}
 				break;
 			case "中转中心转运单":
-				sql="select date,codeList,departure from b营业厅装车单 where code='"+code+"'";
+				sql="select date,codeList,departure from b中转中心转运单 where code='"+code+"'";
 				preparedStatement=connection.prepareStatement(sql);
 				resultSet2=preparedStatement.executeQuery();
 				resultSet2.next();	
 				s=resultSet2.getString(2).split(",");
-				String wuliu46=resultSet2.getString(1)+" 您的快递已离开"+resultSet2.getString(3);
+				String wuliu6=resultSet2.getString(1)+" 您的快递已离开"+resultSet2.getString(3)+"中转中心";
 				for (int i = 0; i < s.length; i++) {
-					sql="select wuliu4 from b营业厅装车单 where code='"+s[i]+"'";
-					preparedStatement=connection.prepareStatement(sql);
-					resultSet2=preparedStatement.executeQuery();
-					resultSet2.next();
-					if (!resultSet2.getString(1).equals(null)) {
-						sql="update 物流信息 set wuliu6='"+wuliu46+"' where code ='"+s[i]+"'";
-					}
-					else {
-						sql="update 物流信息 set wuliu4='"+wuliu46+"' where code ='"+s[i]+"'";
-					}
-					preparedStatement=connection.prepareStatement(sql);
-					preparedStatement.executeUpdate();
-				}
+				sql="update 物流信息 set wuliu6='"+wuliu6+"' where code ='"+s[i]+"'";
+				preparedStatement=connection.prepareStatement(sql);
+				preparedStatement.executeUpdate();
+			}
 				break;
 			}
 			sql="delete from b"+doName+" where code='"+code+"'";

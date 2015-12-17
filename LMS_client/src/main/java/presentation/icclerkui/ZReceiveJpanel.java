@@ -95,7 +95,7 @@ public class ZReceiveJpanel extends JPanel{
 		this.add(date);
 		
 		Date now = new Date();
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		date2 = dateFormat.format( now );
 		date1=new JLabel(date2);
 		date1.setForeground(Color.white);
@@ -182,13 +182,13 @@ public class ZReceiveJpanel extends JPanel{
 				else{
 					String[] list=state2.split("-");
 					zCode=list[3];
-					arrival2=list[2];
+					arrival2=list[1];
 					departure2=depart.getText();
 					String[] list2=tcode.getText().split("，");//此处或许应该加以参数把英文逗号转为中文逗号或要求员工必须使用中文输入法
 					int size=list2.length;
 					codeList=new ArrayList<>();
 					for(int i=0;i<size;i++){
-						codeList.add(list[i]);
+						codeList.add(list2[i]);
 					}
 					po=new ZReceivePO(code2, "中转中心接收单", date2, account, zCode, codeList, departure2, arrival2);
 					new documentController().createBlock(po);
