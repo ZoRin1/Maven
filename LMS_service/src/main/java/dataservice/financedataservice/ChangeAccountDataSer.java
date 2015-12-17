@@ -3,9 +3,6 @@ package dataservice.financedataservice;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
-import rmiService.finance.CostException;
-import rmiService.finance.CustomException;
-
 public interface ChangeAccountDataSer extends Remote{
 	
 	/**

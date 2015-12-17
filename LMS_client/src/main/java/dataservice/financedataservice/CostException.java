@@ -1,4 +1,4 @@
-package businesslogic.financebl;
+package dataservice.financedataservice;
 
 public class CostException extends Exception{
     public CostException()  {}                //用来创建无参数对象

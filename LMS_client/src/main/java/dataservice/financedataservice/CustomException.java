@@ -1,4 +1,4 @@
-package rmiService.finance;
+package dataservice.financedataservice;
 
 public class CustomException extends Exception{
     public CustomException()  {}                //用来创建无参数对象

@@ -5,10 +5,10 @@ import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
-import businesslogic.financebl.CostException;
-import businesslogic.financebl.CustomException;
 import presentation.mainui.ipConfig;
 import dataservice.financedataservice.ChangeAccountDataSer;
+import dataservice.financedataservice.CostException;
+import dataservice.financedataservice.CustomException;
 import dataservice.financedataservice.financeFactory;
 
 public class changeTheAccount {
@@ -19,7 +19,7 @@ public class changeTheAccount {
 		ip = new ipConfig();
 	}
 	
-	public void addEarn(String accountName,double earn) throws CustomException{
+	public void addEarn(String accountName,double earn) throws  CustomException{
 		try {
 			String ipp = ip.getIP();
 			financeFactory finFactory = (financeFactory)Naming.lookup("rmi://"+ipp+"/finFactory");

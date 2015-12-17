@@ -16,10 +16,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import dataservice.financedataservice.CustomException;
 import po.documentsPO.ReceiptPO;
 import businesslogic.documentsbl.createDocument;
 import businesslogic.documentsbl.documentController;
-import businesslogic.financebl.CustomException;
 import businesslogic.financebl.AccountManageModel.AccountManageBL;
 
 public class ReceiptJPanel extends JPanel{

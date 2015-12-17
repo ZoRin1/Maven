@@ -23,10 +23,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 
+import dataservice.financedataservice.CostException;
+import dataservice.financedataservice.CustomException;
 import po.documentsPO.PaymentPO;
 import businesslogic.documentsbl.documentController;
-import businesslogic.financebl.CostException;
-import businesslogic.financebl.CustomException;
 import businesslogic.financebl.AccountManageModel.AccountManageBL;
 import businesslogic.financebl.AccountManageModel.changeTheAccount;
 

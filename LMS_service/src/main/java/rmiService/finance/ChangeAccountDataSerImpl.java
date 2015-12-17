@@ -9,6 +9,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import dataservice.financedataservice.ChangeAccountDataSer;
+import dataservice.financedataservice.CostException;
+import dataservice.financedataservice.CustomException;
 
 public class ChangeAccountDataSerImpl extends UnicastRemoteObject implements ChangeAccountDataSer{
 	
@@ -61,7 +63,7 @@ public class ChangeAccountDataSerImpl extends UnicastRemoteObject implements Cha
 	}
 
 	@Override
-	public void changePay(String accountName, double earn) throws RemoteException,CustomException, CostException{
+	public void changePay(String accountName, double earn) throws RemoteException, CostException, CustomException{
 		// TODO 自动生成的方法存根
 		double subPay=0;
 		sql="SELECT * from 账户表 where Name='"+accountName+"'";
