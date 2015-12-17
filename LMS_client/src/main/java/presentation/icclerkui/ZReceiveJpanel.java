@@ -190,7 +190,7 @@ public class ZReceiveJpanel extends JPanel{
 					for(int i=0;i<size;i++){
 						codeList.add(list[i]);
 					}
-					po=new ZReceivePO(code2, "中转中心转运单", date2, account, zCode, codeList, departure2, arrival2);
+					po=new ZReceivePO(code2, "中转中心接收单", date2, account, zCode, codeList, departure2, arrival2);
 					new documentController().createBlock(po);
 					new finishDialog2(ui, "中转接收单创建完成", true,"中转接收单");
 					panel.remove(panel2);
