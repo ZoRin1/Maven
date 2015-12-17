@@ -29,7 +29,7 @@ public class ChangeAccountDataSerImpl extends UnicastRemoteObject implements Cha
 	}
 
 	@Override
-	public void changeEarn(String accountName, double earn) throws RemoteException{
+	public void changeEarn(String accountName, double earn) throws RemoteException, CustomException{
 		// TODO 自动生成的方法存根
 		double addEarn=0;
 //		sql="UPDATE 账户表"+" set AreaNum=5"+" where AreaNum=4 and SositionNum<="+shipping;
@@ -42,6 +42,8 @@ public class ChangeAccountDataSerImpl extends UnicastRemoteObject implements Cha
 			if(resultSet.next()){
 				String temp = resultSet.getString(2);
 				addEarn = Double.parseDouble(temp)+earn;
+			}else{
+				throw new CustomException();
 			}
 			
 			sql = "UPDATE 账户表"+" set sums='"+addEarn+"' where name='"+accountName+"'";
@@ -59,7 +61,7 @@ public class ChangeAccountDataSerImpl extends UnicastRemoteObject implements Cha
 	}
 
 	@Override
-	public void changePay(String accountName, double earn) throws RemoteException{
+	public void changePay(String accountName, double earn) throws RemoteException,CustomException, CostException{
 		// TODO 自动生成的方法存根
 		double subPay=0;
 		sql="SELECT * from 账户表 where Name='"+accountName+"'";
@@ -71,6 +73,12 @@ public class ChangeAccountDataSerImpl extends UnicastRemoteObject implements Cha
 			if(resultSet.next()){
 				String temp = resultSet.getString(2);
 				subPay = Double.parseDouble(temp)-earn;
+				
+				if(subPay<0){
+					throw new CostException();
+				}
+			}else{
+				throw new CustomException();
 			}
 			
 			sql = "UPDATE 账户表"+" set sums="+subPay+" where name='"+accountName+"'";

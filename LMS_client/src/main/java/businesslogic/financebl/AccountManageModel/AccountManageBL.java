@@ -3,6 +3,8 @@ package businesslogic.financebl.AccountManageModel;
 import java.util.ArrayList;
 
 import po.financePO.AccountPO;
+import businesslogic.financebl.CostException;
+import businesslogic.financebl.CustomException;
 import businesslogic.state.ResultMessage;
 import vo.financeVO.AccountVO;
 
@@ -63,11 +65,11 @@ public class AccountManageBL {
 	}
 	
 	//增加账户余额
-	public void ChangeEarn(String accountName,double earn){
+	public void ChangeEarn(String accountName,double earn) throws CustomException{
 		changeAccount.addEarn(accountName, earn);
 	}
 	//减少账户余额
-	public void ChangePay(String accountName,double pay){
+	public void ChangePay(String accountName,double pay) throws CustomException, CostException{
 		changeAccount.subPay(accountName, pay);
 	}
 	

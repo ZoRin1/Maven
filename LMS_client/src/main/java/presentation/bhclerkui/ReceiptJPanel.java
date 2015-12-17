@@ -19,6 +19,7 @@ import javax.swing.JTextField;
 import po.documentsPO.ReceiptPO;
 import businesslogic.documentsbl.createDocument;
 import businesslogic.documentsbl.documentController;
+import businesslogic.financebl.CustomException;
 import businesslogic.financebl.AccountManageModel.AccountManageBL;
 
 public class ReceiptJPanel extends JPanel{
@@ -181,7 +182,12 @@ public class ReceiptJPanel extends JPanel{
 					
 					//此处增加相应账户的余额
 					accountManage = new AccountManageBL();
-					accountManage.ChangeEarn(account2, fund);
+					try {
+						accountManage.ChangeEarn(account2, fund);
+					} catch (CustomException e1) {
+						// TODO 自动生成的 catch 块
+						System.out.println("找不到账户");
+					}
 					//此处增加相应账户的余额
 					
 					new documentController().createBlock(po);
