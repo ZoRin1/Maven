@@ -183,12 +183,8 @@ public class ReceiptJPanel extends JPanel{
 					
 					//此处增加相应账户的余额
 					accountManage = new AccountManageBL();
-					try {
-						accountManage.ChangeEarn(account2, fund);
-					} catch (CustomException e1) {
-						// TODO 自动生成的 catch 块
-						System.out.println("找不到账户");
-					}
+					accountManage.ChangeEarn(account2, fund);
+
 					//此处增加相应账户的余额
 					
 					new documentController().createBlock(po);

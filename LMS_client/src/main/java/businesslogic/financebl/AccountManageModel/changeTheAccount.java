@@ -19,7 +19,7 @@ public class changeTheAccount {
 		ip = new ipConfig();
 	}
 	
-	public void addEarn(String accountName,double earn) throws  CustomException{
+	public int addEarn(String accountName,double earn){
 		try {
 			String ipp = ip.getIP();
 			financeFactory finFactory = (financeFactory)Naming.lookup("rmi://"+ipp+"/finFactory");
@@ -35,10 +35,11 @@ public class changeTheAccount {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
 		}
+		return 0;
 	}
 	
 	
-	public void subPay(String accountName,double pay)throws CustomException,CostException{
+	public int subPay(String accountName,double pay){
 		try {
 			String ipp = ip.getIP();
 			financeFactory finFactory = (financeFactory)Naming.lookup("rmi://"+ipp+"/finFactory");
@@ -54,5 +55,6 @@ public class changeTheAccount {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
 		}
+		return 0;
 	}
 }

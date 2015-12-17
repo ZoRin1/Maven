@@ -65,12 +65,12 @@ public class AccountManageBL {
 	}
 	
 	//增加账户余额
-	public void ChangeEarn(String accountName,double earn) throws CustomException{
-		changeAccount.addEarn(accountName, earn);
+	public int ChangeEarn(String accountName,double earn){
+		return changeAccount.addEarn(accountName, earn);
 	}
 	//减少账户余额
-	public void ChangePay(String accountName,double pay) throws CustomException, CostException{
-		changeAccount.subPay(accountName, pay);
+	public int  ChangePay(String accountName,double pay){
+		return changeAccount.subPay(accountName, pay);
 	}
 	
 }

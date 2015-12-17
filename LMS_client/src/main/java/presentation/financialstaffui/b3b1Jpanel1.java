@@ -229,18 +229,8 @@ public class b3b1Jpanel1 extends JPanel{
 					
 					//这里要加上改变账户余额的功能！！！
 					accountManage = new AccountManageBL();
-					try {
-						accountManage.ChangePay(zhanghaoField.getText(), Double.parseDouble(jineField.getText()));
-					} catch (NumberFormatException e1) {
-						// TODO 自动生成的 catch 块
-						e1.printStackTrace();
-					} catch (CustomException e1) {
-						// TODO 自动生成的 catch 块
-						System.out.println("找不到账户");
-					} catch (CostException e1) {
-						// TODO 自动生成的 catch 块
-						System.out.println("账户余额不足");
-					}
+					accountManage.ChangePay(zhanghaoField.getText(), Double.parseDouble(jineField.getText()));
+
 					//这里要加上改变账户余额的功能！！
 					
 					

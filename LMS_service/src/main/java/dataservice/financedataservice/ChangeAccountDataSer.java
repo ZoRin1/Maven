@@ -10,7 +10,7 @@ public interface ChangeAccountDataSer extends Remote{
 	 * @throws CustomException 
 	 */
 	
-	public void changeEarn(String accountName,double earn)throws RemoteException, CustomException;
+	public int changeEarn(String accountName,double earn)throws RemoteException;
 	
 	
 	/**
@@ -18,5 +18,5 @@ public interface ChangeAccountDataSer extends Remote{
 	 * @throws CostException 
 	 */
 	
-	public void changePay(String accountName,double earn)throws RemoteException,CustomException, CostException;
+	public int changePay(String accountName,double earn)throws RemoteException;
 }
