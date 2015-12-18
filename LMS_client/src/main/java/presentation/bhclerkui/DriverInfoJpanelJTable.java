@@ -35,14 +35,14 @@ public class DriverInfoJpanelJTable {
 	private DriverInfoJpanel DriverInfoJpanel;
 	private JScrollPane scrollPane;
 	private bhclerkui ui;
-	private String account;
+	private String state;
 	private bhclerkJpanel panel;
 	public JScrollPane getScrollPane() {
 		return scrollPane;
 	}
 	
-	public DriverInfoJpanelJTable(bhclerkui ui,bhclerkJpanel panel,DriverInfoJpanel DriverInfoJpanel,String account){
-		this.account=account;
+	public DriverInfoJpanelJTable(bhclerkui ui,bhclerkJpanel panel,DriverInfoJpanel DriverInfoJpanel,String state){
+		this.state=state;
 		this.ui=ui;
 		this.panel=panel;
 		this.DriverInfoJpanel = DriverInfoJpanel;
@@ -66,11 +66,16 @@ public class DriverInfoJpanelJTable {
 	private void initTable(){
 		//假设的数据
 		String[] inDepotName = new String[]{"司机编号"};
-		String[] list=null;//new BhclerkController().getDriverList(account);
-		int size=list.length;
-		String [][]inDepotValue=new String[size][1];
-		for(int i=0;i<size;i++){
-			inDepotValue[i][0]=list[i];
+		String stateString[]=state.split("-");
+		String[] list=new BhclerkController().getDriverList(stateString[4]+"-"+stateString[5]);
+		String [][] inDepotValue = null;
+		if (list==null) {
+			inDepotValue=new String[0][1];
+		}else {
+			inDepotValue=new String[list.length][1];
+			for(int i=0;i<list.length;i++){
+				inDepotValue[i][0]=list[i];
+			}
 		}
 		//假设的数据： 完善后要从数据库拿取数据来填写表格
 		
@@ -92,7 +97,8 @@ public class DriverInfoJpanelJTable {
 				if(e.getClickCount()==2){
 					int row = driverInfTable.getSelectedRow();
 					String value = driverInfTable.getValueAt(row, 0).toString().trim();
-					new DriverInfoJpanel2(ui, panel, DriverInfoJpanel, new BhclerkController().getDriverInfo(account, value),account);
+					String stateString[]=state.split("-");
+					new DriverInfoJpanel2(ui, panel, DriverInfoJpanel, new BhclerkController().getDriverInfo(stateString[4]+"-"+stateString[5], value),state);
 					//监听的具体实现
 				}
 			}
@@ -103,9 +109,7 @@ public class DriverInfoJpanelJTable {
 		TableColumn column = null;
 		column = driverInfTable.getColumnModel().getColumn(0);
 		column.setPreferredWidth(452);
-		column = driverInfTable.getColumnModel().getColumn(1);
-		column.setPreferredWidth(274);
-		
+
 		
 		driverInfTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		driverInfTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); 

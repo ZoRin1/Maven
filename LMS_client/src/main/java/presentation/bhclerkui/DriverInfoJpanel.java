@@ -19,14 +19,12 @@ public class DriverInfoJpanel extends JPanel{
 	private ImageIcon yesIcon=new ImageIcon("picture/确定.png");
 	private JLabel kuangjia;
 	private DriverInfoJpanelJTable DriverInfoJpanelJTable;
-	private String account;
 	private bhclerkui ui;
 	private bhclerkJpanel panel;
 	private String state;
-	public DriverInfoJpanel(bhclerkui ui,bhclerkJpanel bhclerkJpanel,String account,String state) {
+	public DriverInfoJpanel(bhclerkui ui,bhclerkJpanel bhclerkJpanel,String state) {
 		this.ui=ui;
 		this.panel=bhclerkJpanel;
-		this.account=account;
 		this.state=state;
 		init();
 		bhclerkJpanel.add(this);
@@ -56,7 +54,7 @@ public class DriverInfoJpanel extends JPanel{
 		addButton.setContentAreaFilled(false);
 		this.add(addButton);
 		
-		DriverInfoJpanelJTable = new DriverInfoJpanelJTable(ui,panel,this,account);
+		DriverInfoJpanelJTable = new DriverInfoJpanelJTable(ui,panel,this,state);
 		
 		this.setBounds(260, 60, 730,650);
 		this.setLayout(null);
@@ -100,7 +98,7 @@ public class DriverInfoJpanel extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				panel.remove(panel2);
-				new DriverInfoJpanel3(ui, panel, panel2, account,state);
+				new DriverInfoJpanel3(ui, panel, panel2,state);
 				panel.repaint();
 			}
 		});

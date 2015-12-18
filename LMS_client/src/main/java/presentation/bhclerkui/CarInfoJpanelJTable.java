@@ -37,13 +37,13 @@ public class CarInfoJpanelJTable {
 	private JScrollPane scrollPane;
 	private bhclerkui ui;
 	private bhclerkJpanel panel;
-	private String ID;
+	private String state;
 	public JScrollPane getScrollPane() {
 		return scrollPane;
 	}
 	
-	public CarInfoJpanelJTable(bhclerkui ui,bhclerkJpanel panel,CarInfoJpanel CarInfoJpanel,String account){
-		ID=account;
+	public CarInfoJpanelJTable(bhclerkui ui,bhclerkJpanel panel,CarInfoJpanel CarInfoJpanel,String state){
+		this.state=state;
 		this.panel=panel;
 		this.CarInfoJpanel = CarInfoJpanel;
 		initTable();
@@ -64,13 +64,17 @@ public class CarInfoJpanelJTable {
 	}
 	
 	private void initTable(){
-		
+		String stateString[]=state.split("-");
 		String[] inDepotName = new String[]{"车辆代号"};
-		String[] list=new BhclerkController().getVehicleList(ID);
-		int size=list.length;
-		String [][]inDepotValue=new String[size][1];
-		for(int i=0;i<size;i++){
-			inDepotValue[i][0]=list[i];
+		String[] list=new BhclerkController().getVehicleList(stateString[4]+"-"+stateString[5]);
+		String [][]inDepotValue;
+		if (list==null) {
+			inDepotValue=new String[0][1];
+		}else {
+			inDepotValue=new String[list.length][1];
+			for(int i=0;i<list.length;i++){
+				inDepotValue[i][0]=list[i];
+			}
 		}
 		DefaultTableModel tableModel = new DefaultTableModel(inDepotValue,inDepotName);
 		
@@ -90,8 +94,8 @@ public class CarInfoJpanelJTable {
 				if(e.getClickCount()==2){
 					int row = carInfTable.getSelectedRow();
 					String value = carInfTable.getValueAt(row, 0).toString().trim();
-					VehicleVO info=new BhclerkController().getVehicleInfo(ID, value);
-					new CarInfoJpanel2(ui, panel, CarInfoJpanel, info, ID);
+					VehicleVO info=new BhclerkController().getVehicleInfo(stateString[4]+"-"+stateString[5], value);
+					new CarInfoJpanel2(ui, panel, CarInfoJpanel, info, state);
 					//监听的具体实现
 				}
 			}
@@ -102,8 +106,8 @@ public class CarInfoJpanelJTable {
 		TableColumn column = null;
 		column = carInfTable.getColumnModel().getColumn(0);
 		column.setPreferredWidth(413);
-		column = carInfTable.getColumnModel().getColumn(1);
-		column.setPreferredWidth(310);
+//		column = carInfTable.getColumnModel().getColumn(1);
+//		column.setPreferredWidth(310);
 		
 		
 		carInfTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);

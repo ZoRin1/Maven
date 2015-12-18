@@ -27,7 +27,6 @@ public class CarInfoJpanel3 extends JPanel{
 	 */
 	private static final long serialVersionUID = 1L;
 	private VehicleVO vo;
-	private String account;
 	private String state;
 	
 	private ImageIcon frameIcon =new ImageIcon("picture/操作面板.png");
@@ -41,8 +40,7 @@ public class CarInfoJpanel3 extends JPanel{
 	private JButton yesButton;
 	private ImageIcon returnIcon=new ImageIcon("picture/返回.png");
 	private ImageIcon yesIcon=new ImageIcon("picture/确定.png");
-	public CarInfoJpanel3(bhclerkui ui,bhclerkJpanel panel,CarInfoJpanel panel2,String account,String state){
-		this.account=account;
+	public CarInfoJpanel3(bhclerkui ui,bhclerkJpanel panel,CarInfoJpanel panel2,String state){
 		this.state=state;
 		init();
 		panel.add(this);
@@ -112,16 +110,19 @@ public class CarInfoJpanel3 extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				String[] split=state.split("-");
-				String[] list=new BhclerkController().getVehicleList(account);
-				String code1=split[4]+split[5]+Carcode.getText();
-				int length=list.length;
+				String[] list=new BhclerkController().getVehicleList(split[4]+"-"+split[5]);
 				boolean a=false;
-				for(int i=0;i<length;i++){
-					if(code1.equals(list[i])){
-						a=true;
-						break;
+				if (list!=null) {
+					String code1=split[4]+split[5]+Carcode.getText();
+					int length=list.length;			
+					for(int i=0;i<length;i++){
+						if(code1.equals(list[i])){
+							a=true;
+							break;
+						}
 					}
 				}
+				
 				if(Code.getText().equals("")||Time.getText().equals("")){
 					new notFinishDialog(ui,"输入有误",true);
 				}
@@ -130,10 +131,10 @@ public class CarInfoJpanel3 extends JPanel{
 				}
 				else{
 					vo=new VehicleVO(split[4], split[5], Carcode.getText(), Code.getText(), Time.getText());
-					new BhclerkController().addVehicle(account, vo);
+					new BhclerkController().addVehicle(split[4]+"-"+split[5], vo);
 					new finishDialog2(ui, "车辆信息添加", true,"车辆信息" );
 					panel.remove(panel3);
-					new CarInfoJpanel(ui, panel, account,state);
+					new CarInfoJpanel(ui, panel,state);
 					panel.repaint();
 				}
 			}

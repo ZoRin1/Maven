@@ -24,7 +24,7 @@ public class CarInfoJpanel2 extends JPanel{
 	private static final long serialVersionUID = 1L;
 	private VehicleVO vo;
 	private VehicleVO vo1;
-	private String account;
+	private String state;
 	
 	private ImageIcon frameIcon =new ImageIcon("picture/操作面板.png");
 	private JLabel code;
@@ -37,8 +37,8 @@ public class CarInfoJpanel2 extends JPanel{
 	private ImageIcon deleteIcon=new ImageIcon("picture/删除.png");
 	private ImageIcon returnIcon=new ImageIcon("picture/返回.png");
 	private ImageIcon yesIcon=new ImageIcon("picture/确定.png");
-	public CarInfoJpanel2(bhclerkui ui,bhclerkJpanel panel,CarInfoJpanel panel2,VehicleVO vo,String account){
-		this.account=account;
+	public CarInfoJpanel2(bhclerkui ui,bhclerkJpanel panel,CarInfoJpanel panel2,VehicleVO vo,String state){
+		this.state=state;
 		vo1=vo;
 		init();
 		panel.add(this);
@@ -108,7 +108,8 @@ public class CarInfoJpanel2 extends JPanel{
 				}
 				else{
 					vo=new VehicleVO(vo1.getCodeCity(), vo1.getCodeBussinessHall(), vo1.getCodeID(), Code.getText(), Time.getText());
-					new BhclerkController().changeVehicle(account, vo);
+					String stateString[]=state.split("-");
+					new BhclerkController().changeVehicle(stateString[4]+"-"+stateString[5], vo);
 					panel.remove(panel3);
 					panel.add(panel2);
 					panel.repaint();
@@ -120,7 +121,8 @@ public class CarInfoJpanel2 extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				new BhclerkController().removeVehicle(account,vo1.getCodeCity()+vo1.getCodeBussinessHall()+vo1.getCodeID());
+				String stateString[]=state.split("-");
+				new BhclerkController().removeVehicle(stateString[4]+"-"+stateString[5],vo1.getCodeCity()+vo1.getCodeBussinessHall()+vo1.getCodeID());
 				panel.remove(panel3);
 				panel.add(panel2);
 				panel.repaint();

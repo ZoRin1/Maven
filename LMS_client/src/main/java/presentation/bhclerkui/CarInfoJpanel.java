@@ -21,10 +21,8 @@ public class CarInfoJpanel extends JPanel{
 	private CarInfoJpanelJTable CarInfoJpanelJTable;
 	private bhclerkui ui;
 	private bhclerkJpanel panel;
-	private String account;
 	private String state;
-	public CarInfoJpanel(bhclerkui ui,bhclerkJpanel bhclerkJpanel,String account,String state) {
-		this.account=account;
+	public CarInfoJpanel(bhclerkui ui,bhclerkJpanel bhclerkJpanel,String state) {
 		this.state=state;
 		this.ui=ui;
 		this.panel=bhclerkJpanel;
@@ -35,7 +33,7 @@ public class CarInfoJpanel extends JPanel{
 	public void init(){
 		Font font=new Font("幼圆",Font.BOLD,24);
 		ImageIcon i1 = new ImageIcon("picture/车辆信息框架.png");
-		CarInfoJpanelJTable = new CarInfoJpanelJTable(ui,panel,this,account);
+		CarInfoJpanelJTable = new CarInfoJpanelJTable(ui,panel,this,state);
 		
 		returnButton=new JButton(returnIcon);
 		returnButton.setBounds(662,575,48,48);
@@ -99,7 +97,7 @@ public class CarInfoJpanel extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				panel.remove(panel2);
-				new CarInfoJpanel3(ui, panel, panel2, account,state);
+				new CarInfoJpanel3(ui, panel, panel2,state);
 				panel.repaint();
 			}
 		});

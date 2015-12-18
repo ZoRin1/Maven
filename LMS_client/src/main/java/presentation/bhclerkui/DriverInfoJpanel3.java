@@ -22,7 +22,6 @@ public class DriverInfoJpanel3 extends JPanel{
 	 */
 	private static final long serialVersionUID = 1L;
 	private DriverVO vo;
-	private String account;
 	private String state;
 	
 	private ImageIcon frameIcon =new ImageIcon("picture/操作面板.png");
@@ -44,8 +43,7 @@ public class DriverInfoJpanel3 extends JPanel{
 	private JButton yesButton;
 	private ImageIcon returnIcon=new ImageIcon("picture/返回.png");
 	private ImageIcon yesIcon=new ImageIcon("picture/确定.png");
-	public DriverInfoJpanel3(bhclerkui ui,bhclerkJpanel panel,DriverInfoJpanel panel2,String account,String state){
-		this.account=account;
+	public DriverInfoJpanel3(bhclerkui ui,bhclerkJpanel panel,DriverInfoJpanel panel2,String state){
 		this.state=state;
 		init();
 		panel.add(this);
@@ -160,7 +158,7 @@ public class DriverInfoJpanel3 extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				String[] split=state.split("-");
-				String[] list=new BhclerkController().getVehicleList(account);
+				String[] list=new BhclerkController().getVehicleList(split[4]+"-"+split[5]);
 				String code1=split[4]+split[5]+Drivercode.getText();
 				int length=list.length;
 				boolean a=false;
@@ -180,10 +178,10 @@ public class DriverInfoJpanel3 extends JPanel{
 				else{
 					vo=new DriverVO(split[4], split[5], Drivercode.getText(), dname.getText(), 
 							Date.getText(), id.getText(), Phone.getText(), Sex.getText(), Time.getText());
-					new BhclerkController().addDriver(account, vo);
+					new BhclerkController().addDriver(split[4]+"-"+split[5], vo);
 					new finishDialog2(ui, "车辆信息添加", true,"车辆信息" );
 					panel.remove(panel3);
-					new CarInfoJpanel(ui, panel, account,state);
+					new CarInfoJpanel(ui, panel, state);
 					panel.repaint();
 				}
 			}
