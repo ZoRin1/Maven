@@ -8,6 +8,7 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.swing.ImageIcon;
@@ -24,6 +25,7 @@ import po.documentsPO.YDispatchPO;
 import po.documentsPO.YReceivePO;
 import businesslogic.documentsbl.createDocument;
 import businesslogic.documentsbl.documentController;
+import businesslogic.organizationbl.BusinessController;
 
 public class AcceptDocumentJpanel extends JPanel{
 	/**
@@ -39,6 +41,7 @@ public class AcceptDocumentJpanel extends JPanel{
 	private String departure2;//出发地
 	private String arrival2;//本营业厅
 	private String state2;//货物状态
+	private String[] split;
 	private YReceivePO po;
 	
 	private JLabel code;
@@ -65,6 +68,7 @@ public class AcceptDocumentJpanel extends JPanel{
 		registListener(ui,bhclerkJpanel,this);
 	}
 	public void init(){
+		split=state1.split("-");
 		Font font=new Font("幼圆",Font.BOLD,24);
 		code=new JLabel("单据编号：");
 		code.setForeground(Color.white);
@@ -101,16 +105,16 @@ public class AcceptDocumentJpanel extends JPanel{
 		date1.setBounds(155,97,250,27);
 		this.add(date1);
 		
-		departure=new JLabel("出发地：");
+		departure=new JLabel("出发地："+split[1]+"中转中心");
 		departure.setForeground(Color.white);
 		departure.setFont(font);
-		departure.setBounds(30,164,100,27);
+		departure.setBounds(30,164,275,27);
 		this.add(departure);
 		
-		arrival=new JLabel("到达地：");
+		arrival=new JLabel("到达地："+split[2]+"营业厅");
 		arrival.setForeground(Color.white);
 		arrival.setFont(font);
-		arrival.setBounds(30,231,100,27);
+		arrival.setBounds(30,231,250,27);
 		this.add(arrival);
 		
 		Tcode=new JLabel("订单条形码号：");
@@ -169,8 +173,17 @@ public class AcceptDocumentJpanel extends JPanel{
 			
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
+				String stri=tcode.getText();
+				ArrayList<String> list1=new documentController().getWuliuInfo(stri);
+				boolean a=false;
+				if(list1.equals(null)){
+					a=true;
+				}
 				if(tcode.getText().equals("")||State.getText().equals("")){
 					new notFinishDialog(ui,"输入有误",true);
+				}
+				else if(a){
+					new notFindDialog(ui, "订单条形码号不存在", true, "订单条形码号");
 				}
 				else{
 					code3=tcode.getText();
@@ -179,7 +192,7 @@ public class AcceptDocumentJpanel extends JPanel{
 					new documentController().createBlock(po);
 					new finishDialog2(ui, "接收单创建完成", true,"接收单");
 					panel.remove(panel2);
-					new DispatchJpanel(ui,panel,panel2,account);
+					new DispatchJpanel(ui,panel,panel2,account,stri,state1);
 					panel.repaint();
 				}
 			}
@@ -201,6 +214,8 @@ class DispatchJpanel extends JPanel{
 	private String code3;//对应订单编号
 	private String account;//创建人账号
 	private String name2;//派件快递员姓名
+	private String tcode;
+	private String state;
 	private YDispatchPO po;
 	
 	private ImageIcon frameIcon =new ImageIcon("picture/操作面板.png");
@@ -210,13 +225,14 @@ class DispatchJpanel extends JPanel{
 	private JLabel date;
 	private JLabel date1;
 	private JLabel Tcode;
-	private JTextField tcode;
 	private JLabel member;
 	private JTextField Member;
 	private JButton yesButton;
 	private ImageIcon yesIcon=new ImageIcon("picture/确定.png");
-	public DispatchJpanel(bhclerkui ui,bhclerkJpanel panel,AcceptDocumentJpanel panel2,String account){
+	public DispatchJpanel(bhclerkui ui,bhclerkJpanel panel,AcceptDocumentJpanel panel2,String account,String tcode,String state){
+		this.state=state;
 		this.account=account;
+		this.tcode=tcode;
 		init();
 		panel.add(this);
 		registListener(ui,panel,panel2,this);
@@ -258,16 +274,11 @@ class DispatchJpanel extends JPanel{
 		date1.setBounds(155,97,250,27);
 		this.add(date1);
 		
-		Tcode=new JLabel("订单条形码号：");
+		Tcode=new JLabel("订单条形码号："+tcode);
 		Tcode.setForeground(Color.white);
 		Tcode.setFont(font);
-		Tcode.setBounds(30,164,175,27);
+		Tcode.setBounds(30,164,300,27);
 		this.add(Tcode);
-		
-		tcode=new JTextField();
-		tcode.setBounds(205,164,125,27);
-		tcode.setFont(font);
-		this.add(tcode);
 		
 		member=new JLabel("派件员：");
 		member.setForeground(Color.white);
@@ -297,13 +308,25 @@ class DispatchJpanel extends JPanel{
 			
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				if(tcode.getText().equals("")||Member.getText().equals("")){
+				String[] split=state.split("-");
+				String[] list=new BusinessController().getCourierList(split[4]+split[5]);
+				boolean a=true;
+				int length=list.length;
+				for(int i=0;i<length;i++){
+					if(list[i].equals(Member.getText())){
+						a=false;
+						break;
+					}
+				}
+				if(Member.getText().equals("")){
 					new notFinishDialog(ui,"输入有误",true);
 				}
+				else if(a){
+					new notFindDialog(ui, "派件员输入错误", true, "派件员");
+				}
 				else{
-					code3=tcode.getText();
 					name2=Member.getText();
-					po=new YDispatchPO(date2, code2, "派件单", code3, account, name2);
+					po=new YDispatchPO(date2, code2, "派件单", tcode, account, name2);
 					new documentController().createBlock(po);
 					new finishDialog2(ui, "派件单创建完成", true,"派件单");
 					panel.remove(dispatchJpanel);
