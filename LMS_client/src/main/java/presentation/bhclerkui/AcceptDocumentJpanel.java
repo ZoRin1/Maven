@@ -47,9 +47,7 @@ public class AcceptDocumentJpanel extends JPanel{
 	private JLabel date;
 	private JLabel date1;
 	private JLabel departure;
-	private JTextField depart;
 	private JLabel arrival;
-	private JTextField arrive;
 	private JLabel Tcode;
 	private JTextField tcode;
 	private JLabel state;
@@ -109,21 +107,11 @@ public class AcceptDocumentJpanel extends JPanel{
 		departure.setBounds(30,164,100,27);
 		this.add(departure);
 		
-		depart=new JTextField();
-		depart.setBounds(130,164,125,27);
-		depart.setFont(font);
-		this.add(depart);
-		
 		arrival=new JLabel("到达地：");
 		arrival.setForeground(Color.white);
 		arrival.setFont(font);
 		arrival.setBounds(30,231,100,27);
 		this.add(arrival);
-		
-		arrive=new JTextField();
-		arrive.setBounds(130,231,125,27);
-		arrive.setFont(font);
-		this.add(arrive);
 		
 		Tcode=new JLabel("订单条形码号：");
 		Tcode.setForeground(Color.white);
@@ -181,13 +169,11 @@ public class AcceptDocumentJpanel extends JPanel{
 			
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				if(depart.getText().equals("")||arrive.getText().equals("")||tcode.getText().equals("")||State.getText().equals("")){
+				if(tcode.getText().equals("")||State.getText().equals("")){
 					new notFinishDialog(ui,"输入有误",true);
 				}
 				else{
 					code3=tcode.getText();
-					departure2=depart.getText();
-					arrival2=arrive.getText();
 					state2=State.getText();
 					po=new YReceivePO(date2, code2, "营业厅接收单", code3, account, departure2, arrival2, state2);
 					new documentController().createBlock(po);
