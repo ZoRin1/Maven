@@ -196,5 +196,6 @@ class topmanagerb3OperationJpanel extends JPanel{
 	    super.paintComponent(g);    
 	    g.drawImage(frameIcon.getImage(),-7,-12,null);
      }
+
 }
 

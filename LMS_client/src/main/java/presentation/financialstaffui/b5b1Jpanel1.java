@@ -57,7 +57,7 @@ public class b5b1Jpanel1 extends JPanel{
 	 	this.setLayout(null);
 	 	this.setOpaque(false);
 	}
-	private void registListener(final b5financialstaffui b5financialstaffui,final financialstaffJpanel financialstaffJpanel,final b5b1Jpanel1 b5b1Jpanel1){
+	private void registListener(final b5financialstaffui b5financialstaffui,final  financialstaffJpanel financialstaffJpanel,final b5b1Jpanel1 b5b1Jpanel1){
 		returnButton.addActionListener(new ActionListener() {
 			
 			@Override
@@ -181,6 +181,7 @@ class finishzhangbenDialog extends JDialog{
 			}
 		});
 	}
+
 }
 class dialogJpanel extends JPanel{
 	private ImageIcon dialogIcon=new ImageIcon("picture/背景.png");

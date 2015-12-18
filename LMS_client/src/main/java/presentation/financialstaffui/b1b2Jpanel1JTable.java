@@ -66,7 +66,7 @@ public class b1b2Jpanel1JTable {
 				return false;
 			}
 		};
-		ProfitJtabel.setFont(new Font("幼圆", Font.BOLD, 16));
+		ProfitJtabel.setFont(new Font("幼圆", Font.BOLD, 14));
 		ProfitJtabel.getTableHeader().setReorderingAllowed(false); //设置列不可重排
 		ProfitJtabel.getTableHeader().setResizingAllowed(false);//设置列不可拖动
 		

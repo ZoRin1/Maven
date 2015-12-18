@@ -20,9 +20,6 @@ import businesslogic.storagebl.ExcelModel.OutExcel;
 import po.excelPO.BillsExcelPO;
 import po.excelPO.ExcelPO;
 import presentation.financialstaffui.FileChooser;
-import presentation.financialstaffui.b1b1Jpanel1Jtable;
-import presentation.financialstaffui.b1b1Jpanel2;
-import presentation.financialstaffui.b1financialstaffui;
 import vo.documentsVO.ReceiptVO;
 
 public class b4Management extends JPanel {
@@ -163,4 +160,12 @@ public class b4Management extends JPanel {
 			super.paintComponent(g);    
 			g.drawImage(frameIcon.getImage(),-7,-12,null);
 	 }
+	class topmanagerJpanel extends JPanel{
+		private ImageIcon backgroundIcon=new ImageIcon("picture/背景.png");
+		public void paintComponent(Graphics g)  
+		{  
+		    super.paintComponent(g);    
+		    g.drawImage(backgroundIcon.getImage(),0,0,null);
+	     }
+	   }
 }

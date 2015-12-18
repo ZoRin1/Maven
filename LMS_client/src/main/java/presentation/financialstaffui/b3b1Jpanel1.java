@@ -104,7 +104,7 @@ public class b3b1Jpanel1 extends JPanel{
 		jineField=new JTextField();
 		jineField.setFont(font);
 		jineField.setBounds(500, 150, 150, 30);
-		zhanghaoJLabel=new JLabel("付款账号:");
+		zhanghaoJLabel=new JLabel("付款账户:");
 		zhanghaoJLabel.setForeground(Color.white);
 		zhanghaoJLabel.setFont(font);
 		zhanghaoJLabel.setBounds(370, 250, 150, 30);
@@ -225,26 +225,27 @@ public class b3b1Jpanel1 extends JPanel{
 				if (isFull()) {
 					//修改账户余额暂缺					
 					documentController.createBlock(new PaymentPO(bianhaonumberJLabel.getText(), "付款单", riqi.getText(), account, Double.parseDouble(jineField.getText()), fukuanrenxingmingField.getText(), zhanghaoField.getText(), tiaomuJList.getSelectedValue(), beizhuJList.getSelectedValue()));
-					
-					
+				
 					//这里要加上改变账户余额的功能！！！
 					accountManage = new AccountManageBL();
 					int sign=0;
 					sign = accountManage.ChangePay(zhanghaoField.getText(), Double.parseDouble(jineField.getText()));
 					if(sign==-1){
-						System.out.println("找不到账户");
+						new noFindDialog(b3financialstaffui, "未找到账户", true);
 					}else if(sign==-2){
-						System.out.println("余额不足");
+						new yuebuzuDialog(b3financialstaffui, "余额不足", true);
+					}else {
+						
+						new finishfukuandanDialog(b3financialstaffui, "新建付款单完成", true);
+						financialstaffJpanel.remove(b3b1Jpanel1);
+						financialstaffJpanel.add(b3financialstaffui.operationJpanel);
+						b3financialstaffui.b1.setEnabled(true);
+						b3financialstaffui.b2.setEnabled(true);
+						financialstaffJpanel.repaint();
 					}
 					//这里要加上改变账户余额的功能！！
 					
-					
-					new finishfukuandanDialog(b3financialstaffui, "新建付款单完成", true);
-					financialstaffJpanel.remove(b3b1Jpanel1);
-					financialstaffJpanel.add(b3financialstaffui.operationJpanel);
-					b3financialstaffui.b1.setEnabled(true);
-					b3financialstaffui.b2.setEnabled(true);
-					financialstaffJpanel.repaint();
+				
 				}
 				else {
 					new failDialog(b3financialstaffui, "失败", true);
@@ -343,4 +344,114 @@ class failDialog extends JDialog{
 			}
 		});
 	}
+	class financialstaffJpanel extends JPanel{
+		private ImageIcon backgroundIcon=new ImageIcon("picture/背景.png");
+		public void paintComponent(Graphics g)  
+		{  
+		    super.paintComponent(g);    
+		    g.drawImage(backgroundIcon.getImage(),0,0,null);
+	     }
+	   }
+}
+
+class yuebuzuDialog extends JDialog{
+	private dialogJpanel jPanel;
+	private JLabel jLabel;
+	private JButton jButton;
+	public yuebuzuDialog(JFrame frame,String title,boolean modal) {
+		super(frame,title,modal);
+		init();
+		registerListener();
+		this.setVisible(true);
+	}
+	private void init(){
+		ImageIcon yesIcon=new ImageIcon("picture/登录.png");
+		jLabel=new JLabel("余额不足，付款单创建不成功",jLabel.CENTER);
+		jLabel.setForeground(Color.white);
+		jLabel.setFont(new Font("幼圆",Font.BOLD,27));
+		jPanel=new dialogJpanel();
+		jButton=new JButton(yesIcon);
+		jButton.setContentAreaFilled(false);
+		jPanel.setLayout(null);
+		jButton.setBounds(218,190, 64, 64);
+		jLabel.setBounds(0, 0, 500, 200);
+		jPanel.add(jLabel);
+		jPanel.add(jButton);
+		this.add(jPanel);
+		this.setSize(500, 300);
+		Toolkit kitToolkit =Toolkit.getDefaultToolkit();
+		Dimension screenSize=kitToolkit.getScreenSize();
+		int screenWidth=screenSize.width;
+		int screenHeight=screenSize.height;
+		int dialogWidth=this.getWidth();
+		int dialogHeight=this.getHeight();
+		this.setLocation((screenWidth-dialogWidth)/2, (screenHeight-dialogHeight)/2);
+		this.setResizable(false);
+	}
+	private void registerListener(){
+		jButton.addActionListener(new ActionListener() {		
+			public void actionPerformed(ActionEvent e) {
+				yuebuzuDialog.this.dispose();
+			}
+		});
+	}
+	class financialstaffJpanel extends JPanel{
+		private ImageIcon backgroundIcon=new ImageIcon("picture/背景.png");
+		public void paintComponent(Graphics g)  
+		{  
+		    super.paintComponent(g);    
+		    g.drawImage(backgroundIcon.getImage(),0,0,null);
+	     }
+	   }
+}
+
+class noFindDialog extends JDialog{
+	private dialogJpanel jPanel;
+	private JLabel jLabel;
+	private JButton jButton;
+	public noFindDialog(JFrame frame,String title,boolean modal) {
+		super(frame,title,modal);
+		init();
+		registerListener();
+		this.setVisible(true);
+	}
+	private void init(){
+		ImageIcon yesIcon=new ImageIcon("picture/登录.png");
+		jLabel=new JLabel("未找到账户，请检查账户名",jLabel.CENTER);
+		jLabel.setForeground(Color.white);
+		jLabel.setFont(new Font("幼圆",Font.BOLD,27));
+		jPanel=new dialogJpanel();
+		jButton=new JButton(yesIcon);
+		jButton.setContentAreaFilled(false);
+		jPanel.setLayout(null);
+		jButton.setBounds(218,190, 64, 64);
+		jLabel.setBounds(0, 0, 500, 200);
+		jPanel.add(jLabel);
+		jPanel.add(jButton);
+		this.add(jPanel);
+		this.setSize(500, 300);
+		Toolkit kitToolkit =Toolkit.getDefaultToolkit();
+		Dimension screenSize=kitToolkit.getScreenSize();
+		int screenWidth=screenSize.width;
+		int screenHeight=screenSize.height;
+		int dialogWidth=this.getWidth();
+		int dialogHeight=this.getHeight();
+		this.setLocation((screenWidth-dialogWidth)/2, (screenHeight-dialogHeight)/2);
+		this.setResizable(false);
+	}
+	private void registerListener(){
+		jButton.addActionListener(new ActionListener() {		
+			public void actionPerformed(ActionEvent e) {
+				noFindDialog.this.dispose();
+			}
+		});
+	}
+	class financialstaffJpanel extends JPanel{
+		private ImageIcon backgroundIcon=new ImageIcon("picture/背景.png");
+		public void paintComponent(Graphics g)  
+		{  
+		    super.paintComponent(g);    
+		    g.drawImage(backgroundIcon.getImage(),0,0,null);
+	     }
+	   }
 }

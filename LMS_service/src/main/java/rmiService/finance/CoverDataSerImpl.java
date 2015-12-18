@@ -54,12 +54,7 @@ public class CoverDataSerImpl extends UnicastRemoteObject implements CoverDataSe
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}	
-		System.out.println("已经传输过来了");
 		ArrayList<AccountPO> pp = po;
-		for(AccountPO account:pp){
-			System.out.print(account.getName()+"  "+account.getSums());
-			System.out.println();
-		}
 	}
 
 }

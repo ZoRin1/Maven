@@ -253,28 +253,5 @@ public class bhclerkui extends JFrame{
 		});
 }
 }
-class bhclerkJpanel extends JPanel{
-	private ImageIcon backgroundIcon=new ImageIcon("picture/背景.png");
-	public void paintComponent(Graphics g)  
-	{  
-	    super.paintComponent(g);    
-	    g.drawImage(backgroundIcon.getImage(),0,0,null);
-     }
-   }
-class bhclerkOperationJpanel extends JPanel{
-	private ImageIcon frameIcon =new ImageIcon("picture/操作面板.png");
-	public bhclerkOperationJpanel(bhclerkJpanel bhclerkJpanel) {
-		// TODO Auto-generated constructor stub
-		init();
-		bhclerkJpanel.add(this);
-	}
-	private void init(){
-		this.setBounds(260, 60, 730,650);
-		this.setOpaque(false);
-	}
-	public void paintComponent(Graphics g)  
-	{  
-	    super.paintComponent(g);    
-	    g.drawImage(frameIcon.getImage(),-7,-12,null);
-     }
-}
+
+

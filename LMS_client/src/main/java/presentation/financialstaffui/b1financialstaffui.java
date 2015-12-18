@@ -165,10 +165,10 @@ public class b1financialstaffui extends JFrame{
 		vo = proController.returnPro(date);
 		ArrayList<ProfitVO> tempList = profitList.getProList();
 		proController.addPro();
-		voList.add(vo);
 		for(int i =0 ; i<tempList.size();i++){
 			voList.add(tempList.get(i));
 		}
+		voList.add(vo);
 	}
 	//得到成本收益集合的方法
 	

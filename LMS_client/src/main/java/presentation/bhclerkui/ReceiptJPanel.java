@@ -1,8 +1,10 @@
 package presentation.bhclerkui;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
@@ -11,6 +13,8 @@ import java.util.Date;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -44,6 +48,8 @@ public class ReceiptJPanel extends JPanel{
 	private JTextField Account;
 	private JLabel TCode;
 	private JTextArea tcode;
+	private JLabel zhanghumingJLabel;
+	private JTextField zhanghumingJTextField;
 	private ImageIcon frameIcon =new ImageIcon("picture/操作面板.png");
 	private JButton returnButton;
 	private JButton yesButton;
@@ -117,7 +123,15 @@ public class ReceiptJPanel extends JPanel{
 		Account.setBounds(155,231,125,27);
 		Account.setFont(font);
 		this.add(Account);
-		
+		zhanghumingJLabel =new JLabel("账户名：");
+		zhanghumingJLabel.setForeground(Color.white);
+		zhanghumingJLabel.setFont(font);
+		zhanghumingJLabel.setBounds(330, 231, 100, 27);
+		this.add(zhanghumingJLabel);
+		zhanghumingJTextField=new JTextField();
+		zhanghumingJTextField.setBounds(430, 231,150,27);
+		zhanghumingJTextField.setFont(font);
+		this.add(zhanghumingJTextField);
 		TCode=new JLabel("订单条形码号：");
 		TCode.setForeground(Color.white);
 		TCode.setFont(font);
@@ -177,31 +191,33 @@ public class ReceiptJPanel extends JPanel{
 					int size=list2.length;
 					TCode2=new ArrayList<String>();
 					for(int i=0;i<size;i++){
-						TCode2.add(list[i]);
+						TCode2.add(list2[i]);
 					}
 					po=new ReceiptPO(code2, "收款单", date2, account2, OrgCode, fund, name2, TCode2);
 					
 					//此处增加相应账户的余额
 					accountManage = new AccountManageBL();
 					int sign = 0;
-					sign = accountManage.ChangeEarn(account2, fund);
+					sign = accountManage.ChangeEarn(zhanghumingJTextField.getText(), fund);
 					if(sign==-1){
-						System.out.println("找不到账户");
+						new notFindDialog(ui, "未找到账户", true);
+					}else {
+
+						new documentController().createBlock(po);
+						new finishDialog2(ui, "收款单创建完成", true,"收款单");
+						panel.remove(panel2);
+						panel.add(ui.operationJpanel);
+						ui.carinformationbButton.setEnabled(true);
+						ui.cashdocumentbButton.setEnabled(true);
+						ui.documentreplyButton.setEnabled(true);
+						ui.driverinformationbButton.setEnabled(true);
+						ui.loaddocumentbButton.setEnabled(true);
+						ui.acceptdocumentbButton.setEnabled(true);
+						panel.repaint();
 					}
 
 					//此处增加相应账户的余额
-					
-					new documentController().createBlock(po);
-					new finishDialog2(ui, "收款单创建完成", true,"收款单");
-					panel.remove(panel2);
-					panel.add(ui.operationJpanel);
-					ui.carinformationbButton.setEnabled(true);
-					ui.cashdocumentbButton.setEnabled(true);
-					ui.documentreplyButton.setEnabled(true);
-					ui.driverinformationbButton.setEnabled(true);
-					ui.loaddocumentbButton.setEnabled(true);
-					ui.acceptdocumentbButton.setEnabled(true);
-					panel.repaint();
+
 				}
 				
 			}
@@ -212,4 +228,94 @@ public class ReceiptJPanel extends JPanel{
 			super.paintComponent(g);    
 			g.drawImage(frameIcon.getImage(),-7,-12,null);
 	 }
+	class notFinishDialog extends JDialog{
+		private dialogJpanel jPanel;
+		private JLabel jLabel;
+		private JLabel jLabel1;
+		private JButton jButton;
+		public notFinishDialog(JFrame frame,String title,boolean modal) {
+			super(frame,title,modal);
+			init();
+			registerListener();
+			this.setVisible(true);
+		}
+		private void init(){
+			ImageIcon yesIcon=new ImageIcon("picture/登录.png");
+			jLabel=new JLabel("您的输入不完整，请检查补充",jLabel.CENTER);
+			jLabel.setForeground(Color.white);
+			jLabel.setFont(new Font("幼圆",Font.BOLD,27));
+			jLabel.setBounds(0, 0, 500, 200);
+			
+			jButton=new JButton(yesIcon);
+			jButton.setContentAreaFilled(false);
+			jButton.setBounds(218,190, 64, 64);
+			
+			jPanel=new dialogJpanel();
+			jPanel.setLayout(null);
+			jPanel.add(jLabel);
+			jPanel.add(jButton);
+			this.add(jPanel);
+			this.setSize(500, 300);
+			Toolkit kitToolkit =Toolkit.getDefaultToolkit();
+			Dimension screenSize=kitToolkit.getScreenSize();
+			int screenWidth=screenSize.width;
+			int screenHeight=screenSize.height;
+			int dialogWidth=this.getWidth();
+			int dialogHeight=this.getHeight();
+			this.setLocation((screenWidth-dialogWidth)/2, (screenHeight-dialogHeight)/2);
+			this.setResizable(false);
+		}
+		private void registerListener(){
+			jButton.addActionListener(new ActionListener() {		
+				public void actionPerformed(ActionEvent e) {
+					notFinishDialog.this.dispose();
+				}
+			});
+		}
+	}
+	class notFindDialog extends JDialog{
+		private dialogJpanel jPanel;
+		private JLabel jLabel;
+		private JLabel jLabel1;
+		private JButton jButton;
+		public notFindDialog(JFrame frame,String title,boolean modal) {
+			super(frame,title,modal);
+			init();
+			registerListener();
+			this.setVisible(true);
+		}
+		private void init(){
+			ImageIcon yesIcon=new ImageIcon("picture/登录.png");
+			jLabel=new JLabel("未找到帐户，请检查账户名",jLabel.CENTER);
+			jLabel.setForeground(Color.white);
+			jLabel.setFont(new Font("幼圆",Font.BOLD,27));
+			jLabel.setBounds(0, 0, 500, 200);
+			
+			jButton=new JButton(yesIcon);
+			jButton.setContentAreaFilled(false);
+			jButton.setBounds(218,190, 64, 64);
+			
+			jPanel=new dialogJpanel();
+			jPanel.setLayout(null);
+			jPanel.add(jLabel);
+			jPanel.add(jButton);
+			this.add(jPanel);
+			this.setSize(500, 300);
+			Toolkit kitToolkit =Toolkit.getDefaultToolkit();
+			Dimension screenSize=kitToolkit.getScreenSize();
+			int screenWidth=screenSize.width;
+			int screenHeight=screenSize.height;
+			int dialogWidth=this.getWidth();
+			int dialogHeight=this.getHeight();
+			this.setLocation((screenWidth-dialogWidth)/2, (screenHeight-dialogHeight)/2);
+			this.setResizable(false);
+		}
+		private void registerListener(){
+			jButton.addActionListener(new ActionListener() {		
+				public void actionPerformed(ActionEvent e) {
+					notFindDialog.this.dispose();
+				}
+			});
+		}
+	}
 }

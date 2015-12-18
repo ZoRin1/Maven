@@ -66,7 +66,7 @@ public class b5b2Jpanel1JTable {
 		
 		Object[][] inDepotValue = new Object[bookList.size()][2];
 		for(int i = 0 ; i < bookList.size();i++){
-			inDepotValue[i][0] = bookList.get(i).getAccountName();
+			inDepotValue[i][0] = bookList.get(i).getName();
 			inDepotValue[i][1] = bookList.get(i).getDate();
 			
 		}
@@ -201,7 +201,7 @@ public class b5b2Jpanel1JTable {
 			Object[] o3 = po.getFinanceCode().split(",");
 			Object[] o4 = po.getIDCode().split(",");
 			Object[] o5 = po.getVehicleCode().split(",");
-			
+			Object[] o6 = po.getAccountName().split(",");
 			
 			//假设的数据： 完善后要从数据库拿取数据来填写表格
 			
@@ -221,7 +221,7 @@ public class b5b2Jpanel1JTable {
 			tableModel.addColumn("营业厅编号",o3);
 			tableModel.addColumn("人员编号",o4);
 			tableModel.addColumn("车辆编号",o5);
-
+			tableModel.addColumn("账户",o6);
 			
 			
 			booksTable.getTableHeader().setReorderingAllowed(false); //设置列不可重排
@@ -240,7 +240,8 @@ public class b5b2Jpanel1JTable {
 			column.setPreferredWidth(145);
 			column = booksTable.getColumnModel().getColumn(4);
 			column.setPreferredWidth(145);
-			
+			column = booksTable.getColumnModel().getColumn(5);
+			column.setPreferredWidth(145);
 			
 			
 			booksTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
