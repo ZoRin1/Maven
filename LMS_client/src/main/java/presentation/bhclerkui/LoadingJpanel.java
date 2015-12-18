@@ -23,6 +23,7 @@ import javax.swing.JTextField;
 
 import po.documentsPO.LoadingPO;
 import businesslogic.documentsbl.documentController;
+import businesslogic.organizationbl.BhclerkController;
 
 
 public class LoadingJpanel extends JPanel{
@@ -36,6 +37,7 @@ public class LoadingJpanel extends JPanel{
 	private ArrayList<String> codeList;//所有托运单号
 	private String state;
 	private LoadingPO po;
+	private String[] list;
 	
 	private JLabel code;
 	private JLabel code1;
@@ -64,7 +66,7 @@ public class LoadingJpanel extends JPanel{
 		registListener(ui,bhclerkJpanel,this);
 	}
 	public void init(){
-		String[] list=state.split("-");
+		list=state.split("-");
 		Font font=new Font("幼圆",Font.BOLD,24);
 		code=new JLabel("单据编号：");
 		code.setForeground(Color.white);
@@ -138,7 +140,7 @@ public class LoadingJpanel extends JPanel{
 		this.add(TCode);
 		
 		tcode=new JTextArea();
-		tcode.setBounds(255,298,143,108);
+		tcode.setBounds(255,298,150,108);
 		tcode.setLineWrap(true);
 		tcode.setFont(font);
 		this.add(tcode);
@@ -181,20 +183,45 @@ public class LoadingJpanel extends JPanel{
 				Date now = new Date();
 				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				date = dateFormat.format( now );
+				
+				String str1=Carcode.getText();
+				boolean a=true;
+				String[] list1=new BhclerkController().getVehicleList(list[4]+list[5]);
+				int length=list1.length;
+				for(int i=0;i<length;i++){	
+					if(list[i].equals(str1)){
+						a=false;
+						break;
+					}
+				}
+				String[] list2=tcode.getText().split("，");//此处或许应该加以参数把英文逗号转为中文逗号或要求员工必须使用中文输入法
+				int size=list2.length;
+				codeList=new ArrayList<>();
+				boolean b=false;
+				String str3="";
+				for(int i=0;i<size;i++){
+					ArrayList<String> stri=new documentController().getWuliuInfo(list2[i]);
+					if(stri.equals(null)){
+						b=true;
+						str3=list2[i];
+						break;
+					}
+					codeList.add(list2[i]);
+				}
 				if(jianzhuangyuan.getText().equals("")
 						||yayunyuan.getText().equals("")||Carcode.getText().equals("")||tcode.getText().equals("")){
 					new notFinishDialog(ui, "输入有误", true);
 					panel.repaint();
 				}
+				else if(a){
+					new notFindDialog(ui, "车辆编号不存在", true, "车辆编号");
+				}
+				else if(b){
+					new notFindDialog(ui, "订单条形码号不存在", true, str3);
+				}
 				else{
 					supervisor=jianzhuangyuan.getText();
 					supercargo=yayunyuan.getText();
-					String[] list=tcode.getText().split("，");//此处或许应该加以参数把英文逗号转为中文逗号或要求员工必须使用中文输入法
-					int size=list.length;
-					codeList=new ArrayList<>();
-					for(int i=0;i<size;i++){
-						codeList.add(list[i]);
-					}
 					DecimalFormat df = new DecimalFormat("0.00");
 					documentController co=new documentController();
 					String str=df.format(co.getShortCost());

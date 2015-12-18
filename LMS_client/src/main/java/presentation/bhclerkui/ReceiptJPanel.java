@@ -25,8 +25,13 @@ import po.documentsPO.ReceiptPO;
 import businesslogic.documentsbl.createDocument;
 import businesslogic.documentsbl.documentController;
 import businesslogic.financebl.AccountManageModel.AccountManageBL;
+import businesslogic.organizationbl.BusinessController;
 
 public class ReceiptJPanel extends JPanel{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String code2;//收款单编号
 	private String date2;//收款日期
 	private String account2;//创建人账号
@@ -179,12 +184,25 @@ public class ReceiptJPanel extends JPanel{
 			
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
+				String[] list=state.split("-");
+				String str=list[4]+"-"+list[5];
+				String[] list1=new BusinessController().getCourierList(str);
+				int size1=list1.length;
+				boolean a=true;//a为真代表快递员不存在
+				for(int i=0;i<size1;i++){
+					if(name.getText().equals(list1[i])){
+						a=false;
+						break;
+					}
+				}
 				if(Account.getText().equals("")||tcode.getText().equals("")){
 					new notFinishDialog(ui,"输入有误",true);
 				}
+				else if(a){
+					new notFindDialog(ui, "未找到相应快递员", true, "快递员");
+				}
 				else{
-					String[] list=state.split("-");
-					OrgCode=list[3]+"-"+list[4];
+					OrgCode=list[4]+"-"+list[5];
 					fund=Double.parseDouble(Account.getText());
 					name2=name.getText();
 					String[] list2=tcode.getText().split("，");//此处或许应该加以参数把英文逗号转为中文逗号或要求员工必须使用中文输入法
@@ -200,7 +218,7 @@ public class ReceiptJPanel extends JPanel{
 					int sign = 0;
 					sign = accountManage.ChangeEarn(zhanghumingJTextField.getText(), fund);
 					if(sign==-1){
-						new notFindDialog(ui, "未找到账户", true);
+						new notFindDialog(ui, "未找到账户", true ,"账户");
 					}else {
 
 						new documentController().createBlock(po);
@@ -223,99 +241,55 @@ public class ReceiptJPanel extends JPanel{
 			}
 		});
 	}
-	public void paintComponent(Graphics g)  
-	{  
-			super.paintComponent(g);    
-			g.drawImage(frameIcon.getImage(),-7,-12,null);
-	 }
-	class notFinishDialog extends JDialog{
-		private dialogJpanel jPanel;
-		private JLabel jLabel;
-		private JLabel jLabel1;
-		private JButton jButton;
-		public notFinishDialog(JFrame frame,String title,boolean modal) {
-			super(frame,title,modal);
-			init();
-			registerListener();
-			this.setVisible(true);
-		}
-		private void init(){
-			ImageIcon yesIcon=new ImageIcon("picture/登录.png");
-			jLabel=new JLabel("您的输入不完整，请检查补充",jLabel.CENTER);
-			jLabel.setForeground(Color.white);
-			jLabel.setFont(new Font("幼圆",Font.BOLD,27));
-			jLabel.setBounds(0, 0, 500, 200);
-			
-			jButton=new JButton(yesIcon);
-			jButton.setContentAreaFilled(false);
-			jButton.setBounds(218,190, 64, 64);
-			
-			jPanel=new dialogJpanel();
-			jPanel.setLayout(null);
-			jPanel.add(jLabel);
-			jPanel.add(jButton);
-			this.add(jPanel);
-			this.setSize(500, 300);
-			Toolkit kitToolkit =Toolkit.getDefaultToolkit();
-			Dimension screenSize=kitToolkit.getScreenSize();
-			int screenWidth=screenSize.width;
-			int screenHeight=screenSize.height;
-			int dialogWidth=this.getWidth();
-			int dialogHeight=this.getHeight();
-			this.setLocation((screenWidth-dialogWidth)/2, (screenHeight-dialogHeight)/2);
-			this.setResizable(false);
-		}
-		private void registerListener(){
-			jButton.addActionListener(new ActionListener() {		
-				public void actionPerformed(ActionEvent e) {
-					notFinishDialog.this.dispose();
-				}
-			});
-		}
+}
+class notFindDialog extends JDialog{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private dialogJpanel jPanel;
+	private JLabel jLabel;
+	private JLabel jLabel1;
+	private JButton jButton;
+	private String str;
+	public notFindDialog(JFrame frame,String title,boolean modal,String str1) {
+		super(frame,title,modal);
+		str=str1;
+		init();
+		registerListener();
+		this.setVisible(true);
 	}
-	class notFindDialog extends JDialog{
-		private dialogJpanel jPanel;
-		private JLabel jLabel;
-		private JLabel jLabel1;
-		private JButton jButton;
-		public notFindDialog(JFrame frame,String title,boolean modal) {
-			super(frame,title,modal);
-			init();
-			registerListener();
-			this.setVisible(true);
-		}
-		private void init(){
-			ImageIcon yesIcon=new ImageIcon("picture/登录.png");
-			jLabel=new JLabel("未找到帐户，请检查账户名",jLabel.CENTER);
-			jLabel.setForeground(Color.white);
-			jLabel.setFont(new Font("幼圆",Font.BOLD,27));
-			jLabel.setBounds(0, 0, 500, 200);
-			
-			jButton=new JButton(yesIcon);
-			jButton.setContentAreaFilled(false);
-			jButton.setBounds(218,190, 64, 64);
-			
-			jPanel=new dialogJpanel();
-			jPanel.setLayout(null);
-			jPanel.add(jLabel);
-			jPanel.add(jButton);
-			this.add(jPanel);
-			this.setSize(500, 300);
-			Toolkit kitToolkit =Toolkit.getDefaultToolkit();
-			Dimension screenSize=kitToolkit.getScreenSize();
-			int screenWidth=screenSize.width;
-			int screenHeight=screenSize.height;
-			int dialogWidth=this.getWidth();
-			int dialogHeight=this.getHeight();
-			this.setLocation((screenWidth-dialogWidth)/2, (screenHeight-dialogHeight)/2);
-			this.setResizable(false);
-		}
-		private void registerListener(){
-			jButton.addActionListener(new ActionListener() {		
-				public void actionPerformed(ActionEvent e) {
-					notFindDialog.this.dispose();
-				}
-			});
-		}
+	private void init(){
+		ImageIcon yesIcon=new ImageIcon("picture/登录.png");
+		jLabel=new JLabel("您所输入的"+str+"不存在",jLabel.CENTER);
+		jLabel.setForeground(Color.white);
+		jLabel.setFont(new Font("幼圆",Font.BOLD,27));
+		jLabel.setBounds(0, 0, 500, 200);
+		
+		jButton=new JButton(yesIcon);
+		jButton.setContentAreaFilled(false);
+		jButton.setBounds(218,190, 64, 64);
+		
+		jPanel=new dialogJpanel();
+		jPanel.setLayout(null);
+		jPanel.add(jLabel);
+		jPanel.add(jButton);
+		this.add(jPanel);
+		this.setSize(500, 300);
+		Toolkit kitToolkit =Toolkit.getDefaultToolkit();
+		Dimension screenSize=kitToolkit.getScreenSize();
+		int screenWidth=screenSize.width;
+		int screenHeight=screenSize.height;
+		int dialogWidth=this.getWidth();
+		int dialogHeight=this.getHeight();
+		this.setLocation((screenWidth-dialogWidth)/2, (screenHeight-dialogHeight)/2);
+		this.setResizable(false);
+	}
+	private void registerListener(){
+		jButton.addActionListener(new ActionListener() {		
+			public void actionPerformed(ActionEvent e) {
+				notFindDialog.this.dispose();
+			}
+		});
 	}
 }
