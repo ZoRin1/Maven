@@ -95,7 +95,9 @@ public class CarInfoJpanelJTable {
 					int row = carInfTable.getSelectedRow();
 					String value = carInfTable.getValueAt(row, 0).toString().trim();
 					VehicleVO info=new BhclerkController().getVehicleInfo(stateString[4]+"-"+stateString[5], value);
+					panel.remove(CarInfoJpanel);
 					new CarInfoJpanel2(ui, panel, CarInfoJpanel, info, state);
+					panel.repaint();
 					//监听的具体实现
 				}
 			}

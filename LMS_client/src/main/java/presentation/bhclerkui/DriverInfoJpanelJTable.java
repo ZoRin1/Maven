@@ -98,7 +98,9 @@ public class DriverInfoJpanelJTable {
 					int row = driverInfTable.getSelectedRow();
 					String value = driverInfTable.getValueAt(row, 0).toString().trim();
 					String stateString[]=state.split("-");
+					panel.remove(DriverInfoJpanel);
 					new DriverInfoJpanel2(ui, panel, DriverInfoJpanel, new BhclerkController().getDriverInfo(stateString[4]+"-"+stateString[5], value),state);
+					panel.repaint();
 					//监听的具体实现
 				}
 			}
