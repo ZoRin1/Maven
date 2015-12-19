@@ -121,7 +121,7 @@ public class ZReceiveJpanel extends JPanel{
 		this.add(TCode);
 		
 		tcode=new JTextArea();
-		tcode.setBounds(255,231,143,108);
+		tcode.setBounds(255,231,150,108);
 		tcode.setLineWrap(true);
 		tcode.setFont(font);
 //		jsp = new JScrollPane(tcode);
@@ -176,20 +176,31 @@ public class ZReceiveJpanel extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
+				String[] list1=tcode.getText().split("，");//此处或许应该加以参数把英文逗号转为中文逗号或要求员工必须使用中文输入法
+				int length=list1.length;
+				codeList=new ArrayList<>();
+				boolean b=false;
+				String str3="";
+				for(int i=0;i<length;i++){
+					ArrayList<String> stri=new documentController().getWuliuInfo(list1[i]);
+					if(stri.equals(null)){
+						b=true;
+						str3=list1[i];
+						break;
+					}
+					codeList.add(list1[i]);
+				}
 				if(depart.getText().equals("")||tcode.getText().equals("")||State.getText().equals("")){
 					new notFinishDialog(ui,"输入有误",true);
+				}
+				else if(b=true){
+					new notFindDialog(ui, "订单条形码号不存在", true, str3);
 				}
 				else{
 					String[] list=state2.split("-");
 					zCode=list[3];
 					arrival2=list[1];
 					departure2=depart.getText();
-					String[] list2=tcode.getText().split("，");//此处或许应该加以参数把英文逗号转为中文逗号或要求员工必须使用中文输入法
-					int size=list2.length;
-					codeList=new ArrayList<>();
-					for(int i=0;i<size;i++){
-						codeList.add(list2[i]);
-					}
 					po=new ZReceivePO(code2, "中转中心接收单", date2, account, zCode, codeList, departure2, arrival2);
 					new documentController().createBlock(po);
 					new finishDialog2(ui, "中转接收单创建完成", true,"中转接收单");
@@ -301,6 +312,57 @@ class finishDialog2 extends JDialog{
 		jButton.addActionListener(new ActionListener() {		
 			public void actionPerformed(ActionEvent e) {
 				finishDialog2.this.dispose();
+			}
+		});
+	}
+}
+class notFindDialog extends JDialog{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private dialogJpanel jPanel;
+	private JLabel jLabel;
+	private JLabel jLabel1;
+	private JButton jButton;
+	private String str;
+	public notFindDialog(JFrame frame,String title,boolean modal,String str1) {
+		super(frame,title,modal);
+		str=str1;
+		init();
+		registerListener();
+		this.setVisible(true);
+	}
+	private void init(){
+		ImageIcon yesIcon=new ImageIcon("picture/登录.png");
+		jLabel=new JLabel("您所输入的"+str+"不存在",jLabel.CENTER);
+		jLabel.setForeground(Color.white);
+		jLabel.setFont(new Font("幼圆",Font.BOLD,27));
+		jLabel.setBounds(0, 0, 500, 200);
+		
+		jButton=new JButton(yesIcon);
+		jButton.setContentAreaFilled(false);
+		jButton.setBounds(218,190, 64, 64);
+		
+		jPanel=new dialogJpanel();
+		jPanel.setLayout(null);
+		jPanel.add(jLabel);
+		jPanel.add(jButton);
+		this.add(jPanel);
+		this.setSize(500, 300);
+		Toolkit kitToolkit =Toolkit.getDefaultToolkit();
+		Dimension screenSize=kitToolkit.getScreenSize();
+		int screenWidth=screenSize.width;
+		int screenHeight=screenSize.height;
+		int dialogWidth=this.getWidth();
+		int dialogHeight=this.getHeight();
+		this.setLocation((screenWidth-dialogWidth)/2, (screenHeight-dialogHeight)/2);
+		this.setResizable(false);
+	}
+	private void registerListener(){
+		jButton.addActionListener(new ActionListener() {		
+			public void actionPerformed(ActionEvent e) {
+				notFindDialog.this.dispose();
 			}
 		});
 	}

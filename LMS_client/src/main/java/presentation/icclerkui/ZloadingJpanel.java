@@ -11,6 +11,7 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Spliterator;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -45,7 +46,6 @@ public class ZloadingJpanel extends JPanel{
 	private JLabel date;
 	private JLabel date1;
 	private JLabel departure;
-	private JTextField depart;
 	private JLabel arrival;
 	private JTextField arrive;
 	private JLabel transcode;
@@ -69,6 +69,7 @@ public class ZloadingJpanel extends JPanel{
 		registListener(ui,panel,this);
 	}
 	public void init(String state1){
+		String[] split=state.split("-");
 		Font font=new Font("幼圆",Font.BOLD,24);
 		code=new JLabel("单据编号：");
 		code.setForeground(Color.white);
@@ -105,16 +106,11 @@ public class ZloadingJpanel extends JPanel{
 		date1.setBounds(155,97,250,27);
 		this.add(date1);
 		
-		departure=new JLabel("出发地：");
+		departure=new JLabel("出发地："+split[1]);
 		departure.setForeground(Color.white);
 		departure.setFont(font);
-		departure.setBounds(30,164,100,27);
+		departure.setBounds(30,164,175,27);
 		this.add(departure);
-		
-		depart=new JTextField();
-		depart.setBounds(130,164,125,27);
-		depart.setFont(font);
-		this.add(depart);
 		
 		arrival=new JLabel("到达地：");
 		arrival.setForeground(Color.white);
@@ -160,7 +156,7 @@ public class ZloadingJpanel extends JPanel{
 		this.add(TCode);
 		
 		tcode=new JTextArea();
-		tcode.setBounds(255,365,143,108);
+		tcode.setBounds(255,365,150,108);
 		tcode.setLineWrap(true);
 		tcode.setFont(font);
 		this.add(tcode);
@@ -200,14 +196,33 @@ public class ZloadingJpanel extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				if(depart.getText().equals("")||arrive.getText().equals("")||Transcode.getText().equals("")||name.getText().equals("")
+				String[] split=state.split("-");
+				
+				String[] list1=tcode.getText().split("，");//此处或许应该加以参数把英文逗号转为中文逗号或要求员工必须使用中文输入法
+				int length=list1.length;
+				codeList=new ArrayList<>();
+				boolean b=false;
+				String str3="";
+				for(int i=0;i<length;i++){
+					ArrayList<String> stri=new documentController().getWuliuInfo(list1[i]);
+					if(stri.equals(null)){
+						b=true;
+						str3=list1[i];
+						break;
+					}
+					codeList.add(list1[i]);
+				}
+				
+				if(arrive.getText().equals("")||Transcode.getText().equals("")||name.getText().equals("")
 						||tcode.getText().equals("")){
 					new notFinishDialog(ui, "输入有误", true);
 					panel.repaint();
 				}
+				else if(b){
+					new notFindDialog(ui, "订单条形码号不存在", true, str3);
+				}
 				else{
 					transcode2=Transcode.getText();
-					departure2=depart.getText();
 					arrival2=arrive.getText();
 					name2=name.getText();
 					String[] list=tcode.getText().split("，");//此处或许应该加以参数把英文逗号转为中文逗号或要求员工必须使用中文输入法
@@ -220,16 +235,16 @@ public class ZloadingJpanel extends JPanel{
 					documentController co=new documentController();
 					String str;
 					if(state=="特快专递"){
-						str=df.format(co.getCost(departure2, arrival2, state1, 50000));
+						str=df.format(co.getCost(split[1], arrival2, state1, 50000));
 					}
 					else if(state=="普通快递"){
-						str=df.format(co.getCost(departure2, arrival2, state1, 2000000));
+						str=df.format(co.getCost(split[1], arrival2, state1, 2000000));
 					}
 					else{
-						str=df.format(co.getCost(departure2, arrival2, state1, 10000));
+						str=df.format(co.getCost(split[1], arrival2, state1, 10000));
 					}
 					carriage=Double.parseDouble(str);
-					po=new ZLoadingPO(date2, code2, "中转中心转运单", account, transcode2, departure2, arrival2, name2, codeList, carriage);
+					po=new ZLoadingPO(date2, code2, "中转中心转运单", account, transcode2, split[1],arrival2, name2, codeList, carriage);
 					new documentController().createBlock(po);
 					new finishDialog3(ui, "中转中心装运单创建完成", true , str);
 					panel.remove(panel2);

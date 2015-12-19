@@ -26,6 +26,7 @@ import org.omg.CosNaming.NamingContextExtPackage.StringNameHelper;
 import po.documentsPO.LoadingPO;
 import businesslogic.documentsbl.createDocument;
 import businesslogic.documentsbl.documentController;
+import businesslogic.organizationbl.MiddleController;
 
 
 
@@ -40,14 +41,14 @@ public class LoadingJpanel extends JPanel{
 	private ArrayList<String> codeList;//所有托运单号
 	private String state;
 	private LoadingPO po;
+	private String[] list;
 	
 	private JLabel code;
 	private JLabel code1;
 	private JLabel doName;
 	private JLabel departure;
-	private JTextField depart;
 	private JLabel arrival;
-	private JTextField arrive;
+	private JTextField arrive;//需要检测到达地是否是中转中心下辖营业厅
 	private JLabel jianzhuang;
 	private JTextField jianzhuangyuan;
 	private JLabel yayun;
@@ -55,7 +56,7 @@ public class LoadingJpanel extends JPanel{
 	private JLabel carcode;
 	private JTextField Carcode;
 	private JLabel TCode;
-	private JTextArea tcode;
+	private JTextArea tcode;//需要检测订单条形码号是否存在
 	//此处节省时间先不用列表显示
 	private ImageIcon frameIcon =new ImageIcon("picture/操作面板.png");
 	private JButton returnButton;
@@ -70,6 +71,7 @@ public class LoadingJpanel extends JPanel{
 		registListener(ui,panel,this);
 	}
 	public void init(){
+		list=state.split("-");
 		Font font=new Font("幼圆",Font.BOLD,24);
 		code=new JLabel("单据编号：");
 		code.setForeground(Color.white);
@@ -91,16 +93,11 @@ public class LoadingJpanel extends JPanel{
 		doName.setBounds(360,30,175,27);
 		this.add(doName);
 		
-		departure=new JLabel("出发地：");
+		departure=new JLabel("出发地："+list[1]+list[2]);
 		departure.setForeground(Color.white);
 		departure.setFont(font);
-		departure.setBounds(30,97,100,27);
+		departure.setBounds(30,97,225,27);
 		this.add(departure);
-		
-		depart=new JTextField();
-		depart.setBounds(130,97,125,27);
-		depart.setFont(font);
-		this.add(depart);
 		
 		arrival=new JLabel("到达地：");
 		arrival.setForeground(Color.white);
@@ -196,13 +193,45 @@ public class LoadingJpanel extends JPanel{
 				Date now = new Date();
 				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				date = dateFormat.format( now );
-				if(depart.getText().equals("")||arrive.getText().equals("")||jianzhuangyuan.getText().equals("")
+				
+				boolean a=true;
+				String str1=arrive.getText();
+				String[] list1=new MiddleController().getBussinessHallList(list[3]);
+				int length=list1.length;
+				for(int i=0;i<length;i++){
+					String[] split1=list1[i].split("-");
+					if(str1.equals(split1[0]+"营业厅")){
+						a=false;
+						break;
+					}
+				}
+				
+				String[] list2=tcode.getText().split("，");//此处或许应该加以参数把英文逗号转为中文逗号或要求员工必须使用中文输入法
+				int size2=list2.length;
+				codeList=new ArrayList<>();
+				boolean b=false;
+				String str3="";
+				for(int i=0;i<size2;i++){
+					ArrayList<String> stri=new documentController().getWuliuInfo(list2[i]);
+					if(stri.equals(null)){
+						b=true;
+						str3=list2[i];
+						break;
+					}
+					codeList.add(list2[i]);
+				}
+				if(arrive.getText().equals("")||jianzhuangyuan.getText().equals("")
 						||yayunyuan.getText().equals("")||Carcode.getText().equals("")||tcode.getText().equals("")){
 					new notFinishDialog(ui, "输入有误", true);
 					panel.repaint();
 				}
+				else if(a){
+					new notFindDialog(ui, "到达地输入错误", true, "到达地");
+				}
+				else if(b){
+					new notFindDialog(ui, "订单条形码号", true, str3);
+				}
 				else{
-					departure2=depart.getText();
 					arrival2=arrive.getText();
 					supervisor=jianzhuangyuan.getText();
 					supercargo=yayunyuan.getText();
