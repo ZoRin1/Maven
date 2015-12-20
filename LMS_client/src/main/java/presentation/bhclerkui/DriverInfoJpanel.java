@@ -30,6 +30,7 @@ public class DriverInfoJpanel extends JPanel{
 	}
 	private void init() {
 		// TODO Auto-generated method stub
+		DriverInfoJpanelJTable=new DriverInfoJpanelJTable(ui, panel, this, state);
 		ImageIcon i1 =new  ImageIcon("picture/司机信息框架.png");
 		Font font=new Font("幼圆",Font.BOLD,24);
 		kuangjia = new JLabel(i1);
