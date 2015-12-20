@@ -28,7 +28,7 @@ public class dialogJpanel extends JPanel{
       
      }
 }
-
+//单独用于装车单的dialog,当输入没有问题时弹出
 class finishDialog extends JDialog{
 	/**
 	 * 
@@ -86,7 +86,7 @@ class finishDialog extends JDialog{
 		});
 	}
 }
-
+//所有单据输入不完整时均会弹出
 class notFinishDialog extends JDialog{
 	/**
 	 * 
@@ -137,7 +137,7 @@ class notFinishDialog extends JDialog{
 	}
 }
 
-
+//当输入的东西在数据库中应该有保存但检测中没有时出现，含订单条形码号，城市（转运单中到达地），营业厅（营业厅装车单中为到达地），收款单中的快递员
 class notFindDialog extends JDialog{
 	/**
 	 * 
@@ -189,7 +189,7 @@ class notFindDialog extends JDialog{
 		});
 	}
 }
-
+//收款单，车辆信息，司机信息创建完成时显示
 class finishDialog2 extends JDialog{
 	/**
 	 * 
@@ -238,7 +238,7 @@ class finishDialog2 extends JDialog{
 		});
 	}
 }
-
+//添加车辆信息或司机信息时如果车辆编号或司机编号已存在，则显示此对话框
 class OverWriteDialog extends JDialog{
 	/**
 	 * 

@@ -27,7 +27,7 @@ public class dialogJpanel extends JPanel{
       
      }
 }
-
+//当输入的东西在数据库中应该有保存但检测中没有时出现，含订单条形码号，城市（转运单中到达地），营业厅（营业厅装车单中为到达地），收款单中的快递员
 class notFindDialog extends JDialog{
 	/**
 	 * 
@@ -79,7 +79,7 @@ class notFindDialog extends JDialog{
 		});
 	}
 }
-
+//单独用于装车单的dialog,当输入没有问题时弹出
 class finishDialog extends JDialog{
 	private dialogJpanel jPanel;
 	private JLabel jLabel;
@@ -136,7 +136,7 @@ class finishDialog extends JDialog{
 		});
 	}
 }
-
+//收款单，车辆信息，司机信息创建完成时显示
 class finishDialog2 extends JDialog{
 	private dialogJpanel jPanel;
 	private JLabel jLabel;
@@ -181,7 +181,7 @@ class finishDialog2 extends JDialog{
 		});
 	}
 }
-
+//所有单据输入不完整时均会弹出
 class notFinishDialog extends JDialog{
 	private dialogJpanel jPanel;
 	private JLabel jLabel;
@@ -231,7 +231,7 @@ class notFinishDialog extends JDialog{
 		});
 	}
 }
-
+//中转中心转运单输入无误后显示，独立拿出是因为包含运费计算
 class finishDialog3 extends JDialog{
 	private dialogJpanel jPanel;
 	private JLabel jLabel;
