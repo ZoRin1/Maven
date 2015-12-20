@@ -508,7 +508,7 @@ public class BussinessOrgDataSerImpl extends UnicastRemoteObject implements Buss
 					for (int i = 0; i < driverList.size(); i++) {
 						driver=driver+driverList.get(i)+",";
 					}
-					sql="update 营业厅信息 set driver='"+driver+",' where codeNumberOfMiddle ='"+IDString[0]+"' and codeNumber ='"+ID+"'";
+					sql="update 营业厅信息 set driver='"+driver+"' where codeNumberOfMiddle ='"+IDString[0]+"' and codeNumber ='"+ID+"'";
 					preparedStatement=connection.prepareStatement(sql);
 					preparedStatement.executeUpdate();
 					connection.close();
