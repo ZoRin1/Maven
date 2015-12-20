@@ -100,7 +100,6 @@ public class CarInfoJpanel2 extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				panel.remove(panel3);
-				panel2.repaint();
 				panel.add(panel2);
 				panel.repaint();
 			}
@@ -131,7 +130,6 @@ public class CarInfoJpanel2 extends JPanel{
 				new BhclerkController().removeVehicle(stateString[4]+"-"+stateString[5],vo1.getCodeCity()+vo1.getCodeBussinessHall()+vo1.getCodeID());
 				panel.remove(panel3);
 				tableModel.removeRow(row);
-//				panel2.createjtable();
 				panel2.repaint();
 				panel.add(panel2);
 				panel.repaint();
