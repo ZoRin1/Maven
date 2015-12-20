@@ -128,7 +128,7 @@ public class AccountInfo extends JPanel {
 		change.setForeground(Color.BLACK);
 		change.setContentAreaFilled(true);
 		change.setBorderPainted(true);
-		change.setBounds(120, 470, 160, 50);
+		change.setBounds(178, 575, 160, 50);
 		this.add(change);
 		
 
@@ -136,14 +136,14 @@ public class AccountInfo extends JPanel {
 		delete.setForeground(Color.BLACK);
 		delete.setContentAreaFilled(true);
 		delete.setBorderPainted(true);
-		delete.setBounds(310, 470, 160, 50);
+		delete.setBounds(430, 575, 160, 50);
 		this.add(delete);
 		if (!accountNumberVO.getState().equals("0") ){
 			delete.setEnabled(false);
 		}
 
 		returnButton = new JButton(returnIcon);
-		returnButton.setBounds(500, 470, 48, 48);
+		returnButton.setBounds(662, 575,48,48);
 		returnButton.setContentAreaFilled(false);
 		this.add(returnButton);
 		
