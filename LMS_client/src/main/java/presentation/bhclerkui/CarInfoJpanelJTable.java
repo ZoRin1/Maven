@@ -45,6 +45,7 @@ public class CarInfoJpanelJTable {
 	}
 	
 	public CarInfoJpanelJTable(bhclerkui ui,bhclerkJpanel panel,CarInfoJpanel CarInfoJpanel,String state){
+		this.ui=ui;
 		this.state=state;
 		this.panel=panel;
 		this.CarInfoJpanel = CarInfoJpanel;
