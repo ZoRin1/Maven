@@ -159,14 +159,16 @@ public class DriverInfoJpanel3 extends JPanel{
 				// TODO Auto-generated method stub
 				String[] split=state.split("-");
 				String[] list=new BhclerkController().getVehicleList(split[4]+"-"+split[5]);
-				String code1=split[4]+split[5]+Drivercode.getText();
-				int length=list.length;
 				boolean a=false;
+				String code1=split[4]+split[5]+Drivercode.getText();
+				if(list!=null){
+				int length=list.length;
 				for(int i=0;i<length;i++){
 					if(code1.equals(list[i])){
 						a=true;
 						break;
 					}
+				}
 				}
 				if(Drivercode.getText().equals("")||dname.getText().equals("")||Sex.getText().equals("")||Date.getText().equals("")
 						||id.getText().equals("")||Phone.getText().equals("")||Time.getText().equals("")){
@@ -179,9 +181,9 @@ public class DriverInfoJpanel3 extends JPanel{
 					vo=new DriverVO(split[4], split[5], Drivercode.getText(), dname.getText(), 
 							Date.getText(), id.getText(), Phone.getText(), Sex.getText(), Time.getText());
 					new BhclerkController().addDriver(split[4]+"-"+split[5], vo);
-					new finishDialog2(ui, "车辆信息添加", true,"车辆信息" );
+					new finishDialog2(ui, "司机信息添加", true,"司机信息" );
 					panel.remove(panel3);
-					new CarInfoJpanel(ui, panel, state);
+					new DriverInfoJpanel(ui, panel, state);
 					panel.repaint();
 				}
 			}

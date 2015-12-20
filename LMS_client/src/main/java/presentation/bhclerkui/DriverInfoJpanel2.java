@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 import businesslogic.organizationbl.BhclerkController;
 import vo.orgVO.DriverVO;
@@ -23,6 +24,8 @@ public class DriverInfoJpanel2 extends JPanel{
 	private DriverVO vo;
 	private DriverVO vo1;
 	private String state;
+	private DefaultTableModel tableModel;
+	private int row;
 	private ImageIcon frameIcon =new ImageIcon("picture/操作面板.png");
 	private JLabel DriverName;
 	private JTextField dname;
@@ -42,7 +45,9 @@ public class DriverInfoJpanel2 extends JPanel{
 	private ImageIcon deleteIcon=new ImageIcon("picture/删除.png");
 	private ImageIcon returnIcon=new ImageIcon("picture/返回.png");
 	private ImageIcon yesIcon=new ImageIcon("picture/确定.png");
-	public DriverInfoJpanel2(bhclerkui ui,bhclerkJpanel panel,DriverInfoJpanel panel2,DriverVO vo,String state){
+	public DriverInfoJpanel2(bhclerkui ui,bhclerkJpanel panel,DriverInfoJpanel panel2,DriverVO vo,String state,DefaultTableModel tableModel,int row){
+		this.tableModel=tableModel;
+		this.row=row;
 		this.state=state;
 		vo1=vo;
 		init();
@@ -179,6 +184,8 @@ public class DriverInfoJpanel2 extends JPanel{
 				String stateString[]=state.split("-");
 				new BhclerkController().removeDriver(stateString[4]+"-"+stateString[5],vo1.getCodeCity()+vo1.getCodeBussinessHall()+vo1.getCodeID());
 				panel.remove(panel3);
+				tableModel.removeRow(row);
+				panel2.repaint();
 				panel.add(panel2);
 				panel.repaint();
 			}

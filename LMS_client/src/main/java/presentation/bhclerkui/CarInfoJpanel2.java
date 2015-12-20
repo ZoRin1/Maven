@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 import vo.orgVO.DriverVO;
 import vo.orgVO.VehicleVO;
@@ -37,8 +38,12 @@ public class CarInfoJpanel2 extends JPanel{
 	private ImageIcon deleteIcon=new ImageIcon("picture/删除.png");
 	private ImageIcon returnIcon=new ImageIcon("picture/返回.png");
 	private ImageIcon yesIcon=new ImageIcon("picture/确定.png");
-	public CarInfoJpanel2(bhclerkui ui,bhclerkJpanel panel,CarInfoJpanel panel2,VehicleVO vo,String state){
+	private DefaultTableModel tableModel;
+	private int row;
+	public CarInfoJpanel2(bhclerkui ui,bhclerkJpanel panel,CarInfoJpanel panel2,VehicleVO vo,String state,DefaultTableModel tableModel,int row){
 		this.state=state;
+		this.tableModel=tableModel;
+		this.row = row;
 		vo1=vo;
 		init();
 		panel.add(this);
@@ -95,6 +100,7 @@ public class CarInfoJpanel2 extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				panel.remove(panel3);
+				panel2.repaint();
 				panel.add(panel2);
 				panel.repaint();
 			}
@@ -124,6 +130,9 @@ public class CarInfoJpanel2 extends JPanel{
 				String stateString[]=state.split("-");
 				new BhclerkController().removeVehicle(stateString[4]+"-"+stateString[5],vo1.getCodeCity()+vo1.getCodeBussinessHall()+vo1.getCodeID());
 				panel.remove(panel3);
+				tableModel.removeRow(row);
+//				panel2.createjtable();
+				panel2.repaint();
 				panel.add(panel2);
 				panel.repaint();
 			}

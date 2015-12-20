@@ -13,10 +13,8 @@ import javax.swing.JPanel;
 public class CarInfoJpanel extends JPanel{
 	private ImageIcon frameIcon =new ImageIcon("picture/操作面板.png");
 	private JButton returnButton;
-	private JButton yesButton;
 	private JButton addButton;
 	private ImageIcon returnIcon=new ImageIcon("picture/返回.png");
-	private ImageIcon yesIcon=new ImageIcon("picture/确定.png");
 	private JLabel CarLabel;
 	private CarInfoJpanelJTable CarInfoJpanelJTable;
 	private bhclerkui ui;
@@ -27,13 +25,18 @@ public class CarInfoJpanel extends JPanel{
 		this.ui=ui;
 		this.panel=bhclerkJpanel;
 		init();
+		createjtable();
 		bhclerkJpanel.add(this);
 		registListener(ui,bhclerkJpanel,this);
+	}
+	public void createjtable(){
+		CarInfoJpanelJTable = new CarInfoJpanelJTable(ui,panel,this,state);
+		CarLabel.add(CarInfoJpanelJTable.getScrollPane());
 	}
 	public void init(){
 		Font font=new Font("幼圆",Font.BOLD,24);
 		ImageIcon i1 = new ImageIcon("picture/车辆信息框架.png");
-		CarInfoJpanelJTable = new CarInfoJpanelJTable(ui,panel,this,state);
+		
 		
 		returnButton=new JButton(returnIcon);
 		returnButton.setBounds(662,575,48,48);
@@ -42,13 +45,9 @@ public class CarInfoJpanel extends JPanel{
 		
 		CarLabel = new JLabel(i1);
 		CarLabel.setBounds(0, 0, 723, 571);
-		CarLabel.add(CarInfoJpanelJTable.getScrollPane());
+		
 		this.add(CarLabel);
 		
-		yesButton=new JButton(yesIcon);
-		yesButton.setBounds(602, 575,48,48);
-		yesButton.setContentAreaFilled(false);
-		this.add(yesButton);
 		
 		addButton=new JButton("添加");
 		addButton.setBounds(30, 575, 80, 30);
@@ -63,21 +62,6 @@ public class CarInfoJpanel extends JPanel{
 			final CarInfoJpanel panel2) {
 		// TODO Auto-generated method stub
 		returnButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				panel.remove(panel2);
-				panel.add(ui.operationJpanel);
-				ui.carinformationbButton.setEnabled(true);
-				ui.cashdocumentbButton.setEnabled(true);
-				ui.documentreplyButton.setEnabled(true);
-				ui.driverinformationbButton.setEnabled(true);
-				ui.loaddocumentbButton.setEnabled(true);
-				ui.acceptdocumentbButton.setEnabled(true);
-				panel.repaint();
-			}
-		});
-		yesButton.addActionListener(new ActionListener() {
-			
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				panel.remove(panel2);

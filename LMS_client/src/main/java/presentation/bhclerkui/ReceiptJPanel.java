@@ -241,4 +241,9 @@ public class ReceiptJPanel extends JPanel{
 			}
 		});
 	}
+	public void paintComponent(Graphics g)  
+	{  
+			super.paintComponent(g);    
+			g.drawImage(frameIcon.getImage(),-7,-12,null);
+	 }
 }

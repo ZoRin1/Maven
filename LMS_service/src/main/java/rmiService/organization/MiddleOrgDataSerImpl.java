@@ -122,7 +122,7 @@ public class MiddleOrgDataSerImpl extends UnicastRemoteObject implements MiddleO
 				for (int i = 0; i < assisantList.size(); i++) {
 					assisant=assisant+assisantList.get(i)+",";
 				}
-				sql="update 中转中心信息 set assisant='"+assisant+",' where codeNumber ='"+ID+"'";
+				sql="update 中转中心信息 set assisant='"+assisant+"' where codeNumber ='"+ID+"'";
 				preparedStatement=connection.prepareStatement(sql);
 				preparedStatement.executeUpdate();
 				sql="update 帐号表 set state ='0' where ID='"+bID+"'";
@@ -234,7 +234,7 @@ public class MiddleOrgDataSerImpl extends UnicastRemoteObject implements MiddleO
 			for (int i = 0; i < storgerList.size(); i++) {
 				storger=storger+storgerList.get(i)+",";
 			}
-			sql="update 中转中心信息 set storger='"+storger+",' where codeNumber ='"+ID+"'";
+			sql="update 中转中心信息 set storger='"+storger+"' where codeNumber ='"+ID+"'";
 			preparedStatement=connection.prepareStatement(sql);
 			preparedStatement.executeUpdate();
 			sql="update 帐号表 set state ='0' where ID='"+bID+"'";

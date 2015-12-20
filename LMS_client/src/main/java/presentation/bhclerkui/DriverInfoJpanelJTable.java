@@ -37,6 +37,8 @@ public class DriverInfoJpanelJTable {
 	private bhclerkui ui;
 	private String state;
 	private bhclerkJpanel panel;
+	DefaultTableModel tableModel;
+	private int row;
 	public JScrollPane getScrollPane() {
 		return scrollPane;
 	}
@@ -79,7 +81,7 @@ public class DriverInfoJpanelJTable {
 		}
 		//假设的数据： 完善后要从数据库拿取数据来填写表格
 		
-		DefaultTableModel tableModel = new DefaultTableModel(inDepotValue,inDepotName);
+		tableModel = new DefaultTableModel(inDepotValue,inDepotName);
 		
 		driverInfTable = new JTable(tableModel){
 			public boolean isCellEditable(int row, int column){
@@ -95,11 +97,11 @@ public class DriverInfoJpanelJTable {
 			
 			public void mouseClicked(MouseEvent e) {
 				if(e.getClickCount()==2){
-					int row = driverInfTable.getSelectedRow();
+					row = driverInfTable.getSelectedRow();
 					String value = driverInfTable.getValueAt(row, 0).toString().trim();
 					String stateString[]=state.split("-");
 					panel.remove(DriverInfoJpanel);
-					new DriverInfoJpanel2(ui, panel, DriverInfoJpanel, new BhclerkController().getDriverInfo(stateString[4]+"-"+stateString[5], value),state);
+					new DriverInfoJpanel2(ui, panel, DriverInfoJpanel, new BhclerkController().getDriverInfo(stateString[4]+"-"+stateString[5], value),state,tableModel,row);
 					panel.repaint();
 					//监听的具体实现
 				}

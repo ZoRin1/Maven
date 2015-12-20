@@ -38,6 +38,8 @@ public class CarInfoJpanelJTable {
 	private bhclerkui ui;
 	private bhclerkJpanel panel;
 	private String state;
+	private DefaultTableModel tableModel;
+	private int row;
 	public JScrollPane getScrollPane() {
 		return scrollPane;
 	}
@@ -76,7 +78,7 @@ public class CarInfoJpanelJTable {
 				inDepotValue[i][0]=list[i];
 			}
 		}
-		DefaultTableModel tableModel = new DefaultTableModel(inDepotValue,inDepotName);
+		tableModel = new DefaultTableModel(inDepotValue,inDepotName);
 		
 		carInfTable = new JTable(tableModel){
 			public boolean isCellEditable(int row, int column){
@@ -92,11 +94,11 @@ public class CarInfoJpanelJTable {
 			
 			public void mouseClicked(MouseEvent e) {
 				if(e.getClickCount()==2){
-					int row = carInfTable.getSelectedRow();
+					row = carInfTable.getSelectedRow();
 					String value = carInfTable.getValueAt(row, 0).toString().trim();
 					VehicleVO info=new BhclerkController().getVehicleInfo(stateString[4]+"-"+stateString[5], value);
-					panel.remove(CarInfoJpanel);
-					new CarInfoJpanel2(ui, panel, CarInfoJpanel, info, state);
+				    panel.remove(CarInfoJpanel);
+					new CarInfoJpanel2(ui, panel, CarInfoJpanel, info, state,tableModel,row);
 					panel.repaint();
 					//监听的具体实现
 				}

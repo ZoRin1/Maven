@@ -129,7 +129,7 @@ public class BussinessOrgDataSerImpl extends UnicastRemoteObject implements Buss
 				for (int i = 0; i < assisantList.size(); i++) {
 					assisant=assisant+assisantList.get(i)+",";
 				}
-				sql="update 营业厅信息 set assisant='"+assisant+",' where codeNumberOfMiddle ='"+IDString[0]+"' and codeNumber ='"+ID+"'";
+				sql="update 营业厅信息 set assisant='"+assisant+"' where codeNumberOfMiddle ='"+IDString[0]+"' and codeNumber ='"+ID+"'";
 				preparedStatement=connection.prepareStatement(sql);
 				preparedStatement.executeUpdate();
 				sql="update 帐号表 set state ='0' where ID='"+bID+"'";
@@ -244,7 +244,7 @@ public class BussinessOrgDataSerImpl extends UnicastRemoteObject implements Buss
 				for (int i = 0; i < courierList.size(); i++) {
 					courier=courier+courierList.get(i)+",";
 				}
-				sql="update 营业厅信息 set courier='"+courier+",' where codeNumberOfMiddle ='"+IDString[0]+"' and codeNumber ='"+ID+"'";
+				sql="update 营业厅信息 set courier='"+courier+"' where codeNumberOfMiddle ='"+IDString[0]+"' and codeNumber ='"+ID+"'";
 				preparedStatement=connection.prepareStatement(sql);
 				preparedStatement.executeUpdate();
 				sql="update 帐号表 set state ='0' where ID='"+bID+"'";
@@ -374,7 +374,7 @@ public class BussinessOrgDataSerImpl extends UnicastRemoteObject implements Buss
 					for (int i = 0; i < vehicleList.size(); i++) {
 						vehicle=vehicle+vehicleList.get(i)+",";
 					}
-					sql="update 营业厅信息 set vehicle='"+vehicle+",' where codeNumberOfMiddle ='"+IDString[0]+"' and codeNumber ='"+ID+"'";
+					sql="update 营业厅信息 set vehicle='"+vehicle+"' where codeNumberOfMiddle ='"+IDString[0]+"' and codeNumber ='"+ID+"'";
 					preparedStatement=connection.prepareStatement(sql);
 					preparedStatement.executeUpdate();
 					connection.close();
