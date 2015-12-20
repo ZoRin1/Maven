@@ -25,12 +25,12 @@ public class b2MiddleChange extends JPanel {
 private JLabel city,bianHao,bianHaoI,yeWuYuan,changKuGuanLiYuan;
 	
 	private JComboBox yeWuYuanB,changKuGuanLiYuanB,kongXianY,kongXianC;
-	private JTextField cityI;
-	private JButton yesButton,returnButton;
+	private JLabel cityI;
+	private JButton returnButton;
 	private ImageIcon frameIcon =new ImageIcon("picture/操作面板.png");
 	
 	private ImageIcon returnIcon=new ImageIcon("picture/返回.png");
-	private ImageIcon yesIcon=new ImageIcon("picture/确定.png");
+
 	
 	public b2MiddleChange(b2topmanagerui b2ui,topmanagerJpanel tjpl,String ID){
 		init(ID);
@@ -51,9 +51,9 @@ private JLabel city,bianHao,bianHaoI,yeWuYuan,changKuGuanLiYuan;
 		city.setBounds(100, 80, 200, 50);
 		this.add(city);
 		
-		cityI = new JTextField(middleController.GetInfo(ID));
+		cityI = new JLabel(middleController.GetInfo(ID));
 		cityI.setFont(bFont);
-		cityI.setForeground(Color.BLACK);
+		cityI.setForeground(Color.white);
 		cityI.setBounds(300, 80, 200, 50);
 		this.add(cityI);
 		
@@ -135,11 +135,7 @@ private JLabel city,bianHao,bianHaoI,yeWuYuan,changKuGuanLiYuan;
 		returnButton.setBounds(500, 530, 48, 48);
 		returnButton.setContentAreaFilled(false);
 		this.add(returnButton);
-		
-		yesButton=new JButton(yesIcon);
-		yesButton.setBounds(350, 530,48,48);
-		yesButton.setContentAreaFilled(false);	 	 	
-	 	this.add(yesButton);
+
 
 		this.setBounds(260, 60, 730, 650);
 		this.setLayout(null);
@@ -162,28 +158,7 @@ private JLabel city,bianHao,bianHaoI,yeWuYuan,changKuGuanLiYuan;
 			}
 		});
 
-		yesButton.addActionListener(new ActionListener() {
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				String input = cityI.getText();
-				if (!input.equals("")) {
-					boolean result = middleController.changeCity(ID, input);
-					if (result) {
-						JOptionPane.showMessageDialog(tjpl, "修改成功");
-						tjpl.remove(b2MiddleChange);
-						new b2MiddleInfo(b2ui, tjpl, ID);
-						tjpl.repaint();
-					}else {
-						JOptionPane.showMessageDialog(tjpl, "修改失败");
-					}
-				}else {
-					JOptionPane.showMessageDialog(tjpl, "请输入中转中心所在城市");
-				}
-				
-			}
-		});
 
 		yeWuYuanB.addItemListener(new ItemListener() {
 

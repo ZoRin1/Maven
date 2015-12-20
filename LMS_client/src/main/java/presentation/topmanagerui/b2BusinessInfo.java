@@ -18,7 +18,7 @@ import vo.orgVO.BussinessOrgVO;
 
 public class b2BusinessInfo extends JPanel {
 	private JLabel suoShu,suoShuC,suoZai,suoZaiC,bianHao,bianHaoC,kuaiDiYuan,yeWuYuan;
-	private JButton change,delete,returnButton;
+	private JButton change,returnButton;
 	private JComboBox kuaiDiYuanb,yeWuYuanb;
 
 	private ImageIcon frameIcon =new ImageIcon("picture/操作面板.png");	
@@ -113,12 +113,7 @@ public class b2BusinessInfo extends JPanel {
 		change.setBounds(120, 500, 160, 50);
 		this.add(change);
 
-		delete = new JButton("删除");
-		delete.setForeground(Color.BLACK);
-		delete.setContentAreaFilled(true);
-		delete.setBorderPainted(true);
-		delete.setBounds(310, 500, 160, 50);
-		this.add(delete);
+
 
 		returnButton = new JButton(returnIcon);
 		returnButton.setBounds(500, 500, 48, 48);
@@ -148,28 +143,6 @@ public class b2BusinessInfo extends JPanel {
 			}
 		});
 		
-		delete.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				Object[] options = { "确定", "取消" };
-				int result = JOptionPane.showOptionDialog(null, "删除账号", "删除账号", JOptionPane.YES_NO_OPTION,
-						JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
-				if (result == 0) {
-					BusinessController businessController = new BusinessController();
-					boolean b = businessController.removeBussinessHall(ID, ID);
-					if(b){
-					tjpl.remove(b2BusinessInfo);
-					tjpl.add(b2ui.operationJpanel);
-					b2ui.b1.setEnabled(true);
-					b2ui.b2.setEnabled(true);
-					b2ui.b3.setEnabled(true);
-					tjpl.repaint();
-					}
-				}
-			}
-		});
 		
 		change.addActionListener(new ActionListener() {
 

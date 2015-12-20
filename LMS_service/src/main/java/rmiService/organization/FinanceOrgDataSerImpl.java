@@ -41,7 +41,7 @@ public class FinanceOrgDataSerImpl extends UnicastRemoteObject implements Financ
 				if (resultSet.getString(1)!=null&&!resultSet.equals("")) {
 					string=resultSet.getString(1).split(",");
 					for (int i = 0; i < string.length; i++) {
-						sql="select name from 帐号表";
+						sql="select name from 帐号表 where ID='"+string[i]+"'";
 						preparedStatement=connection.prepareStatement(sql);
 						resultSet=preparedStatement.executeQuery();
 						resultSet.next();

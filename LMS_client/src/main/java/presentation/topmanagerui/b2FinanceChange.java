@@ -21,7 +21,7 @@ import businesslogic.organizationbl.MiddleController;
 
 public class b2FinanceChange extends JPanel {
 	private JLabel bianHao,biaoHaoI,caiWuRenYuan;
-    private JButton yesButton,returnButton;
+    private JButton returnButton;
     private JComboBox caiWuRenYuanB,kongXian;
 	
 	private ImageIcon frameIcon =new ImageIcon("picture/操作面板.png");	
@@ -81,12 +81,6 @@ public class b2FinanceChange extends JPanel {
 			this.add(kongXian);
 		}
 				
-		yesButton = new JButton("保存");
-		yesButton.setForeground(Color.BLACK);
-		yesButton.setContentAreaFilled(true);
-		yesButton.setBorderPainted(true);
-		yesButton.setBounds(180, 400, 160, 50);
-		this.add(yesButton);
 
 
 		returnButton = new JButton(returnIcon);
@@ -116,17 +110,6 @@ public class b2FinanceChange extends JPanel {
 			}
 		});
 
-		yesButton.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				JOptionPane.showMessageDialog(tjpl, "修改成功");
-				tjpl.remove(b2FinanceChange);
-				new b2FianaceInfo(b2ui, tjpl);
-				tjpl.repaint();
-			}
-		});
 		
 		caiWuRenYuanB.addItemListener(new ItemListener() {
 

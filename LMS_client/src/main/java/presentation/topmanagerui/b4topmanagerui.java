@@ -72,7 +72,18 @@ public class b4topmanagerui extends JFrame{
 					tuichuButton.setIcon(tuichuIcon2);
 				}
 			});
-			
+			b1.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+					topmanagerJpanel.remove(b4topmanagerui.operationJpanel);
+					b1.setEnabled(false);
+					b2.setEnabled(false);
+					new b4Management(b4topmanagerui, topmanagerJpanel);
+					topmanagerJpanel.repaint();
+				}
+			});
 			b2.addActionListener(new ActionListener() {
 				
 				@Override

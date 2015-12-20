@@ -20,7 +20,7 @@ public class b2MiddleInfo extends JPanel {
 	private JLabel city,cityI,bianHao,bianHaoI,yeWuYuan,changKuGuanLiYuan,xiaXiaYingYeTing;
 	
 	private JComboBox yeWuYuanB,changKuGuanLiYuanB,xiaXiaYingYeTingB;
-	private JButton change,delete,returnButton;
+	private JButton change,returnButton;
 	
 	private ImageIcon frameIcon =new ImageIcon("picture/操作面板.png");	
 	private ImageIcon returnIcon=new ImageIcon("picture/返回.png");
@@ -112,12 +112,7 @@ public class b2MiddleInfo extends JPanel {
 		change.setBounds(120, 500, 160, 50);
 		this.add(change);
 
-		delete = new JButton("删除");
-		delete.setForeground(Color.BLACK);
-		delete.setContentAreaFilled(true);
-		delete.setBorderPainted(true);
-		delete.setBounds(310, 500, 160, 50);
-		this.add(delete);
+
 
 		returnButton = new JButton(returnIcon);
 		returnButton.setBounds(500, 500, 48, 48);
@@ -146,29 +141,7 @@ public class b2MiddleInfo extends JPanel {
 
 			}
 		});
-		
-		delete.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				Object[] options = { "确定", "取消" };
-				int result = JOptionPane.showOptionDialog(null, "删除中转中心", "删除中转中心？", JOptionPane.YES_NO_OPTION,
-						JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
-				if (result == 0) {
-					MiddleController middleController = new MiddleController();
-					boolean b = middleController.removeMiddleOrg(ID);
-					if(b){
-					tjpl.remove(b2MiddleInfo);
-					tjpl.add(b2ui.operationJpanel);
-					b2ui.b1.setEnabled(true);
-					b2ui.b2.setEnabled(true);
-					b2ui.b3.setEnabled(true);
-					tjpl.repaint();
-					}
-				}
-			}
-		});
+	
 		
 		change.addActionListener(new ActionListener() {
 

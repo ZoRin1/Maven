@@ -22,13 +22,12 @@ import presentation.adminui.NumberFieldListener;
 
 public class b2BusinessChange extends JPanel {
 	private JLabel suoShu,suoShuC,suoZai,bianHao,bianHaoC,kuaiDiYuan,yeWuYuan;
-	private JTextField suoZaiF;
+	private JLabel suoZaiF;
 	private JComboBox kuaiDiYuanb,yeWuYuanb,kongXianK,kongXianY;
 	private ImageIcon frameIcon =new ImageIcon("picture/操作面板.png");
 	private JButton returnButton;
-	private JButton yesButton;
 	private ImageIcon returnIcon=new ImageIcon("picture/返回.png");
-	private ImageIcon yesIcon=new ImageIcon("picture/确定.png");
+
 	
 	public b2BusinessChange(b2topmanagerui b2ui,topmanagerJpanel tjpl,String ID){
 		init(ID);
@@ -60,9 +59,9 @@ public class b2BusinessChange extends JPanel {
 		suoZai.setBounds(100, 130, 180, 50);
 		this.add(suoZai);
 		
-		suoZaiF = new JTextField(businessController.getInfo(ID));
+		suoZaiF = new JLabel(businessController.getInfo(ID));
 		suoZaiF.setFont(bFont);
-		suoZaiF.setForeground(Color.BLACK);
+		suoZaiF.setForeground(Color.white);
 		suoZaiF.setBounds(290, 130, 150, 50);
 		this.add(suoZaiF);
 		
@@ -147,11 +146,6 @@ public class b2BusinessChange extends JPanel {
 		returnButton.setBounds(450, 530,48,48);
 		returnButton.setContentAreaFilled(false);
 		this.add(returnButton);
-		
-		yesButton=new JButton(yesIcon);
-		yesButton.setBounds(350, 530,48,48);
-		yesButton.setContentAreaFilled(false);	 	 	
-	 	this.add(yesButton);
 
 		this.setBounds(260, 60, 730, 650);
 		this.setLayout(null);
@@ -173,29 +167,6 @@ public class b2BusinessChange extends JPanel {
 			}
 		});
 		
-		yesButton.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				String input = suoZaiF.getText();
-				if (!input.equals("")) {
-					boolean result = businessController.changeCity(ID, input);
-					if (result) {
-						JOptionPane.showMessageDialog(tjpl, "修改成功");
-						tjpl.remove(b2BusinessChange);
-						new b2BusinessInfo(b2ui, tjpl, ID);
-						tjpl.repaint();
-					}else {
-						JOptionPane.showMessageDialog(tjpl, "修改失败");
-					}
-					
-				}else{
-					JOptionPane.showMessageDialog(tjpl, "请输入营业厅所在地区");
-				}
-				
-			}
-		});
 		
 		
 		kuaiDiYuanb.addItemListener(new ItemListener() {

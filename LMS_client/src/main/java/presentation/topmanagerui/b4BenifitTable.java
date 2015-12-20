@@ -41,7 +41,6 @@ public class b4BenifitTable {
 //					{"楚香传奇","2324 KB","生成时间","成本收益"},
 //				{"楚奇","232134 KB","生成时间","成本收益"}
 //					};
-		System.out.println(profitList.size());
 		Object[][] inDepotValue = new Object[profitList.size()][4];
 		for(int i = 0 ; i < profitList.size();i++){
 				inDepotValue[i][0] = profitList.get(i).getTotalRevenue();
