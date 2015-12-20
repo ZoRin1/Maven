@@ -67,7 +67,7 @@ public class CarInfoJpanelJTable {
 	}
 	
 	private void initTable(){
-		String stateString[]=state.split("-");
+		final String stateString[]=state.split("-");
 		String[] inDepotName = new String[]{"车辆代号"};
 		String[] list=new BhclerkController().getVehicleList(stateString[4]+"-"+stateString[5]);
 		String [][]inDepotValue;
