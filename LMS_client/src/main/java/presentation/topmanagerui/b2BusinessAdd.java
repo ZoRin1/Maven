@@ -106,31 +106,36 @@ public class b2BusinessAdd extends JPanel {
 					JOptionPane.showMessageDialog(null, "请输入所在地区");
 				}
 				
-				if ((!zhong.equals("")) && (!di.equals(""))) {
-					String bianHao = "";
-					if (middleController.getBussinessHallList(zhong) != null) {
-						int n = middleController.getBussinessHallList(zhong).length;
-						if (n < 9) {
-							bianHao = "00" + String.valueOf(n + 1);
-						}else if (n < 99) {
-							bianHao = "0" + String.valueOf(n + 1);
-						}else {
-							bianHao = String.valueOf(n + 1);
-						}
-					}else {
-						bianHao = "001";
-					}
+				if ((!zhong.equals("")) && (!di.equals(""))) {							
 					String mCity = middleController.GetInfo(zhong);
-					BussinessOrgVO vo = new BussinessOrgVO(mCity, di, zhong + "-" +bianHao, zhong, null, null, null, null);
-					boolean result = businessController.addBussinessHall(bianHao, vo);
-					if (result) {
-						JOptionPane.showMessageDialog(tjpl, "创建成功,机构编号为"+ zhong + "-" + bianHao);
-						tjpl.remove(b2BusinessAdd);
-						new b2SearchOrg(b2ui, tjpl, org);
-						tjpl.repaint();
+					if (mCity==null) {
+						JOptionPane.showMessageDialog(tjpl, "不存在此中转中心");
 					}else {
-						JOptionPane.showMessageDialog(tjpl, "修改失败,已存在同名营业厅");
+						String bianHao = "";	
+						if (middleController.getBussinessHallList(zhong) != null) {
+							int n = middleController.getBussinessHallList(zhong).length;
+							if (n < 9) {
+								bianHao = "00" + String.valueOf(n + 1);
+							}else if (n < 99) {
+								bianHao = "0" + String.valueOf(n + 1);
+							}else {
+								bianHao = String.valueOf(n + 1);
+							}
+						}else {
+							bianHao = "001";
+						}
+						BussinessOrgVO vo = new BussinessOrgVO(mCity, di, zhong + "-" +bianHao, zhong, null, null, null, null);
+						boolean result = businessController.addBussinessHall(bianHao, vo);
+						if (result) {
+							JOptionPane.showMessageDialog(tjpl, "创建成功,机构编号为"+ zhong + "-" + bianHao);
+							tjpl.remove(b2BusinessAdd);
+							new b2SearchOrg(b2ui, tjpl, org);
+							tjpl.repaint();
+						}else {
+							JOptionPane.showMessageDialog(tjpl, "修改失败,已存在同名营业厅");
+						}
 					}
+					
 					
 				}
 				
