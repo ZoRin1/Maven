@@ -546,7 +546,7 @@ class b1Jpanel2 extends JPanel{
 		riqi = dateFormat.format( now );
 		String string=null;
 		if (jcity.equals(scity)) {
-//			string=Double.toString(documentController.getShortCost());
+			string=Double.toString(documentController.getOwnCost(orderPO.getWeight()));
 		}else {
 			string=Double.toString(documentController.getCost(jcity, scity, orderPO.getState(), orderPO.getWeight()));
 		}
