@@ -201,7 +201,7 @@ public class LoadingJpanel extends JPanel{
 				String str3="";
 				for(int i=0;i<size;i++){
 					ArrayList<String> stri=new documentController().getWuliuInfo(list2[i]);
-					if(stri.equals(null)){
+					if(stri==null){
 						b=true;
 						str3=list2[i];
 						break;

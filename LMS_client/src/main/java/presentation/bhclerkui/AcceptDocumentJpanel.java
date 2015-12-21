@@ -13,6 +13,7 @@ import java.util.Date;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -54,7 +55,7 @@ public class AcceptDocumentJpanel extends JPanel{
 	private JLabel Tcode;
 	private JTextField tcode;
 	private JLabel state;
-	private JTextField State;
+	private JComboBox<String> stateBox;
 	private ImageIcon frameIcon =new ImageIcon("picture/操作面板.png");
 	private JButton returnButton;
 	private JButton yesButton;
@@ -124,20 +125,21 @@ public class AcceptDocumentJpanel extends JPanel{
 		this.add(Tcode);
 		
 		tcode=new JTextField();
-		tcode.setBounds(205,298,130,27);
+		tcode.setBounds(205,298,135,27);
 		tcode.setFont(font);
 		this.add(tcode);
-		
+
 		state=new JLabel("货物状态：");
 		state.setForeground(Color.white);
 		state.setFont(font);
 		state.setBounds(30,365,125,27);
 		this.add(state);
-		
-		State=new JTextField();
-		State.setBounds(155,365,125,27);
-		State.setFont(font);
-		this.add(State);
+		final String type[]={"完整","破损","丢失"};
+		stateBox=new JComboBox<String>(type);
+		stateBox.setEditable(false);
+		stateBox.setBounds(155,365,125,30);
+		stateBox.setFont(font);
+		this.add(stateBox);
 		
 		returnButton=new JButton(returnIcon);
 		returnButton.setBounds(662,575,48,48);
@@ -176,10 +178,10 @@ public class AcceptDocumentJpanel extends JPanel{
 				String stri=tcode.getText();
 				ArrayList<String> list1=new documentController().getWuliuInfo(stri);
 				boolean a=false;
-				if(list1.equals(null)){
+				if(list1==null){
 					a=true;
 				}
-				if(tcode.getText().equals("")||State.getText().equals("")){
+				if(tcode.getText().equals("")){
 					new notFinishDialog(ui,"输入有误",true);
 				}
 				else if(a){
@@ -187,7 +189,7 @@ public class AcceptDocumentJpanel extends JPanel{
 				}
 				else{
 					code3=tcode.getText();
-					state2=State.getText();
+					state2=(String)stateBox.getSelectedItem();
 					po=new YReceivePO(date2, code2, "营业厅接收单", code3, account, departure2, arrival2, state2);
 					new documentController().createBlock(po);
 					new finishDialog2(ui, "接收单创建完成", true,"接收单");

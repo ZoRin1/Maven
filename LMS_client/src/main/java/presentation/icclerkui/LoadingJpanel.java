@@ -96,7 +96,7 @@ public class LoadingJpanel extends JPanel{
 		departure=new JLabel("出发地："+list[1]+list[2]);
 		departure.setForeground(Color.white);
 		departure.setFont(font);
-		departure.setBounds(30,97,225,27);
+		departure.setBounds(30,97,300,27);
 		this.add(departure);
 		
 		arrival=new JLabel("到达地：");

@@ -24,6 +24,7 @@ import javax.swing.event.ListDataListener;
 
 import po.documentsPO.OrderPO;
 import businesslogic.documentsbl.documentController;
+import businesslogic.transportationbl.TransportationController;
 
 public class b1Jpanel1 extends JPanel{
 	private JLabel jijianrenJLabel;
@@ -35,6 +36,8 @@ public class b1Jpanel1 extends JPanel{
 	private JTextField jijianrenshoujiField;
 	private JLabel jijianrendanweiJLabel;
 	private JTextField jijianrendanweiField;
+	private JLabel jijianrenchengshi;
+	private JLabel jijianrenchengshiLabel;
 	private JLabel jijianrenzhuzhiJLabel;
 	private JTextField jijianrenzhuzhiField;
 	private JLabel shoujianrenJLabel;
@@ -46,6 +49,8 @@ public class b1Jpanel1 extends JPanel{
 	private JTextField shoujianrenshoujiField;
 	private JLabel shoujianrendanweiJLabel;
 	private JTextField shoujianrendanweiField;
+	private JLabel shoujianrenchengshi;
+	private JComboBox<String> shoujianrenchengshiBox;
 	private JLabel shoujianrenzhuzhiJLabel;
 	private JTextField shoujianrenzhuzhiField;
 	private JLabel tuoyunwupinxinxiJLabel;
@@ -75,9 +80,11 @@ public class b1Jpanel1 extends JPanel{
 	private String account;
 	private ImageIcon returnIcon=new ImageIcon("picture/返回.png");
 	private ImageIcon yesIcon=new ImageIcon("picture/确定.png");
-	public b1Jpanel1(courierui courierui,courierJpanel courierJpanel,String account) {
+	private String state;
+	public b1Jpanel1(courierui courierui,courierJpanel courierJpanel,String account,String state) {
 		// TODO Auto-generated constructor stub
 		this.account=account;
+		this.state=state;
 		init();
 	 	courierJpanel.add(this);
 		registListener(courierui,courierJpanel,this);
@@ -99,16 +106,18 @@ public class b1Jpanel1 extends JPanel{
 		jijianrendianhuaJLabel.setForeground(Color.white);
 		jijianrendianhuaJLabel.setFont(font);
 		jijianrendianhuaJLabel.setBounds(135, 75, 56, 27);
-		jijianrendianhuaField=new JTextField();
-		jijianrendianhuaField.setBounds(440, 30, 250, 30);
+		jijianrendianhuaField=new JTextField("");
+		jijianrendianhuaField.setBounds(205, 75, 145, 30);
 		jijianrendianhuaField.setFont(font);
+		
 		jijianrenshoujiJLabel=new JLabel("手机:");
 		jijianrenshoujiJLabel.setForeground(Color.white);
 		jijianrenshoujiJLabel.setFont(font);
 		jijianrenshoujiJLabel.setBounds(360, 30, 56, 27);
-		jijianrenshoujiField=new JTextField();
+		jijianrenshoujiField=new JTextField("");
 		jijianrenshoujiField.setFont(font);
-		jijianrenshoujiField.setBounds(205, 75, 145, 30);
+		jijianrenshoujiField.setBounds(	440, 30, 250, 30);
+		
 		jijianrendanweiJLabel=new JLabel("单位:");
 		jijianrendanweiJLabel.setForeground(Color.white);
 		jijianrendanweiJLabel.setFont(font);
@@ -116,17 +125,32 @@ public class b1Jpanel1 extends JPanel{
 		jijianrendanweiField=new JTextField();
 		jijianrendanweiField .setFont(font);
 		jijianrendanweiField.setBounds(440, 75, 250, 30);
+		
+		jijianrenchengshi=new JLabel("城市:");
+		jijianrenchengshi.setForeground(Color.white);
+		jijianrenchengshi.setFont(font);
+		jijianrenchengshi.setBounds(135, 120, 56, 27);
+		this.add(jijianrenchengshi);
+		String stateString[]=state.split("-");
+		jijianrenchengshiLabel=new JLabel(stateString[1]);
+		jijianrenchengshiLabel.setForeground(Color.white);
+		jijianrenchengshiLabel.setFont(font);
+		jijianrenchengshiLabel.setBounds(205, 120, 145, 27);
+		this.add(jijianrenchengshiLabel);
+		
 		jijianrenzhuzhiJLabel=new JLabel("住址:");
 		jijianrenzhuzhiJLabel.setForeground(Color.white);
 		jijianrenzhuzhiJLabel.setFont(font);
-		jijianrenzhuzhiJLabel.setBounds(135, 120, 56, 27);
+		jijianrenzhuzhiJLabel.setBounds(360, 120, 56, 27);
 		jijianrenzhuzhiField=new JTextField();
 		jijianrenzhuzhiField.setFont(font);
-		jijianrenzhuzhiField.setBounds(205, 120, 485, 30);
+		jijianrenzhuzhiField.setBounds(440, 120, 250, 30);
+		
 		shoujianrenJLabel=new JLabel("收件人:");
 		shoujianrenJLabel.setForeground(Color.white);
 		shoujianrenJLabel.setFont(font);
 		shoujianrenJLabel.setBounds(10, 185, 80, 27);
+		
 		shoujianrennameJLabel=new JLabel("姓名:");
 		shoujianrennameJLabel.setForeground(Color.white);
 		shoujianrennameJLabel.setFont(font);
@@ -134,20 +158,23 @@ public class b1Jpanel1 extends JPanel{
 		shoujianrennameField=new JTextField();
 		shoujianrennameField.setFont(font);
 		shoujianrennameField.setBounds(205, 185, 145, 30);
+		
 		shoujianrendianhuaJLabel=new JLabel("电话:");
 		shoujianrendianhuaJLabel.setForeground(Color.white);
 		shoujianrendianhuaJLabel.setFont(font);
 		shoujianrendianhuaJLabel.setBounds(135, 230, 56, 27);
 		shoujianrendianhuaField=new JTextField();
 		shoujianrendianhuaField.setFont(font);
-		shoujianrendianhuaField.setBounds(440, 185, 250, 30);
+		shoujianrendianhuaField.setBounds(205, 230, 145, 30);
+		
 		shoujianrenshoujiJLabel=new JLabel("手机:");
 		shoujianrenshoujiJLabel.setForeground(Color.white);
 		shoujianrenshoujiJLabel.setFont(font);
 		shoujianrenshoujiJLabel.setBounds(360, 185, 56, 27);
 		shoujianrenshoujiField=new JTextField();
 		shoujianrenshoujiField.setFont(font);
-		shoujianrenshoujiField.setBounds(205, 230, 145, 30);
+		shoujianrenshoujiField.setBounds(440, 185, 250, 30);
+		
 		shoujianrendanweiJLabel=new JLabel("单位:");
 		shoujianrendanweiJLabel.setForeground(Color.white);
 		shoujianrendanweiJLabel.setFont(font);
@@ -155,17 +182,31 @@ public class b1Jpanel1 extends JPanel{
 		shoujianrendanweiField=new JTextField();
 		shoujianrendanweiField.setFont(font);
 		shoujianrendanweiField.setBounds(440, 230,250 , 30);
+		
+		shoujianrenchengshi=new JLabel("城市:");
+		shoujianrenchengshi.setForeground(Color.white);
+		shoujianrenchengshi.setFont(font);
+		shoujianrenchengshi.setBounds(135, 275, 56, 27);
+		this.add(shoujianrenchengshi);
+		shoujianrenchengshiBox=new JComboBox<String>(new TransportationController().getCityList(""));
+		shoujianrenchengshiBox.setEditable(false);
+		shoujianrenchengshiBox.setFont(font);
+		shoujianrenchengshiBox.setBounds(205, 275, 145, 27);
+		this.add(shoujianrenchengshiBox);
+		
 		shoujianrenzhuzhiJLabel=new JLabel("住址:");
 		shoujianrenzhuzhiJLabel.setForeground(Color.white);
 		shoujianrenzhuzhiJLabel.setFont(font);
-		shoujianrenzhuzhiJLabel.setBounds(135, 275, 56, 27);
+		shoujianrenzhuzhiJLabel.setBounds(360, 275, 56, 27);
 		shoujianrenzhuzhiField=new JTextField();
 		shoujianrenzhuzhiField.setFont(font);
-		shoujianrenzhuzhiField.setBounds(205, 275, 485, 30);
+		shoujianrenzhuzhiField.setBounds(440, 275, 250, 30);
+		
 		tuoyunwupinxinxiJLabel=new JLabel("托运物品信息:");
 		tuoyunwupinxinxiJLabel.setForeground(Color.white);
 		tuoyunwupinxinxiJLabel.setFont(font);
 		tuoyunwupinxinxiJLabel.setBounds(10, 340, 152, 27);
+		
 		jianshuJLabel=new JLabel("件数:");
 		jianshuJLabel.setForeground(Color.white);
 		jianshuJLabel.setFont(font);
@@ -173,6 +214,7 @@ public class b1Jpanel1 extends JPanel{
 		jianshuField=new JTextField();
 		jianshuField.setFont(font);
 		jianshuField.setBounds(250, 340, 50, 30);
+	
 		zhongliangField=new JTextField();
 		zhongliangField.setFont(font);
 		zhongliangField.setBounds(440, 340, 50, 30);
@@ -180,10 +222,12 @@ public class b1Jpanel1 extends JPanel{
 		zhongliangJLabel.setForeground(Color.white);
 		zhongliangJLabel.setFont(font);
 		zhongliangJLabel.setBounds(360, 340, 56, 27);
+		
 		kgJLabel=new JLabel("Kg");
 		kgJLabel.setForeground(Color.white);
 		kgJLabel.setFont(font);
 		kgJLabel.setBounds(500, 340, 24, 27);
+		
 		tijiJLabel=new JLabel("体积:");
 		tijiJLabel.setForeground(Color.white);
 		tijiJLabel.setFont(font);
@@ -191,10 +235,12 @@ public class b1Jpanel1 extends JPanel{
 		tijiField=new JTextField();
 		tijiField.setFont(font);
 		tijiField.setBounds(250, 385, 50, 30);
+		
 		lifangcmJLabel=new JLabel("cm^3");
 		lifangcmJLabel.setForeground(Color.white);
 		lifangcmJLabel.setFont(font);
 		lifangcmJLabel.setBounds(310, 385, 47, 27);
+		
 		chicunJLabel=new JLabel("尺寸:");
 		chicunJLabel.setForeground(Color.white);
 		chicunJLabel.setFont(font);
@@ -208,6 +254,7 @@ public class b1Jpanel1 extends JPanel{
 		chicun3Field=new JTextField();
 		chicun3Field.setFont(font);
 		chicun3Field.setBounds(612, 385, 50, 30);
+		
 		cm1JLabel=new JLabel("cm*");
 		cm1JLabel.setFont(font);
 		cm1JLabel.setForeground(Color.white);
@@ -220,6 +267,7 @@ public class b1Jpanel1 extends JPanel{
 		cm3JLabel.setForeground(Color.white);
 		cm3JLabel.setFont(font);
 		cm3JLabel.setBounds(662, 385, 36, 27);
+		
 		neijianpinmingField=new JTextField();
 		neijianpinmingField.setFont(font);
 		neijianpinmingField.setBounds(290,430, 250, 30);
@@ -227,10 +275,12 @@ public class b1Jpanel1 extends JPanel{
 		neijianpinmingJLabel.setFont(font);
 		neijianpinmingJLabel.setForeground(Color.white);
 		neijianpinmingJLabel.setBounds(180, 430, 104, 27);
+		
 		dingdanxinxiJLabel=new JLabel("订单信息:");
 		dingdanxinxiJLabel.setForeground(Color.white);
 		dingdanxinxiJLabel.setFont(font);
 		dingdanxinxiJLabel.setBounds(10, 495, 104, 27);
+		
 		final String type[]={"经济快递","特快专递","普通快递"};
 		kuaidizhongleiBox=new JComboBox<String>(type);
 		kuaidizhongleiBox.setEditable(false);
@@ -240,6 +290,7 @@ public class b1Jpanel1 extends JPanel{
 		kuaidizhongleiJLabel.setForeground(Color.white);
 		kuaidizhongleiJLabel.setFont(font);
 		kuaidizhongleiJLabel.setBounds(135, 495, 104, 27);
+		
 		this.add(jijianrenJLabel);
 		this.add(jijianrennameJLabel);
 		this.add(jijianrennameField);
@@ -373,7 +424,7 @@ public class b1Jpanel1 extends JPanel{
 				if (isFull()) {
 					courierJpanel.remove(b1Jpanel1);
 					double sizeList[]={Double.parseDouble(chicun1Field.getText()),Double.parseDouble(chicun2Field.getText()),Double.parseDouble(chicun3Field.getText())};
-					new b1Jpanel2(courierui, courierJpanel, b1Jpanel1,new OrderPO(null, "寄件单", account, null, jijianrennameField.getText(), jijianrenzhuzhiField.getText(), jijianrendanweiField.getText(), jijianrendianhuaField.getText(), jijianrenshoujiField.getText(), shoujianrennameField.getText(), shoujianrenzhuzhiField.getText(), shoujianrendanweiField.getText(), shoujianrendianhuaField.getText(), shoujianrenshoujiField.getText(), Integer.parseInt(jianshuField.getText()), Double.parseDouble(zhongliangField.getText()), Double.parseDouble(tijiField.getText()), neijianpinmingField.getText(), sizeList, 0,(String)kuaidizhongleiBox.getSelectedItem()),account);
+					new b1Jpanel2(jijianrenchengshiLabel.getText(),(String)shoujianrenchengshiBox.getSelectedItem(),courierui, courierJpanel, b1Jpanel1,new OrderPO(null, "寄件单", account, null, jijianrennameField.getText(), jijianrenchengshiLabel.getText()+jijianrenzhuzhiField.getText(), jijianrendanweiField.getText(), jijianrendianhuaField.getText(), jijianrenshoujiField.getText(), shoujianrennameField.getText(), (String)shoujianrenchengshiBox.getSelectedItem()+shoujianrenzhuzhiField.getText(), shoujianrendanweiField.getText(), shoujianrendianhuaField.getText(), shoujianrenshoujiField.getText(), Integer.parseInt(jianshuField.getText()), Double.parseDouble(zhongliangField.getText()), Double.parseDouble(tijiField.getText()), neijianpinmingField.getText(), sizeList, 0,(String)kuaidizhongleiBox.getSelectedItem()),account);
 					courierJpanel.repaint();
 				}
 				else {
@@ -412,8 +463,12 @@ class b1Jpanel2 extends JPanel{
 	private ImageIcon returnIcon=new ImageIcon("picture/返回.png");
 	private ImageIcon yesIcon=new ImageIcon("picture/确定.png");
 	private String account;
-	public b1Jpanel2(courierui courierui,courierJpanel courierJpanel,b1Jpanel1 b1Jpanel1,OrderPO orderPO,String account) {
+	private String jcity;
+	private String scity;
+	public b1Jpanel2(String jcity,String scity,courierui courierui,courierJpanel courierJpanel,b1Jpanel1 b1Jpanel1,OrderPO orderPO,String account) {
 		// TODO Auto-generated constructor stub
+		this.jcity=jcity;
+		this.scity=scity;
 		this.account=account;
 		this.orderPO=orderPO;
 		init();
@@ -440,11 +495,11 @@ class b1Jpanel2 extends JPanel{
 		cankaobaojianumberJLabel=new JLabel();
 		cankaobaojianumberJLabel.setForeground(Color.white);
 		cankaobaojianumberJLabel.setFont(font);
-		cankaobaojianumberJLabel.setBounds(260, 250, 50, 30);
+		cankaobaojianumberJLabel.setBounds(260, 250, 100, 30);
 		yuan1=new JLabel("元");
 		yuan1.setForeground(Color.white);
 		yuan1.setFont(font);
-		yuan1.setBounds(320, 250, 24, 30);
+		yuan1.setBounds(360, 250, 24, 30);
 		baozhuangfeiJLabel=new JLabel("包装费:");
 		baozhuangfeiJLabel.setForeground(Color.white);
 		baozhuangfeiJLabel.setFont(font);
@@ -489,7 +544,15 @@ class b1Jpanel2 extends JPanel{
 		Date now = new Date(); 
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		riqi = dateFormat.format( now );
-//		cankaobaojianumberJLabel.setText(documentController.get);
+		String string=null;
+		if (jcity.equals(scity)) {
+//			string=Double.toString(documentController.getShortCost());
+		}else {
+			string=Double.toString(documentController.getCost(jcity, scity, orderPO.getState(), orderPO.getWeight()));
+		}
+		cankaobaojianumberJLabel.setText(string);
+		baozhuangfeinumberJLabel.setText(Integer.toString(orderPO.getNumber()*5));
+		yugushijiannumberJLabel.setText(Integer.toString(documentController.getDays(jcity, scity, orderPO.getState(), orderPO.getWeight())));
 		this.add(dingdannumberJLabel);
 		this.add(dingdantiaoxingmahaoJLabel);
 		this.add(cankaobaojiaJLabel);

@@ -14,6 +14,7 @@ import java.util.Date;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -51,7 +52,7 @@ public class ZReceiveJpanel extends JPanel{
 	private JLabel TCode;
 	private JTextArea tcode;
 	private JLabel state;
-	private JTextField State;
+	private JComboBox<String> State;
 //	private JScrollPane jsp;
 	private ImageIcon frameIcon =new ImageIcon("picture/操作面板.png");
 	private JButton returnButton;
@@ -62,7 +63,6 @@ public class ZReceiveJpanel extends JPanel{
 		this.account=account;
 		state2=state;
 		init();
-		ui.setTitle("中转中心业务员-中转接收单创建");
 		panel.add(this);
 		registListener(ui,panel,this);
 	}
@@ -135,9 +135,10 @@ public class ZReceiveJpanel extends JPanel{
 		state.setFont(font);
 		state.setBounds(30,365,125,27);
 		this.add(state);
-		
-		State=new JTextField();
-		State.setBounds(155,365,125,27);
+		String []type={"完整","破损","丢失"};
+		State=new JComboBox<String>(type);
+		State.setEditable(false);
+		State.setBounds(155,365,125,30);
 		State.setFont(font);
 		this.add(State);
 		
@@ -190,7 +191,7 @@ public class ZReceiveJpanel extends JPanel{
 					}
 					codeList.add(list1[i]);
 				}
-				if(depart.getText().equals("")||tcode.getText().equals("")||State.getText().equals("")){
+				if(depart.getText().equals("")||tcode.getText().equals("")){
 					new notFinishDialog(ui,"输入有误",true);
 				}
 				else if(b=true){

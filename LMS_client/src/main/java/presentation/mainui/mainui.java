@@ -230,7 +230,7 @@ class mainFrame extends JFrame{
 								String s[]=state.split("-");
 								switch (s[0]) {
 								case "1":
-									new courierui("快递员界面",args,account);
+									new courierui("快递员界面",args,account,state);
 									mf.dispose();
 									break;
 								case "2":
@@ -340,7 +340,7 @@ b3.addActionListener(new ActionListener() {
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 
-		new courierui("快递员界面",args,accountnumberJTextField.getText());
+		new courierui("快递员界面",args,accountnumberJTextField.getText(),"");
 		mf.dispose();
 	}
 });

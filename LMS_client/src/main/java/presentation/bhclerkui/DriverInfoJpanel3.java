@@ -5,13 +5,17 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import presentation.financialstaffui.DateChooser;
 import vo.orgVO.DriverVO;
 import vo.orgVO.VehicleVO;
 import businesslogic.organizationbl.BhclerkController;
@@ -30,7 +34,7 @@ public class DriverInfoJpanel3 extends JPanel{
 	private JLabel DriverName;
 	private JTextField dname;
 	private JLabel sex;
-	private JTextField Sex;
+	private JComboBox<String> sexBox;
 	private JLabel date;
 	private JTextField Date;
 	private JLabel ID;
@@ -41,6 +45,8 @@ public class DriverInfoJpanel3 extends JPanel{
 	private JTextField Time;
 	private JButton returnButton;
 	private JButton yesButton;
+	private DateChooser dateChooser1;
+	private DateChooser dateChooser2;
 	private ImageIcon returnIcon=new ImageIcon("picture/返回.png");
 	private ImageIcon yesIcon=new ImageIcon("picture/确定.png");
 	public DriverInfoJpanel3(bhclerkui ui,bhclerkJpanel panel,DriverInfoJpanel panel2,String state){
@@ -78,11 +84,12 @@ public class DriverInfoJpanel3 extends JPanel{
 		sex.setFont(font);
 		sex.setBounds(360,97,75,27);
 		this.add(sex);
-		
-		Sex=new JTextField();
-		Sex.setBounds(435,97,25,27);
-		Sex.setFont(font);
-		this.add(Sex);//此处或应改为复选框
+		final String sextype[]={"男","女"};
+		sexBox=new JComboBox<String>(sextype);
+		sexBox.setEditable(false);
+		sexBox.setBounds(435,97,50,30);
+		sexBox.setFont(font);
+		this.add(sexBox);//此处或应改为复选框
 				
 		date=new JLabel("出生日期：");
 		date.setForeground(Color.white);
@@ -90,7 +97,9 @@ public class DriverInfoJpanel3 extends JPanel{
 		date.setBounds(30,164,125,27);
 		this.add(date);
 		
-		Date=new JTextField();
+		Date=new JTextField("点击选择日期");	
+		dateChooser1 = DateChooser.getInstance("yyyy-MM-dd");        //日期选择类
+		dateChooser1.register(Date);
 		Date.setBounds(155,164,200,27);
 		Date.setFont(font);
 		this.add(Date);
@@ -123,8 +132,10 @@ public class DriverInfoJpanel3 extends JPanel{
 		time.setBounds(30,365,150,27);
 		this.add(time);
 		
-		Time=new JTextField();
-		Time.setBounds(180,365,100,27);
+		Time=new JTextField("点击选择日期");
+		dateChooser2 = DateChooser.getInstance("yyyy-MM-dd");        //日期选择类
+		dateChooser2.register(Time);
+		Time.setBounds(180,365,200,27);
 		Time.setFont(font);
 		this.add(Time);
 		
@@ -144,6 +155,40 @@ public class DriverInfoJpanel3 extends JPanel{
 	 	this.setOpaque(false);
 	}
 	private void registListener(final bhclerkui ui,final bhclerkJpanel panel,final DriverInfoJpanel panel2,final DriverInfoJpanel3 panel3){
+			Drivercode.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyTyped(KeyEvent e) {
+					// TODO Auto-generated method stub
+					int keyChar = e.getKeyChar();
+					if (keyChar<=KeyEvent.VK_9&&keyChar>=KeyEvent.VK_0) {
+						
+					}else {
+						e.consume();
+					}
+				}
+			});
+			id.addKeyListener(new KeyAdapter() {
+				public void keyTyped(KeyEvent e) {
+					// TODO Auto-generated method stub
+					int keyChar = e.getKeyChar();
+					if (keyChar<=KeyEvent.VK_9&&keyChar>=KeyEvent.VK_0) {
+						
+					}else {
+						e.consume();
+					}
+				}
+			});
+			Phone.addKeyListener(new KeyAdapter() {
+				public void keyTyped(KeyEvent e) {
+					// TODO Auto-generated method stub
+					int keyChar = e.getKeyChar();
+					if (keyChar<=KeyEvent.VK_9&&keyChar>=KeyEvent.VK_0) {
+						
+					}else {
+						e.consume();
+					}
+				}
+			});
 		returnButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
@@ -158,7 +203,7 @@ public class DriverInfoJpanel3 extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				String[] split=state.split("-");
-				String[] list=new BhclerkController().getVehicleList(split[4]+"-"+split[5]);
+				String[] list=new BhclerkController().getDriverList(split[4]+"-"+split[5]);
 				boolean a=false;
 				String code1=split[4]+split[5]+Drivercode.getText();
 				if(list!=null){
@@ -170,16 +215,19 @@ public class DriverInfoJpanel3 extends JPanel{
 					}
 				}
 				}
-				if(Drivercode.getText().equals("")||dname.getText().equals("")||Sex.getText().equals("")||Date.getText().equals("")
+				if(Drivercode.getText().equals("")||dname.getText().equals("")||Date.getText().equals("")
 						||id.getText().equals("")||Phone.getText().equals("")||Time.getText().equals("")){
 					new notFinishDialog(ui,"输入有误",true);
 				}
+				else if (Drivercode.getText().length()!=3) {
+					new codeDialog(ui, "编号格式不符", true, "司机");
+				}
 				else if(a){
-					new OverWriteDialog(ui, "输入有误", true);
+					new OverWriteDialog(ui, "输入有误", true,"司机");
 				}
 				else{
 					vo=new DriverVO(split[4], split[5], Drivercode.getText(), dname.getText(), 
-							Date.getText(), id.getText(), Phone.getText(), Sex.getText(), Time.getText());
+							Date.getText(), id.getText(), Phone.getText(), (String)sexBox.getSelectedItem(), Time.getText());
 					new BhclerkController().addDriver(split[4]+"-"+split[5], vo);
 					new finishDialog2(ui, "司机信息添加", true,"司机信息" );
 					panel.remove(panel3);

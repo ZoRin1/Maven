@@ -1,23 +1,21 @@
 package presentation.bhclerkui;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Date;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import vo.orgVO.DriverVO;
 import vo.orgVO.VehicleVO;
 import businesslogic.organizationbl.BhclerkController;
 
@@ -35,7 +33,7 @@ public class CarInfoJpanel3 extends JPanel{
 	private JLabel time;
 	private JTextField Carcode;
 	private JTextField Code;
-	private JTextField Time;
+	private JLabel Time;
 	private JButton returnButton;
 	private JButton yesButton;
 	private ImageIcon returnIcon=new ImageIcon("picture/返回.png");
@@ -66,7 +64,7 @@ public class CarInfoJpanel3 extends JPanel{
 		this.add(code);
 		
 		Code=new JTextField();
-		Code.setBounds(130,97,150,27);
+		Code.setBounds(155,97,150,27);
 		Code.setFont(font);
 		this.add(Code);
 		
@@ -75,9 +73,12 @@ public class CarInfoJpanel3 extends JPanel{
 		time.setFont(font);
 		time.setBounds(30,164,125,27);
 		this.add(time);
-		
-		Time=new JTextField();
-		Time.setBounds(155,164,150,27);
+
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		String riqi = dateFormat.format(new Date());
+		Time=new JLabel(riqi);
+		Time.setForeground(Color.white);
+		Time.setBounds(155,164,300,27);
 		Time.setFont(font);
 		this.add(Time);
 		
@@ -97,6 +98,18 @@ public class CarInfoJpanel3 extends JPanel{
 	 	this.setOpaque(false);
 	}
 	private void registListener(final bhclerkui ui,final bhclerkJpanel panel,final CarInfoJpanel panel2,final CarInfoJpanel3 panel3){
+		Carcode.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
+				int keyChar = e.getKeyChar();
+				if (keyChar<=KeyEvent.VK_9&&keyChar>=KeyEvent.VK_0) {
+					
+				}else {
+					e.consume();
+				}
+			}
+		});
 		returnButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
@@ -123,11 +136,14 @@ public class CarInfoJpanel3 extends JPanel{
 					}
 				}
 				
-				if(Code.getText().equals("")||Time.getText().equals("")){
+				if(Code.getText().equals("")||carcode.getText().equals("")){
 					new notFinishDialog(ui,"输入有误",true);
 				}
+				else if (Carcode.getText().length()!=3) {
+					new codeDialog(ui, "编号格式不符", true, "车辆");
+				}
 				else if(a){
-					new OverWriteDialog(ui, "输入有误", true);
+					new OverWriteDialog(ui, "输入有误", true,"车辆");
 				}
 				else{
 					vo=new VehicleVO(split[4], split[5], Carcode.getText(), Code.getText(), Time.getText());
