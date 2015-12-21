@@ -2,6 +2,7 @@ package businesslogic.documentsbl;
 
 import java.util.ArrayList;
 
+import businesslogic.storagebl.DriveModel.returnSpace;
 import po.documentsPO.DocumentPO;
 import po.documentsPO.InBillsPO;
 import po.documentsPO.PaymentPO;
@@ -30,6 +31,12 @@ public class documentController {
 	public double getShortCost(){
 		DocumentsLineItem item=new DocumentsLineItem(1);
 		return item.getCost();
+	}
+	
+	//本地寄件单计算运费
+	public double getOwnCost(double weight){
+		DocumentsLineItem item=new DocumentsLineItem(1,weight);
+		return item.getOwnCost();
 	}
 	
 	//寄件单中获得预计天数
