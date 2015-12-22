@@ -109,13 +109,13 @@ public class b2MiddleInfo extends JPanel {
 		change.setForeground(Color.BLACK);
 		change.setContentAreaFilled(true);
 		change.setBorderPainted(true);
-		change.setBounds(120, 500, 160, 50);
+		change.setBounds(120, 520, 160, 50);
 		this.add(change);
 
 
 
 		returnButton = new JButton(returnIcon);
-		returnButton.setBounds(500, 500, 48, 48);
+		returnButton.setBounds(662, 575,48,48);
 		returnButton.setContentAreaFilled(false);
 		this.add(returnButton);
 

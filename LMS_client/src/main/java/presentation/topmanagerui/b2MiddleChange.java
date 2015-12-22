@@ -132,7 +132,7 @@ private JLabel city,bianHao,bianHaoI,yeWuYuan,changKuGuanLiYuan;
 		
 		//到时候再加图片
 		returnButton = new JButton(returnIcon);
-		returnButton.setBounds(500, 530, 48, 48);
+		returnButton.setBounds(662, 575,48,48);
 		returnButton.setContentAreaFilled(false);
 		this.add(returnButton);
 

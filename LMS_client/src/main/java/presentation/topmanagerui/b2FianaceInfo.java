@@ -65,12 +65,12 @@ public class b2FianaceInfo extends JPanel {
 		change.setForeground(Color.BLACK);
 		change.setContentAreaFilled(true);
 		change.setBorderPainted(true);
-		change.setBounds(180, 400, 160, 50);
+		change.setBounds(180, 500, 160, 50);
 		this.add(change);
 
 
 		returnButton = new JButton(returnIcon);
-		returnButton.setBounds(500, 400, 48, 48);
+		returnButton.setBounds(662, 575,48,48);
 		returnButton.setContentAreaFilled(false);
 		this.add(returnButton);
 

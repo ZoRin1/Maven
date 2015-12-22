@@ -84,7 +84,7 @@ public class b2FinanceChange extends JPanel {
 
 
 		returnButton = new JButton(returnIcon);
-		returnButton.setBounds(500, 400, 48, 48);
+		returnButton.setBounds(662, 575,48,48);
 		returnButton.setContentAreaFilled(false);
 		this.add(returnButton);
 

@@ -71,12 +71,12 @@ public class b2SearchOrg extends JPanel {
 		search.setBounds(360, 160, 100, 50);
 		this.add(search);
 		
-		b4=new JButton(b4Icon);
-		returnButton=new JButton(returnIcon);
+		b4=new JButton(b4Icon);		
 		b4.setContentAreaFilled(false);
 		b4.setBounds(250,480,200, 50);
 		this.add(b4);
 		
+		returnButton=new JButton(returnIcon);
 		returnButton.setBounds(662, 575,48,48);
 		returnButton.setContentAreaFilled(false);
 		this.add(returnButton);

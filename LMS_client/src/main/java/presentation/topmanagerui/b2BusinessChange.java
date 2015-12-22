@@ -143,7 +143,7 @@ public class b2BusinessChange extends JPanel {
 		
 		//到时候再加图片
 		returnButton=new JButton(returnIcon);		
-		returnButton.setBounds(450, 530,48,48);
+		returnButton.setBounds(662, 575,48,48);
 		returnButton.setContentAreaFilled(false);
 		this.add(returnButton);
 

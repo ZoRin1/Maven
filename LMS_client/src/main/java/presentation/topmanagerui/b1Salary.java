@@ -104,12 +104,12 @@ public class b1Salary extends JPanel {
 		this.add(baiFenHao);
 		
 		yesButton=new JButton(yesIcon);
-		yesButton.setBounds(300, 480,48,48);
+		yesButton.setBounds(602, 575,48,48);
 		yesButton.setContentAreaFilled(false);	 	 	
 	 	this.add(yesButton);
 		
 		returnButton=new JButton(returnIcon);		
-		returnButton.setBounds(400, 480,48,48);
+		returnButton.setBounds(662, 575,48,48);
 		returnButton.setContentAreaFilled(false);
 		this.add(returnButton);
 		
