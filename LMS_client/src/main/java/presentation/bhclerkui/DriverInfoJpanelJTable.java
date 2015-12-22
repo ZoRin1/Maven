@@ -60,14 +60,14 @@ public class DriverInfoJpanelJTable {
         scrollPane.setColumnHeaderView(driverInfTable.getTableHeader());
         
         scrollPane.getColumnHeader().setOpaque(false);
-		scrollPane.setBounds(0, 0, 730, 571);
+		scrollPane.setBounds(0, 0, 725, 571);
         
 		DriverInfoJpanel.add(scrollPane);
 	}
 	
 	private void initTable(){
 		//假设的数据
-		String[] inDepotName = new String[]{"司机编号"};
+		String[] inDepotName = new String[]{" "};
 		String stateString[]=state.split("-");
 		String[] list=new BhclerkController().getDriverList(stateString[4]+"-"+stateString[5]);
 		String [][] inDepotValue = null;
@@ -88,7 +88,7 @@ public class DriverInfoJpanelJTable {
 				return false;
 			}
 		};
-		driverInfTable.setFont(new Font("幼圆", Font.BOLD, 20));
+		driverInfTable.setFont(new Font("幼圆", Font.BOLD, 24));
 		driverInfTable.getTableHeader().setReorderingAllowed(false); //设置列不可重排
 		driverInfTable.getTableHeader().setResizingAllowed(false); //设置列不可拖动
 		
@@ -108,11 +108,11 @@ public class DriverInfoJpanelJTable {
 			}
 		});
 		
-		driverInfTable.setRowHeight(32);
+		driverInfTable.setRowHeight(31);
 		driverInfTable.setShowGrid(false);
 		TableColumn column = null;
 		column = driverInfTable.getColumnModel().getColumn(0);
-		column.setPreferredWidth(452);
+		column.setPreferredWidth(720);
 
 		
 		driverInfTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
@@ -125,6 +125,7 @@ public class DriverInfoJpanelJTable {
 		driverInfTable.setDefaultRenderer(Object.class,render);
 		
 		JTableHeader header = driverInfTable.getTableHeader();
+		header.setSize(725, 27);
 		header.setOpaque(false);
 		header.getTable().setOpaque(false);
 		

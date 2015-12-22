@@ -31,7 +31,7 @@ public class CarInfoJpanel2 extends JPanel{
 	private JLabel code;
 	private JLabel time;
 	private JTextField Code;
-	private JTextField Time;
+	private JLabel Time;
 	private JButton deleteButton;
 	private JButton returnButton;
 	private JButton yesButton;
@@ -68,11 +68,11 @@ public class CarInfoJpanel2 extends JPanel{
 		time.setFont(font);
 		time.setBounds(30,97,125,27);
 		this.add(time);
-		
-		Time=new JTextField();
-		Time.setBounds(155,97,150,27);
+		String string[]=vo1.getDate().split(" ");
+		Time=new JLabel(string[0]);
+		Time.setForeground(Color.white);
+		Time.setBounds(155,97,450,27);
 		Time.setFont(font);
-		Time.setText(vo1.getDate());
 		this.add(Time);
 		
 		deleteButton=new JButton(deleteIcon);

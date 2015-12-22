@@ -68,7 +68,7 @@ public class CarInfoJpanelJTable {
 	
 	private void initTable(){
 		final String stateString[]=state.split("-");
-		String[] inDepotName = new String[]{"车辆代号"};
+		String[] inDepotName = new String[]{" "};
 		String[] list=new BhclerkController().getVehicleList(stateString[4]+"-"+stateString[5]);
 		String [][]inDepotValue;
 		if (list==null) {
@@ -86,10 +86,9 @@ public class CarInfoJpanelJTable {
 				return false;
 			}
 		};
-		carInfTable.setFont(new Font("幼圆", Font.BOLD, 20));
+		carInfTable.setFont(new Font("幼圆", Font.BOLD, 24));
 		carInfTable.getTableHeader().setReorderingAllowed(false); //设置列不可重排
 		carInfTable.getTableHeader().setResizingAllowed(false); //设置列不可拖动
-		
 		//对双击的监听
 		carInfTable.addMouseListener(new MouseAdapter() {
 			
@@ -106,11 +105,11 @@ public class CarInfoJpanelJTable {
 			}
 		});
 		
-		carInfTable.setRowHeight(32);
+		carInfTable.setRowHeight(31);
 		carInfTable.setShowGrid(false);
 		TableColumn column = null;
 		column = carInfTable.getColumnModel().getColumn(0);
-		column.setPreferredWidth(413);
+		column.setPreferredWidth(725);
 //		column = carInfTable.getColumnModel().getColumn(1);
 //		column.setPreferredWidth(310);
 		
@@ -125,6 +124,7 @@ public class CarInfoJpanelJTable {
 		carInfTable.setDefaultRenderer(Object.class,render);
 		
 		JTableHeader header = carInfTable.getTableHeader();
+		header.setSize(725, 27);
 		header.setOpaque(false);
 		header.getTable().setOpaque(false);
 		

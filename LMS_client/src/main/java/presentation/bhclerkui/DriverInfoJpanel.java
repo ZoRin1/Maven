@@ -1,5 +1,6 @@
 package presentation.bhclerkui;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
@@ -45,7 +46,9 @@ public class DriverInfoJpanel extends JPanel{
 		
 		
 		addButton=new JButton("添加");
-		addButton.setBounds(30, 575, 80, 30);
+		addButton.setFont(font);
+		addButton.setForeground(Color.white);
+		addButton.setBounds(30, 575, 100, 48);
 		addButton.setContentAreaFilled(false);
 		this.add(addButton);
 		

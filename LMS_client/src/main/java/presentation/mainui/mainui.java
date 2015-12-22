@@ -435,7 +435,7 @@ class aboutDialog extends JDialog{
 	}
 }
 class dialogJpanel extends JPanel{
-	private ImageIcon dialogIcon=new ImageIcon("picture/背景.png");
+	private ImageIcon dialogIcon=new ImageIcon("picture/对话框背景.png");
 	public void paintComponent(Graphics g)  
 	{  
 	    super.paintComponent(g);    
