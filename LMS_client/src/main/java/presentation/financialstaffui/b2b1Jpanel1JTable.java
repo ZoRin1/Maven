@@ -9,9 +9,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
-import java.util.Vector;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -20,8 +18,6 @@ import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 
-import businesslogic.financebl.AccountManageModel.AccountManageBL;
-import presentation.icwarehousemanui.checkDepotPanel;
 import vo.financeVO.AccountVO;
 
 public class b2b1Jpanel1JTable {

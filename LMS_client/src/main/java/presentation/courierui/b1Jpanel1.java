@@ -428,7 +428,7 @@ public class b1Jpanel1 extends JPanel{
 					courierJpanel.repaint();
 				}
 				else {
-					new failDialog(courierui, "失败", true);
+					new failDialog(courierui, "失败", true,"填写不完整，请继续填写");
 				}		
 			}
 		});
@@ -600,7 +600,7 @@ class b1Jpanel2 extends JPanel{
 					orderPO.setDate(riqi);
 					orderPO.setSumCost(Double.parseDouble(shijibaojianumber.getText()));
 					documentController.createBlock(orderPO);
-					new finishDialog(courierui, "寄件单创建完成", true);
+					new finishDialog(courierui, "寄件单创建完成", true,"寄件单创建完成");
 					courierJpanel.remove(b1Jpanel2);
 					courierJpanel.add(courierui.operationJpanel);
 					courierui.orderfinishButton.setEnabled(true);
@@ -609,7 +609,7 @@ class b1Jpanel2 extends JPanel{
 					courierJpanel.repaint();
 				}
 				else {
-					new failDialog(courierui, "失败", true);
+					new failDialog(courierui, "失败", true,"填写不完整，请继续填写");
 				}
 				
 			}
@@ -621,96 +621,3 @@ class b1Jpanel2 extends JPanel{
 		g.drawImage(frameIcon.getImage(),-7,-12,null);
  }
 }
-class failDialog extends JDialog{
-	private dialogJpanel jPanel;
-	private JLabel jLabel;
-	private JButton jButton;
-	public failDialog(JFrame frame,String title,boolean modal) {
-		super(frame,title,modal);
-		init();
-		registerListener();
-		this.setVisible(true);
-	}
-	private void init(){
-		ImageIcon yesIcon=new ImageIcon("picture/登录.png");
-		jLabel=new JLabel("填写不完整，请继续填写",jLabel.CENTER);
-		jLabel.setForeground(Color.white);
-		jLabel.setFont(new Font("幼圆",Font.BOLD,27));
-		jPanel=new dialogJpanel();
-		jButton=new JButton(yesIcon);
-		jButton.setContentAreaFilled(false);
-		jPanel.setLayout(null);
-		jButton.setBounds(218,190, 64, 64);
-		jLabel.setBounds(0, 0, 500, 200);
-		jPanel.add(jLabel);
-		jPanel.add(jButton);
-		this.add(jPanel);
-		this.setSize(500, 300);
-		Toolkit kitToolkit =Toolkit.getDefaultToolkit();
-		Dimension screenSize=kitToolkit.getScreenSize();
-		int screenWidth=screenSize.width;
-		int screenHeight=screenSize.height;
-		int dialogWidth=this.getWidth();
-		int dialogHeight=this.getHeight();
-		this.setLocation((screenWidth-dialogWidth)/2, (screenHeight-dialogHeight)/2);
-		this.setResizable(false);
-	}
-	private void registerListener(){
-		jButton.addActionListener(new ActionListener() {		
-			public void actionPerformed(ActionEvent e) {
-				failDialog.this.dispose();
-			}
-		});
-	}
-}
-class finishDialog extends JDialog{
-	private dialogJpanel jPanel;
-	private JLabel jLabel;
-	private JButton jButton;
-	public finishDialog(JFrame frame,String title,boolean modal) {
-		super(frame,title,modal);
-		init();
-		registerListener();
-		this.setVisible(true);
-	}
-	private void init(){
-		ImageIcon yesIcon=new ImageIcon("picture/登录.png");
-		jLabel=new JLabel("寄件单创建完成",jLabel.CENTER);
-		jLabel.setForeground(Color.white);
-		jLabel.setFont(new Font("幼圆",Font.BOLD,27));
-		jPanel=new dialogJpanel();
-		jButton=new JButton(yesIcon);
-		jButton.setContentAreaFilled(false);
-		jPanel.setLayout(null);
-		jButton.setBounds(218,190, 64, 64);
-		jLabel.setBounds(0, 0, 500, 200);
-		jPanel.add(jLabel);
-		jPanel.add(jButton);
-		this.add(jPanel);
-		this.setSize(500, 300);
-		Toolkit kitToolkit =Toolkit.getDefaultToolkit();
-		Dimension screenSize=kitToolkit.getScreenSize();
-		int screenWidth=screenSize.width;
-		int screenHeight=screenSize.height;
-		int dialogWidth=this.getWidth();
-		int dialogHeight=this.getHeight();
-		this.setLocation((screenWidth-dialogWidth)/2, (screenHeight-dialogHeight)/2);
-		this.setResizable(false);
-	}
-	private void registerListener(){
-		jButton.addActionListener(new ActionListener() {		
-			public void actionPerformed(ActionEvent e) {
-				finishDialog.this.dispose();
-			}
-		});
-	}
-}
-class dialogJpanel extends JPanel{
-	private ImageIcon dialogIcon=new ImageIcon("picture/背景.png");
-	public void paintComponent(Graphics g)  
-	{  
-	    super.paintComponent(g);    
-	    g.drawImage(dialogIcon.getImage(),0,0,null);
-      
-     }
-   }

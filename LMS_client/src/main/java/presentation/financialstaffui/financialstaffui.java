@@ -28,7 +28,6 @@ public class financialstaffui extends JFrame{
 	private JButton tuichuButton;
 	private JButton zuixiaohuaButton;
 	
-	//这是暂时的ID和State
 	private String account;
 	private String state;
 	public financialstaffui(String s,String [] args,String account,String state) {

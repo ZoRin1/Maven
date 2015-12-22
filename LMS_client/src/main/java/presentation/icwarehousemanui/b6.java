@@ -32,11 +32,11 @@ public class b6 {
 		int check =init();
 		if(check>0){
 			//失败DiaLog
-			new failDialog1(icwarehousemanui, "库存初始化失败", true);
+			new failDialog(icwarehousemanui, "库存初始化失败", true,"机动区仍存货物！初始化失败！");
 		}else{
 			String[] temp = state.split("-");
 			reSpace.returnSpace(temp[1]);
-			new finishb6Dialog(icwarehousemanui, "库存初始化完成", true);
+			new finishDialog(icwarehousemanui, "库存初始化完成", true,"库存初始化完成");
 		}
 	}
 	//实现库存初始化
@@ -48,99 +48,4 @@ public class b6 {
 	}
 
 }
-class finishb6Dialog extends JDialog{
-	private dialogJpanel jPanel;
-	private JLabel jLabel;
-	private JButton jButton;
-	public finishb6Dialog(JFrame frame,String title,boolean modal) {
-		super(frame,title,modal);
-		init();
-		registerListener();
-		this.setVisible(true);
-	}
-	private void init(){
-		ImageIcon yesIcon=new ImageIcon("picture/登录.png");
-		jLabel=new JLabel("库存初始化完成",jLabel.CENTER);
-		jLabel.setForeground(Color.white);
-		jLabel.setFont(new Font("幼圆",Font.BOLD,27));
-		jPanel=new dialogJpanel();
-		jButton=new JButton(yesIcon);
-		jButton.setContentAreaFilled(false);
-		jPanel.setLayout(null);
-		jButton.setBounds(218,190, 64, 64);
-		jLabel.setBounds(0, 0, 500, 200);
-		jPanel.add(jLabel);
-		jPanel.add(jButton);
-		this.add(jPanel);
-		this.setSize(500, 300);
-		Toolkit kitToolkit =Toolkit.getDefaultToolkit();
-		Dimension screenSize=kitToolkit.getScreenSize();
-		int screenWidth=screenSize.width;
-		int screenHeight=screenSize.height;
-		int dialogWidth=this.getWidth();
-		int dialogHeight=this.getHeight();
-		this.setLocation((screenWidth-dialogWidth)/2, (screenHeight-dialogHeight)/2);
-		this.setResizable(false);
-	}
-	private void registerListener(){
-		jButton.addActionListener(new ActionListener() {		
-			public void actionPerformed(ActionEvent e) {
-				
-				finishb6Dialog.this.dispose();
-			}
-		});
-	}
-}
-
-class failDialog1 extends JDialog{
-	private dialogJpanel jPanel;
-	private JLabel jLabel;
-	private JButton jButton;
-	public failDialog1(JFrame frame,String title,boolean modal) {
-		super(frame,title,modal);
-		init();
-		registerListener();
-		this.setVisible(true);
-	}
-	private void init(){
-		ImageIcon yesIcon=new ImageIcon("picture/登录.png");
-		jLabel=new JLabel("机动区仍存货物！初始化失败！",jLabel.CENTER);
-		jLabel.setForeground(Color.white);
-		jLabel.setFont(new Font("幼圆",Font.BOLD,27));
-		jPanel=new dialogJpanel();
-		jButton=new JButton(yesIcon);
-		jButton.setContentAreaFilled(false);
-		jPanel.setLayout(null);
-		jButton.setBounds(218,190, 64, 64);
-		jLabel.setBounds(0, 0, 500, 200);
-		jPanel.add(jLabel);
-		jPanel.add(jButton);
-		this.add(jPanel);
-		this.setSize(500, 300);
-		Toolkit kitToolkit =Toolkit.getDefaultToolkit();
-		Dimension screenSize=kitToolkit.getScreenSize();
-		int screenWidth=screenSize.width;
-		int screenHeight=screenSize.height;
-		int dialogWidth=this.getWidth();
-		int dialogHeight=this.getHeight();
-		this.setLocation((screenWidth-dialogWidth)/2, (screenHeight-dialogHeight)/2);
-		this.setResizable(false);
-	}
-	private void registerListener(){
-		jButton.addActionListener(new ActionListener() {		
-			public void actionPerformed(ActionEvent e) {
-				failDialog1.this.dispose();
-			}
-		});
-	}
-}
-
-class dialogJpanel extends JPanel{
-	private ImageIcon dialogIcon=new ImageIcon("picture/背景.png");
-	public void paintComponent(Graphics g)  
-	{  
-	    super.paintComponent(g);    
-	    g.drawImage(dialogIcon.getImage(),0,0,null);
-      
-     }
-   }
+   

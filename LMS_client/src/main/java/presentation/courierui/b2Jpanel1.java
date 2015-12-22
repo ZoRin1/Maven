@@ -106,7 +106,7 @@ public class b2Jpanel1 extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				if (dingdantiaoxingmanumJLabel.getText().equals("")) {
-					new tiaoxingmafailDialog(courierui, "条形码错误", true);
+					new failDialog(courierui, "条形码错误", true,"条形码错误，请修改");
 				}
 				else {
 					courierJpanel.remove(b2Jpanel1);
@@ -125,7 +125,7 @@ public class b2Jpanel1 extends JPanel{
 				}
 				else {
 					dingdantiaoxingmanumJLabel.setText("");
-					new tiaoxingmafailDialog(courierui, "错误", true);
+					new failDialog(courierui, "错误", true,"条形码错误，请修改");
 				}
 			}
 		});
@@ -249,7 +249,7 @@ class b2Jpanel2 extends JPanel{
 				if (isFull()) {
 					GetOrderPO getOrderPO=new GetOrderPO(shoujiandanbianhaonumJLabel.getText(), "收件单", code, account, shoujianrenField.getText(), riqiJLabel.getText());
 					documentController.createBlock(getOrderPO);
-					new orderfinishDialog(courierui, "收件单创建完成", true);
+					new finishDialog(courierui, "收件单创建完成", true, "收件单创建完成");
 					courierJpanel.remove(b2Jpanel2);
 					courierJpanel.add(courierui.operationJpanel);
 					courierui.orderfinishButton.setEnabled(true);
@@ -258,7 +258,7 @@ class b2Jpanel2 extends JPanel{
 					courierJpanel.repaint();
 				}
 				else {
-					new failDialog(courierui, "失败", true);
+					new failDialog(courierui, "失败", true,"填写不完整，请继续填写");
 				}			
 			}
 		});
@@ -268,88 +268,4 @@ class b2Jpanel2 extends JPanel{
 		super.paintComponent(g);    
 		g.drawImage(frameIcon.getImage(),-7,-12,null);
  }
-}
-class tiaoxingmafailDialog extends JDialog{
-	private dialogJpanel jPanel;
-	private JLabel jLabel;
-	private JButton jButton;
-	public tiaoxingmafailDialog(JFrame frame,String title,boolean modal) {
-		super(frame,title,modal);
-		init();
-		registerListener();
-		this.setVisible(true);
-	}
-	private void init(){
-		ImageIcon yesIcon=new ImageIcon("picture/登录.png");
-		jLabel=new JLabel("条形码错误，请修改",jLabel.CENTER);
-		jLabel.setForeground(Color.white);
-		jLabel.setFont(new Font("幼圆",Font.BOLD,27));
-		jPanel=new dialogJpanel();
-		jButton=new JButton(yesIcon);
-		jButton.setContentAreaFilled(false);
-		jPanel.setLayout(null);
-		jButton.setBounds(218,190, 64, 64);
-		jLabel.setBounds(0, 0, 500, 200);
-		jPanel.add(jLabel);
-		jPanel.add(jButton);
-		this.add(jPanel);
-		this.setSize(500, 300);
-		Toolkit kitToolkit =Toolkit.getDefaultToolkit();
-		Dimension screenSize=kitToolkit.getScreenSize();
-		int screenWidth=screenSize.width;
-		int screenHeight=screenSize.height;
-		int dialogWidth=this.getWidth();
-		int dialogHeight=this.getHeight();
-		this.setLocation((screenWidth-dialogWidth)/2, (screenHeight-dialogHeight)/2);
-		this.setResizable(false);
-	}
-	private void registerListener(){
-		jButton.addActionListener(new ActionListener() {		
-			public void actionPerformed(ActionEvent e) {
-				tiaoxingmafailDialog.this.dispose();
-			}
-		});
-	}
-}
-class orderfinishDialog extends JDialog{
-	private dialogJpanel jPanel;
-	private JLabel jLabel;
-	private JButton jButton;
-	public orderfinishDialog(JFrame frame,String title,boolean modal) {
-		super(frame,title,modal);
-		init();
-		registerListener();
-		this.setVisible(true);
-	}
-	private void init(){
-		ImageIcon yesIcon=new ImageIcon("picture/登录.png");
-		jLabel=new JLabel("收件单创建完成",jLabel.CENTER);
-		jLabel.setForeground(Color.white);
-		jLabel.setFont(new Font("幼圆",Font.BOLD,27));
-		jPanel=new dialogJpanel();
-		jButton=new JButton(yesIcon);
-		jButton.setContentAreaFilled(false);
-		jPanel.setLayout(null);
-		jButton.setBounds(218,190, 64, 64);
-		jLabel.setBounds(0, 0, 500, 200);
-		jPanel.add(jLabel);
-		jPanel.add(jButton);
-		this.add(jPanel);
-		this.setSize(500, 300);
-		Toolkit kitToolkit =Toolkit.getDefaultToolkit();
-		Dimension screenSize=kitToolkit.getScreenSize();
-		int screenWidth=screenSize.width;
-		int screenHeight=screenSize.height;
-		int dialogWidth=this.getWidth();
-		int dialogHeight=this.getHeight();
-		this.setLocation((screenWidth-dialogWidth)/2, (screenHeight-dialogHeight)/2);
-		this.setResizable(false);
-	}
-	private void registerListener(){
-		jButton.addActionListener(new ActionListener() {		
-			public void actionPerformed(ActionEvent e) {
-				orderfinishDialog.this.dispose();
-			}
-		});
-	}
 }
