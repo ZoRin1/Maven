@@ -146,13 +146,16 @@ public class b5CostConst extends JPanel {
 				boolean b2 = DataCheck.isDouble(huoCheF.getText());
 				boolean b3 = DataCheck.isDouble(feiJiF.getText());
 				if (!b1) {
-					JOptionPane.showMessageDialog(b5ui, "请输入正确的汽车成本常量数值，形如1.20");
+					new DisplayDialog(b5ui, "请输入正确的汽车成本常量数值，形如1.20");
+//					JOptionPane.showMessageDialog(b5ui, "请输入正确的汽车成本常量数值，形如1.20");
 				}
 				if (!b2) {
-					JOptionPane.showMessageDialog(b5ui, "请输入正确的火车成本常量数值，形如1.20");
+					new DisplayDialog(b5ui, "请输入正确的火车成本常量数值，形如1.20");
+//					JOptionPane.showMessageDialog(b5ui, "请输入正确的火车成本常量数值，形如1.20");
 				}
 				if (!b3) {
-					JOptionPane.showMessageDialog(b5ui, "请输入正确的飞机成本常量数值，形如1.20");
+					new DisplayDialog(b5ui, "请输入正确的飞机成本常量数值，形如1.20");
+//					JOptionPane.showMessageDialog(b5ui, "请输入正确的飞机成本常量数值，形如1.20");
 				}
 				
 				if (b1 && b2 && b3) {
@@ -169,14 +172,16 @@ public class b5CostConst extends JPanel {
 					boolean r3 = transportationController.changeCost(3, Double.parseDouble(feiJiF.getText()));
 					
 					if (r1 && r2 && r3) {
-						JOptionPane.showMessageDialog(b5ui, "修改成功！");
+						new DisplayDialog(b5ui, "修改成功！");
+//						JOptionPane.showMessageDialog(b5ui, "修改成功！");
 						tjpl.remove(costConst);
 						tjpl.add(b5ui.operationJpanel);						
 						b5ui.b1.setEnabled(true);
 						b5ui.b2.setEnabled(true);
 						tjpl.repaint();
 					}else {
-						JOptionPane.showMessageDialog(b5ui, "修改失败，请重试");
+						new DisplayDialog(b5ui, "修改失败，请重试");
+//						JOptionPane.showMessageDialog(b5ui, "修改失败，请重试");
 					}
 					
 					

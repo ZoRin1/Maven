@@ -137,10 +137,11 @@ public class b2FinanceChange extends JPanel {
 				int state = e.getStateChange();
 				if (state == ItemEvent.SELECTED) {
 					if (!caiWuRenYuanB.getSelectedItem().equals("增加财务人员")) {
-						Object[] options = { "确定", "取消" };
-						int result = JOptionPane.showOptionDialog(null, "删除财务人员", "删除该财务人员", JOptionPane.YES_NO_OPTION,
-								JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
-						if (result == 0) {
+						AskDialog ask = new AskDialog(b2ui, "删除财务人员", true, "确定删除此财务人员？");
+//						Object[] options = { "确定", "取消" };
+//						int result = JOptionPane.showOptionDialog(null, "删除财务人员", "删除该财务人员", JOptionPane.YES_NO_OPTION,
+//								JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
+						if (ask.state) {
 							String temd = (String) caiWuRenYuanB.getSelectedItem();
 							String[] Temp = temd.split("-");
 							financeController.removeFinancer(Long.parseLong(Temp[0]));

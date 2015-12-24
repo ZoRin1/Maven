@@ -225,7 +225,8 @@ private void init(AccountNumberVO accountNumberVO){
 						
 						boolean result = accountInfoController.changeInfo(Long.parseLong(zhangHaoNo.getText()), accountNumberVO);
 						if (result) {
-							JOptionPane.showMessageDialog(aui, "修改成功");
+							new DisplayDialog(aui,"修改成功");
+//							JOptionPane.showMessageDialog(aui, "修改成功");
 							apl.remove(changeAccount);
 							apl.add(aui.operationJpanel);
 							aui.accountField.setEditable(true);
@@ -233,7 +234,8 @@ private void init(AccountNumberVO accountNumberVO){
 							aui.addaccountButton.setEnabled(true);
 							aui.repaint();
 						}else {
-							JOptionPane.showMessageDialog(null, "修改失败，请重试");
+							new DisplayDialog(aui, "修改失败，请重试");
+//							JOptionPane.showMessageDialog(null, "修改失败，请重试");
 						}
 					} catch (NumberFormatException e1) {
 						// TODO Auto-generated catch block

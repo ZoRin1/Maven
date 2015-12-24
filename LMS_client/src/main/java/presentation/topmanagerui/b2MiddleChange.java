@@ -180,10 +180,11 @@ private JLabel city,bianHao,bianHaoI,yeWuYuan,changKuGuanLiYuan;
 				int state = e.getStateChange();
 				if (state == ItemEvent.SELECTED) {
 					if (!yeWuYuanB.getSelectedItem().equals("增加业务员")) {
-						Object[] options = { "确定", "取消" };
-						int result = JOptionPane.showOptionDialog(null, "删除业务员", "删除该业务员", JOptionPane.YES_NO_OPTION,
-								JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
-						if (result == 0) {
+						AskDialog ask = new AskDialog(b2ui, "删除业务员", true, "确定删除此业务员？");
+//						Object[] options = { "确定", "取消" };
+//						int result = JOptionPane.showOptionDialog(null, "删除业务员", "删除该业务员", JOptionPane.YES_NO_OPTION,
+//								JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
+						if (ask.state) {
 							String temd = (String) yeWuYuanB.getSelectedItem();
 							String[] Temp = temd.split("-");
 							middleController.removeBussinessman(ID, Long.parseLong(Temp[0]));
@@ -239,10 +240,11 @@ private JLabel city,bianHao,bianHaoI,yeWuYuan,changKuGuanLiYuan;
 				int state = e.getStateChange();
 				if (state == ItemEvent.SELECTED) {
 					if (!changKuGuanLiYuanB.getSelectedItem().equals("增加仓库管理员")) {
-						Object[] options = { "确定", "取消" };
-						int result = JOptionPane.showOptionDialog(null, "删除仓库管理员", "删除该仓库管理员", JOptionPane.YES_NO_OPTION,
-								JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
-						if (result == 0) {
+						AskDialog ask = new AskDialog(b2ui, "删除仓库管理员", true, "确定删除此仓库管理员？");
+//						Object[] options = { "确定", "取消" };
+//						int result = JOptionPane.showOptionDialog(null, "删除仓库管理员", "删除该仓库管理员", JOptionPane.YES_NO_OPTION,
+//								JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
+						if (ask.state) {
 							String temd = (String) changKuGuanLiYuanB.getSelectedItem();
 							String[] Temp = temd.split("-");
 							middleController.removeStorger(ID, Long.parseLong(Temp[0]));

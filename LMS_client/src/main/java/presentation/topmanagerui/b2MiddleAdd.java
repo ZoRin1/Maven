@@ -98,7 +98,8 @@ public class b2MiddleAdd extends JPanel {
 				// TODO Auto-generated method stub
 				String di = diQuF.getText();
 				if (di.equals("")) {
-					JOptionPane.showMessageDialog(null, "请输入所在地区");
+					new DisplayDialog(b2ui, "请输入所在地区");
+//					JOptionPane.showMessageDialog(null, "请输入所在地区");
 				}
 				
 				if (!di.equals("")) {
@@ -132,16 +133,19 @@ public class b2MiddleAdd extends JPanel {
 							}
 							boolean r2 = cityController.addCity(mCity);
 							if (r1 && r2) {
-								JOptionPane.showMessageDialog(tjpl, "创建成功,机构编号为" + bianHao);
+								new DisplayDialog(b2ui, "创建成功,机构编号为" + bianHao);
+//								JOptionPane.showMessageDialog(tjpl, "创建成功,机构编号为" + bianHao);
 								tjpl.remove(b2MiddleAdd);
 								new b2SearchOrg(b2ui, tjpl, org);
 								tjpl.repaint();
 							}else {
-								JOptionPane.showMessageDialog(tjpl, "创建失败,请重试");
+								new DisplayDialog(b2ui,"创建失败,请重试");
+//								JOptionPane.showMessageDialog(tjpl, "创建失败,请重试");
 							}
 							
 						}else {
-							JOptionPane.showMessageDialog(null, "该城市已存在，请重新输入");
+							new DisplayDialog(b2ui,"该城市已存在，请重新输入");
+//							JOptionPane.showMessageDialog(null, "该城市已存在，请重新输入");
 						}
 						
 					}

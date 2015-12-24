@@ -200,7 +200,8 @@ public class AccountInfo extends JPanel {
 						AccountInfoController accountInfoController = new AccountInfoController();
 						boolean result =accountInfoController.deleteAccount(accountNumberVO.getID());
 						if (result) {
-							JOptionPane.showMessageDialog(null, "删除成功");
+							new DisplayDialog(aui, "删除成功，请重试");
+//							JOptionPane.showMessageDialog(null, "删除成功");
 							apl.remove(accountInfo);
 							apl.add(aui.operationJpanel);					
 							aui.accountField.setEditable(true);
@@ -208,7 +209,8 @@ public class AccountInfo extends JPanel {
 							aui.addaccountButton.setEnabled(true);
 							aui.repaint();
 						}else {
-							JOptionPane.showMessageDialog(null, "删除失败，请重试");
+							new DisplayDialog(aui,  "删除失败，请重试");
+//							JOptionPane.showMessageDialog(null, "删除失败，请重试");
 						}
 					} catch (HeadlessException e1) {
 						// TODO Auto-generated catch block

@@ -121,7 +121,8 @@ public class b3JPanel extends JPanel {
 								new InternetDialog(tui);
 							}
 							String message = DocumentsToString.getOrderPO(po);
-							JOptionPane.showMessageDialog(null, message);	
+							new DocumentsDialog(tui, "收件单", message);
+//							JOptionPane.showMessageDialog(null, message);	
 							break;
 						}
 //						case "入库单":{
@@ -139,7 +140,8 @@ public class b3JPanel extends JPanel {
 								new InternetDialog(tui);
 							}
 							String message = DocumentsToString.loadingPO(po);
-							JOptionPane.showMessageDialog(null, message);	
+							new DocumentsDialog(tui, "营业厅装车单", message);
+//							JOptionPane.showMessageDialog(null, message);	
 							break;
 						}
 						case "寄件单":{
@@ -151,7 +153,8 @@ public class b3JPanel extends JPanel {
 								new InternetDialog(tui);
 							}
 							String message = DocumentsToString.orderPO(po);
-							JOptionPane.showMessageDialog(null, message);	
+							new DocumentsDialog(tui, "寄件单", message);
+//							JOptionPane.showMessageDialog(null, message);	
 							break;
 						}
 						case "付款单":{
@@ -163,7 +166,8 @@ public class b3JPanel extends JPanel {
 								new InternetDialog(tui);
 							}
 							String message = DocumentsToString.payMentPO(po);
-							JOptionPane.showMessageDialog(null, message);	
+							new DocumentsDialog(tui, "付款单", message);
+//							JOptionPane.showMessageDialog(null, message);	
 							break;
 						}
 						case "收款单":{
@@ -175,7 +179,8 @@ public class b3JPanel extends JPanel {
 								new InternetDialog(tui);
 							}
 							String message = DocumentsToString.receiptPO(po);
-							JOptionPane.showMessageDialog(null, message);	
+							new DocumentsDialog(tui, "收款单", message);
+//							JOptionPane.showMessageDialog(null, message);	
 							break;
 						}
 						case "派件单":{
@@ -187,7 +192,8 @@ public class b3JPanel extends JPanel {
 								new InternetDialog(tui);
 							}
 							String message = DocumentsToString.yDispatchPO(po);
-							JOptionPane.showMessageDialog(null, message);	
+							new DocumentsDialog(tui, "派件单", message);
+//							JOptionPane.showMessageDialog(null, message);	
 							break;
 						}
 						case "营业厅接收单":{
@@ -199,7 +205,8 @@ public class b3JPanel extends JPanel {
 								new InternetDialog(tui);
 							}
 							String message = DocumentsToString.yReceivePO(po);
-							JOptionPane.showMessageDialog(null, message);	
+							new DocumentsDialog(tui, "营业厅接收单", message);
+//							JOptionPane.showMessageDialog(null, message);	
 							break;
 						}
 						case "中转中心转运单":{
@@ -211,7 +218,8 @@ public class b3JPanel extends JPanel {
 								new InternetDialog(tui);
 							}
 							String message = DocumentsToString.zLoadingPO(po);
-							JOptionPane.showMessageDialog(null, message);	
+							new DocumentsDialog(tui, "中转中心转运单", message);
+//							JOptionPane.showMessageDialog(null, message);	
 							break;
 						}
 						case "中转中心接收单":{
@@ -223,7 +231,8 @@ public class b3JPanel extends JPanel {
 								new InternetDialog(tui);
 							}
 							String message = DocumentsToString.getOrderPO(po);
-							JOptionPane.showMessageDialog(null, message);	
+							new DocumentsDialog(tui, "中转中心接收单", message);
+//							JOptionPane.showMessageDialog(null, message);	
 							break;
 						}
 						default:{

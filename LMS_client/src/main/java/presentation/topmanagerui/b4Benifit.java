@@ -52,7 +52,8 @@ public class b4Benifit extends JPanel {
 			j1.add(b4table.getScrollPane());
 			this.add(j1);
 		}else {
-			JOptionPane.showMessageDialog(null, "未找到相关数据");
+			new DisplayDialog(b4ui, "未找到相关数据");
+//			JOptionPane.showMessageDialog(null, "未找到相关数据");
 		}
 		
 		
