@@ -94,7 +94,7 @@ public class b2icwarehousemanui  extends JFrame{
 				// TODO 自动生成的方法存根
 				icwarehousemanJpanel.remove(operationJpanel);
 				b2icwarehousemanui.b1.setEnabled(false);
-				new b2Jpanel1(b2icwarehousemanui,icwarehousemanJpanel,account,state);
+				new b2Jpanel1(icwarehousemanui,b2icwarehousemanui,icwarehousemanJpanel,account,state);
 				icwarehousemanJpanel.repaint();
 			}
 		});

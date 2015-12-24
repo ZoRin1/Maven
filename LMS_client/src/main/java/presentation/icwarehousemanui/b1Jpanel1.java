@@ -23,8 +23,10 @@ public class b1Jpanel1 extends JPanel{
 	private JLabel dingdantiaoxingmaJLabel;
 	 JLabel dingdantiaoxingmanumJLabel;
 	private documentController documentController;
-	public b1Jpanel1(b1icwarehousemanui ui,icwarehousemanJpanel icwarehousemanJpanel,String account,String state) {
+	private icwarehousemanui icwarehousemanui;
+	public b1Jpanel1(icwarehousemanui icwarehousemanui,b1icwarehousemanui ui,icwarehousemanJpanel icwarehousemanJpanel,String account,String state) {
 		// TODO Auto-generated constructor stub
+		this.icwarehousemanui=icwarehousemanui;
 		this.account=account;
 		this.state=state;
 		init();
@@ -123,7 +125,7 @@ public class b1Jpanel1 extends JPanel{
 				}
 				else {
 					icwarehousemanJpanel.remove(b1Jpanel1);
-					new b1Jpanel2(ui, icwarehousemanJpanel,b1Jpanel1,dingdantiaoxingmanumJLabel.getText(),account,state);
+					new b1Jpanel2(icwarehousemanui,ui, icwarehousemanJpanel,b1Jpanel1,dingdantiaoxingmanumJLabel.getText(),account,state);
 					icwarehousemanJpanel.repaint();	
 				}		
 			}
