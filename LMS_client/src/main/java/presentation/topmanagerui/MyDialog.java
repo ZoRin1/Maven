@@ -1,4 +1,4 @@
-package presentation.adminui;
+package presentation.topmanagerui;
 
 import java.awt.Color;
 import java.awt.Dimension;

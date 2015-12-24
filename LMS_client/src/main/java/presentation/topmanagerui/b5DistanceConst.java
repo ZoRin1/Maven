@@ -135,16 +135,20 @@ public class b5DistanceConst extends JPanel {
 				boolean dis = DataCheck.isDouble(juLiF.getText());
 				boolean same = qiDianCity.getSelectedItem().equals(zhongDianCity.getSelectedItem());
 				if (ch1) {
-					JOptionPane.showMessageDialog(b5ui, "请选择起点城市");
+					new DisplayDialog(b5ui, "请选择起点城市");
+//					JOptionPane.showMessageDialog(b5ui, "请选择起点城市");
 				}
 				if (ch2) {
-					JOptionPane.showMessageDialog(b5ui, "请选择终点城市");
+					new DisplayDialog(b5ui, "请选择终点城市");
+//					JOptionPane.showMessageDialog(b5ui, "请选择终点城市");
 				}
 				if (!dis) {
-					JOptionPane.showMessageDialog(b5ui, "请输入正确的距离数值");
+					new DisplayDialog(b5ui, "请输入正确的距离数值");
+//					JOptionPane.showMessageDialog(b5ui, "请输入正确的距离数值");
 				}
 				if (same) {
-					JOptionPane.showMessageDialog(null, "起点城市和终点城市不能相同");
+					new DisplayDialog(b5ui, "起点城市和终点城市不能相同");
+//					JOptionPane.showMessageDialog(null, "起点城市和终点城市不能相同");
 				}
 				TransportationController transportationController = null;
 				try {
@@ -169,14 +173,16 @@ public class b5DistanceConst extends JPanel {
 						b2 = transportationController.addRoute(route2); 
 					}
 					if (b1 && b2) {
-						JOptionPane.showMessageDialog(b5ui, "修改成功！");
+						new DisplayDialog(b5ui, "修改成功！");
+//						JOptionPane.showMessageDialog(b5ui, "修改成功！");
 						tjpl.remove(distanceConst);
 						tjpl.add(b5ui.operationJpanel);
 						b5ui.b1.setEnabled(true);
 						b5ui.b2.setEnabled(true);
 						tjpl.repaint();
 					}else {
-						JOptionPane.showMessageDialog(b5ui, "修改失败，请重试");
+						new DisplayDialog(b5ui, "修改失败，请重试");
+//						JOptionPane.showMessageDialog(b5ui, "修改失败，请重试");
 					}
 				}								
 			}

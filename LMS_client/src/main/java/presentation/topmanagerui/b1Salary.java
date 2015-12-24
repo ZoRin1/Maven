@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import businesslogic.transportationbl.TransportationController;
+import presentation.adminui.DisplayDialog;
 
 public class b1Salary extends JPanel {
 	private JLabel tiShi,anYue,yuanMeiYue,jiCi,yuanMeiCi,tiCheng,baiFenHao;
@@ -163,13 +164,16 @@ public class b1Salary extends JPanel {
 				boolean bTIiCheng = DataCheck.isDouble(tiChengF.getText());
 				
 				if (!bAnYue) {
-					JOptionPane.showMessageDialog(null, "请输入正确的按月工资策略数值");
+					new DisplayDialog(b1ui, "请输入正确的按月工资策略数值");
+//					JOptionPane.showMessageDialog(null, "请输入正确的按月工资策略数值");
 				}
 				if (!bJiCi) {
-					JOptionPane.showMessageDialog(null, "请输入正确的计次工资策略数值");
+					new DisplayDialog(b1ui, "请输入正确的计次工资策略数值");
+//					JOptionPane.showMessageDialog(null, "请输入正确的计次工资策略数值");
 				}
 				if (!bTIiCheng) {
-					JOptionPane.showMessageDialog(null, "请输入正确的提成工资策略数值");
+					new DisplayDialog(b1ui, "请输入正确的提成工资策略数值");
+//					JOptionPane.showMessageDialog(null, "请输入正确的提成工资策略数值");
 				}
 				if (bAnYue && bJiCi && bTIiCheng) {
 					TransportationController t=null;
@@ -185,7 +189,8 @@ public class b1Salary extends JPanel {
 					salarys[2] = Double.parseDouble(tiChengF.getText());
 					boolean result = t.changeSalary(employee, salarys);
 					if (result) {
-						JOptionPane.showMessageDialog(b1ui, "修改成功！");
+						new DisplayDialog(b1ui, "修改成功！");
+//						JOptionPane.showMessageDialog(b1ui, "修改成功！");
 						b1ui.setTitle("总经理--工资管理");
 						tjpl.remove(salary);
 						tjpl.add(b1ui.operationJpanel);												
@@ -197,7 +202,8 @@ public class b1Salary extends JPanel {
 						b1ui.b6.setEnabled(true);
 						tjpl.repaint();
 					}else {
-						JOptionPane.showMessageDialog(b1ui, "修改失败，请重试！");
+						new DisplayDialog(b1ui, "修改失败，请重试！");
+//						JOptionPane.showMessageDialog(b1ui, "修改失败，请重试！");
 					}
 					
 					

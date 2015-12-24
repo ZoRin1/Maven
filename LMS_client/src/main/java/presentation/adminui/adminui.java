@@ -231,7 +231,8 @@ public class adminui extends JFrame{
 								new SearchAccount(aui, apl, result);
 								aui.repaint();
 							}else{
-								JOptionPane.showMessageDialog(aui, "未找到账号，请重新输入");
+								new DisplayDialog(aui, "未找到账号，请重新输入");
+//								JOptionPane.showMessageDialog(aui, "未找到账号，请重新输入");
 							}
 						} catch (HeadlessException e1) {
 							// TODO Auto-generated catch block
@@ -241,10 +242,12 @@ public class adminui extends JFrame{
 							new InternetDialog(aui);
 						}
 					}else {
-						JOptionPane.showMessageDialog(aui, "请输入账号");
+						new DisplayDialog(aui, "未找到账号，请重新输入");
+//						JOptionPane.showMessageDialog(aui, "请输入账号");
 					}					
 				}else {
-					JOptionPane.showMessageDialog(aui, "请输入账号");
+					new DisplayDialog(aui, "请输入账号");
+//					JOptionPane.showMessageDialog(aui, "请输入账号");
 				}
 				
 			}

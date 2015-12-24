@@ -16,8 +16,7 @@ import po.documentsPO.ZReceivePO;
 public class DocumentsToString {
 	
 	public static String getOrderPO (GetOrderPO po){
-		String result = "单据名称:" + po.getDoName();
-		result = result + "\n单据编号:" + po.getCode();
+		String result = "单据编号:" + po.getCode();
 		result = result + "\n对应订单编号:" + po.getCode1();
 		result = result + "\n创建人账号:" + po.getAccount();
 		result = result + "\n收件人姓名:" + po.getReceiverName();
@@ -26,8 +25,7 @@ public class DocumentsToString {
 	}
 	
 	public static String inBillsPO (InBillsPO po){
-		String result = "单据名称:" + po.getDoName();
-		result = result + "\n单据编号:" + po.getCode();
+		String result ="单据编号:" + po.getCode();
 		result = result + "\n入库快递编号:" + po.getInDepotNum();
 		result = result + "\n创入库日期:" + po.getInDepotDate();
 		result = result + "\n创建人账号:" + po.getAccount();
@@ -40,8 +38,7 @@ public class DocumentsToString {
 	}
 	
 	public static String loadingPO(LoadingPO po){
-		String result = "单据名称:" + po.getDoName();
-		result = result + "\n单据编号:" + po.getCode();
+		String result = "单据编号:" + po.getCode();
 		result = result + "\n装运日期:" + po.getDate();
 		result = result + "\n创建人账号:" + po.getAccount();
 		result = result + "\n出发地:" + po.getDeparture();
@@ -53,32 +50,30 @@ public class DocumentsToString {
 	}
 	
 	public static String orderPO(OrderPO po){
-		String result = "单据名称:" + po.getDoName();
-		result = result + "\n单据编号:" + po.getCode();
-		result = result + "\n创建人账号:" + po.getAccount();
+		String result = "单据编号:" + po.getCode();
+		result = result + "    创建人账号:" + po.getAccount();
 		result = result + "\n日期:" + po.getDate();
-		result = result + "\n寄件人姓名:" + po.getSenderName();
+		result = result + "    寄件人姓名:" + po.getSenderName();
 		result = result + "\n寄件人地址:" + po.getSenderAddress();
-		result = result + "\n寄件人电话:" + po.getSPhoneNumber();
+		result = result + "    寄件人电话:" + po.getSPhoneNumber();
 		result = result + "\n寄件人手机:" + po.getSMobileNumber();
-		result = result + "\n收件人姓名:" + po.getReceiverName();
+		result = result + "    收件人姓名:" + po.getReceiverName();
 		result = result + "\n收件人地址:" + po.getReceiverAddress();
-		result = result + "\n收件人单位:" + po.getReceiverOrg();
+		result = result + "    收件人单位:" + po.getReceiverOrg();
 		result = result + "\n收件人电话:" + po.getRPhoneNumber();
-		result = result + "\n收件人手机:" + po.getRMobileNumber();
+		result = result + "    收件人手机:" + po.getRMobileNumber();
 		result = result + "\n货物数量:" + String.valueOf(po.getNumber());
-		result = result + "\n货物重量:" + String.valueOf(po.getWeight());
+		result = result + "    货物重量:" + String.valueOf(po.getWeight());
 		result = result + "\n货物体积:" + String.valueOf(po.getShape());
-		result = result + "\n货物名:" + po.getCargoNameList();
+		result = result + "    货物名:" + po.getCargoNameList();
 		result = result + "\n货物大学:" + "/长:" + po.getSizeList()[0] + "/宽:" + po.getSizeList()[1] + "/高:" + po.getSizeList()[2];
-		result = result + "\n总费用:" + po.getSumCost();
+		result = result + "    总费用:" + po.getSumCost();
 		result = result + "\n快递种类:" + po.getState();
 		return result;
 	}
 	
 	public static String outBillsPO(OutbillsPO po){
-		String result = "单据名称:" + po.getDoName();
-		result = result + "\n单据编号:" + po.getCode();
+		String result =  "单据编号:" + po.getCode();
 		result = result + "\n快递编号:" + po.getPackCode();
 		result = result + "\n出库日期:" + po.getDate();
 		result = result + "\n创建人账号:" + po.getAccount();
@@ -89,8 +84,7 @@ public class DocumentsToString {
 	}
 	
 	public static String payMentPO(PaymentPO po){
-		String result = "单据名称:" + po.getDoName();
-		result = result + "\n单据编号:" + po.getCode();
+		String result = "单据编号:" + po.getCode();
 		result = result + "\n付款日期:" + po.getDate();
 		result = result + "\n创建人账号:" + po.getAccount();
 		result = result + "\n付款金额:" + po.getFund();
@@ -102,8 +96,7 @@ public class DocumentsToString {
 	}
 	
 	public static String receiptPO(ReceiptPO po){
-		String result = "单据名称:" + po.getDoName();
-		result = result + "\n单据编号:" + po.getCode();
+		String result = "单据编号:" + po.getCode();
 		result = result + "\n收款日期:" + po.getDate();
 		result = result + "\n创建人账号:" + po.getAccount();
 		result = result + "\n营业厅编号:" + po.getOrgCode();
@@ -113,8 +106,7 @@ public class DocumentsToString {
 	}
 	
 	public static String yDispatchPO(YDispatchPO po){
-		String result = "单据名称:" + po.getDoName();
-		result = result + "\n单据编号:" + po.getCode();
+		String result = "单据编号:" + po.getCode();
 		result = result + "\n派件日期:" + po.getDate();
 		result = result + "\n对应订单编号:" + po.getCode2();
 		result = result + "\n创建人账号:" + po.getAccount();
@@ -123,8 +115,7 @@ public class DocumentsToString {
 	}
 	
 	public static String yReceivePO (YReceivePO po){
-		String result = "单据名称:" + po.getDoName();
-		result = result + "\n单据编号:" + po.getCode();
+		String result ="单据编号:" + po.getCode();
 		result = result + "\n派件日期:" + po.getDate();
 		result = result + "\n订单条形码号:" + po.getCode1();
 		result = result + "\n创建人账号:" + po.getAccount();
@@ -135,8 +126,7 @@ public class DocumentsToString {
 	}
 
 	public static String zLoadingPO(ZLoadingPO po){
-		String result = "单据名称:" + po.getDoName();
-		result = result + "\n单据编号:" + po.getCode();
+		String result = "单据编号:" + po.getCode();
 		result = result + "\n装运日期:" + po.getDate();
 		result = result + "\n创建人账号:" + po.getAccount();
 		result = result + "\n车辆编号:" + po.getTranscode();
@@ -148,8 +138,7 @@ public class DocumentsToString {
 	}
 	
 	public static String zReceivePO(ZReceivePO po){
-		String result = "单据名称:" + po.getDoName();
-		result = result + "\n单据编号:" + po.getCode();
+		String result = "单据编号:" + po.getCode();
 		result = result + "\n中转日期:" + po.getDate();
 		result = result + "\n创建人账号:" + po.getAccount();
 		result = result + "\n中转中心汽运编号:" + po.getzCode();

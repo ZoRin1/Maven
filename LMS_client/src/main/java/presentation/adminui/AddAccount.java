@@ -244,11 +244,13 @@ public class AddAccount extends JPanel {
 						AccountInfoController accountInfoController = new AccountInfoController();
 						boolean bExist = (accountInfoController.getInfo(Long.parseLong(zhangHaoNo.getText())) != null);
 						if (bExist) {
-							JOptionPane.showMessageDialog(null, "账号已存在，请重新输入");
+							new DisplayDialog(aui, "账号已存在，请重新输入");
+//							JOptionPane.showMessageDialog(null, "账号已存在，请重新输入");
 						}else {
 							boolean result = accountInfoController.addAccount(Long.parseLong(zhangHaoNo.getText()), accountNumberVO);
 							if (result) {
-								JOptionPane.showMessageDialog(aui, "创建成功");
+								new DisplayDialog(aui,"创建成功");
+//								JOptionPane.showMessageDialog(aui, "创建成功");
 								apl.remove(aat);
 								apl.add(aui.operationJpanel);
 								aui.accountField.setEditable(true);
@@ -256,7 +258,8 @@ public class AddAccount extends JPanel {
 								aui.addaccountButton.setEnabled(true);
 								aui.repaint();
 							}else {
-								JOptionPane.showMessageDialog(null, "创建失败，请重试");
+								new DisplayDialog(aui, "创建失败，请重试");
+//								JOptionPane.showMessageDialog(null, "创建失败，请重试");
 							}
 						}
 					} catch (NumberFormatException e1) {

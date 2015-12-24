@@ -107,16 +107,19 @@ public class b2BusinessAdd extends JPanel {
 				String di = diQuF.getText();
 				String zhong = zhongZhuanF.getText();
 				if (zhong.equals("")) {
-					JOptionPane.showMessageDialog(null, "请输入所属中转中心编号");
+					new DisplayDialog(b2ui, "请输入所属中转中心编号");
+//					JOptionPane.showMessageDialog(null, "请输入所属中转中心编号");
 				}
 				if (di.equals("")) {
-					JOptionPane.showMessageDialog(null, "请输入所在地区");
+					new DisplayDialog(b2ui, "请输入所在地区");
+//					JOptionPane.showMessageDialog(null, "请输入所在地区");
 				}
 				
 				if ((!zhong.equals("")) && (!di.equals(""))) {							
 					String mCity = middleController.GetInfo(zhong);
 					if (mCity==null) {
-						JOptionPane.showMessageDialog(tjpl, "不存在此中转中心");
+						new DisplayDialog(b2ui, "不存在此中转中心");
+//						JOptionPane.showMessageDialog(tjpl, "不存在此中转中心");
 					}else {
 						String bianHao = "";	
 						if (middleController.getBussinessHallList(zhong) != null) {
@@ -134,12 +137,14 @@ public class b2BusinessAdd extends JPanel {
 						BussinessOrgVO vo = new BussinessOrgVO(mCity, di, zhong + "-" +bianHao, zhong, null, null, null, null);
 						boolean result = businessController.addBussinessHall(bianHao, vo);
 						if (result) {
-							JOptionPane.showMessageDialog(tjpl, "创建成功,机构编号为"+ zhong + "-" + bianHao);
+							new DisplayDialog(b2ui, "创建成功,机构编号为"+ zhong + "-" + bianHao);
+//							JOptionPane.showMessageDialog(tjpl, "创建成功,机构编号为"+ zhong + "-" + bianHao);
 							tjpl.remove(b2BusinessAdd);
 							new b2SearchOrg(b2ui, tjpl, org);
 							tjpl.repaint();
 						}else {
-							JOptionPane.showMessageDialog(tjpl, "修改失败,已存在同名营业厅");
+							new DisplayDialog(b2ui, "修改失败,已存在同名营业厅");
+//							JOptionPane.showMessageDialog(tjpl, "修改失败,已存在同名营业厅");
 						}
 					}
 					
