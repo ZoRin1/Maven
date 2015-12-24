@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.rmi.RemoteException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -30,13 +31,24 @@ public class b2BusinessChange extends JPanel {
 
 	
 	public b2BusinessChange(b2topmanagerui b2ui,topmanagerJpanel tjpl,String ID){
-		init(ID);
+		init(ID,b2ui);
 		tjpl.add(this);
-		registListener(b2ui, tjpl, this, ID);
+		try {
+			registListener(b2ui, tjpl, this, ID);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			new InternetDialog(b2ui);
+		}
 	}
 	
-	private void init(String ID) {
-		BusinessController businessController = new BusinessController();
+	private void init(String ID,b2topmanagerui b2ui) {
+		BusinessController businessController = null;
+		try {
+			businessController = new BusinessController();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			new InternetDialog(b2ui);
+		}
 		String[] temp = ID.split("-");
 		Font bFont = new Font("幼圆", Font.BOLD, 30);
 		Font sFont = new Font("幼圆", Font.BOLD, 20);
@@ -117,7 +129,13 @@ public class b2BusinessChange extends JPanel {
 		yeWuYuanb.setSelectedIndex(-1);
 		this.add(yeWuYuanb);
 		
-		AccountInfoController accountInfoController = new AccountInfoController();
+		AccountInfoController accountInfoController = null;
+		try {
+			accountInfoController = new AccountInfoController();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			new InternetDialog(b2ui);
+		}
 		
 		if (accountInfoController.getAccountList() != null) {
 			kongXianK = new JComboBox(accountInfoController.getAccountList());
@@ -152,7 +170,7 @@ public class b2BusinessChange extends JPanel {
 		this.setOpaque(false);
 	}
 	
-	private void registListener(final b2topmanagerui b2ui,final topmanagerJpanel tjpl,final b2BusinessChange b2BusinessChange,final String ID) {
+	private void registListener(final b2topmanagerui b2ui,final topmanagerJpanel tjpl,final b2BusinessChange b2BusinessChange,final String ID) throws RemoteException {
 		
 		final BusinessController businessController = new BusinessController();
 		final AccountInfoController accountInfoController = new AccountInfoController();
@@ -207,7 +225,13 @@ public class b2BusinessChange extends JPanel {
 				@Override
 				public void itemStateChanged(ItemEvent e) {
 					// TODO Auto-generated method stub
-					BusinessController businessController = new BusinessController();
+					BusinessController businessController=null;
+					try {
+						businessController = new BusinessController();
+					} catch (RemoteException e1) {
+						// TODO Auto-generated catch block
+						new InternetDialog(b2ui);
+					}
 					int state = e.getStateChange();
 					if(state==ItemEvent.SELECTED){
 						String temp = (String) kongXianK.getSelectedItem();
@@ -228,7 +252,13 @@ public class b2BusinessChange extends JPanel {
 			@Override
 			public void itemStateChanged(ItemEvent e) {
 				// TODO Auto-generated method stub
-				BusinessController businessController = new BusinessController();
+				BusinessController businessController=null;
+				try {
+					businessController = new BusinessController();
+				} catch (RemoteException e1) {
+					// TODO Auto-generated catch block
+					new InternetDialog(b2ui);
+				}
 				int state = e.getStateChange();
 				if(state==ItemEvent.SELECTED){
 					if (!yeWuYuanb.getSelectedItem().equals("增加业务员")) {
@@ -263,7 +293,13 @@ public class b2BusinessChange extends JPanel {
 				@Override
 				public void itemStateChanged(ItemEvent e) {
 					// TODO Auto-generated method stub
-					BusinessController businessController = new BusinessController();
+					BusinessController businessController=null;
+					try {
+						businessController = new BusinessController();
+					} catch (RemoteException e1) {
+						// TODO Auto-generated catch block
+						new InternetDialog(b2ui);
+					}
 					int state = e.getStateChange();
 					if(state==ItemEvent.SELECTED){
 						String temp = (String) kongXianY.getSelectedItem();

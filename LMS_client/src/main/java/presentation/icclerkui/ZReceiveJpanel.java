@@ -7,6 +7,7 @@ import java.awt.Graphics;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -62,11 +63,11 @@ public class ZReceiveJpanel extends JPanel{
 	public ZReceiveJpanel(icclerkui ui,icclerkJpanel panel,String account,String state) {
 		this.account=account;
 		state2=state;
-		init();
+		init(ui);
 		panel.add(this);
 		registListener(ui,panel,this);
 	}
-	public void init(){
+	public void init(icclerkui ui){
 		Font font=new Font("幼圆",Font.BOLD,24);
 		code=new JLabel("单据编号：");
 		code.setForeground(Color.white);
@@ -75,7 +76,12 @@ public class ZReceiveJpanel extends JPanel{
 		this.add(code);
 		
 		code1=new JLabel();
-		code2=new documentController().getDocCode("中转中心接收单",account);
+		try {
+			code2=new documentController().getDocCode("中转中心接收单",account);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			new InternetDialog(ui);
+		}
 		code1.setText(code2);
 		code1.setForeground(Color.white);
 		code1.setFont(font);
@@ -183,7 +189,13 @@ public class ZReceiveJpanel extends JPanel{
 				boolean b=false;
 				String str3="";
 				for(int i=0;i<length;i++){
-					ArrayList<String> stri=new documentController().getWuliuInfo(list1[i]);
+					ArrayList<String> stri=null;
+					try {
+						stri = new documentController().getWuliuInfo(list1[i]);
+					} catch (RemoteException e1) {
+						// TODO Auto-generated catch block
+						new InternetDialog(ui);
+					}
 					if(stri.equals(null)){
 						b=true;
 						str3=list1[i];
@@ -203,7 +215,12 @@ public class ZReceiveJpanel extends JPanel{
 					arrival2=list[1];
 					departure2=depart.getText();
 					po=new ZReceivePO(code2, "中转中心接收单", date2, account, zCode, codeList, departure2, arrival2);
-					new documentController().createBlock(po);
+					try {
+						new documentController().createBlock(po);
+					} catch (RemoteException e1) {
+						// TODO Auto-generated catch block
+						new InternetDialog(ui);
+					}
 					new finishDialog2(ui, "中转接收单创建完成", true,"中转接收单");
 					panel.remove(panel2);
 					panel.add(ui.operationJpanel);

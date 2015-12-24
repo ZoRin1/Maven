@@ -5,8 +5,8 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 
-import javax.naming.InitialContext;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -15,7 +15,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import businesslogic.transportationbl.TransportationController;
-import presentation.adminui.NumberFieldListener;
 
 public class b1Salary extends JPanel {
 	private JLabel tiShi,anYue,yuanMeiYue,jiCi,yuanMeiCi,tiCheng,baiFenHao;
@@ -28,16 +27,21 @@ public class b1Salary extends JPanel {
 	private ImageIcon yesIcon=new ImageIcon("picture/确定.png");
 	
 	public b1Salary(topmanagerui tui,topmanagerJpanel tjpl,b1topmanagerui b1ui,int employee) {
-		init(employee);
+		init(employee,b1ui);
 		tjpl.add(this);
 		registListener(tjpl, b1ui, this,employee);
-		
-		
 	}
 	
-	private void init(int employee) {//employee 为员工种类
+	private void init(int employee,b1topmanagerui b1ui) {//employee 为员工种类
 	
-		TransportationController transportationController = new TransportationController();
+		TransportationController transportationController=null;
+
+		try {
+			transportationController = new TransportationController();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			new InternetDialog(b1ui);
+		}
 		double[] salary = transportationController.getSalary(employee);
 		
 		Font big = new Font("幼圆", Font.BOLD, 40);
@@ -168,7 +172,13 @@ public class b1Salary extends JPanel {
 					JOptionPane.showMessageDialog(null, "请输入正确的提成工资策略数值");
 				}
 				if (bAnYue && bJiCi && bTIiCheng) {
-					TransportationController t = new TransportationController();
+					TransportationController t=null;
+					try {
+						t = new TransportationController();
+					} catch (RemoteException e1) {
+						// TODO Auto-generated catch block
+						new InternetDialog(b1ui);
+					}
 					double[] salarys = new double[3];
 					salarys[0] = Double.parseDouble(anYueF.getText());
 					salarys[1] = Double.parseDouble(jiCiF.getText());

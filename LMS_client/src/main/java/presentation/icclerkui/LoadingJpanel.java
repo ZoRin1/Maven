@@ -7,6 +7,7 @@ import java.awt.Graphics;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -67,10 +68,10 @@ public class LoadingJpanel extends JPanel{
 		panel.add(this);
 		this.account=account;
 		this.state=state;
-		init();
+		init(ui);
 		registListener(ui,panel,this);
 	}
-	public void init(){
+	public void init(icclerkui ui){
 		list=state.split("-");
 		Font font=new Font("幼圆",Font.BOLD,24);
 		code=new JLabel("单据编号：");
@@ -80,7 +81,12 @@ public class LoadingJpanel extends JPanel{
 		this.add(code);
 		
 		code1=new JLabel();
-		code2=new documentController().getDocCode("营业厅装车单",account);
+		try {
+			code2=new documentController().getDocCode("营业厅装车单",account);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			new InternetDialog(ui);
+		}
 		code1.setText(code2);
 		code1.setForeground(Color.white);
 		code1.setFont(font);
@@ -196,7 +202,13 @@ public class LoadingJpanel extends JPanel{
 				
 				boolean a=true;
 				String str1=arrive.getText();
-				String[] list1=new MiddleController().getBussinessHallList(list[3]);
+				String[] list1=null;
+				try {
+					list1 = new MiddleController().getBussinessHallList(list[3]);
+				} catch (RemoteException e1) {
+					// TODO Auto-generated catch block
+					new InternetDialog(ui);
+				}
 				int length=list1.length;
 				for(int i=0;i<length;i++){
 					String[] split1=list1[i].split("-");
@@ -212,7 +224,13 @@ public class LoadingJpanel extends JPanel{
 				boolean b=false;
 				String str3="";
 				for(int i=0;i<size2;i++){
-					ArrayList<String> stri=new documentController().getWuliuInfo(list2[i]);
+					ArrayList<String> stri=null;
+					try {
+						stri = new documentController().getWuliuInfo(list2[i]);
+					} catch (RemoteException e1) {
+						// TODO Auto-generated catch block
+						new InternetDialog(ui);
+					}
 					if(stri.equals(null)){
 						b=true;
 						str3=list2[i];
@@ -243,10 +261,21 @@ public class LoadingJpanel extends JPanel{
 					}
 					DecimalFormat df = new DecimalFormat("0.00");
 					documentController co=new documentController();
-					String str=df.format(co.getShortCost());
+					String str=null;
+					try {
+						str = df.format(co.getShortCost());
+					} catch (RemoteException e1) {
+						// TODO Auto-generated catch block
+						new InternetDialog(ui);
+					}
 					double charge=Double.parseDouble(str);
 					po=new LoadingPO(date, code2, "营业厅装车单", account, departure2, arrival2, supervisor, supercargo, codeList, charge);
-					new documentController().createBlock(po);
+					try {
+						new documentController().createBlock(po);
+					} catch (RemoteException e1) {
+						// TODO Auto-generated catch block
+						new InternetDialog(ui);
+					}
 					new finishDialog(ui, "装车单创建完成", true , str);
 					panel.remove(panel2);
 					panel.add(ui.operationJpanel);

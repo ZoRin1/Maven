@@ -4,6 +4,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -38,8 +39,8 @@ public class stockDepotPanel2 extends JPanel{
 	public stockDepotPanel2(icwarehousemanui icwarehousemanui,icwarehousemanJpanel icwarehousemanJpanel,String account,String state){
 		this.account = account;
 		this.state = state;
-		check();
-		getDepotCount();
+		check(icwarehousemanui);
+		getDepotCount(icwarehousemanui);
 		init();
 		icwarehousemanJpanel.add(this);
 		registListener(icwarehousemanui,icwarehousemanJpanel,this);
@@ -130,7 +131,7 @@ public class stockDepotPanel2 extends JPanel{
 		});
 	}
 	
-	private void check(){
+	private void check(icwarehousemanui icwarehousemanui){
 		SimpleDateFormat endDf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
 		SimpleDateFormat startdf = new SimpleDateFormat("yyyy-MM-dd");//设置日期格式
 		String startDate = startdf.format(new Date())+" 00:00:00";
@@ -140,7 +141,12 @@ public class stockDepotPanel2 extends JPanel{
 		
 		
 		checkController = new CheckController();
-		InVOList = checkController.conInventory(account, startDate, endDate);
+		try {
+			InVOList = checkController.conInventory(account, startDate, endDate);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			new InternetDialog(icwarehousemanui);
+		}
 		VOList = new ArrayList<InDepotInfVO>();
 		for(int i = 0 ; i < InVOList.size();i++){
 			if(InVOList.get(i).getAreaNum()==3||InVOList.get(i).getAreaNum()==7){
@@ -149,8 +155,13 @@ public class stockDepotPanel2 extends JPanel{
 		}
 	}
 	
-	private void getDepotCount(){
-		usedSpace =new spaceBL();
+	private void getDepotCount(icwarehousemanui icwarehousemanui){
+		try {
+			usedSpace =new spaceBL();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			new InternetDialog(icwarehousemanui);
+		}
 		String[] temp = state.split("-");
 		useSpace = usedSpace.usedSpaceInf(temp[1]);
 	}

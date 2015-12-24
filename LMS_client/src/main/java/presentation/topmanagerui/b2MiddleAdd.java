@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -32,7 +33,12 @@ public class b2MiddleAdd extends JPanel {
 	public b2MiddleAdd(b2topmanagerui b2ui,topmanagerJpanel tjpl,String org){
 		init();
 		tjpl.add(this);
-		registLIstener(b2ui, tjpl, this, org);
+		try {
+			registLIstener(b2ui, tjpl, this, org);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			new InternetDialog(b2ui);
+		}
 	}
 
 	private void init() {
@@ -68,7 +74,7 @@ public class b2MiddleAdd extends JPanel {
 		
 	}
 	
-	private void registLIstener(final b2topmanagerui b2ui,final topmanagerJpanel tjpl,final b2MiddleAdd b2MiddleAdd,final String org) {
+	private void registLIstener(final b2topmanagerui b2ui,final topmanagerJpanel tjpl,final b2MiddleAdd b2MiddleAdd,final String org) throws RemoteException {
 		
 		final TransportationController transportationController = new TransportationController();
 		final MiddleController middleController = new MiddleController();
@@ -117,7 +123,13 @@ public class b2MiddleAdd extends JPanel {
 							}
 							MiddleOrgVO vo = new MiddleOrgVO(mCity, bianHao, null, null, null);
 							boolean r1 = middleController.addMiddleOrg(bianHao, vo);
-							CityController cityController = new CityController();
+							CityController cityController = null;
+							try {
+								cityController = new CityController();
+							} catch (RemoteException e1) {
+								// TODO Auto-generated catch block
+								new InternetDialog(b2ui);
+							}
 							boolean r2 = cityController.addCity(mCity);
 							if (r1 && r2) {
 								JOptionPane.showMessageDialog(tjpl, "创建成功,机构编号为" + bianHao);

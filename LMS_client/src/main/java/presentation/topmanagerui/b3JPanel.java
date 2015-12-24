@@ -10,6 +10,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
@@ -54,11 +55,16 @@ public class b3JPanel extends JPanel {
 	
 	public b3JPanel(topmanagerui tui,topmanagerJpanel tjpl) {
 		// TODO Auto-generated constructor stub
-		init(tui, tjpl);	
+		try {
+			init(tui, tjpl);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			new InternetDialog(tui);
+		}	
 		registListener(tui, tjpl, this);
 		tjpl.add(this);
 	}
-	private void init(topmanagerui tui,topmanagerJpanel tjpl){
+	private void init(final topmanagerui tui,topmanagerJpanel tjpl) throws RemoteException{
 		final documentController documentController = new documentController();
 		ArrayList<String> documents = documentController.showList();
 		
@@ -107,7 +113,13 @@ public class b3JPanel extends JPanel {
 						String code = (String)table.getValueAt(r, 0);
 						switch (name) {
 						case "收件单":{
-							GetOrderPO po = (GetOrderPO) documentController.getBufferedInfo(code, "收件单");
+							GetOrderPO po = null;
+							try {
+								po = (GetOrderPO) documentController.getBufferedInfo(code, "收件单");
+							} catch (RemoteException e1) {
+								// TODO Auto-generated catch block
+								new InternetDialog(tui);
+							}
 							String message = DocumentsToString.getOrderPO(po);
 							JOptionPane.showMessageDialog(null, message);	
 							break;
@@ -119,49 +131,97 @@ public class b3JPanel extends JPanel {
 //							break;
 //						}
 						case "营业厅装车单":{
-							LoadingPO po = (LoadingPO) documentController.getBufferedInfo(code, "营业厅装车单");
+							LoadingPO po = null;
+							try {
+								po = (LoadingPO) documentController.getBufferedInfo(code, "营业厅装车单");
+							} catch (RemoteException e1) {
+								// TODO Auto-generated catch block
+								new InternetDialog(tui);
+							}
 							String message = DocumentsToString.loadingPO(po);
 							JOptionPane.showMessageDialog(null, message);	
 							break;
 						}
 						case "寄件单":{
-							OrderPO po = (OrderPO) documentController.getBufferedInfo(code, "寄件单");
+							OrderPO po = null;
+							try {
+								po = (OrderPO) documentController.getBufferedInfo(code, "寄件单");
+							} catch (RemoteException e1) {
+								// TODO Auto-generated catch block
+								new InternetDialog(tui);
+							}
 							String message = DocumentsToString.orderPO(po);
 							JOptionPane.showMessageDialog(null, message);	
 							break;
 						}
 						case "付款单":{
-							PaymentPO po = (PaymentPO) documentController.getBufferedInfo(code, "付款单");
+							PaymentPO po = null;
+							try {
+								po = (PaymentPO) documentController.getBufferedInfo(code, "付款单");
+							} catch (RemoteException e1) {
+								// TODO Auto-generated catch block
+								new InternetDialog(tui);
+							}
 							String message = DocumentsToString.payMentPO(po);
 							JOptionPane.showMessageDialog(null, message);	
 							break;
 						}
 						case "收款单":{
-							ReceiptPO po = (ReceiptPO) documentController.getBufferedInfo(code, "收款单");
+							ReceiptPO po = null;
+							try {
+								po = (ReceiptPO) documentController.getBufferedInfo(code, "收款单");
+							} catch (RemoteException e1) {
+								// TODO Auto-generated catch block
+								new InternetDialog(tui);
+							}
 							String message = DocumentsToString.receiptPO(po);
 							JOptionPane.showMessageDialog(null, message);	
 							break;
 						}
 						case "派件单":{
-							YDispatchPO po = (YDispatchPO) documentController.getBufferedInfo(code, "派件单");
+							YDispatchPO po = null;
+							try {
+								po = (YDispatchPO) documentController.getBufferedInfo(code, "派件单");
+							} catch (RemoteException e1) {
+								// TODO Auto-generated catch block
+								new InternetDialog(tui);
+							}
 							String message = DocumentsToString.yDispatchPO(po);
 							JOptionPane.showMessageDialog(null, message);	
 							break;
 						}
 						case "营业厅接收单":{
-							YReceivePO po = (YReceivePO) documentController.getBufferedInfo(code, "营业厅接收单");
+							YReceivePO po = null;
+							try {
+								po = (YReceivePO) documentController.getBufferedInfo(code, "营业厅接收单");
+							} catch (RemoteException e1) {
+								// TODO Auto-generated catch block
+								new InternetDialog(tui);
+							}
 							String message = DocumentsToString.yReceivePO(po);
 							JOptionPane.showMessageDialog(null, message);	
 							break;
 						}
 						case "中转中心转运单":{
-							ZLoadingPO po = (ZLoadingPO) documentController.getBufferedInfo(code, "中转中心转运单");
+							ZLoadingPO po = null;
+							try {
+								po = (ZLoadingPO) documentController.getBufferedInfo(code, "中转中心转运单");
+							} catch (RemoteException e1) {
+								// TODO Auto-generated catch block
+								new InternetDialog(tui);
+							}
 							String message = DocumentsToString.zLoadingPO(po);
 							JOptionPane.showMessageDialog(null, message);	
 							break;
 						}
 						case "中转中心接收单":{
-							GetOrderPO po = (GetOrderPO) documentController.getBufferedInfo(code, "中转中心接收单");
+							GetOrderPO po = null;
+							try {
+								po = (GetOrderPO) documentController.getBufferedInfo(code, "中转中心接收单");
+							} catch (RemoteException e1) {
+								// TODO Auto-generated catch block
+								new InternetDialog(tui);
+							}
 							String message = DocumentsToString.getOrderPO(po);
 							JOptionPane.showMessageDialog(null, message);	
 							break;
@@ -234,7 +294,12 @@ public class b3JPanel extends JPanel {
 					if (state.equals("通过")) {
 						b = true;
 					}
-					documentController.examined(data[i][0], data[i][1], b);
+					try {
+						documentController.examined(data[i][0], data[i][1], b);
+					} catch (RemoteException e1) {
+						// TODO Auto-generated catch block
+						new InternetDialog(tui);
+					}
 				}
 				tjpl.remove(b3jpl);
 				new b3JPanel(tui, tjpl);

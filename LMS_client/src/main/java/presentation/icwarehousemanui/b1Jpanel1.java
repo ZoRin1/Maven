@@ -7,9 +7,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-
+import java.rmi.RemoteException;
 import javax.swing.*;
-
 import businesslogic.documentsbl.documentController;
 
 public class b1Jpanel1 extends JPanel{
@@ -92,9 +91,14 @@ public class b1Jpanel1 extends JPanel{
 		this.setBounds(260, 60, 730,650);
 		this.setLayout(null);
 	}
-	private boolean isCodeTrue(){
-		if (documentController.getWuliuInfo(t1.getText())==null) {
-			return false;
+	private boolean isCodeTrue(b1icwarehousemanui ui){
+		try {
+			if (documentController.getWuliuInfo(t1.getText())==null) {
+				return false;
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			new InternetDialog(ui);
 		}
 		return true;
 	}
@@ -129,7 +133,7 @@ public class b1Jpanel1 extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO 自动生成的方法存根
-				if (isCodeTrue()) {
+				if (isCodeTrue(ui)) {
 					dingdantiaoxingmanumJLabel.setText(t1.getText());
 				}
 				else {

@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -32,7 +33,13 @@ public class b2BusinessInfo extends JPanel {
 	}
 	private void init(b2topmanagerui b2ui,topmanagerJpanel tjpl,String ID) {
 		
-		BusinessController businessController = new BusinessController();
+		BusinessController businessController = null;
+		try {
+			businessController = new BusinessController();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			new InternetDialog(b2ui);
+		}
 		String[] temp = ID.split("-");
 		Font bFont = new Font("幼圆", Font.BOLD, 30);
 		Font sFont = new Font("幼圆", Font.BOLD, 20);

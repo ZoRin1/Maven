@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -75,10 +76,7 @@ public class b2BusinessAdd extends JPanel {
 		
 	}
     
-    private void registListener(final b2topmanagerui b2ui,final topmanagerJpanel tjpl,final b2BusinessAdd b2BusinessAdd,final String org) {
-		
-    	final MiddleController middleController = new MiddleController();
-    	final BusinessController businessController = new BusinessController();
+    private void registListener(final b2topmanagerui b2ui,final topmanagerJpanel tjpl,final b2BusinessAdd b2BusinessAdd,final String org) {	
     	
     	returnButton.addActionListener(new ActionListener() {
 
@@ -96,6 +94,15 @@ public class b2BusinessAdd extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				MiddleController middleController = null;
+				BusinessController businessController = null;
+				try {
+					middleController = new MiddleController();
+					businessController = new BusinessController();
+				} catch (RemoteException e1) {
+					// TODO Auto-generated catch block
+				 new InternetDialog(b2ui);
+				}
 				// TODO Auto-generated method stub
 				String di = diQuF.getText();
 				String zhong = zhongZhuanF.getText();

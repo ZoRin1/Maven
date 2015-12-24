@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.rmi.RemoteException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -52,11 +53,16 @@ class finishb5Dialog extends JDialog{
 		super(frame,title,modal);
 		this.account = account;
 		this.state = state;
-		space = new spaceBL();
+		try {
+			space = new spaceBL();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			new InternetDialog(frame);
+		}
 		usedSpace();
 		allSpace();
 		init();
-		registerListener();
+		registerListener(frame);
 		this.setVisible(true);
 	}
 	private void init(){
@@ -206,7 +212,7 @@ class finishb5Dialog extends JDialog{
 		this.setLocation((screenWidth-dialogWidth)/2, (screenHeight-dialogHeight)/2);
 		this.setResizable(false);
 	}
-	private void registerListener(){
+	private void registerListener(final JFrame frame){
 		jButton.addActionListener(new ActionListener() {		
 			public void actionPerformed(ActionEvent e) {
 				
@@ -215,7 +221,15 @@ class finishb5Dialog extends JDialog{
 				//这个上面还要添加  库存输入是否超出机动区大小！！！！
 				String[] temp = state.split("-");
 				drive = new DriverBL();
-				drive.drive(Integer.parseInt(t1.getText()), Integer.parseInt(t2.getText()), Integer.parseInt(t3.getText()), temp[1]);
+				try {
+					drive.drive(Integer.parseInt(t1.getText()), Integer.parseInt(t2.getText()), Integer.parseInt(t3.getText()), temp[1]);
+				} catch (NumberFormatException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (RemoteException e1) {
+					// TODO Auto-generated catch block
+					new InternetDialog(frame);
+				}
 				
 				//这里要添加库存报警的功能！！！！
 				used = space.usedSpaceInf(temp[1]);

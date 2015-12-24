@@ -7,6 +7,7 @@ import java.awt.Graphics;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -63,12 +64,12 @@ public class ZloadingJpanel extends JPanel{
 		this.state1=state1;
 		this.account=account;
 		this.state=state;
-		init(state1);
+		init(state1,ui);
 		ui.setTitle("中转中心业务员-中转接收单创建");
 		panel.add(this);
 		registListener(ui,panel,this);
 	}
-	public void init(String state1){
+	public void init(String state1,icclerkui ui){
 		String[] split=state.split("-");
 		Font font=new Font("幼圆",Font.BOLD,24);
 		code=new JLabel("单据编号：");
@@ -78,7 +79,12 @@ public class ZloadingJpanel extends JPanel{
 		this.add(code);
 		
 		code1=new JLabel();
-		code2=new documentController().getDocCode("中转中心转运单",account);
+		try {
+			code2=new documentController().getDocCode("中转中心转运单",account);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			new InternetDialog(ui);
+		}
 		code1.setText(code2);
 		code1.setForeground(Color.white);
 		code1.setFont(font);
@@ -204,7 +210,13 @@ public class ZloadingJpanel extends JPanel{
 				boolean b=false;
 				String str3="";
 				for(int i=0;i<length;i++){
-					ArrayList<String> stri=new documentController().getWuliuInfo(list1[i]);
+					ArrayList<String> stri=null;
+					try {
+						stri = new documentController().getWuliuInfo(list1[i]);
+					} catch (RemoteException e1) {
+						// TODO Auto-generated catch block
+						new InternetDialog(ui);
+					}
 					if(stri.equals(null)){
 						b=true;
 						str3=list1[i];
@@ -233,19 +245,29 @@ public class ZloadingJpanel extends JPanel{
 					}
 					DecimalFormat df = new DecimalFormat("0.00");
 					documentController co=new documentController();
-					String str;
-					if(state=="特快专递"){
-						str=df.format(co.getCost(split[1], arrival2, state1, 50000));
-					}
-					else if(state=="普通快递"){
-						str=df.format(co.getCost(split[1], arrival2, state1, 2000000));
-					}
-					else{
-						str=df.format(co.getCost(split[1], arrival2, state1, 10000));
+					String str=null;
+					try {
+						if(state=="特快专递"){
+							str=df.format(co.getCost(split[1], arrival2, state1, 50000));
+						}
+						else if(state=="普通快递"){
+							str=df.format(co.getCost(split[1], arrival2, state1, 2000000));
+						}
+						else{
+							str=df.format(co.getCost(split[1], arrival2, state1, 10000));
+						}
+					} catch (RemoteException e1) {
+						// TODO Auto-generated catch block
+						new InternetDialog(ui);
 					}
 					carriage=Double.parseDouble(str);
 					po=new ZLoadingPO(date2, code2, "中转中心转运单", account, transcode2, split[1],arrival2, name2, codeList, carriage);
-					new documentController().createBlock(po);
+					try {
+						new documentController().createBlock(po);
+					} catch (RemoteException e1) {
+						// TODO Auto-generated catch block
+						new InternetDialog(ui);
+					}
 					new finishDialog3(ui, "中转中心装运单创建完成", true , str);
 					panel.remove(panel2);
 					panel.add(ui.operationJpanel);

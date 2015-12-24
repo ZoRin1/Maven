@@ -10,6 +10,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -280,7 +281,13 @@ public class checkDepotDialog {
 						
 						//这中间要加对单据的调用
 						checkController = new CheckController();
-						ArrayList<SimpleInDepotInfVO> simpleInf = checkController.conCheck(account, starttime, endtime);
+						ArrayList<SimpleInDepotInfVO> simpleInf=null;
+						try {
+							simpleInf = checkController.conCheck(account, starttime, endtime);
+						} catch (RemoteException e) {
+							// TODO Auto-generated catch block
+							new InternetDialog(ui);
+						}
 						//这中间要加对单据的调用
 						
 						checkDepot.dispose();
@@ -301,7 +308,13 @@ public class checkDepotDialog {
 					
 					//这中间要加对单据的调用
 					checkController = new CheckController();
-					ArrayList<SimpleInDepotInfVO> simpleInf = checkController.conCheck(account, starttime, endtime);
+					ArrayList<SimpleInDepotInfVO> simpleInf=null;
+					try {
+						simpleInf = checkController.conCheck(account, starttime, endtime);
+					} catch (RemoteException e) {
+						// TODO Auto-generated catch block
+						new InternetDialog(ui);
+					}
 					//这中间要加对单据的调用
 					
 					checkDepot.dispose();

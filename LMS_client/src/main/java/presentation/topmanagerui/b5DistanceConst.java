@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -30,11 +31,16 @@ public class b5DistanceConst extends JPanel {
 	private ImageIcon yesIcon=new ImageIcon("picture/确定.png");
 	
 	public b5DistanceConst(b5topmanagerui b5ui,topmanagerJpanel tjpl){
-		init();
+		try {
+			init();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			new InternetDialog(b5ui);
+		}
 		tjpl.add(this);
 		registListener(b5ui, tjpl, this);
 	}
-	private void init(){
+	private void init() throws RemoteException{
 		
 		Font big = new Font("幼圆", Font.BOLD, 35);
 		Font small = new Font("幼圆", Font.BOLD, 30);
@@ -140,7 +146,13 @@ public class b5DistanceConst extends JPanel {
 				if (same) {
 					JOptionPane.showMessageDialog(null, "起点城市和终点城市不能相同");
 				}
-				TransportationController transportationController = new TransportationController();
+				TransportationController transportationController = null;
+				try {
+					transportationController = new TransportationController();
+				} catch (RemoteException e1) {
+					// TODO Auto-generated catch block
+					new InternetDialog(b5ui);
+				}
 				
 				if (!ch1 && ! ch2 && dis && !same) {
 					RouteVO route1 = new RouteVO(qiDianCity.getSelectedItem() + "-" + zhongDianCity.getSelectedItem(), 

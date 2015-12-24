@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.rmi.RemoteException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -33,12 +34,22 @@ private JLabel city,bianHao,bianHaoI,yeWuYuan,changKuGuanLiYuan;
 
 	
 	public b2MiddleChange(b2topmanagerui b2ui,topmanagerJpanel tjpl,String ID){
-		init(ID);
+		try {
+			init(ID);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			new InternetDialog(b2ui);
+		}
 		tjpl.add(this);
-		registListener(b2ui, tjpl, this, ID);
+		try {
+			registListener(b2ui, tjpl, this, ID);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			new InternetDialog(b2ui);
+		}
 	}
 	
-	private void init(String ID) {
+	private void init(String ID) throws RemoteException {
 		MiddleController middleController = new MiddleController();
 		AccountInfoController accountInfoController = new AccountInfoController();
 		String[] temp = ID.split("-");
@@ -143,7 +154,7 @@ private JLabel city,bianHao,bianHaoI,yeWuYuan,changKuGuanLiYuan;
 		
 	}
 	
-	private void registListener(final b2topmanagerui b2ui, final topmanagerJpanel tjpl,final b2MiddleChange b2MiddleChange, final String ID) {
+	private void registListener(final b2topmanagerui b2ui, final topmanagerJpanel tjpl,final b2MiddleChange b2MiddleChange, final String ID) throws RemoteException {
 		final MiddleController middleController = new MiddleController();
 		final AccountInfoController accountInfoController = new AccountInfoController();
 		
@@ -218,7 +229,13 @@ private JLabel city,bianHao,bianHaoI,yeWuYuan,changKuGuanLiYuan;
 			@Override
 			public void itemStateChanged(ItemEvent e) {
 				// TODO Auto-generated method stub
-				MiddleController middleController = new MiddleController();
+				MiddleController middleController = null;
+				try {
+					middleController = new MiddleController();
+				} catch (RemoteException e1) {
+					// TODO Auto-generated catch block
+					new InternetDialog(b2ui);
+				}
 				int state = e.getStateChange();
 				if (state == ItemEvent.SELECTED) {
 					if (!changKuGuanLiYuanB.getSelectedItem().equals("增加仓库管理员")) {
@@ -252,7 +269,13 @@ private JLabel city,bianHao,bianHaoI,yeWuYuan,changKuGuanLiYuan;
 				@Override
 				public void itemStateChanged(ItemEvent e) {
 					// TODO Auto-generated method stub
-					MiddleController middleController = new MiddleController();
+					MiddleController middleController = null;
+					try {
+						middleController = new MiddleController();
+					} catch (RemoteException e1) {
+						// TODO Auto-generated catch block
+						new InternetDialog(b2ui);
+					}
 					int state = e.getStateChange();
 					if (state == ItemEvent.SELECTED) {
 						String temp = (String) kongXianC.getSelectedItem();

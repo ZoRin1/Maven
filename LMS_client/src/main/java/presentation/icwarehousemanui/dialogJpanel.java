@@ -15,7 +15,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import presentation.bhclerkui.dialogJpanel;
 
 
 public 	class dialogJpanel extends JPanel{

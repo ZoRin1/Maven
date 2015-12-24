@@ -13,6 +13,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -44,14 +45,19 @@ public class b2Jpanel1 extends JPanel{
 		// TODO Auto-generated constructor stub
 		this.account=account;
 		this.state=state;
-		init();
+		init(ui);
 		icwarehousemanJpanel.add(this);
 		registListener(ui,icwarehousemanJpanel,this);
 	}
-	private void init(){
+	private void init(b2icwarehousemanui ui){
 		documentController=new documentController();
 		inDepot = new InDepotBL();
-		depot110 = new spaceBL();
+		try {
+			depot110 = new spaceBL();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			new InternetDialog(ui);
+		}
 		ImageIcon returnIcon=new ImageIcon("picture/返回.png");
 		ImageIcon i1 = new ImageIcon("picture/库存图片/入库单.png");
 		ImageIcon i2 = new ImageIcon("picture/库存图片/入库单编号.png");
@@ -93,7 +99,12 @@ public class b2Jpanel1 extends JPanel{
 		j10.setBounds(236,409, 16, 18);
 		j11.setBounds(430,409, 16, 18);
 		
-		t1 = new JLabel(documentController.getDocCode("入库单",account));
+		try {
+			t1 = new JLabel(documentController.getDocCode("入库单",account));
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			new InternetDialog(ui);
+		}
 		t2 = new JLabel("入库单");
 		t3 = new JTextField();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -210,10 +221,24 @@ public class b2Jpanel1 extends JPanel{
 						returnButton.setEnabled(false);
 						getPosition=new getPosition();
 						String stateList[]=state.split("-");	
-						DepotVO vo=getPosition.getPOsition(stateList[1], Integer.parseInt(t6.getText()));
-						t7.setText(Integer.toString(vo.getPai()));
-						t8.setText(Integer.toString(vo.getJia()));
-						t9.setText(Integer.toString(vo.getWei()));
+						DepotVO vo=null;
+						try {
+							vo = getPosition.getPOsition(stateList[1], Integer.parseInt(t6.getText()));
+						} catch (NumberFormatException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (RemoteException e) {
+							// TODO Auto-generated catch block
+							new InternetDialog(ui);
+						}
+						try {
+							t7.setText(Integer.toString(vo.getPai()));
+							t8.setText(Integer.toString(vo.getJia()));
+							t9.setText(Integer.toString(vo.getWei()));
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							new InternetDialog(ui);
+						}
 						b2jpanel.repaint();
 					}
 				}			
@@ -247,13 +272,26 @@ public class b2Jpanel1 extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				if (isFull()) {
-					documentController.createBlock(new InBillsPO(t1.getText(), "入库单", t3.getText(), t4.getText(), account, t5.getText(), Integer.parseInt(t6.getText()),  Integer.parseInt(t7.getText()),  Integer.parseInt(t8.getText()),  Integer.parseInt(t9.getText())));
+					try {
+						documentController.createBlock(new InBillsPO(t1.getText(), "入库单", t3.getText(), t4.getText(), account, t5.getText(), Integer.parseInt(t6.getText()),  Integer.parseInt(t7.getText()),  Integer.parseInt(t8.getText()),  Integer.parseInt(t9.getText())));
+					} catch (NumberFormatException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (RemoteException e1) {
+						// TODO Auto-generated catch block
+						new InternetDialog(ui);
+					}
 					
 					
                     //库存信息表的添加！！！！
 					DepotPO po = new DepotPO(Integer.parseInt(t6.getText()),  Integer.parseInt(t7.getText()),  Integer.parseInt(t8.getText()),  Integer.parseInt(t9.getText()));
 					String[] temp = state.split("-");
-					inDepot.inDepotExcel(t1.getText(), t4.getText(), po, temp[1]);
+					try {
+						inDepot.inDepotExcel(t1.getText(), t4.getText(), po, temp[1]);
+					} catch (RemoteException e1) {
+						// TODO Auto-generated catch block
+						new InternetDialog(ui);
+					}
 					//库存信息表的添加！！！！
 					
 					//库存报警功能的添加！！！！

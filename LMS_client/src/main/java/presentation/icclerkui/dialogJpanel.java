@@ -3,10 +3,12 @@ package presentation.icclerkui;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 import java.text.DecimalFormat;
 
 import javax.swing.ImageIcon;
@@ -16,7 +18,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import presentation.bhclerkui.dialogJpanel;
 import businesslogic.documentsbl.documentController;
 
 public class dialogJpanel extends JPanel{
@@ -89,12 +90,12 @@ class finishDialog extends JDialog{
 	private String charge;
 	public finishDialog(JFrame frame,String title,boolean modal,String charge) {
 		super(frame,title,modal);
-		init();
+		init(frame);
 		registerListener();
 		this.charge=charge;
 		this.setVisible(true);
 	}
-	private void init(){
+	private void init(JFrame frame){
 		ImageIcon yesIcon=new ImageIcon("picture/登录.png");
 		jLabel=new JLabel("装车单创建完成",jLabel.CENTER);
 		jLabel.setForeground(Color.white);
@@ -103,7 +104,13 @@ class finishDialog extends JDialog{
 		
 		DecimalFormat df = new DecimalFormat("0.00");
 		documentController co=new documentController();
-		String str=df.format(co.getShortCost());
+		String str=null;
+		try {
+			str = df.format(co.getShortCost());
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			new InternetDialog(frame);
+		}
 		jLabel1=new JLabel("运费："+str+"元",jLabel.CENTER);
 		jLabel1.setForeground(Color.white);
 		jLabel1.setFont(new Font("幼圆",Font.BOLD,27));
@@ -190,11 +197,11 @@ class notFinishDialog extends JDialog{
 	private JButton jButton;
 	public notFinishDialog(JFrame frame,String title,boolean modal) {
 		super(frame,title,modal);
-		init();
+		init(frame);
 		registerListener();
 		this.setVisible(true);
 	}
-	private void init(){
+	private void init(JFrame frame){
 		ImageIcon yesIcon=new ImageIcon("picture/登录.png");
 		jLabel=new JLabel("您的输入不完整，请检查补充",jLabel.CENTER);
 		jLabel.setForeground(Color.white);
@@ -203,7 +210,12 @@ class notFinishDialog extends JDialog{
 		
 		DecimalFormat df = new DecimalFormat("0.00");
 		documentController co=new documentController();
-		String str=df.format(co.getShortCost());
+		try {
+			String str=df.format(co.getShortCost());
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			new InternetDialog(frame);
+		}
 		
 		jButton=new JButton(yesIcon);
 		jButton.setContentAreaFilled(false);

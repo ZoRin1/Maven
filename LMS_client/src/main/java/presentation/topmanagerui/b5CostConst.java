@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -25,12 +26,17 @@ public class b5CostConst extends JPanel {
 	private ImageIcon yesIcon=new ImageIcon("picture/确定.png");
 	
 	public b5CostConst(b5topmanagerui b5ui,topmanagerJpanel tjpl){
-		init();
+		try {
+			init();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			new InternetDialog(b5ui);
+		}
 		tjpl.add(this);
 		registListener(b5ui, tjpl, this);
 	}
 	
-	private void init() {
+	private void init() throws RemoteException {
 		TransportationController transportationController = new TransportationController();
 		
 		Font big = new Font("幼圆", Font.BOLD, 35);
@@ -150,7 +156,13 @@ public class b5CostConst extends JPanel {
 				}
 				
 				if (b1 && b2 && b3) {
-					TransportationController transportationController = new TransportationController();
+					TransportationController transportationController = null;
+					try {
+						transportationController = new TransportationController();
+					} catch (RemoteException e1) {
+						// TODO Auto-generated catch block
+						new InternetDialog(b5ui);
+					}
 								
 					boolean r1 = transportationController.changeCost(1, Double.parseDouble(qiCheF.getText()));
 					boolean r2 = transportationController.changeCost(2, Double.parseDouble(huoCheF.getText()));

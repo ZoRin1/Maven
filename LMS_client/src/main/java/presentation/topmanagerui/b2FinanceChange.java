@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.rmi.RemoteException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -28,12 +29,22 @@ public class b2FinanceChange extends JPanel {
 	private ImageIcon returnIcon=new ImageIcon("picture/返回.png");
 	
 	public b2FinanceChange(b2topmanagerui b2ui,topmanagerJpanel tjpl){
-		init();
+		try {
+			init();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			new InternetDialog(b2ui);
+		}
 		tjpl.add(this);
-		registListener(b2ui, tjpl, this);
+		try {
+			registListener(b2ui, tjpl, this);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			new InternetDialog(b2ui);
+		}
 	}
 	
-	private void init() {
+	private void init() throws RemoteException {
 		Font bFont = new Font("幼圆", Font.BOLD, 30);
 		Font sFont = new Font("幼圆", Font.BOLD, 20);
 		FinanceController financeController = new FinanceController();
@@ -93,7 +104,7 @@ public class b2FinanceChange extends JPanel {
 		this.setOpaque(false);
 	}
 	
-	private void registListener(final b2topmanagerui b2ui,final topmanagerJpanel tjpl,final b2FinanceChange b2FinanceChange) {
+	private void registListener(final b2topmanagerui b2ui,final topmanagerJpanel tjpl,final b2FinanceChange b2FinanceChange) throws RemoteException {
 		
 		final AccountInfoController accountInfoController = new AccountInfoController();
 		final FinanceController financeController = new FinanceController();
@@ -116,7 +127,13 @@ public class b2FinanceChange extends JPanel {
 			@Override
 			public void itemStateChanged(ItemEvent e) {
 				// TODO Auto-generated method stub
-				FinanceController financeController = new FinanceController();
+				FinanceController financeController = null;
+				try {
+					financeController = new FinanceController();
+				} catch (RemoteException e1) {
+					// TODO Auto-generated catch block
+					new InternetDialog(b2ui);
+				}
 				int state = e.getStateChange();
 				if (state == ItemEvent.SELECTED) {
 					if (!caiWuRenYuanB.getSelectedItem().equals("增加财务人员")) {
@@ -149,7 +166,13 @@ public class b2FinanceChange extends JPanel {
 				@Override
 				public void itemStateChanged(ItemEvent e) {
 					// TODO Auto-generated method stub
-					FinanceController financeController = new FinanceController();
+					FinanceController financeController = null;
+					try {
+						financeController = new FinanceController();
+					} catch (RemoteException e1) {
+						// TODO Auto-generated catch block
+						new InternetDialog(b2ui);
+					}
 					int state = e.getStateChange();
 					if (state == ItemEvent.SELECTED) {
 						String temp = (String) kongXian.getSelectedItem();

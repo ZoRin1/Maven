@@ -11,6 +11,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.ColorConvertOp;
+import java.rmi.RemoteException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -145,14 +146,26 @@ public class b2SearchOrg extends JPanel {
 				if (!input.equals("")) {
 					if(org.equals("营业厅")){
 						if (DataCheck.isBusinessCOde(input)) {
-							BusinessController businessController = new BusinessController();
+							BusinessController businessController = null;
+							try {
+								businessController = new BusinessController();
+							} catch (RemoteException e1) {
+								// TODO Auto-generated catch block
+								new InternetDialog(b2ui);
+							}
 							orgs = businessController.getInfo(input);	
 						}else{
 							JOptionPane.showMessageDialog(null, "请输入正确的营业厅编号，形如“001-001”");
 						}
 								
 					}else{
-						MiddleController middleController = new MiddleController();
+						MiddleController middleController = null;
+						try {
+							middleController = new MiddleController();
+						} catch (RemoteException e1) {
+							// TODO Auto-generated catch block
+							new InternetDialog(b2ui);
+						}
 						orgs = middleController.GetInfo(input);
 					}
 					if (orgs != null) {

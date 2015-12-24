@@ -4,6 +4,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -30,7 +31,12 @@ public class b4Benifit extends JPanel {
 	
 	public b4Benifit(b4topmanagerui b4ui,topmanagerJpanel tjpl) {
 		// TODO Auto-generated constructor stub
-		getProfit();
+		try {
+			getProfit();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			new InternetDialog(b4ui);
+		}
 		init(b4ui, tjpl);
 		tjpl.add(this);
 		registListener(b4ui, tjpl, this);
@@ -64,7 +70,7 @@ public class b4Benifit extends JPanel {
 	}
 
 	//得到成本收益集合的方法
-	public void getProfit(){
+	public void getProfit() throws RemoteException{
 			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
 			String date = df.format(new Date());
 			ProfitController proController = new ProfitController();

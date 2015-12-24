@@ -12,6 +12,7 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -27,7 +28,6 @@ import businesslogic.accountbl.AccountLoginController;
 import businesslogic.documentsbl.documentController;
 import presentation.adminui.adminui;
 import presentation.bhclerkui.bhclerkui;
-import presentation.bhclerkui.dialogJpanel;
 import presentation.courierui.courierui;
 import presentation.financialstaffui.financialstaffui;
 import presentation.icclerkui.icclerkui;
@@ -220,7 +220,12 @@ class mainFrame extends JFrame{
 							new loginFailDialog(mf, "登陆失败", true);
 						}
 						else {
-							accountLoginController=new AccountLoginController();
+							try {
+								accountLoginController=new AccountLoginController();
+							} catch (RemoteException e1) {
+								// TODO Auto-generated catch block
+								new InternetDialog(mf);
+							}
 							long ID=Long.parseLong(accountnumberJTextField.getText());
 							String account=accountnumberJTextField.getText();
 							String state=accountLoginController.login(ID, String.valueOf(passwordField.getPassword()));
@@ -271,7 +276,13 @@ class mainFrame extends JFrame{
 			checkButton.addActionListener(new ActionListener() {			
 				public void actionPerformed(ActionEvent e) {
 					documentController=new documentController();
-					ArrayList<String> wuliuInfoList=documentController.getWuliuInfo(codeJTextField.getText());
+					ArrayList<String> wuliuInfoList=null;
+					try {
+						wuliuInfoList = documentController.getWuliuInfo(codeJTextField.getText());
+					} catch (RemoteException e1) {
+						// TODO Auto-generated catch block
+						new InternetDialog(mf);
+					}
 					// TODO Auto-generated method stub
 					if (wuliuInfoList==null) {
 						new checkFailDialog(mf, "查询失败", true);

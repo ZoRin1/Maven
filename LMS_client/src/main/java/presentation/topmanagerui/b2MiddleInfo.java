@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -26,12 +27,17 @@ public class b2MiddleInfo extends JPanel {
 	private ImageIcon returnIcon=new ImageIcon("picture/返回.png");
 	
 	public b2MiddleInfo(b2topmanagerui b2ui,topmanagerJpanel tjpl,String ID){
-		init(ID);
+		try {
+			init(ID);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			new InternetDialog(b2ui);
+		}
 		tjpl.add(this);
 		registListener(b2ui, tjpl, this, ID);
 	}
 	
-	private void init(String ID) {
+	private void init(String ID) throws RemoteException {
 		MiddleController middleController = new MiddleController();
 		String[] temp = ID.split("-");
 		Font bFont = new Font("幼圆", Font.BOLD, 30);

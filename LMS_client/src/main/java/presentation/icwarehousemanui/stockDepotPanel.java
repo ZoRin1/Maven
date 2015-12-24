@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -155,7 +156,12 @@ public class stockDepotPanel extends JPanel{
 				getInf = new GetExcelInf();
 				outExcel = new OutExcel();
 				String[] temp = state.split("-");
-				arrList = getInf.getExcel(temp[1]);
+				try {
+					arrList = getInf.getExcel(temp[1]);
+				} catch (RemoteException e) {
+					// TODO Auto-generated catch block
+					new InternetDialog(ui);
+				}
 //				outExcel.outExcel(address, arrList);
 				
 				ArrayList<ExcelPO> fatherList = new ArrayList<ExcelPO>();
@@ -205,7 +211,12 @@ public class stockDepotPanel extends JPanel{
 		
 		
 		checkController = new CheckController();
-		InVOList = checkController.conInventory(account, startDate, endDate);
+		try {
+			InVOList = checkController.conInventory(account, startDate, endDate);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			new InternetDialog(icwarehousemanui);
+		}
 		VOList = new ArrayList<InDepotInfVO>();
 		for(int i = 0 ; i < InVOList.size();i++){
 			if(InVOList.get(i).getAreaNum()==1||InVOList.get(i).getAreaNum()==5){
@@ -215,7 +226,12 @@ public class stockDepotPanel extends JPanel{
 	}
 	
 	private void getDepotCount(){
-		usedSpace =new spaceBL();
+		try {
+			usedSpace =new spaceBL();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			new InternetDialog(icwarehousemanui);
+		}
 		String[] temp = state.split("-");
 		useSpace = usedSpace.usedSpaceInf(temp[1]);
 	}

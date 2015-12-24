@@ -7,6 +7,7 @@ import java.awt.Graphics;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -45,14 +46,19 @@ public class b1Jpanel2 extends JPanel{
 		this.code=code;
 		this.account=account;
 		this.state=state;
-		init();
+		init(ui);
 		icwarehousemanJpanel.add(this);
 		registListener(ui,icwarehousemanJpanel,b1Jpanel1,this);
 	}
 	
-	private void init(){
+	private void init(b1icwarehousemanui ui){
 		documentController=new documentController();
-		depot110 = new spaceBL();
+		try {
+			depot110 = new spaceBL();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			new InternetDialog(ui);
+		}
 		ImageIcon returnIcon=new ImageIcon("picture/返回.png");
 		ImageIcon i1 = new ImageIcon("picture/库存图片/出库单.png");
 		ImageIcon i2 = new ImageIcon("picture/库存图片/出库单编号.png");
@@ -83,7 +89,12 @@ public class b1Jpanel2 extends JPanel{
 		j7.setBounds(368, 269, 105, 27);
 		j8.setBounds(368, 360, 105, 27);
 		
-		t1 = new JLabel(documentController.getDocCode("出库单",account));
+		try {
+			t1 = new JLabel(documentController.getDocCode("出库单",account));
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			new InternetDialog(ui);
+		}
 		t2 = new JLabel(code);
 		t3 = new JTextField();
 		t4 = new JTextField();
@@ -174,9 +185,19 @@ public class b1Jpanel2 extends JPanel{
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO 自动生成的方法存根
 				if (isFull()) {
-					documentController.createBlock(new OutbillsPO(t1.getText(), "出库单", code, t6.getText(), account, t3.getText(), t4.getText(), t7.getText()));
+					try {
+						documentController.createBlock(new OutbillsPO(t1.getText(), "出库单", code, t6.getText(), account, t3.getText(), t4.getText(), t7.getText()));
+					} catch (RemoteException e) {
+						// TODO Auto-generated catch block
+						new InternetDialog(ui);
+					}
 					String stateList[]=state.split("-");
-					documentController.updateDrive(code, stateList[1]); 
+					try {
+						documentController.updateDrive(code, stateList[1]);
+					} catch (RemoteException e) {
+						// TODO Auto-generated catch block
+						new InternetDialog(ui);
+					} 
 					finishDialog out = new finishDialog(ui, "出库单创建完成", true,"出库单创建完成");
 					
 					//这里要添加库存报警的功能！！！！

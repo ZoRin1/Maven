@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -67,7 +68,13 @@ public class documentReplyJTable {
 		//假设的数据
 		String[] inDepotName = new String[]{" "," "};
 		
-		ArrayList<String> list=new documentController().showOwnList(account);
+		ArrayList<String> list=null;
+		try {
+			list = new documentController().showOwnList(account);
+		} catch (RemoteException e1) {
+			// TODO Auto-generated catch block
+			new InternetDialog(ui);
+		}
 		int length=list.size();
 		String [][] inDepotValue=new String[length][2];
 		for(int i=0;i<length;i++){
@@ -94,7 +101,12 @@ public class documentReplyJTable {
 					int row = Jtabel.getSelectedRow();
 					String value = Jtabel.getValueAt(row, 0).toString().trim();
 					String value2= Jtabel.getValueAt(row, 1).toString().trim();
-					po=new documentController().getBufferedInfo(value, value2);
+					try {
+						po=new documentController().getBufferedInfo(value, value2);
+					} catch (RemoteException e1) {
+						// TODO Auto-generated catch block
+						new InternetDialog(ui);
+					}
 					System.out.println("m");
 					if(value2.equals("营业厅装车单")){
 						LoadingPO po1=(LoadingPO)po;

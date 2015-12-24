@@ -4,6 +4,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -38,11 +39,16 @@ public class b4Managment2 extends JPanel{
 		this.b4topmanagerui = b4topmanagerui;
 		costBL = new CostStatisticsBL();
 		payList = new ArrayList<PaymentVO>();
-		init();
+		try {
+			init();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			new InternetDialog(b4topmanagerui);
+		}
 		topmanagerJpanel.add(this);
 		registListener(b4topmanagerui,topmanagerJpanel,this);
 	}
-	private void init(){
+	private void init() throws RemoteException{
 		Font font=new Font("幼圆",Font.BOLD,20);
 		ImageIcon i1 = new ImageIcon("picture/财务图片/经营付款.png");
 		ImageIcon Excel = new ImageIcon("picture/小导出EXCEL.png");
