@@ -10,6 +10,10 @@ import javax.swing.*;
 public class ServiceFrame {
 	
 	private JFrame mainFrame;
+	public JFrame getMainFrame() {
+		return mainFrame;
+	}
+
 	private JPanel mainPanel;
 	private JButton qidong,zhongzhi;
 	private String result;
@@ -68,7 +72,8 @@ public class ServiceFrame {
 		
 		mainFrame.setContentPane(mainPanel);
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		mainFrame.setSize(450, 300);
+//		mainFrame.setSize(450, 300);
+		mainFrame.setBounds(400, 400, 450, 300);
 		mainFrame.setVisible(true);
 	}
 }

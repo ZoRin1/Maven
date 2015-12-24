@@ -5,6 +5,8 @@ import java.awt.event.ActionListener;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
+import javax.swing.JFrame;
+
 import rmiService.account.accountFactoryImpl;
 import rmiService.documents.documentsFactoryImpl;
 import rmiService.finance.financeFactoryImpl;
@@ -133,6 +135,7 @@ public class launch {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO 自动生成的方法存根
+				System.exit(0);
 			}
 		});
 	}
