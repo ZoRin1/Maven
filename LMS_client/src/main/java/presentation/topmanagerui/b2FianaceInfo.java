@@ -19,7 +19,7 @@ public class b2FianaceInfo extends JPanel {
 	private JLabel bianHao,biaoHaoI,caiWuRenYuan;
     private JButton change,returnButton;
     private JComboBox caiWuRenYuanB;
-	
+    private ImageIcon changeIcon = new ImageIcon("picture/修改y.png");
 	private ImageIcon frameIcon =new ImageIcon("picture/操作面板.png");	
 	private ImageIcon returnIcon=new ImageIcon("picture/返回.png");
 	
@@ -68,11 +68,10 @@ public class b2FianaceInfo extends JPanel {
 		}
 		
 		
-		change = new JButton("修改");
-		change.setForeground(Color.BLACK);
-		change.setContentAreaFilled(true);
-		change.setBorderPainted(true);
-		change.setBounds(180, 500, 160, 50);
+		change = new JButton(changeIcon);
+		change.setContentAreaFilled(false);
+		change.setBorderPainted(false);
+		change.setBounds(238, 425, 158, 58);
 		this.add(change);
 
 

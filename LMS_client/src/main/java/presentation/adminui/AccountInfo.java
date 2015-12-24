@@ -24,7 +24,8 @@ public class AccountInfo extends JPanel {
 	private JLabel daBiaoTi,zhangHao,zangHaoI,miMa,miMaI,xinMing,xinMingI,dianHua,dianHuaI,shenFenZhengHao,shenFenZhengHaoI,zhuCeRiQi,zhuCeRiQiI;
 	private JButton change,delete,returnButton;
 	private ImageIcon frameIcon =new ImageIcon("picture/操作面板.png");
-	
+	private ImageIcon changeIcon = new ImageIcon("picture/修改y.png");
+	private ImageIcon deleteIcon = new ImageIcon("picture/删除y.png");
 	private ImageIcon returnIcon=new ImageIcon("picture/返回.png");
 	private ImageIcon yesIcon=new ImageIcon("picture/确定.png");
 	
@@ -126,19 +127,19 @@ public class AccountInfo extends JPanel {
 		this.add(zhuCeRiQiI);
 		
 		//到时候再加图片
-		change = new JButton("修改");
+		change = new JButton(changeIcon);
 		change.setForeground(Color.BLACK);
-		change.setContentAreaFilled(true);
-		change.setBorderPainted(true);
-		change.setBounds(178, 575, 160, 50);
+		change.setContentAreaFilled(false);
+		change.setBorderPainted(false);
+		change.setBounds(178, 525, 158, 58);
 		this.add(change);
 		
 
-		delete = new JButton("删除");
+		delete = new JButton(deleteIcon);
 		delete.setForeground(Color.BLACK);
-		delete.setContentAreaFilled(true);
-		delete.setBorderPainted(true);
-		delete.setBounds(430, 575, 160, 50);
+		delete.setContentAreaFilled(false);
+		delete.setBorderPainted(false);
+		delete.setBounds(430, 525, 158, 58);
 		this.add(delete);
 		if (!accountNumberVO.getState().equals("0") ){
 			delete.setEnabled(false);
@@ -200,7 +201,7 @@ public class AccountInfo extends JPanel {
 						AccountInfoController accountInfoController = new AccountInfoController();
 						boolean result =accountInfoController.deleteAccount(accountNumberVO.getID());
 						if (result) {
-							new DisplayDialog(aui, "删除成功，请重试");
+							new DisplayDialog(aui, "删除成功");
 //							JOptionPane.showMessageDialog(null, "删除成功");
 							apl.remove(accountInfo);
 							apl.add(aui.operationJpanel);					

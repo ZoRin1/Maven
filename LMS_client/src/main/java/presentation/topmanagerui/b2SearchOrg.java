@@ -74,7 +74,8 @@ public class b2SearchOrg extends JPanel {
 		
 		b4=new JButton(b4Icon);		
 		b4.setContentAreaFilled(false);
-		b4.setBounds(250,480,200, 50);
+		b4.setBorderPainted(false);
+		b4.setBounds(235,480,208, 58);
 		this.add(b4);
 		
 		returnButton=new JButton(returnIcon);
@@ -226,13 +227,13 @@ public class b2SearchOrg extends JPanel {
 						
 					}else{
 						if (org.equals("营业厅")) {
-							new DisplayDialog(b2ui, "未找到，请输入营业厅编号");
+							new DisplayDialog(b2ui, "未找到，请重新输入营业厅编号");
 //							JOptionPane.showMessageDialog(null, "未找到，请输入营业厅编号");
 							tjpl.remove(b2SearchOrg);
 							new b2SearchOrg(b2ui, tjpl, org);
 							tjpl.repaint();
 						}else {
-							new DisplayDialog(b2ui, "未找到，请输入中转中心编号");
+							new DisplayDialog(b2ui, "未找到，请重新输入中转中心编号");
 //							JOptionPane.showMessageDialog(null, "未找到，请输入中转中心编号");
 							tjpl.remove(b2SearchOrg);
 							new b2SearchOrg(b2ui, tjpl, org);

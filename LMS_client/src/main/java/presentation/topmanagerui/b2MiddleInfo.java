@@ -22,7 +22,7 @@ public class b2MiddleInfo extends JPanel {
 	
 	private JComboBox yeWuYuanB,changKuGuanLiYuanB,xiaXiaYingYeTingB;
 	private JButton change,returnButton;
-	
+	private ImageIcon changeIcon = new ImageIcon("picture/修改y.png");
 	private ImageIcon frameIcon =new ImageIcon("picture/操作面板.png");	
 	private ImageIcon returnIcon=new ImageIcon("picture/返回.png");
 	
@@ -111,11 +111,10 @@ public class b2MiddleInfo extends JPanel {
 		
 		
 		// 到时候再加图片
-		change = new JButton("修改");
-		change.setForeground(Color.BLACK);
-		change.setContentAreaFilled(true);
-		change.setBorderPainted(true);
-		change.setBounds(120, 520, 160, 50);
+		change = new JButton(changeIcon);
+		change.setContentAreaFilled(false);
+		change.setBorderPainted(false);
+		change.setBounds(238, 485, 158, 58);
 		this.add(change);
 
 

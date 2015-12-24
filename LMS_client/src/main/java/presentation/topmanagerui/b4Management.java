@@ -156,7 +156,7 @@ public class b4Management extends JPanel {
 				}
 
 				outExcel = new OutExcel();
-				String[] name = { "收款单编号", "收款日期", "单据名", "收款金额" };
+				String[] name = { "付款单编号", "付款日期", "单据名", "付款金额" };
 				outExcel.outExcel("经营情况表", name, address, fatherList);
 			}
 		});

@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import businesslogic.transportationbl.TransportationController;
-import presentation.adminui.DisplayDialog;
+
 
 public class b1Salary extends JPanel {
 	private JLabel tiShi,anYue,yuanMeiYue,jiCi,yuanMeiCi,tiCheng,baiFenHao;

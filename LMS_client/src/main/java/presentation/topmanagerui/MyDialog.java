@@ -84,7 +84,7 @@ class DocumentsDialog extends JDialog{
 		this.setVisible(true);
 	}
 	private void init(){
-		ImageIcon yesIcon=new ImageIcon("picture/登录.png");
+		ImageIcon yesIcon=new ImageIcon("picture/确定.png");
 		jLabel=new JLabel(words,jLabel.CENTER);
 		jLabel.setForeground(Color.white);
 		jLabel.setFont(new Font("幼圆",Font.BOLD,18));
@@ -92,12 +92,12 @@ class DocumentsDialog extends JDialog{
 		jButton=new JButton(yesIcon);
 		jButton.setContentAreaFilled(false);
 		jPanel.setLayout(null);
-		jButton.setBounds(218,230, 64, 64);
-		jLabel.setBounds(0, 0, 500, 200);
+		jButton.setBounds(218,280, 48, 48);
+		jLabel.setBounds(0, 0, 500, 260);
 		jPanel.add(jLabel);
 		jPanel.add(jButton);
 		this.add(jPanel);
-		this.setSize(500, 300);
+		this.setSize(500, 380);
 		Toolkit kitToolkit =Toolkit.getDefaultToolkit();
 		Dimension screenSize=kitToolkit.getScreenSize();
 		int screenWidth=screenSize.width;

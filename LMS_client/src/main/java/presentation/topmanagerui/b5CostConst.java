@@ -146,15 +146,15 @@ public class b5CostConst extends JPanel {
 				boolean b2 = DataCheck.isDouble(huoCheF.getText());
 				boolean b3 = DataCheck.isDouble(feiJiF.getText());
 				if (!b1) {
-					new DisplayDialog(b5ui, "请输入正确的汽车成本常量数值，形如1.20");
+					new DisplayDialog(b5ui, "<html>请输入正确的汽车成本常量 <br>数值,形如1.20</html>");
 //					JOptionPane.showMessageDialog(b5ui, "请输入正确的汽车成本常量数值，形如1.20");
 				}
 				if (!b2) {
-					new DisplayDialog(b5ui, "请输入正确的火车成本常量数值，形如1.20");
+					new DisplayDialog(b5ui, "<html>请输入正确的火车成本常量 <br>数值,形如1.20</html>");
 //					JOptionPane.showMessageDialog(b5ui, "请输入正确的火车成本常量数值，形如1.20");
 				}
 				if (!b3) {
-					new DisplayDialog(b5ui, "请输入正确的飞机成本常量数值，形如1.20");
+					new DisplayDialog(b5ui, "<html>请输入正确的飞机成本常量 <br>数值,形如1.20</html>");
 //					JOptionPane.showMessageDialog(b5ui, "请输入正确的飞机成本常量数值，形如1.20");
 				}
 				
