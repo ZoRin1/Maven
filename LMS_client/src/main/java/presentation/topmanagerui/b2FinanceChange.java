@@ -77,7 +77,8 @@ public class b2FinanceChange extends JPanel {
 			caiWuRenYuanB = new JComboBox(a);
 		}		
 		caiWuRenYuanB.setFont(sFont);
-		caiWuRenYuanB.setForeground(Color.BLACK);
+		caiWuRenYuanB.setOpaque(false);
+		caiWuRenYuanB.setForeground(Color.WHITE);
 		caiWuRenYuanB.setBounds(240, 250, 180, 40);
 		caiWuRenYuanB.setSelectedIndex(-1);
 		this.add(caiWuRenYuanB);
@@ -85,7 +86,8 @@ public class b2FinanceChange extends JPanel {
 		if (accountInfoController.getAccountList() != null) {
 			kongXian = new JComboBox(accountInfoController.getAccountList());
 			kongXian.setFont(sFont);
-			kongXian.setForeground(Color.BLACK);
+			kongXian.setOpaque(false);
+			kongXian.setForeground(Color.WHITE);
 			kongXian.setBounds(240, 300, 180, 40);
 			kongXian.setSelectedIndex(-1);
 			kongXian.setVisible(false);

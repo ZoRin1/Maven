@@ -61,7 +61,8 @@ public class b5DistanceConst extends JPanel {
 		String[] qiDianC = transportationController.getCityList(null);
 	    qiDianCity = new JComboBox(qiDianC);
 		qiDianCity.setFont(small);
-		qiDianCity.setForeground(Color.BLACK);
+		qiDianCity.setOpaque(false);
+		qiDianCity.setForeground(Color.WHITE);
 		qiDianCity.setBounds(320, 200, 200, 50);
 		this.add(qiDianCity);
 		
@@ -74,7 +75,8 @@ public class b5DistanceConst extends JPanel {
 		String[] zhongDianC = transportationController.getCityList(null);
 		zhongDianCity = new JComboBox(zhongDianC);
 		zhongDianCity.setFont(small);
-		zhongDianCity.setForeground(Color.BLACK);
+		zhongDianCity.setOpaque(false);
+		zhongDianCity.setForeground(Color.WHITE);
 		zhongDianCity.setBounds(320, 280, 200, 50);
 		this.add(zhongDianCity);
 		
@@ -86,7 +88,8 @@ public class b5DistanceConst extends JPanel {
 		
 		juLiF = new JTextField("0.0");
 		juLiF.setFont(small);
-		juLiF.setForeground(Color.BLACK);
+		juLiF.setOpaque(false);
+		juLiF.setForeground(Color.WHITE);
 		juLiF.setBounds(320, 350, 200, 50);
 		juLiF.addKeyListener(new KeyListenerOfDouble());
 		this.add(juLiF);

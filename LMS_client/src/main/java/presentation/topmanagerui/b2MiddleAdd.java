@@ -52,8 +52,9 @@ public class b2MiddleAdd extends JPanel {
     	
     	diQuF = new JTextField();
     	diQuF.setFont(font);
-    	diQuF.setForeground(Color.BLACK);
-    	diQuF.setBounds(290, 250, 200, 60);
+    	diQuF.setForeground(Color.WHITE);
+    	diQuF.setOpaque(false);
+    	diQuF.setBounds(290, 250, 200, 50);
     	this.add(diQuF);
     	
     	

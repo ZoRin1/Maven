@@ -32,6 +32,7 @@ import presentation.financialstaffui.financialstaffui;
 public class b2SearchOrg extends JPanel {
 	
 	private ImageIcon frameIcon =new ImageIcon("picture/操作面板.png");
+	ImageIcon searchIcon=new ImageIcon("picture/搜索.png");
 	private JLabel tiShi;
 	private JTextField orgF;
 	private JButton search,returnButton;
@@ -57,19 +58,20 @@ public class b2SearchOrg extends JPanel {
 		tiShi = new JLabel("请输入" + org + "编号");
 		tiShi.setFont(font);
 		tiShi.setForeground(Color.WHITE);
-		tiShi.setBounds(150, 100, 300, 50);
+		tiShi.setBounds(185, 100, 300, 50);
 		this.add(tiShi);
 		
 		orgF = new JTextField();
+		orgF.setOpaque(false);
 		orgF.setFont(font);
-		orgF.setForeground(Color.BLACK);
-		orgF.setBounds(150, 160, 200, 50);
+		orgF.setForeground(Color.WHITE);
+		orgF.setBounds(185, 160, 200, 50);
 		this.add(orgF);
 		
-		search = new JButton("搜索");
+		search = new JButton(searchIcon);
 		search.setFont(font);
-		search.setForeground(Color.WHITE);
-		search.setBounds(360, 160, 100, 50);
+		search.setContentAreaFilled(false);
+		search.setBounds(395, 160, 48, 48);
 		this.add(search);
 		
 		b4=new JButton(b4Icon);		

@@ -62,7 +62,9 @@ public class b1Salary extends JPanel {
 		
 		anYueF = new JTextField(String.valueOf(salary[0]));
 		anYueF.setFont(small);
-		anYueF.setBounds(280, 240, 150, 43);
+		anYueF.setOpaque(false);
+		anYueF.setForeground(Color.WHITE);
+		anYueF.setBounds(280, 240, 150, 40);
 		anYueF.addKeyListener(new KeyListenerOfDouble());
 		this.add(anYueF);
 		
@@ -80,7 +82,9 @@ public class b1Salary extends JPanel {
 		
 		jiCiF = new JTextField(String.valueOf(salary[1]));
 		jiCiF.setFont(small);
-		jiCiF.setBounds(280, 310, 150, 43);
+		jiCiF.setOpaque(false);
+		jiCiF.setForeground(Color.WHITE);
+		jiCiF.setBounds(280, 310, 150, 40);
 		jiCiF.addKeyListener(new KeyListenerOfDouble());
 		this.add(jiCiF);
 		
@@ -98,7 +102,9 @@ public class b1Salary extends JPanel {
 		
 		tiChengF = new JTextField(String.valueOf(salary[2]));
 		tiChengF.setFont(small);
-		tiChengF.setBounds(280, 380, 150, 43);
+		tiChengF.setOpaque(false);
+		tiChengF.setForeground(Color.WHITE);
+		tiChengF.setBounds(280, 380, 150, 40);
 		tiChengF.addKeyListener(new KeyListenerOfDouble());
 		this.add(tiChengF);
 		

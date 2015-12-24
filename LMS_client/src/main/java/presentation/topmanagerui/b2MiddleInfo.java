@@ -88,7 +88,8 @@ public class b2MiddleInfo extends JPanel {
 		if (middleController.getBussinessmanList(ID) != null) {
 			yeWuYuanB = new JComboBox(middleController.getBussinessmanList(ID));
 			yeWuYuanB.setFont(sFont);
-			yeWuYuanB.setForeground(Color.BLACK);
+			yeWuYuanB.setOpaque(false);
+			yeWuYuanB.setForeground(Color.WHITE);
 			yeWuYuanB.setBounds(100, 270, 180, 40);
 			this.add(yeWuYuanB);
 		}
@@ -96,7 +97,8 @@ public class b2MiddleInfo extends JPanel {
 		if (middleController.getStorgerList(ID) != null) {
 			changKuGuanLiYuanB = new JComboBox(middleController.getStorgerList(ID));
 			changKuGuanLiYuanB.setFont(sFont);
-			changKuGuanLiYuanB.setForeground(Color.BLACK);
+			changKuGuanLiYuanB.setOpaque(false);
+			changKuGuanLiYuanB.setForeground(Color.WHITE);
 			changKuGuanLiYuanB.setBounds(310, 270, 180, 40);
 			this.add(changKuGuanLiYuanB);
 		}
@@ -104,7 +106,8 @@ public class b2MiddleInfo extends JPanel {
 		if (middleController.getBussinessHallList(ID) != null) {
 			xiaXiaYingYeTingB = new JComboBox(middleController.getBussinessHallList(ID));
 			xiaXiaYingYeTingB.setFont(sFont);
-			xiaXiaYingYeTingB.setForeground(Color.BLACK);
+			xiaXiaYingYeTingB.setOpaque(false);
+			xiaXiaYingYeTingB.setForeground(Color.WHITE);
 			xiaXiaYingYeTingB.setBounds(200, 370, 220, 40);
 			this.add(xiaXiaYingYeTingB);
 		}

@@ -56,7 +56,9 @@ public class b5CostConst extends JPanel {
 		
 		qiCheF = new JTextField(String.valueOf(transportationController.getCost(1)));
 		qiCheF.setFont(small);
-		qiCheF.setBounds(240, 240, 150, 43);
+		qiCheF.setOpaque(false);
+		qiCheF.setForeground(Color.WHITE);
+		qiCheF.setBounds(240, 240, 150, 40);
 		qiCheF.addKeyListener(new KeyListenerOfDouble());
 		this.add(qiCheF);
 		
@@ -74,7 +76,9 @@ public class b5CostConst extends JPanel {
 		
 		huoCheF = new JTextField(String.valueOf(transportationController.getCost(2)));
 		huoCheF.setFont(small);
-		huoCheF.setBounds(240, 310, 150, 43);
+		huoCheF.setOpaque(false);
+		huoCheF.setForeground(Color.WHITE);
+		huoCheF.setBounds(240, 310, 150, 40);
 		huoCheF.addKeyListener(new KeyListenerOfDouble());
 		this.add(huoCheF);
 		
@@ -92,7 +96,9 @@ public class b5CostConst extends JPanel {
 		
 		feiJiF = new JTextField(String.valueOf(transportationController.getCost(3)));
 		feiJiF.setFont(small);
-		feiJiF.setBounds(240, 380, 150, 43);
+		feiJiF.setOpaque(false);
+		feiJiF.setForeground(Color.WHITE);
+		feiJiF.setBounds(240, 380, 150, 40);
 		feiJiF.addKeyListener(new KeyListenerOfDouble());
 		this.add(feiJiF);
 		

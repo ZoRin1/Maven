@@ -102,7 +102,8 @@ private JLabel city,bianHao,bianHaoI,yeWuYuan,changKuGuanLiYuan;
 			yeWuYuanB = new JComboBox(a);
 		}		
 		yeWuYuanB.setFont(sFont);
-		yeWuYuanB.setForeground(Color.BLACK);
+		yeWuYuanB.setOpaque(false);
+		yeWuYuanB.setForeground(Color.WHITE);
 		yeWuYuanB.setBounds(100, 270, 180, 40);
 		yeWuYuanB.setSelectedIndex(-1);
 		this.add(yeWuYuanB);
@@ -110,7 +111,8 @@ private JLabel city,bianHao,bianHaoI,yeWuYuan,changKuGuanLiYuan;
 		if (accountInfoController.getAccountList() != null) {
 			kongXianY = new JComboBox(accountInfoController.getAccountList());
 			kongXianY.setFont(sFont);
-			kongXianY.setForeground(Color.BLACK);
+			kongXianY.setOpaque(false);
+			kongXianY.setForeground(Color.WHITE);
 			kongXianY.setBounds(100, 320, 180, 40);
 			kongXianY.setSelectedIndex(-1);
 			kongXianY.setVisible(false);
@@ -126,7 +128,8 @@ private JLabel city,bianHao,bianHaoI,yeWuYuan,changKuGuanLiYuan;
 			changKuGuanLiYuanB = new JComboBox(a);
 		}		
 		changKuGuanLiYuanB.setFont(sFont);
-		changKuGuanLiYuanB.setForeground(Color.BLACK);
+		changKuGuanLiYuanB.setOpaque(false);
+		changKuGuanLiYuanB.setForeground(Color.WHITE);
 		changKuGuanLiYuanB.setBounds(310, 270, 180, 40);
 		changKuGuanLiYuanB.setSelectedIndex(-1);
 		this.add(changKuGuanLiYuanB);
@@ -134,7 +137,8 @@ private JLabel city,bianHao,bianHaoI,yeWuYuan,changKuGuanLiYuan;
 		if (accountInfoController.getAccountList() != null) {
 			kongXianC = new JComboBox(accountInfoController.getAccountList());
 			kongXianC.setFont(sFont);
-			kongXianC.setForeground(Color.BLACK);
+			kongXianC.setOpaque(false);
+			kongXianC.setForeground(Color.WHITE);
 			kongXianC.setBounds(310, 320, 180, 40);
 			kongXianC.setSelectedIndex(-1);
 			kongXianC.setVisible(false);

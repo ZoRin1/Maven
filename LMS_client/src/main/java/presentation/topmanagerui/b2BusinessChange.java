@@ -109,7 +109,8 @@ public class b2BusinessChange extends JPanel {
 			kuaiDiYuanb = new JComboBox(a);
 		}
 		kuaiDiYuanb.setFont(sFont);
-		kuaiDiYuanb.setForeground(Color.BLACK);
+		kuaiDiYuanb.setOpaque(false);
+		kuaiDiYuanb.setForeground(Color.WHITE);
 		kuaiDiYuanb.setBounds(120, 310, 180, 40);
 		kuaiDiYuanb.setSelectedIndex(-1);
 		this.add(kuaiDiYuanb);
@@ -123,7 +124,8 @@ public class b2BusinessChange extends JPanel {
 			yeWuYuanb = new JComboBox(a);
 		}
 		yeWuYuanb.setFont(sFont);
-		yeWuYuanb.setForeground(Color.BLACK);
+		yeWuYuanb.setOpaque(false);
+		yeWuYuanb.setForeground(Color.WHITE);
 		yeWuYuanb.setBounds(330, 310, 180, 40);
 		yeWuYuanb.setSelectedIndex(-1);
 		this.add(yeWuYuanb);
@@ -139,7 +141,8 @@ public class b2BusinessChange extends JPanel {
 		if (accountInfoController.getAccountList() != null) {
 			kongXianK = new JComboBox(accountInfoController.getAccountList());
 			kongXianK.setFont(sFont);
-			kongXianK.setForeground(Color.BLACK);
+			kongXianK.setOpaque(false);
+			kongXianK.setForeground(Color.WHITE);
 			kongXianK.setBounds(120, 360, 180, 40);
 			kongXianK.setVisible(false);
 			kongXianK.setSelectedIndex(-1);
@@ -149,7 +152,8 @@ public class b2BusinessChange extends JPanel {
 		if (accountInfoController.getAccountList() != null) {
 			kongXianY = new JComboBox(accountInfoController.getAccountList());
 			kongXianY.setFont(sFont);
-			kongXianY.setForeground(Color.BLACK);
+			kongXianY.setOpaque(false);
+			kongXianY.setForeground(Color.WHITE);
 			kongXianY.setBounds(330, 360, 180, 40);
 			kongXianY.setVisible(false);
 			kongXianY.setSelectedIndex(-1);

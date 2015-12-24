@@ -43,8 +43,9 @@ public class b2BusinessAdd extends JPanel {
     	
     	diQuF = new JTextField();
     	diQuF.setFont(font);
-    	diQuF.setForeground(Color.BLACK);
-    	diQuF.setBounds(290, 150, 200, 60);
+    	diQuF.setForeground(Color.WHITE);
+    	diQuF.setOpaque(false);
+    	diQuF.setBounds(290, 150, 200, 50);
     	this.add(diQuF);
     	
     	zhongZhuan = new JLabel("所属中转中心编号:");
@@ -55,8 +56,9 @@ public class b2BusinessAdd extends JPanel {
     	
     	zhongZhuanF = new JTextField();
     	zhongZhuanF.setFont(font);
-    	zhongZhuanF.setForeground(Color.BLACK);
-    	zhongZhuanF.setBounds(390, 250, 200, 60);
+    	zhongZhuanF.setForeground(Color.WHITE);
+    	zhongZhuanF.setOpaque(false);
+    	zhongZhuanF.setBounds(390, 250, 200, 50);
     	this.add(zhongZhuanF);
     	
     	//到时候再加图片
