@@ -191,10 +191,11 @@ public class AccountInfo extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				Object[] options = {"确定","取消"};
-				int choose = JOptionPane.showOptionDialog(null, "删除账号", "删除账号", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, 
-						null, options, options[1]);
-				if (choose == 0) {
+//				Object[] options = {"确定","取消"};
+//				int choose = JOptionPane.showOptionDialog(null, "删除账号", "删除账号", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, 
+//						null, options, options[1]);
+				AskDialog ask = new AskDialog(null, "删除账号", true, "确定删除此账号？");
+				if (ask.state) {
 					try {
 						AccountInfoController accountInfoController = new AccountInfoController();
 						boolean result =accountInfoController.deleteAccount(accountNumberVO.getID());
