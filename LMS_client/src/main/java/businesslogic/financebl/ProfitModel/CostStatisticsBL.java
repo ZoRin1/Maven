@@ -1,5 +1,6 @@
 package businesslogic.financebl.ProfitModel;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import vo.documentsVO.PaymentVO;
@@ -17,7 +18,7 @@ public class CostStatisticsBL implements EarnOrPayBlSer{
 		getReceipt = new GetReceipt();
 	}
 	//得到总收入
-	public double CalculateGet(String end){
+	public double CalculateGet(String end) throws RemoteException{
 		ArrayList<ReceiptVO> get = getReceipt.getAllReceivables(end);
 		double Earn = 0;
 		for(int i = 0 ; i < get.size();i++){
@@ -27,7 +28,7 @@ public class CostStatisticsBL implements EarnOrPayBlSer{
 		
 	}
 	//得到总支出
-	public double CalculatePay(String end){
+	public double CalculatePay(String end) throws RemoteException{
 		ArrayList<PaymentVO> pay = getPayBills.getAllPay(end);
 		double Allpay =0;
 		for(int i = 0 ; i <pay.size();i++){
@@ -36,12 +37,12 @@ public class CostStatisticsBL implements EarnOrPayBlSer{
 		return Allpay;
 	}
 	//得到所有的付款单
-	public ArrayList<ReceiptVO> getInBills(String end){
+	public ArrayList<ReceiptVO> getInBills(String end) throws RemoteException{
 		ArrayList<ReceiptVO> get = getReceipt.getAllReceivables(end);
 		return get;
 	}
 	//得到所有的收款单
-	public ArrayList<PaymentVO> getPayBills(String end){
+	public ArrayList<PaymentVO> getPayBills(String end) throws RemoteException{
 		ArrayList<PaymentVO> pay = getPayBills.getAllPay(end);
 		return pay;
 	}

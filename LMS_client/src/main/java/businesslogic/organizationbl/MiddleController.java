@@ -1,10 +1,15 @@
 package businesslogic.organizationbl;
 
+import java.rmi.RemoteException;
+
 import vo.orgVO.MiddleOrgVO;
 
 public class MiddleController {
+	MiddleBL mBL;
+	public MiddleController() throws RemoteException{
+		 mBL= new MiddleBL();
+	}
 	
-	MiddleBL mBL = new MiddleBL();
 	
 	
 

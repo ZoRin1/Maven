@@ -1,11 +1,16 @@
 package businesslogic.organizationbl;
 
+import java.rmi.RemoteException;
+
 import businesslogicservice.storageblservice.usedSpaceBlSer;
 import vo.orgVO.BussinessOrgVO;
 
 public class BusinessController {
+	BusinessBL bBL;
+	public  BusinessController() throws RemoteException {
+		bBL = new BusinessBL();
+	}
 	
-	BusinessBL bBL = new BusinessBL();
 	
 	public String[] getBussinessmanList(String ID) {
 		// TODO 自动生成的方法存根

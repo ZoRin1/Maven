@@ -1,5 +1,6 @@
 package businesslogic.financebl.ProfitModel;
 
+import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -18,7 +19,7 @@ public class ProfitController {
 	private addProfit add;
 	
 	
-	public ProfitController() {
+	public ProfitController() throws RemoteException {
 		super();
 		cost = new CostStatisticsBL();
 		profit = new ProfitBL();
@@ -37,14 +38,14 @@ public class ProfitController {
 //		return 0;
 //	}
 	
-	public ProfitVO returnPro(String end){
+	public ProfitVO returnPro(String end) throws RemoteException{
 		earn = cost.CalculateGet(end);
 		pay = cost.CalculatePay(end);
 		ProfitVO pro = new ProfitVO(earn,pay,date);
 		return pro;
 	}
 	
-	public void addPro(){
+	public void addPro() throws RemoteException{
 		ProfitPO po = new ProfitPO(earn, pay, date);
 		add.addPro(po);
 	}

@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -69,7 +70,13 @@ public class documentJtable {
 	private void initTable(){
 		String[] inDepotName = new String[]{" "," "};
 		documentController=new documentController();
-		ArrayList<String>codeNameList= documentController.showOwnList(account);
+		ArrayList<String> codeNameList=null;
+		try {
+			codeNameList = documentController.showOwnList(account);
+		} catch (RemoteException e1) {
+			// TODO Auto-generated catch block
+			new InternetDialog(courierui);
+		}
 		Object[][] inDepotValue;
 			 inDepotValue = new Object[codeNameList.size()][2];
 			for (int i = 0; i < codeNameList.size(); i++) {
@@ -98,7 +105,12 @@ public class documentJtable {
 							int row = Jtable.getSelectedRow();
 							String value = Jtable.getValueAt(row, 0).toString().trim();
 							String value2= Jtable.getValueAt(row, 1).toString().trim();
-							po=new documentController().getBufferedInfo(value, value2);
+							try {
+								po=new documentController().getBufferedInfo(value, value2);
+							} catch (RemoteException e1) {
+								// TODO Auto-generated catch block
+								new InternetDialog(courierui);
+							}
 							if(value2.equals("寄件单")){
 								OrderPO po1=(OrderPO)po;
 								new OrderDialog(courierui, "寄件单", true, po1);

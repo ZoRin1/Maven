@@ -22,7 +22,7 @@ public class showBufferedList implements showBufferedListBlSer{
 	}
 	
 	@Override
-	public ArrayList<String> showList() {
+	public ArrayList<String> showList() throws RemoteException{
 		// TODO Auto-generated method stub
 		ArrayList<String> list=new ArrayList<>();
 		try {
@@ -33,10 +33,7 @@ public class showBufferedList implements showBufferedListBlSer{
 	} catch (MalformedURLException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
-	} catch (RemoteException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	} catch (NotBoundException e) {
+	}  catch (NotBoundException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
@@ -44,7 +41,7 @@ public class showBufferedList implements showBufferedListBlSer{
 	}
 	//单据反馈中使用
 	@Override
-	public ArrayList<String> showOwnList(String account) {
+	public ArrayList<String> showOwnList(String account) throws RemoteException{
 		// TODO Auto-generated method stub
 		ArrayList<String> list=new ArrayList<>();
 		try {
@@ -56,10 +53,7 @@ public class showBufferedList implements showBufferedListBlSer{
 	} catch (MalformedURLException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
-	} catch (RemoteException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	} catch (NotBoundException e) {
+	}  catch (NotBoundException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}

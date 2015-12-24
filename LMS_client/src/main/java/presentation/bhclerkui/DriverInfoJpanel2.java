@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -169,7 +170,12 @@ public class DriverInfoJpanel2 extends JPanel{
 					vo=new DriverVO(vo1.getCodeCity(), vo1.getCodeBussinessHall(), vo1.getCodeID(), dname.getText(), 
 							Date.getText(), id.getText(), Phone.getText(), Sex.getText(), Time.getText());
 					String stateString[]=state.split("-");
-					new BhclerkController().changeDriver(stateString[4]+"-"+stateString[5], vo);
+					try {
+						new BhclerkController().changeDriver(stateString[4]+"-"+stateString[5], vo);
+					} catch (RemoteException e1) {
+						// TODO Auto-generated catch block
+						new InternetDialog(ui);
+					}
 					panel.remove(panel3);
 					panel.add(panel2);
 					panel.repaint();
@@ -182,7 +188,12 @@ public class DriverInfoJpanel2 extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				String stateString[]=state.split("-");
-				new BhclerkController().removeDriver(stateString[4]+"-"+stateString[5],vo1.getCodeCity()+vo1.getCodeBussinessHall()+vo1.getCodeID());
+				try {
+					new BhclerkController().removeDriver(stateString[4]+"-"+stateString[5],vo1.getCodeCity()+vo1.getCodeBussinessHall()+vo1.getCodeID());
+				} catch (RemoteException e1) {
+					// TODO Auto-generated catch block
+					new InternetDialog(ui);
+				}
 				panel.remove(panel3);
 				tableModel.removeRow(row);
 				panel2.repaint();

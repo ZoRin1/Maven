@@ -28,7 +28,7 @@ public class ProfitListBL implements ProfitListBlSer{
 	
 	
 	@Override
-	public ArrayList<ProfitVO> getProList() {
+	public ArrayList<ProfitVO> getProList()throws RemoteException {
 		// TODO 自动生成的方法存根
 		String now ="";
 		Date date = new Date();
@@ -47,10 +47,7 @@ public class ProfitListBL implements ProfitListBlSer{
 		} catch (MalformedURLException e) {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
-		} catch (RemoteException e) {
-			// TODO 自动生成的 catch 块
-			e.printStackTrace();
-		} catch (NotBoundException e) {
+		}  catch (NotBoundException e) {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
 		}

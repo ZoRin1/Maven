@@ -15,7 +15,7 @@ public class FinanceBL implements FinanceOrgBLSer {
 	private FinanceOrgDataSer financeOrgDataSer;
 	private ipConfig ip;
 	
-	public FinanceBL() {
+	public FinanceBL() throws RemoteException{
 		// TODO Auto-generated constructor stub
 		ip = new ipConfig();
 		try {
@@ -25,10 +25,7 @@ public class FinanceBL implements FinanceOrgBLSer {
 		} catch (MalformedURLException e) {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
-		} catch (RemoteException e) {
-			// TODO 自动生成的 catch 块
-			e.printStackTrace();
-		} catch (NotBoundException e) {
+		}  catch (NotBoundException e) {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
 		}

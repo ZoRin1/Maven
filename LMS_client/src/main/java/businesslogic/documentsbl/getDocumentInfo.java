@@ -19,7 +19,7 @@ public class getDocumentInfo implements getDocumentInfoBlSer{
 	private ipConfig ip;
 	
 	@Override
-	public DocumentPO getDocumentInfo(String code, String doName) {
+	public DocumentPO getDocumentInfo(String code, String doName) throws RemoteException{
 		// TODO Auto-generated method stub
 		DocumentPO po=new DocumentPO();
 		ip = new ipConfig();
@@ -29,9 +29,6 @@ public class getDocumentInfo implements getDocumentInfoBlSer{
 		getDocumentInfoDataSer getDocumentInfoDataSer =documentsFactory.createGetDocumentInfoDataSer();
 		po=getDocumentInfoDataSer.getDocumentInfo(code, doName);
 	} catch (MalformedURLException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	} catch (RemoteException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	} catch (NotBoundException e) {

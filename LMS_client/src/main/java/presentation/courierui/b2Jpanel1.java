@@ -7,6 +7,7 @@ import java.awt.Graphics;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -80,9 +81,14 @@ public class b2Jpanel1 extends JPanel{
 	 	this.setLayout(null);
 	 	this.setOpaque(false);
 	}
-	private boolean isCodeTrue(){
-		if (documentController.getWuliuInfo(dingdantiaoxingmahaoField.getText())==null) {
-			return false;
+	private boolean isCodeTrue(courierui courierui){
+		try {
+			if (documentController.getWuliuInfo(dingdantiaoxingmahaoField.getText())==null) {
+				return false;
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			new InternetDialog(courierui);
 		}
 		return true;
 	}
@@ -120,7 +126,7 @@ public class b2Jpanel1 extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				if (isCodeTrue()) {
+				if (isCodeTrue(courierui)) {
 					dingdantiaoxingmanumJLabel.setText(dingdantiaoxingmahaoField.getText());
 				}
 				else {
@@ -157,11 +163,11 @@ class b2Jpanel2 extends JPanel{
 		// TODO Auto-generated constructor stub
 		this.code=code;
 		this.account=account;
-		init();
+		init(courierui);
 	 	courierJpanel.add(this);
 		registListener(courierui,courierJpanel,b2Jpanel1,this);
 	}
-	private void init(){
+	private void init(courierui courierui){
 		documentController=new documentController();
 		Font font=new Font("幼圆", Font.BOLD, 20);
 		dingdantiaoxingmahaoJLabel=new JLabel("订单条形码号:");
@@ -181,7 +187,12 @@ class b2Jpanel2 extends JPanel{
 		shoujiandanbianhaonumJLabel.setForeground(Color.white);
 		shoujiandanbianhaonumJLabel.setFont(font);
 		shoujiandanbianhaonumJLabel.setBounds(280, 200, 250, 30);
-		shoujiandanbianhaonumJLabel.setText(documentController.getDocCode("收件单",account));
+		try {
+			shoujiandanbianhaonumJLabel.setText(documentController.getDocCode("收件单",account));
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			new InternetDialog(courierui);
+		}
 		shoujianrenJLabel=new JLabel("收件人:");
 		shoujianrenJLabel.setForeground(Color.white);
 		shoujianrenJLabel.setFont(font);
@@ -248,7 +259,12 @@ class b2Jpanel2 extends JPanel{
 				// TODO Auto-generated method stub
 				if (isFull()) {
 					GetOrderPO getOrderPO=new GetOrderPO(shoujiandanbianhaonumJLabel.getText(), "收件单", code, account, shoujianrenField.getText(), riqiJLabel.getText());
-					documentController.createBlock(getOrderPO);
+					try {
+						documentController.createBlock(getOrderPO);
+					} catch (RemoteException e1) {
+						// TODO Auto-generated catch block
+						new InternetDialog(courierui);
+					}
 					new finishDialog(courierui, "收件单创建完成", true, "收件单创建完成");
 					courierJpanel.remove(b2Jpanel2);
 					courierJpanel.add(courierui.operationJpanel);

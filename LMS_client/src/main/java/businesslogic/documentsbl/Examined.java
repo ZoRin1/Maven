@@ -17,7 +17,7 @@ public class Examined implements ExaminedBlSer{
 	private ipConfig ip;
 	
 	@Override
-	public boolean examined(String code, String doName, boolean Examined) {
+	public boolean examined(String code, String doName, boolean Examined)throws RemoteException {
 		// TODO Auto-generated method stub
 		boolean a=false;
 		ip = new ipConfig();
@@ -33,9 +33,6 @@ public class Examined implements ExaminedBlSer{
 			a=NotApproved.NotApproved(code, doName);
 		}
 	} catch (MalformedURLException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	} catch (RemoteException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	} catch (NotBoundException e) {

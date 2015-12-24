@@ -1,5 +1,7 @@
 package businesslogicservice.storageblservice;
 
+import java.rmi.RemoteException;
+
 import businesslogic.state.ResultMessage;
 
 
@@ -12,7 +14,8 @@ public interface DriveBlSer {
 	 * 若未超界，则更新库存信息并返回成功消息
 	 * @author YangGuan
 	 * @param city TODO
+	 * @throws RemoteException 
 	 *
 	 */
-	public ResultMessage drive(int shipping,int trains,int motor, String city);
+	public ResultMessage drive(int shipping,int trains,int motor, String city) throws RemoteException;
 }

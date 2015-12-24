@@ -23,7 +23,7 @@ public class UpdateSpace implements UpdateSpaceSer{
 	private int wei;
 	private InBillsPO po;
 	private ipConfig ip;
-	public UpdateSpace(String InDepotCode,String city) {
+	public UpdateSpace(String InDepotCode,String city) throws RemoteException{
 		super();
 		ip = new ipConfig();
 		try {
@@ -32,9 +32,6 @@ public class UpdateSpace implements UpdateSpaceSer{
 			getDocumentInfoDataSer getDocumentInfoDataSer=documentsFactory.createGetDocumentInfoDataSer();
 			po=getDocumentInfoDataSer.getInDepotInfo("入库单", InDepotCode);
 		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (NotBoundException e) {
@@ -49,7 +46,7 @@ public class UpdateSpace implements UpdateSpaceSer{
 	}
 
 	@Override
-	public void updateDrive() {
+	public void updateDrive() throws RemoteException {
 		// TODO Auto-generated method stub
 		DepotVO vo = new DepotVO(qu, pai, jia, wei);
 		out = new OutDepotBL();

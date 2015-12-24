@@ -1,5 +1,6 @@
 package businesslogic.financebl.settlementModel;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import po.documentsPO.ReceiptPO;
@@ -20,7 +21,7 @@ public class SettlementBL implements GetReceivablesBillsBlSer{
 	}
 
 	@Override
-	public ArrayList<ReceiptVO> getReceivables(String selling, String date) {
+	public ArrayList<ReceiptVO> getReceivables(String selling, String date) throws RemoteException {
 		// TODO 自动生成的方法存根
 		po = getReceipt.getReceipts(selling, date);
 		ReceiptVO v1;
@@ -34,7 +35,7 @@ public class SettlementBL implements GetReceivablesBillsBlSer{
 	}
 
 	@Override
-	public ArrayList<ReceiptVO> getAllReceivables(String end) {
+	public ArrayList<ReceiptVO> getAllReceivables(String end) throws RemoteException {
 		// TODO 自动生成的方法存根
 		po = getReceipt.getAllReceipts(end);
 		ReceiptVO v1;
@@ -49,7 +50,7 @@ public class SettlementBL implements GetReceivablesBillsBlSer{
 
 	@Override
 	public ArrayList<ReceiptVO> getSomeReceivables(String start,
-			String end) {
+			String end) throws RemoteException {
 		// TODO 自动生成的方法存根
 		po = getReceipt.getAllReceipts(start, end);
 		ReceiptVO v1;

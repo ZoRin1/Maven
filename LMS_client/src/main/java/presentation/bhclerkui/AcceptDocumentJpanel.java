@@ -7,6 +7,7 @@ import java.awt.Graphics;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -64,11 +65,11 @@ public class AcceptDocumentJpanel extends JPanel{
 	public AcceptDocumentJpanel(bhclerkui ui,bhclerkJpanel bhclerkJpanel,String account,String state) {
 		this.account=account;
 		state1=state;
-		init();
+		init(ui);
 		bhclerkJpanel.add(this);
 		registListener(ui,bhclerkJpanel,this);
 	}
-	public void init(){
+	public void init(bhclerkui ui){
 		split=state1.split("-");
 		Font font=new Font("幼圆",Font.BOLD,24);
 		code=new JLabel("单据编号：");
@@ -78,7 +79,12 @@ public class AcceptDocumentJpanel extends JPanel{
 		this.add(code);
 		
 		code1=new JLabel();
-		code2=new documentController().getDocCode("营业厅接收单",account);
+		try {
+			code2=new documentController().getDocCode("营业厅接收单",account);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			new InternetDialog(ui);
+		}
 		code1.setText(code2);
 		code1.setForeground(Color.white);
 		code1.setFont(font);
@@ -176,10 +182,16 @@ public class AcceptDocumentJpanel extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				String stri=tcode.getText();
-				ArrayList<String> list1=new documentController().getWuliuInfo(stri);
-				boolean a=false;
-				if(list1==null){
-					a=true;
+				boolean a = false;;
+				try {
+					ArrayList<String> list1=new documentController().getWuliuInfo(stri);
+					
+					if(list1==null){
+						a=true;
+					}
+				} catch (RemoteException e1) {
+					// TODO Auto-generated catch block
+					new InternetDialog(ui);
 				}
 				if(tcode.getText().equals("")){
 					new notFinishDialog(ui,"输入有误",true);
@@ -191,7 +203,12 @@ public class AcceptDocumentJpanel extends JPanel{
 					code3=tcode.getText();
 					state2=(String)stateBox.getSelectedItem();
 					po=new YReceivePO(date2, code2, "营业厅接收单", code3, account, departure2, arrival2, state2);
-					new documentController().createBlock(po);
+					try {
+						new documentController().createBlock(po);
+					} catch (RemoteException e1) {
+						// TODO Auto-generated catch block
+						new InternetDialog(ui);
+					}
 					new finishDialog2(ui, "接收单创建完成", true,"接收单");
 					panel.remove(panel2);
 					new DispatchJpanel(ui,panel,panel2,account,stri,state1);
@@ -235,11 +252,11 @@ class DispatchJpanel extends JPanel{
 		this.state=state;
 		this.account=account;
 		this.tcode=tcode;
-		init();
+		init(ui);
 		panel.add(this);
 		registListener(ui,panel,panel2,this);
 	}
-	private void init(){
+	private void init(bhclerkui ui){
 		Font font=new Font("幼圆",Font.BOLD,24);
 		code=new JLabel("单据编号：");
 		code.setForeground(Color.white);
@@ -248,7 +265,12 @@ class DispatchJpanel extends JPanel{
 		this.add(code);
 		
 		code1=new JLabel();
-		code2=new documentController().getDocCode("派件单",account);
+		try {
+			code2=new documentController().getDocCode("派件单",account);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			new InternetDialog(ui);
+		}
 		code1.setText(code2);
 		code1.setForeground(Color.white);
 		code1.setFont(font);
@@ -311,14 +333,19 @@ class DispatchJpanel extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				String[] split=state.split("-");
-				String[] list=new BusinessController().getCourierList(split[4]+split[5]);
 				boolean a=true;
-				int length=list.length;
-				for(int i=0;i<length;i++){
-					if(list[i].equals(Member.getText())){
-						a=false;
-						break;
+				try {
+					String[] list=new BusinessController().getCourierList(split[4]+split[5]);
+					int length=list.length;
+					for(int i=0;i<length;i++){
+						if(list[i].equals(Member.getText())){
+							a=false;
+							break;
+						}
 					}
+				} catch (RemoteException e1) {
+					// TODO Auto-generated catch block
+					new InternetDialog(ui);
 				}
 				if(Member.getText().equals("")){
 					new notFinishDialog(ui,"输入有误",true);
@@ -329,7 +356,12 @@ class DispatchJpanel extends JPanel{
 				else{
 					name2=Member.getText();
 					po=new YDispatchPO(date2, code2, "派件单", tcode, account, name2);
-					new documentController().createBlock(po);
+					try {
+						new documentController().createBlock(po);
+					} catch (RemoteException e1) {
+						// TODO Auto-generated catch block
+						new InternetDialog(ui);
+					}
 					new finishDialog2(ui, "派件单创建完成", true,"派件单");
 					panel.remove(dispatchJpanel);
 					panel.add(ui.operationJpanel);

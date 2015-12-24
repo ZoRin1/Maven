@@ -15,7 +15,7 @@ public class getWuliuInfo implements getWuliuInfoBlSer{
 	//如果不存在条形码号对应订单，则返回null，然后于展示层提示输入不完整
 	private ipConfig ip;
 	@Override
-	public ArrayList<String> getWuliuInfo(String code) {
+	public ArrayList<String> getWuliuInfo(String code) throws RemoteException{
 		// TODO Auto-generated method stub	
 		ip = new ipConfig();
 		try {
@@ -25,9 +25,6 @@ public class getWuliuInfo implements getWuliuInfoBlSer{
 			ArrayList<String> list=getWuliuInfoDataSer.getWuliuInfo(code);
 			return list;
 		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (NotBoundException e) {

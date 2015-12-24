@@ -22,7 +22,7 @@ public class CheckAccountBL implements GetAccountBlSer{
 	}
 	
 	@Override
-	public ArrayList<AccountVO> getAccount() {
+	public ArrayList<AccountVO> getAccount()throws RemoteException {
 		// TODO 自动生成的方法存根
 		ArrayList<AccountVO> vo = new ArrayList<AccountVO>();
 		ArrayList<AccountPO> po;
@@ -41,10 +41,7 @@ public class CheckAccountBL implements GetAccountBlSer{
 		} catch (MalformedURLException e) {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
-		} catch (RemoteException e) {
-			// TODO 自动生成的 catch 块
-			e.printStackTrace();
-		} catch (NotBoundException e) {
+		}  catch (NotBoundException e) {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
 		}

@@ -16,7 +16,7 @@ public class spaceBL implements usedSpaceBlSer{
 	private UsedSpaceDataSer used;
 	private ipConfig ip;
 	
-	public spaceBL(){
+	public spaceBL()throws RemoteException{
 		ip = new ipConfig();
 		try {
 			String ipp = ip.getIP();
@@ -25,10 +25,7 @@ public class spaceBL implements usedSpaceBlSer{
 		} catch (MalformedURLException e) {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
-		} catch (RemoteException e) {
-			// TODO 自动生成的 catch 块
-			e.printStackTrace();
-		} catch (NotBoundException e) {
+		}catch (NotBoundException e) {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
 		}

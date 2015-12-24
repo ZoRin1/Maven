@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -123,17 +124,22 @@ public class CarInfoJpanel3 extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				String[] split=state.split("-");
-				String[] list=new BhclerkController().getVehicleList(split[4]+"-"+split[5]);
 				boolean a=false;
-				if (list!=null) {
-					String code1=split[4]+split[5]+Carcode.getText();
-					int length=list.length;			
-					for(int i=0;i<length;i++){
-						if(code1.equals(list[i])){
-							a=true;
-							break;
+				try {
+					String[] list=new BhclerkController().getVehicleList(split[4]+"-"+split[5]);
+					if (list!=null) {
+						String code1=split[4]+split[5]+Carcode.getText();
+						int length=list.length;			
+						for(int i=0;i<length;i++){
+							if(code1.equals(list[i])){
+								a=true;
+								break;
+							}
 						}
 					}
+				} catch (RemoteException e1) {
+					// TODO Auto-generated catch block
+					new InternetDialog(ui);
 				}
 				
 				if(Code.getText().equals("")||carcode.getText().equals("")){
@@ -147,7 +153,12 @@ public class CarInfoJpanel3 extends JPanel{
 				}
 				else{
 					vo=new VehicleVO(split[4], split[5], Carcode.getText(), Code.getText(), Time.getText());
-					new BhclerkController().addVehicle(split[4]+"-"+split[5], vo);
+					try {
+						new BhclerkController().addVehicle(split[4]+"-"+split[5], vo);
+					} catch (RemoteException e1) {
+						// TODO Auto-generated catch block
+						new InternetDialog(ui);
+					}
 					new finishDialog2(ui, "车辆信息添加", true,"车辆信息" );
 					panel.remove(panel3);
 					new CarInfoJpanel(ui, panel,state);

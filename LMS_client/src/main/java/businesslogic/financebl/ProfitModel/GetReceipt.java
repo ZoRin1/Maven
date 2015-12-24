@@ -1,5 +1,6 @@
 package businesslogic.financebl.ProfitModel;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import po.documentsPO.ReceiptPO;
@@ -16,7 +17,7 @@ public class GetReceipt {
 		vo = new ArrayList<ReceiptVO>();
 	}
 	//得到收款单集合
-	public ArrayList<ReceiptVO> getAllReceivables(String end){
+	public ArrayList<ReceiptVO> getAllReceivables(String end) throws RemoteException{
 		ArrayList<ReceiptPO> po = getReceipt.getAllReceipts(end);
 		ReceiptVO v1;
 		ReceiptPO p1;

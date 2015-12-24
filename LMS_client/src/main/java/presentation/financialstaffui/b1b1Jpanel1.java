@@ -4,6 +4,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -45,11 +46,11 @@ public class b1b1Jpanel1 extends JPanel{
 		this.b1financialstaffui = b1financialstaffui;
 		this.costBL = new CostStatisticsBL();
 		this.ReceiptList = new ArrayList<ReceiptVO>();
-		init();
+		init(b1financialstaffui);
 		financialstaffJpanel.add(this);
 		registListener(b1financialstaffui,financialstaffJpanel,this);
 	}
-	private void init(){
+	private void init(b1financialstaffui b1financialstaffui){
 		Font font=new Font("幼圆",Font.BOLD,20);
 		ImageIcon i1 = new ImageIcon("picture/财务图片/经营收款.png");
 		ImageIcon Excel = new ImageIcon("picture/小导出EXCEL.png");
@@ -60,7 +61,12 @@ public class b1b1Jpanel1 extends JPanel{
 		
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
 		String date = df.format(new Date());
-		ReceiptList = costBL.getInBills(date);
+		try {
+			ReceiptList = costBL.getInBills(date);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			new InternetDialog(b1financialstaffui);
+		}
 		shoukuanTable = new b1b1Jpanel1Jtable(this, ReceiptList);
 		
 		fukuan = new JButton();

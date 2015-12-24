@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -97,7 +98,12 @@ public class b5financialstaffui extends JFrame{
 				// TODO Auto-generated method stub
 				
 				BookController =new BooksController();
-				bookList = BookController.getBook();
+				try {
+					bookList = BookController.getBook();
+				} catch (RemoteException e1) {
+					// TODO Auto-generated catch block
+					new InternetDialog(b5financialstaffui);
+				}
 //				BooksPO p1 = new BooksPO("132123,12123,123132","sdsad,456456,dasda","sdasd,55445,4554","sadsad,sadasdas,sdada","a,a,a","q,a,s,d,f", "张三", "2015");
 //				BooksPO p2 = new BooksPO("132123,12123,123132","sdsad,456456,dasda","sdasd,55445,4554","sadsad,sadasdas,sdada","a,a,a","q,a,s,d,f",  "李四", "2015");
 //				BooksPO p3 = new BooksPO("132123,12123,123132","sdsad,456456,dasda","sdasd,55445,4554","sadsad,sadasdas,sdada","a,a,a","q,a,s,d,f",  "王五", "2015");

@@ -4,9 +4,11 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.AppletInitializer;
+import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -213,24 +215,35 @@ private void init(AccountNumberVO accountNumberVO){
 				//暂时不用
 				//正常使用时启用
 				if(bMiMa && bXinMing && bDianHua && bShenFenZhengHao){
-					AccountInfoController accountInfoController = new AccountInfoController();
-					AccountNumberVO vo = accountInfoController.getInfo(Long.parseLong(zhangHaoNo.getText()));
-					AccountNumberVO accountNumberVO = new AccountNumberVO(xinMingF.getText(), 
-							Long.parseLong(zhangHaoNo.getText()), miMaF.getText(),
-							vo.getState(), dianHuaF.getText(), shenFenZhengHaoMaF.getText(), 
-							vo.getDate());
-					
-					boolean result = accountInfoController.changeInfo(Long.parseLong(zhangHaoNo.getText()), accountNumberVO);
-					if (result) {
-						JOptionPane.showMessageDialog(aui, "修改成功");
-						apl.remove(changeAccount);
-						apl.add(aui.operationJpanel);
-						aui.accountField.setEditable(true);
-						aui.searchButton.setEnabled(true);
-						aui.addaccountButton.setEnabled(true);
-						aui.repaint();
-					}else {
-						JOptionPane.showMessageDialog(null, "修改失败，请重试");
+					try {
+						AccountInfoController accountInfoController = new AccountInfoController();
+						AccountNumberVO vo = accountInfoController.getInfo(Long.parseLong(zhangHaoNo.getText()));
+						AccountNumberVO accountNumberVO = new AccountNumberVO(xinMingF.getText(), 
+								Long.parseLong(zhangHaoNo.getText()), miMaF.getText(),
+								vo.getState(), dianHuaF.getText(), shenFenZhengHaoMaF.getText(), 
+								vo.getDate());
+						
+						boolean result = accountInfoController.changeInfo(Long.parseLong(zhangHaoNo.getText()), accountNumberVO);
+						if (result) {
+							JOptionPane.showMessageDialog(aui, "修改成功");
+							apl.remove(changeAccount);
+							apl.add(aui.operationJpanel);
+							aui.accountField.setEditable(true);
+							aui.searchButton.setEnabled(true);
+							aui.addaccountButton.setEnabled(true);
+							aui.repaint();
+						}else {
+							JOptionPane.showMessageDialog(null, "修改失败，请重试");
+						}
+					} catch (NumberFormatException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (HeadlessException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (RemoteException e1) {
+						// TODO Auto-generated catch block
+						new InternetDialog(aui);
 					}
 
 				}

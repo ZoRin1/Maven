@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -160,13 +161,18 @@ public class b1financialstaffui extends JFrame{
 		voList=new ArrayList<>();
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
 		String date = df.format(new Date());
-		proController = new ProfitController();
-		profitList = new ProfitListBL();
-		vo = proController.returnPro(date);
-		ArrayList<ProfitVO> tempList = profitList.getProList();
-		proController.addPro();
-		for(int i =0 ; i<tempList.size();i++){
-			voList.add(tempList.get(i));
+		try {
+			proController = new ProfitController();
+			profitList = new ProfitListBL();
+			vo = proController.returnPro(date);
+			ArrayList<ProfitVO> tempList = profitList.getProList();
+			proController.addPro();
+			for(int i =0 ; i<tempList.size();i++){
+				voList.add(tempList.get(i));
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			new InternetDialog(this);
 		}
 		voList.add(vo);
 	}

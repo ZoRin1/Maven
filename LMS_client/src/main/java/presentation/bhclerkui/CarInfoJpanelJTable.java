@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -69,7 +70,13 @@ public class CarInfoJpanelJTable {
 	private void initTable(){
 		final String stateString[]=state.split("-");
 		String[] inDepotName = new String[]{" "};
-		String[] list=new BhclerkController().getVehicleList(stateString[4]+"-"+stateString[5]);
+		String[] list=null;
+		try {
+			list = new BhclerkController().getVehicleList(stateString[4]+"-"+stateString[5]);
+		} catch (RemoteException e1) {
+			// TODO Auto-generated catch block
+			new InternetDialog(ui);
+		}
 		String [][]inDepotValue;
 		if (list==null) {
 			inDepotValue=new String[0][1];
@@ -96,7 +103,13 @@ public class CarInfoJpanelJTable {
 				if(e.getClickCount()==2){
 					row = carInfTable.getSelectedRow();
 					String value = carInfTable.getValueAt(row, 0).toString().trim();
-					VehicleVO info=new BhclerkController().getVehicleInfo(stateString[4]+"-"+stateString[5], value);
+					VehicleVO info=null;
+					try {
+						info = new BhclerkController().getVehicleInfo(stateString[4]+"-"+stateString[5], value);
+					} catch (RemoteException e1) {
+						// TODO Auto-generated catch block
+						new InternetDialog(ui);
+					}
 				    panel.remove(CarInfoJpanel);
 					new CarInfoJpanel2(ui, panel, CarInfoJpanel, info, state,tableModel,row);
 					panel.repaint();

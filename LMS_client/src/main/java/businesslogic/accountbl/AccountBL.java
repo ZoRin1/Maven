@@ -18,7 +18,7 @@ public class AccountBL implements AccountBLSer {
 	private ipConfig ip;
 	
 	
-	public AccountBL(){
+	public AccountBL() throws RemoteException{
 		
 		try {
 			ip = new ipConfig();
@@ -28,10 +28,7 @@ public class AccountBL implements AccountBLSer {
 		} catch (MalformedURLException e) {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
-		} catch (RemoteException e) {
-			// TODO 自动生成的 catch 块
-			e.printStackTrace();
-		} catch (NotBoundException e) {
+		}catch (NotBoundException e) {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
 		}

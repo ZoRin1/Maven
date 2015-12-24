@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 import java.sql.Date;
 
 import javax.swing.ImageIcon;
@@ -114,7 +115,12 @@ public class CarInfoJpanel2 extends JPanel{
 				else{
 					vo=new VehicleVO(vo1.getCodeCity(), vo1.getCodeBussinessHall(), vo1.getCodeID(), Code.getText(), Time.getText());
 					String stateString[]=state.split("-");
-					new BhclerkController().changeVehicle(stateString[4]+"-"+stateString[5], vo);
+					try {
+						new BhclerkController().changeVehicle(stateString[4]+"-"+stateString[5], vo);
+					} catch (RemoteException e1) {
+						// TODO Auto-generated catch block
+						new InternetDialog(ui);
+					}
 					panel.remove(panel3);
 					panel.add(panel2);
 					panel.repaint();
@@ -127,7 +133,12 @@ public class CarInfoJpanel2 extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				String stateString[]=state.split("-");
-				new BhclerkController().removeVehicle(stateString[4]+"-"+stateString[5],vo1.getCodeCity()+vo1.getCodeBussinessHall()+vo1.getCodeID());
+				try {
+					new BhclerkController().removeVehicle(stateString[4]+"-"+stateString[5],vo1.getCodeCity()+vo1.getCodeBussinessHall()+vo1.getCodeID());
+				} catch (RemoteException e1) {
+					// TODO Auto-generated catch block
+					new InternetDialog(ui);
+				}
 				panel.remove(panel3);
 				tableModel.removeRow(row);
 				panel2.repaint();

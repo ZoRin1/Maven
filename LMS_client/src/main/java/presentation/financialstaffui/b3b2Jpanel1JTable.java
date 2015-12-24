@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -73,7 +74,13 @@ public class b3b2Jpanel1JTable {
 //					};
 		//假设的数据： 完善后要从数据库拿取数据来填写表格
 		documentController=new documentController();
-		ArrayList<String>codeNameList= documentController.showOwnList(account);
+		ArrayList<String> codeNameList=null;
+		try {
+			codeNameList = documentController.showOwnList(account);
+		} catch (RemoteException e1) {
+			// TODO Auto-generated catch block
+			new InternetDialog(b3financialstaffui);
+		}
 		Object[][] inDepotValue;
 			 inDepotValue = new Object[codeNameList.size()][2];
 			for (int i = 0; i < codeNameList.size(); i++) {
@@ -95,7 +102,12 @@ public class b3b2Jpanel1JTable {
 					int row = billsJtabel.getSelectedRow();
 					String value = billsJtabel.getValueAt(row, 0).toString().trim();
 					String value2= billsJtabel.getValueAt(row, 1).toString().trim();
-					po=new documentController().getBufferedInfo(value, value2);
+					try {
+						po=new documentController().getBufferedInfo(value, value2);
+					} catch (RemoteException e1) {
+						// TODO Auto-generated catch block
+						new InternetDialog(b3financialstaffui);
+					}
 					PaymentPO po1=(PaymentPO)po;
 						new PaymentDialog(b3financialstaffui, "付款单", true, po1);
 					//监听的具体实现

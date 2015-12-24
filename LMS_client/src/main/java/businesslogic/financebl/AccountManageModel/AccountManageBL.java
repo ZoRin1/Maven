@@ -1,5 +1,6 @@
 package businesslogic.financebl.AccountManageModel;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import dataservice.financedataservice.CostException;
@@ -17,7 +18,7 @@ public class AccountManageBL {
 	private changeTheAccount changeAccount;
 	
 	
-	public ArrayList<AccountVO> getAccountInf() {
+	public ArrayList<AccountVO> getAccountInf() throws RemoteException {
 		CheckManage();
 		return accountInf;
 	}
@@ -30,7 +31,7 @@ public class AccountManageBL {
 	}
 	
     //账户信息
-	public void CheckManage(){
+	public void CheckManage() throws RemoteException{
 		accountInf = checkAccount.getAccount();
 	}
 	
@@ -51,7 +52,7 @@ public class AccountManageBL {
 	}
 	
 	//更新账户信息
-	public boolean UpdateAccount(ArrayList<AccountVO> vo){
+	public boolean UpdateAccount(ArrayList<AccountVO> vo) throws RemoteException{
 		ArrayList<AccountPO> po = new ArrayList<AccountPO>();
 		AccountPO p1;
 		AccountVO v1;
@@ -65,11 +66,11 @@ public class AccountManageBL {
 	}
 	
 	//增加账户余额
-	public int ChangeEarn(String accountName,double earn){
+	public int ChangeEarn(String accountName,double earn) throws RemoteException{
 		return changeAccount.addEarn(accountName, earn);
 	}
 	//减少账户余额
-	public int  ChangePay(String accountName,double pay){
+	public int  ChangePay(String accountName,double pay) throws RemoteException{
 		return changeAccount.subPay(accountName, pay);
 	}
 	

@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -110,7 +111,12 @@ public class b4Jpanel1 extends JPanel{
 				docController = new documentController();
 				String now = date.getStrDate();
 				String selling = bussinessHallCodeField.getText();
-				receiptList = docController.getReceipts(selling, now);
+				try {
+					receiptList = docController.getReceipts(selling, now);
+				} catch (RemoteException e1) {
+					// TODO Auto-generated catch block
+					new InternetDialog(financialstaffui);
+				}
 				
 				//本地测试的假数据
 //				ArrayList<String> TCode = new ArrayList<String>();

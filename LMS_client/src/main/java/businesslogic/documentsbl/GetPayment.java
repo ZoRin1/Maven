@@ -24,7 +24,7 @@ public class GetPayment implements GetPaymentSer{
 		super();
 		ip = new ipConfig();
 	}
-	public ArrayList<PaymentPO> getAllPay(String end) {
+	public ArrayList<PaymentPO> getAllPay(String end) throws RemoteException{
 		// TODO Auto-generated method stub
 		list=new ArrayList<String>();
 		list1=new ArrayList<PaymentPO>();
@@ -45,17 +45,14 @@ public class GetPayment implements GetPaymentSer{
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NotBoundException e) {
+		}  catch (NotBoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return list1;
 	}
 
-	public ArrayList<PaymentPO> getAllPay(String start, String end) {
+	public ArrayList<PaymentPO> getAllPay(String start, String end) throws RemoteException{
 		// TODO Auto-generated method stub
 		list=new ArrayList<String>();
 		list1=new ArrayList<PaymentPO>();
@@ -75,10 +72,7 @@ public class GetPayment implements GetPaymentSer{
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NotBoundException e) {
+		}  catch (NotBoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

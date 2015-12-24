@@ -1,5 +1,7 @@
 package businesslogic.documentsbl;
 
+import java.rmi.RemoteException;
+
 import businesslogic.storagebl.DriveModel.returnSpace;
 import businesslogic.transportationbl.TransportationController;
 
@@ -10,7 +12,7 @@ public class DocumentsLineItem{
 	int type=1;
 	int days=0;
 	//此处所需line是起始城市名-到达城市名
-	public DocumentsLineItem(String line, int type, double weight) {
+	public DocumentsLineItem(String line, int type, double weight) throws RemoteException {
 		super();
 		TransportationController co=new TransportationController();
 		distance=co.getDistance(line)/100;
@@ -18,12 +20,12 @@ public class DocumentsLineItem{
 		this.weight=weight;
 		this.type=type;
 	}
-	public DocumentsLineItem(int type){
+	public DocumentsLineItem(int type) throws RemoteException{
 		TransportationController co=new TransportationController();
 		this.type=type;
 		cost=co.getCost(type);
 	}
-	public DocumentsLineItem(int type,double weight){
+	public DocumentsLineItem(int type,double weight) throws RemoteException{
 		TransportationController co=new TransportationController();
 		this.type=type;
 		cost=co.getCost(type);

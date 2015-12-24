@@ -23,7 +23,7 @@ public class GetReceipt implements GetReceiptSer{
 		super();
 		ip = new ipConfig();
 	}
-	public ArrayList<ReceiptPO> getReceipts(String selling, String date) {
+	public ArrayList<ReceiptPO> getReceipts(String selling, String date)throws RemoteException {
 		// TODO Auto-generated method stub
 		list=new ArrayList<String>();
 		list1=new ArrayList<ReceiptPO>();
@@ -45,17 +45,14 @@ public class GetReceipt implements GetReceiptSer{
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NotBoundException e) {
+		}  catch (NotBoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return list1;
 	}
 
-	public ArrayList<ReceiptPO> getAllReceipts(String end) {
+	public ArrayList<ReceiptPO> getAllReceipts(String end)throws RemoteException {
 		list=new ArrayList<String>();
 		list1=new ArrayList<ReceiptPO>();
 		ReceiptPO po;
@@ -74,17 +71,14 @@ public class GetReceipt implements GetReceiptSer{
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NotBoundException e) {
+		}  catch (NotBoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return list1;
 	}
 
-	public ArrayList<ReceiptPO> getAllReceipts(String start, String end) {
+	public ArrayList<ReceiptPO> getAllReceipts(String start, String end) throws RemoteException{
 		// TODO Auto-generated method stub
 		list=new ArrayList<String>();
 		list1=new ArrayList<ReceiptPO>();
@@ -104,10 +98,7 @@ public class GetReceipt implements GetReceiptSer{
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NotBoundException e) {
+		}  catch (NotBoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

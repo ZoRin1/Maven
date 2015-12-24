@@ -19,7 +19,7 @@ public class NewBooksBL implements NewBooksBlSer{
 		ip = new ipConfig();
 	}
 	@Override
-	public void newBooks(String name) {
+	public void newBooks(String name) throws RemoteException{
 		// TODO 自动生成的方法存根
 		try {
 			String ipp = ip.getIP();
@@ -29,10 +29,7 @@ public class NewBooksBL implements NewBooksBlSer{
 		} catch (MalformedURLException e) {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
-		} catch (RemoteException e) {
-			// TODO 自动生成的 catch 块
-			e.printStackTrace();
-		} catch (NotBoundException e) {
+		}  catch (NotBoundException e) {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
 		}

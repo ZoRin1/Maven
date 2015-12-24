@@ -19,7 +19,7 @@ public class changeTheAccount {
 		ip = new ipConfig();
 	}
 	
-	public int addEarn(String accountName,double earn){
+	public int addEarn(String accountName,double earn)throws RemoteException{
 		int sign=0;
 		try {
 			String ipp = ip.getIP();
@@ -29,10 +29,7 @@ public class changeTheAccount {
 		} catch (MalformedURLException e) {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
-		} catch (RemoteException e) {
-			// TODO 自动生成的 catch 块
-			e.printStackTrace();
-		} catch (NotBoundException e) {
+		}  catch (NotBoundException e) {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
 		}
@@ -40,7 +37,7 @@ public class changeTheAccount {
 	}
 	
 	
-	public int subPay(String accountName,double pay){
+	public int subPay(String accountName,double pay)throws RemoteException{
 		int sign = 0;
 		try {
 			String ipp = ip.getIP();
@@ -48,9 +45,6 @@ public class changeTheAccount {
 			ChangeAccountDataSer change = finFactory.createChangeAccountDateSer();
 			sign = change.changePay(accountName, pay);
 		} catch (MalformedURLException e) {
-			// TODO 自动生成的 catch 块
-			e.printStackTrace();
-		} catch (RemoteException e) {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
 		} catch (NotBoundException e) {

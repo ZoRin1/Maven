@@ -21,7 +21,7 @@ public class returnSpace implements RetuenSpaceBlSer{
 	}
 
 	@Override
-	public void returnSpace(String city) {
+	public void returnSpace(String city)throws RemoteException {
 		// TODO 自动生成的方法存根
 		try {
 			String ipp = ip.getIP();
@@ -29,9 +29,6 @@ public class returnSpace implements RetuenSpaceBlSer{
 			ReturnSpaceDataSer returnSpace = stoFactory.createReturnSpaceDataSer();
 			returnSpace.reSpace(city);
 		} catch (MalformedURLException e) {
-			// TODO 自动生成的 catch 块
-			e.printStackTrace();
-		} catch (RemoteException e) {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
 		} catch (NotBoundException e) {

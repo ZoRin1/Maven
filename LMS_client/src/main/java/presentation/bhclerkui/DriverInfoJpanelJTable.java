@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.rmi.RemoteException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -69,7 +70,13 @@ public class DriverInfoJpanelJTable {
 		//假设的数据
 		String[] inDepotName = new String[]{" "};
 		String stateString[]=state.split("-");
-		String[] list=new BhclerkController().getDriverList(stateString[4]+"-"+stateString[5]);
+		String[] list=null;
+		try {
+			list = new BhclerkController().getDriverList(stateString[4]+"-"+stateString[5]);
+		} catch (RemoteException e1) {
+			// TODO Auto-generated catch block
+			new InternetDialog(ui);
+		}
 		String [][] inDepotValue = null;
 		if (list==null) {
 			inDepotValue=new String[0][1];
@@ -101,7 +108,12 @@ public class DriverInfoJpanelJTable {
 					String value = driverInfTable.getValueAt(row, 0).toString().trim();
 					String stateString[]=state.split("-");
 					panel.remove(DriverInfoJpanel);
-					new DriverInfoJpanel2(ui, panel, DriverInfoJpanel, new BhclerkController().getDriverInfo(stateString[4]+"-"+stateString[5], value),state,tableModel,row);
+					try {
+						new DriverInfoJpanel2(ui, panel, DriverInfoJpanel, new BhclerkController().getDriverInfo(stateString[4]+"-"+stateString[5], value),state,tableModel,row);
+					} catch (RemoteException e1) {
+						// TODO Auto-generated catch block
+						new InternetDialog(ui);
+					}
 					panel.repaint();
 					//监听的具体实现
 				}

@@ -7,6 +7,7 @@ import java.awt.Graphics;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -66,11 +67,11 @@ public class ReceiptJPanel extends JPanel{
 
 		this.account2=account;
 		this.state=state;
-		init();
+		init(ui);
 		bhclerkJpanel.add(this);
 		registListener(ui,bhclerkJpanel,this);
 	}
-	public void init(){
+	public void init(bhclerkui ui){
 		Font font=new Font("幼圆",Font.BOLD,24);
 		code=new JLabel("单据编号：");
 		code.setForeground(Color.white);
@@ -79,7 +80,12 @@ public class ReceiptJPanel extends JPanel{
 		this.add(code);
 		
 		code1=new JLabel();
-		code2=new documentController().getDocCode("收款单",account2);
+		try {
+			code2=new documentController().getDocCode("收款单",account2);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			new InternetDialog(ui);
+		}
 		code1.setText(code2);
 		code1.setForeground(Color.white);
 		code1.setFont(font);
@@ -186,7 +192,13 @@ public class ReceiptJPanel extends JPanel{
 				// TODO Auto-generated method stub
 				String[] list=state.split("-");
 				String str=list[4]+"-"+list[5];
-				String[] list1=new BusinessController().getCourierList(str);
+				String[] list1=null;
+				try {
+					list1 = new BusinessController().getCourierList(str);
+				} catch (RemoteException e1) {
+					// TODO Auto-generated catch block
+					new InternetDialog(ui);
+				}
 				int size1=list1.length;
 				boolean a=true;//a为真代表快递员不存在
 				for(int i=0;i<size1;i++){
@@ -216,12 +228,22 @@ public class ReceiptJPanel extends JPanel{
 					//此处增加相应账户的余额
 					accountManage = new AccountManageBL();
 					int sign = 0;
-					sign = accountManage.ChangeEarn(zhanghumingJTextField.getText(), fund);
+					try {
+						sign = accountManage.ChangeEarn(zhanghumingJTextField.getText(), fund);
+					} catch (RemoteException e1) {
+						// TODO Auto-generated catch block
+						new InternetDialog(ui);
+					}
 					if(sign==-1){
 						new notFindDialog(ui, "未找到账户", true ,"账户");
 					}else {
 
-						new documentController().createBlock(po);
+						try {
+							new documentController().createBlock(po);
+						} catch (RemoteException e1) {
+							// TODO Auto-generated catch block
+							new InternetDialog(ui);
+						}
 						new finishDialog2(ui, "收款单创建完成", true,"收款单");
 						panel.remove(panel2);
 						panel.add(ui.operationJpanel);

@@ -18,7 +18,7 @@ public class getBufferedInfo implements getBufferedInfoBlSer{
 	private ipConfig ip;
 	
 	@Override
-	public DocumentPO getBufferedInfo(String code, String doName) {
+	public DocumentPO getBufferedInfo(String code, String doName) throws RemoteException{
 		// TODO Auto-generated method stub
 		DocumentPO po=new DocumentPO();
 		ip = new ipConfig();
@@ -29,9 +29,6 @@ public class getBufferedInfo implements getBufferedInfoBlSer{
 		po=getBufferedInfoDataSer.getBufferedInfo(code, doName);
 		return po;
 	} catch (MalformedURLException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	} catch (RemoteException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	} catch (NotBoundException e) {

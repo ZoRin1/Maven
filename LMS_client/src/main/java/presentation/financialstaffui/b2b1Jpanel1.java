@@ -4,6 +4,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -88,7 +89,12 @@ public class b2b1Jpanel1 extends JPanel{
 				// TODO 自动生成的方法存根
 				new finishDialog(b2financialstaffui, "更新完成", true,"更新账户信息完成");
 				AccountManageBL accountManageBL=new AccountManageBL();
-				accountManageBL.UpdateAccount(accountInf);
+				try {
+					accountManageBL.UpdateAccount(accountInf);
+				} catch (RemoteException e) {
+					// TODO Auto-generated catch block
+					new InternetDialog(b2financialstaffui);
+				}
 				
 			}
 		});

@@ -17,7 +17,7 @@ public class createBlock implements createBlockBlSer{
 	private ipConfig ip;
 
 	@Override
-	public boolean createBlock(DocumentPO po) {
+	public boolean createBlock(DocumentPO po) throws RemoteException {
 		// TODO Auto-generated method stub
 		boolean a=true;
 		ip = new ipConfig();
@@ -29,10 +29,7 @@ public class createBlock implements createBlockBlSer{
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NotBoundException e) {
+		}catch (NotBoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

@@ -27,7 +27,7 @@ public class CheckBL implements check_inventoryBlSer{
 	}
 	
 	@Override
-	public ArrayList<SimpleInDepotInfVO> check(String account, String start, String end) {
+	public ArrayList<SimpleInDepotInfVO> check(String account, String start, String end) throws RemoteException{
 		// TODO 自动生成的方法存根
 		try {
 			String ipp = ip.getIP();
@@ -45,9 +45,6 @@ public class CheckBL implements check_inventoryBlSer{
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (NotBoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -56,7 +53,7 @@ public class CheckBL implements check_inventoryBlSer{
 	}
 
 	@Override
-	public ArrayList<InDepotInfVO> inventory(String account, String start, String end) {
+	public ArrayList<InDepotInfVO> inventory(String account, String start, String end) throws RemoteException{
 		// TODO 自动生成的方法存根
 		try {
 			String ipp = ip.getIP();
@@ -74,10 +71,7 @@ public class CheckBL implements check_inventoryBlSer{
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NotBoundException e) {
+		}catch (NotBoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

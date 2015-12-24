@@ -1,5 +1,7 @@
 package businesslogicservice.financeblservice;
 
+import java.rmi.RemoteException;
+
 import vo.financeVO.*;
 
 public interface NewBooksBlSer {
@@ -10,7 +12,8 @@ public interface NewBooksBlSer {
 	 * 用于期初建账
 	 * @author YangGuan
 	 * @param name TODO
+	 * @throws RemoteException 
 	 *
 	 */
-	public void newBooks(String name);
+	public void newBooks(String name) throws RemoteException;
 }

@@ -22,7 +22,7 @@ public class GetExcelInf {
 		ip = new ipConfig();
 	}
 	
-	public ArrayList<DepotExcelPO> getExcel(String city){
+	public ArrayList<DepotExcelPO> getExcel(String city)throws RemoteException{
 		try {
 			String ipp = ip.getIP();
 			storageFactory stoFactory = (storageFactory)Naming.lookup("rmi://"+ipp+"/stoFactory");
@@ -32,10 +32,7 @@ public class GetExcelInf {
 		} catch (MalformedURLException e) {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
-		} catch (RemoteException e) {
-			// TODO 自动生成的 catch 块
-			e.printStackTrace();
-		} catch (NotBoundException e) {
+		}  catch (NotBoundException e) {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
 		}

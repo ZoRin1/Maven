@@ -17,7 +17,7 @@ public class MiddleBL implements MiddleOrgBLSer {
 	private MiddleOrgDataSer middleOrgDataSer;
 	private ipConfig ip=new ipConfig();
 	
-	public MiddleBL() {
+	public MiddleBL() throws RemoteException{
 		// TODO Auto-generated constructor stub
 		try {
 			String ipp = ip.getIP();
@@ -26,10 +26,7 @@ public class MiddleBL implements MiddleOrgBLSer {
 		} catch (MalformedURLException e) {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
-		} catch (RemoteException e) {
-			// TODO 自动生成的 catch 块
-			e.printStackTrace();
-		} catch (NotBoundException e) {
+		}  catch (NotBoundException e) {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
 		}

@@ -21,7 +21,7 @@ public class getPosition implements GetPositionBlSer{
 		ip = new ipConfig();
 	}
 	@Override
-	public DepotVO getPOsition(String city, int qu) {
+	public DepotVO getPOsition(String city, int qu) throws RemoteException{
 		// TODO Auto-generated method stub
 		try {
 			String ipp = ip.getIP();
@@ -32,10 +32,7 @@ public class getPosition implements GetPositionBlSer{
 		} catch (MalformedURLException e) {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
-		} catch (RemoteException e) {
-			// TODO 自动生成的 catch 块
-			e.printStackTrace();
-		} catch (NotBoundException e) {
+		}  catch (NotBoundException e) {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
 		}

@@ -15,7 +15,7 @@ public class addProfit {
 	private ipConfig ip;
 	private financeFactory finFactory;
 	
-	public addProfit(){
+	public addProfit()throws RemoteException{
 		ip = new ipConfig();
 		String ipp = ip.getIP();
 		try {
@@ -23,23 +23,17 @@ public class addProfit {
 		} catch (MalformedURLException e) {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
-		} catch (RemoteException e) {
-			// TODO 自动生成的 catch 块
-			e.printStackTrace();
-		} catch (NotBoundException e) {
+		}  catch (NotBoundException e) {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
 		}
 	}
 	
-	public void addPro(ProfitPO po){
-		try {
+	public void addPro(ProfitPO po) throws RemoteException{
+
 			StorageProDataSer stoPro = finFactory.createStorageProDataSer();
 			stoPro.setCostRecords(po);
-		} catch (RemoteException e) {
-			// TODO 自动生成的 catch 块
-			e.printStackTrace();
-		}
+		
 		
 	}
 }

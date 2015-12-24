@@ -19,7 +19,7 @@ public class OutDepotBL {
 	public OutDepotBL(){
 		ip = new ipConfig();
 	}
-	public void outDepot(DepotVO depo,String city){
+	public void outDepot(DepotVO depo,String city)throws RemoteException{
 		try {
 			String ipp = ip.getIP();
 			storageFactory stoFactory = (storageFactory)Naming.lookup("rmi://"+ipp+"/stoFactory");
@@ -27,9 +27,6 @@ public class OutDepotBL {
 			po = new DepotPO(depo.getQu(),depo.getPai(),depo.getJia(),depo.getWei());
 			outDepot.outDepot(po, city);
 		} catch (MalformedURLException e) {
-			// TODO 自动生成的 catch 块
-			e.printStackTrace();
-		} catch (RemoteException e) {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
 		} catch (NotBoundException e) {

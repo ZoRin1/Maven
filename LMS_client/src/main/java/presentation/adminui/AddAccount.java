@@ -3,8 +3,10 @@ package presentation.adminui;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -238,23 +240,34 @@ public class AddAccount extends JPanel {
 							Long.parseLong(zhangHaoNo.getText()), miMaF.getText(),
 							"0", dianHuaF.getText(), shenFenZhengHaoMaF.getText(), 
 							date);
-					AccountInfoController accountInfoController = new AccountInfoController();
-					boolean bExist = (accountInfoController.getInfo(Long.parseLong(zhangHaoNo.getText())) != null);
-					if (bExist) {
-						JOptionPane.showMessageDialog(null, "账号已存在，请重新输入");
-					}else {
-						boolean result = accountInfoController.addAccount(Long.parseLong(zhangHaoNo.getText()), accountNumberVO);
-						if (result) {
-							JOptionPane.showMessageDialog(aui, "创建成功");
-							apl.remove(aat);
-							apl.add(aui.operationJpanel);
-							aui.accountField.setEditable(true);
-							aui.searchButton.setEnabled(true);
-							aui.addaccountButton.setEnabled(true);
-							aui.repaint();
+					try {
+						AccountInfoController accountInfoController = new AccountInfoController();
+						boolean bExist = (accountInfoController.getInfo(Long.parseLong(zhangHaoNo.getText())) != null);
+						if (bExist) {
+							JOptionPane.showMessageDialog(null, "账号已存在，请重新输入");
 						}else {
-							JOptionPane.showMessageDialog(null, "创建失败，请重试");
+							boolean result = accountInfoController.addAccount(Long.parseLong(zhangHaoNo.getText()), accountNumberVO);
+							if (result) {
+								JOptionPane.showMessageDialog(aui, "创建成功");
+								apl.remove(aat);
+								apl.add(aui.operationJpanel);
+								aui.accountField.setEditable(true);
+								aui.searchButton.setEnabled(true);
+								aui.addaccountButton.setEnabled(true);
+								aui.repaint();
+							}else {
+								JOptionPane.showMessageDialog(null, "创建失败，请重试");
+							}
 						}
+					} catch (NumberFormatException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (HeadlessException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (RemoteException e1) {
+						// TODO Auto-generated catch block
+						new InternetDialog(aui);
 					}														
 				}
 				

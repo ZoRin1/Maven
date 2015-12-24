@@ -4,6 +4,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -57,7 +58,12 @@ public class b1b1Jpanel2 extends JPanel{
 		
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
 		String date = df.format(new Date());
-		payList = costBL.getPayBills(date);
+		try {
+			payList = costBL.getPayBills(date);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			new InternetDialog(b1financialstaffui);
+		}
 		fukuanTable = new b1b1Jpanel2Jtable(this, payList);
 		
 		returnButton=new JButton(returnIcon);

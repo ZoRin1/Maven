@@ -1,5 +1,6 @@
 package businesslogic.storagebl.CheckModel;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import po.documentsPO.OutbillsPO;
@@ -18,12 +19,12 @@ public class CheckController {
 	}
 
 
-	public ArrayList<SimpleInDepotInfVO>conCheck(String account,String start, String end) {		
+	public ArrayList<SimpleInDepotInfVO>conCheck(String account,String start, String end) throws RemoteException {		
 		return check.check(account, start, end);
 	}
 	
 
-	public ArrayList<InDepotInfVO> conInventory(String account,String start, String end) {
+	public ArrayList<InDepotInfVO> conInventory(String account,String start, String end) throws RemoteException {
 		return check.inventory(account, start, end);
 	}
 	

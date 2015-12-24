@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -126,7 +127,12 @@ public class b2financialstaffui extends JFrame{
 //		accountInf.add(v7);
 		account = new AccountManageBL();
 		accountInf=new ArrayList<>();
-		accountInf = account.getAccountInf();
+		try {
+			accountInf = account.getAccountInf();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			new InternetDialog(this);
+		}
 	}
 	
 	private void init(financialstaffui fsui){

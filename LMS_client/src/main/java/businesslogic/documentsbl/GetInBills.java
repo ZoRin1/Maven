@@ -25,7 +25,7 @@ public class GetInBills implements GetInBillsSer{
 		ip = new ipConfig();
 	}
 	public ArrayList<InBillsPO> getInBill(String account, String start,
-			String end) {
+			String end) throws RemoteException{
 		// TODO Auto-generated method stub
 		list=new ArrayList<String>();
 		list1=new ArrayList<InBillsPO>();
@@ -47,16 +47,13 @@ public class GetInBills implements GetInBillsSer{
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NotBoundException e) {
+		}  catch (NotBoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return list1;
 	}
-	public ArrayList<InBillsPO> getAllInBills(String account, String end) {
+	public ArrayList<InBillsPO> getAllInBills(String account, String end) throws RemoteException{
 		// TODO Auto-generated method stub
 		list=new ArrayList<String>();
 		list1=new ArrayList<InBillsPO>();
@@ -78,10 +75,7 @@ public class GetInBills implements GetInBillsSer{
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NotBoundException e) {
+		}  catch (NotBoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

@@ -8,6 +8,7 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.peer.LightweightPeer;
+import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -85,11 +86,11 @@ public class b1Jpanel1 extends JPanel{
 		// TODO Auto-generated constructor stub
 		this.account=account;
 		this.state=state;
-		init();
+		init(courierui);
 	 	courierJpanel.add(this);
 		registListener(courierui,courierJpanel,this);
 	}
-	private void init(){
+	private void init(courierui courierui){
 		Font font=new Font("幼圆",Font.BOLD,20);
 		jijianrenJLabel=new JLabel("寄件人:");
 		jijianrenJLabel.setForeground(Color.white);
@@ -188,7 +189,12 @@ public class b1Jpanel1 extends JPanel{
 		shoujianrenchengshi.setFont(font);
 		shoujianrenchengshi.setBounds(135, 275, 56, 27);
 		this.add(shoujianrenchengshi);
-		shoujianrenchengshiBox=new JComboBox<String>(new TransportationController().getCityList(""));
+		try {
+			shoujianrenchengshiBox=new JComboBox<String>(new TransportationController().getCityList(""));
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			new InternetDialog(courierui);
+		}
 		shoujianrenchengshiBox.setEditable(false);
 		shoujianrenchengshiBox.setFont(font);
 		shoujianrenchengshiBox.setBounds(205, 275, 145, 27);
@@ -471,11 +477,11 @@ class b1Jpanel2 extends JPanel{
 		this.scity=scity;
 		this.account=account;
 		this.orderPO=orderPO;
-		init();
+		init(courierui);
 	 	courierJpanel.add(this);
 		registListener(courierui,courierJpanel,b1Jpanel1,this);
 	}
-	private void init(){
+	private void init(courierui courierui){
 		documentController=new documentController();
 		Font font=new Font("幼圆",Font.BOLD,20);
 		dingdantiaoxingmahaoJLabel=new JLabel("订单条形码号:");
@@ -486,7 +492,12 @@ class b1Jpanel2 extends JPanel{
 		dingdannumberJLabel.setForeground(Color.white);
 		dingdannumberJLabel.setFont(font);
 		dingdannumberJLabel.setBounds(350, 150, 300, 30);
-		dingdannumberJLabel.setText(documentController.getDocCode("寄件单",account));
+		try {
+			dingdannumberJLabel.setText(documentController.getDocCode("寄件单",account));
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			new InternetDialog(courierui);
+		}
 		
 		cankaobaojiaJLabel=new JLabel("参考报价:");
 		cankaobaojiaJLabel.setForeground(Color.white);
@@ -546,13 +557,28 @@ class b1Jpanel2 extends JPanel{
 		riqi = dateFormat.format( now );
 		String string=null;
 		if (jcity.equals(scity)) {
-			string=Double.toString(documentController.getOwnCost(orderPO.getWeight()));
+			try {
+				string=Double.toString(documentController.getOwnCost(orderPO.getWeight()));
+			} catch (RemoteException e) {
+				// TODO Auto-generated catch block
+				new InternetDialog(courierui);
+			}
 		}else {
-			string=Double.toString(documentController.getCost(jcity, scity, orderPO.getState(), orderPO.getWeight()));
+			try {
+				string=Double.toString(documentController.getCost(jcity, scity, orderPO.getState(), orderPO.getWeight()));
+			} catch (RemoteException e) {
+				// TODO Auto-generated catch block
+				new InternetDialog(courierui);
+			}
 		}
 		cankaobaojianumberJLabel.setText(string);
 		baozhuangfeinumberJLabel.setText(Integer.toString(orderPO.getNumber()*5));
-		yugushijiannumberJLabel.setText(Integer.toString(documentController.getDays(jcity, scity, orderPO.getState(), orderPO.getWeight())));
+		try {
+			yugushijiannumberJLabel.setText(Integer.toString(documentController.getDays(jcity, scity, orderPO.getState(), orderPO.getWeight())));
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			new InternetDialog(courierui);
+		}
 		this.add(dingdannumberJLabel);
 		this.add(dingdantiaoxingmahaoJLabel);
 		this.add(cankaobaojiaJLabel);
@@ -599,7 +625,12 @@ class b1Jpanel2 extends JPanel{
 					orderPO.setCode(dingdannumberJLabel.getText());
 					orderPO.setDate(riqi);
 					orderPO.setSumCost(Double.parseDouble(shijibaojianumber.getText()));
-					documentController.createBlock(orderPO);
+					try {
+						documentController.createBlock(orderPO);
+					} catch (RemoteException e1) {
+						// TODO Auto-generated catch block
+						new InternetDialog(courierui);
+					}
 					new finishDialog(courierui, "寄件单创建完成", true,"寄件单创建完成");
 					courierJpanel.remove(b1Jpanel2);
 					courierJpanel.add(courierui.operationJpanel);

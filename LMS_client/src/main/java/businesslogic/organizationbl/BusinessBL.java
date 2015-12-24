@@ -21,7 +21,7 @@ public class BusinessBL implements BussinessOrgBLSer {
 	private BussinessOrgDataSer bussinessOrgDataSer;
 	private ipConfig ip;
 
- public BusinessBL() {
+ public BusinessBL() throws RemoteException{
 		// TODO Auto-generated constructor stub			
 	 ip = new ipConfig();
 		try {
@@ -31,10 +31,7 @@ public class BusinessBL implements BussinessOrgBLSer {
 		} catch (MalformedURLException e) {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
-		} catch (RemoteException e) {
-			// TODO 自动生成的 catch 块
-			e.printStackTrace();
-		} catch (NotBoundException e) {
+		}  catch (NotBoundException e) {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
 		}

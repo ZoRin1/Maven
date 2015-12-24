@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.rmi.RemoteException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -69,12 +70,15 @@ public class SearchAccount extends JPanel {
 		        	//暂时不用
 					int r = accountTable.getSelectedRow();
 					long ID = Long.parseLong(data[r][0]);
-					AccountInfoController accountInfoController = new AccountInfoController();
-					AccountNumberVO accountNumberVO = accountInfoController.getInfo(ID);   
-										
-//					AccountNumberVO accountNumberVO1 = new AccountNumberVO("杨华安", 1000000, "admin1", 
-//							null, "13270807992", "522123199505051039", "2015-11-26");					
-					new AccountInfo(aui,apl, accountNumberVO);
+					try {
+						AccountInfoController accountInfoController = new AccountInfoController();
+						AccountNumberVO accountNumberVO = accountInfoController.getInfo(ID);   
+															
+						new AccountInfo(aui,apl, accountNumberVO);
+					} catch (RemoteException e1) {
+						// TODO Auto-generated catch block
+						new InternetDialog(aui);
+					}
 					aui.repaint();
 			 }
 		}

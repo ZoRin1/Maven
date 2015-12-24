@@ -1,5 +1,6 @@
 package businesslogic.financebl.ProfitModel;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import po.documentsPO.PaymentPO;
@@ -19,7 +20,7 @@ public class GetPayBills {
 		vo = new ArrayList<PaymentVO>();
 	}
 	//得到付款单集合
-	public ArrayList<PaymentVO> getAllPay(String end){
+	public ArrayList<PaymentVO> getAllPay(String end) throws RemoteException{
 		ArrayList<PaymentPO> po = getPay.getAllPay(end);
 		PaymentVO v1;
 		PaymentPO p1;

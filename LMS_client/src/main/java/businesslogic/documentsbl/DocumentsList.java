@@ -1,4 +1,6 @@
 package businesslogic.documentsbl;
+import java.rmi.RemoteException;
+
 import businesslogic.documentsbl.DocumentsLineItem;
 public class DocumentsList {
 	String departure=null;
@@ -13,7 +15,7 @@ public class DocumentsList {
 		this.trans = trans;
 		this.weight=weight;
 	}
-	public double getCost(){
+	public double getCost() throws RemoteException{
 		String line=departure+"-"+arrival;
 		int type=0;
 		double cost=0;
@@ -27,7 +29,7 @@ public class DocumentsList {
 		cost=item.getTotal();
 		return cost;
 	}
-	public int getDays(){
+	public int getDays() throws RemoteException{
 		String line=departure+"-"+arrival;
 		int type=0;
 		if(trans.equals("特快专递"))

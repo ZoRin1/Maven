@@ -23,7 +23,7 @@ public class CoverAccountBL {
 		ip = new ipConfig();
 	}
 	
-	public boolean CoverAccount(){
+	public boolean CoverAccount()throws RemoteException{
 		try {
 			String ipp = ip.getIP();
 			financeFactory finFactory = (financeFactory)Naming.lookup("rmi://"+ipp+"/finFactory");
@@ -32,10 +32,7 @@ public class CoverAccountBL {
 		} catch (MalformedURLException e) {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
-		} catch (RemoteException e) {
-			// TODO 自动生成的 catch 块
-			e.printStackTrace();
-		} catch (NotBoundException e) {
+		}catch (NotBoundException e) {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
 		}

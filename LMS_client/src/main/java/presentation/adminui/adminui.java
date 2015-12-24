@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.HeadlessException;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,6 +12,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.rmi.RemoteException;
 
 import javax.naming.InitialContext;
 import javax.swing.ImageIcon;
@@ -216,19 +218,27 @@ public class adminui extends JFrame{
 				if (!Id.equals("")) {
 					if (Id.charAt(0)!='0') {
 						long ID = Long.parseLong(Id);
-						AccountInfoController accountInfoController = new AccountInfoController();
-						String[] result = accountInfoController.getAccount(ID);
+						try {
+							AccountInfoController accountInfoController = new AccountInfoController();
+							String[] result = accountInfoController.getAccount(ID);
 //						String[]temp = {"1002356-杨华安"};
-						if (result != null) {
-							apl.remove(aui.operationJpanel);
-							aui.searchButton.setEnabled(false);
-							aui.addaccountButton.setEnabled(false);
-							aui.accountField.setText("");
-							aui.accountField.setEditable(false);
-							new SearchAccount(aui, apl, result);
-							aui.repaint();
-						}else{
-							JOptionPane.showMessageDialog(aui, "未找到账号，请重新输入");
+							if (result != null) {
+								apl.remove(aui.operationJpanel);
+								aui.searchButton.setEnabled(false);
+								aui.addaccountButton.setEnabled(false);
+								aui.accountField.setText("");
+								aui.accountField.setEditable(false);
+								new SearchAccount(aui, apl, result);
+								aui.repaint();
+							}else{
+								JOptionPane.showMessageDialog(aui, "未找到账号，请重新输入");
+							}
+						} catch (HeadlessException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (RemoteException e1) {
+							// TODO Auto-generated catch block
+							new InternetDialog(aui);
 						}
 					}else {
 						JOptionPane.showMessageDialog(aui, "请输入账号");

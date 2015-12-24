@@ -25,7 +25,7 @@ public class GetBooksBL implements GetBooksBlSer{
 	}
 
 	@Override
-	public ArrayList<BooksPO> getBooks() {
+	public ArrayList<BooksPO> getBooks() throws RemoteException{
 		// TODO 自动生成的方法存根
 		try {
 			String ipp = ip.getIP();
@@ -35,10 +35,7 @@ public class GetBooksBL implements GetBooksBlSer{
 		} catch (MalformedURLException e) {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
-		} catch (RemoteException e) {
-			// TODO 自动生成的 catch 块
-			e.printStackTrace();
-		} catch (NotBoundException e) {
+		}  catch (NotBoundException e) {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
 		}

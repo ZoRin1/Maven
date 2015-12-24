@@ -3,8 +3,10 @@ package presentation.adminui;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -193,18 +195,26 @@ public class AccountInfo extends JPanel {
 				int choose = JOptionPane.showOptionDialog(null, "删除账号", "删除账号", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, 
 						null, options, options[1]);
 				if (choose == 0) {
-					AccountInfoController accountInfoController = new AccountInfoController();
-					boolean result =accountInfoController.deleteAccount(accountNumberVO.getID());
-					if (result) {
-						JOptionPane.showMessageDialog(null, "删除成功");
-						apl.remove(accountInfo);
-						apl.add(aui.operationJpanel);					
-						aui.accountField.setEditable(true);
-						aui.searchButton.setEnabled(true);
-						aui.addaccountButton.setEnabled(true);
-						aui.repaint();
-					}else {
-						JOptionPane.showMessageDialog(null, "失败成功，请重试");
+					try {
+						AccountInfoController accountInfoController = new AccountInfoController();
+						boolean result =accountInfoController.deleteAccount(accountNumberVO.getID());
+						if (result) {
+							JOptionPane.showMessageDialog(null, "删除成功");
+							apl.remove(accountInfo);
+							apl.add(aui.operationJpanel);					
+							aui.accountField.setEditable(true);
+							aui.searchButton.setEnabled(true);
+							aui.addaccountButton.setEnabled(true);
+							aui.repaint();
+						}else {
+							JOptionPane.showMessageDialog(null, "删除失败，请重试");
+						}
+					} catch (HeadlessException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (RemoteException e1) {
+						// TODO Auto-generated catch block
+						new InternetDialog(aui);
 					}
 					
 				}

@@ -1,9 +1,15 @@
 package businesslogic.transportationbl;
 
+import java.rmi.RemoteException;
+
 import vo.transportationVO.RouteVO;
 
 public class TransportationController {
-	TransportationBL tBL = new TransportationBL();
+	TransportationBL tBL ;
+	public TransportationController() throws RemoteException{
+		tBL= new TransportationBL();
+	}
+
 	public boolean changeDistance(RouteVO route) {
 		// TODO 自动生成的方法存根
 		return tBL.changeDistance(route);

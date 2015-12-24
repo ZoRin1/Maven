@@ -17,7 +17,7 @@ public class createDocument implements createDocumentBlSer{
 	private ipConfig ip;
 
 	@Override
-	public String createDocument(String doName,String account) {
+	public String createDocument(String doName,String account) throws RemoteException{
 		// TODO Auto-generated method stub
 		String code=null;
 		ip = new ipConfig();
@@ -27,9 +27,6 @@ public class createDocument implements createDocumentBlSer{
 			GetDocCodeDataSer getDocCodeDataSer=documentsFactory.createGetDocCodeDataSer();
 			code=getDocCodeDataSer.getDocCode(doName,account);
 		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (NotBoundException e) {

@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.rmi.RemoteException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -203,7 +204,13 @@ public class DriverInfoJpanel3 extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				String[] split=state.split("-");
-				String[] list=new BhclerkController().getDriverList(split[4]+"-"+split[5]);
+				String[] list=null;
+				try {
+					list = new BhclerkController().getDriverList(split[4]+"-"+split[5]);
+				} catch (RemoteException e1) {
+					// TODO Auto-generated catch block
+					new InternetDialog(ui);
+				}
 				boolean a=false;
 				String code1=split[4]+split[5]+Drivercode.getText();
 				if(list!=null){
@@ -228,7 +235,12 @@ public class DriverInfoJpanel3 extends JPanel{
 				else{
 					vo=new DriverVO(split[4], split[5], Drivercode.getText(), dname.getText(), 
 							Date.getText(), id.getText(), Phone.getText(), (String)sexBox.getSelectedItem(), Time.getText());
-					new BhclerkController().addDriver(split[4]+"-"+split[5], vo);
+					try {
+						new BhclerkController().addDriver(split[4]+"-"+split[5], vo);
+					} catch (RemoteException e1) {
+						// TODO Auto-generated catch block
+						new InternetDialog(ui);
+					}
 					new finishDialog2(ui, "司机信息添加", true,"司机信息" );
 					panel.remove(panel3);
 					new DriverInfoJpanel(ui, panel, state);

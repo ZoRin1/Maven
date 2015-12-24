@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -50,11 +51,11 @@ public class b3b1Jpanel1 extends JPanel{
 	public b3b1Jpanel1(b3financialstaffui b3financialstaffui,financialstaffJpanel financialstaffJpanel,String account) {
 		// TODO Auto-generated constructor stub
 		this.account=account;
-		init();
+		init(b3financialstaffui);
 		financialstaffJpanel.add(this);
 		registListener(b3financialstaffui,financialstaffJpanel,this);
 	}
-	private void init(){
+	private void init(b3financialstaffui b3financialstaffui){
 		documentController=new documentController();
 		Font font=new Font("幼圆",Font.BOLD,20);
 		yesButton=new JButton(yesIcon);
@@ -68,7 +69,12 @@ public class b3b1Jpanel1 extends JPanel{
 		bianhaoJLabel.setFont(font);
 		bianhaoJLabel.setBounds(50, 50, 150, 30);
 		bianhaonumberJLabel=new JLabel();
-		bianhaonumberJLabel.setText(documentController.getDocCode("付款单",account));
+		try {
+			bianhaonumberJLabel.setText(documentController.getDocCode("付款单",account));
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			new InternetDialog(b3financialstaffui);
+		}
 		bianhaonumberJLabel.setForeground(Color.white);
 		bianhaonumberJLabel.setFont(font);
 		bianhaonumberJLabel.setBounds(200, 50, 150, 30);
@@ -224,12 +230,28 @@ public class b3b1Jpanel1 extends JPanel{
 				// TODO Auto-generated method stub
 				if (isFull()) {
 					//修改账户余额暂缺					
-					documentController.createBlock(new PaymentPO(bianhaonumberJLabel.getText(), "付款单", riqi.getText(), account, Double.parseDouble(jineField.getText()), fukuanrenxingmingField.getText(), zhanghaoField.getText(), tiaomuJList.getSelectedValue(), beizhuJList.getSelectedValue()));
+					try {
+						documentController.createBlock(new PaymentPO(bianhaonumberJLabel.getText(), "付款单", riqi.getText(), account, Double.parseDouble(jineField.getText()), fukuanrenxingmingField.getText(), zhanghaoField.getText(), tiaomuJList.getSelectedValue(), beizhuJList.getSelectedValue()));
+					} catch (NumberFormatException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (RemoteException e1) {
+						// TODO Auto-generated catch block
+						new InternetDialog(b3financialstaffui);
+					}
 				
 					//这里要加上改变账户余额的功能！！！
 					accountManage = new AccountManageBL();
 					int sign=0;
-					sign = accountManage.ChangePay(zhanghaoField.getText(), Double.parseDouble(jineField.getText()));
+					try {
+						sign = accountManage.ChangePay(zhanghaoField.getText(), Double.parseDouble(jineField.getText()));
+					} catch (NumberFormatException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (RemoteException e1) {
+						// TODO Auto-generated catch block
+						new InternetDialog(b3financialstaffui);
+					}
 					if(sign==-1){
 						new failDialog(b3financialstaffui, "未找到账户", true,"未找到账户，请检查账户名");
 					}else if(sign==-2){

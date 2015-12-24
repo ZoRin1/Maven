@@ -1,9 +1,15 @@
 package businesslogic.accountbl;
 
+import java.rmi.RemoteException;
+
 import vo.accountVO.AccountNumberVO;
 
 public class AccountInfoController {
-	AccountBL aBL=new AccountBL();
+	AccountBL aBL;
+	public  AccountInfoController() throws RemoteException {
+		aBL=new AccountBL();
+	}
+
 
 	public boolean addAccount(long ID, AccountNumberVO vo) {
 		// TODO 自动生成的方法存根

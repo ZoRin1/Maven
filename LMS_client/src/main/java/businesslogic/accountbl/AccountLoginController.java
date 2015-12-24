@@ -1,7 +1,13 @@
 package businesslogic.accountbl;
 
+import java.rmi.RemoteException;
+
 public class AccountLoginController {
-	AccountBL aBL=new AccountBL();
+	AccountBL aBL;
+	public  AccountLoginController() throws RemoteException {
+		aBL=new AccountBL();
+	}
+	
 	public String login(long ID, String password) {
 		// TODO 自动生成的方法存根
 		return aBL.login(ID, password);

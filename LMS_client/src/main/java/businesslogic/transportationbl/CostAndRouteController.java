@@ -1,8 +1,13 @@
 package businesslogic.transportationbl;
 
+import java.rmi.RemoteException;
+
 public class CostAndRouteController {
+	TransportationBL tBL ;
+	public  CostAndRouteController() throws RemoteException {
+		tBL= new TransportationBL();
+	}
 	
-	TransportationBL tBL = new TransportationBL();
 	
 	public double getCost(int type) {
 		// TODO 自动生成的方法存根

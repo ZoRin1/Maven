@@ -1,12 +1,15 @@
 package businesslogic.organizationbl;
 
+import java.rmi.RemoteException;
+
 import vo.orgVO.DriverVO;
 import vo.orgVO.VehicleVO;
 
 public class BhclerkController {
-	
-	BusinessBL bBL = new BusinessBL();
-	
+	BusinessBL bBL;
+	public BhclerkController() throws RemoteException{
+		 bBL= new BusinessBL() ;
+	}
 	public String[] getVehicleList(String ID) {
 		// TODO 自动生成的方法存根
 		return bBL.getVehicleList(ID);

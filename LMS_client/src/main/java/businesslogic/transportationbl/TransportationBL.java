@@ -19,7 +19,7 @@ public class TransportationBL implements TransportationBLSer {
 	private TransportationDataSer transportationDataSer;
 	private ipConfig ip;
 
-	public TransportationBL() {
+	public TransportationBL()throws RemoteException {
 		// TODO Auto-generated constructor stub
 		ip = new ipConfig();
 		try {
@@ -29,10 +29,7 @@ public class TransportationBL implements TransportationBLSer {
 		} catch (MalformedURLException e) {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
-		} catch (RemoteException e) {
-			// TODO 自动生成的 catch 块
-			e.printStackTrace();
-		} catch (NotBoundException e) {
+		}  catch (NotBoundException e) {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
 		}

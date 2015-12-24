@@ -8,6 +8,7 @@ import java.awt.Graphics;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -80,7 +81,12 @@ public class b5b1Jpanel1 extends JPanel{
 				}
 				else {
 					booksController=new BooksController();
-					booksController.newBook(newBooksNameField.getText());
+					try {
+						booksController.newBook(newBooksNameField.getText());
+					} catch (RemoteException e1) {
+						// TODO Auto-generated catch block
+						new InternetDialog(b5financialstaffui);
+					}
 					new finishDialog(b5financialstaffui, "新建账本完成", true,"新建账本完成");
 					financialstaffJpanel.remove(b5b1Jpanel1);
 					financialstaffJpanel.add(b5financialstaffui.operationJpanel);
