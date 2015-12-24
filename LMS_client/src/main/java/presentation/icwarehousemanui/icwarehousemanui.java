@@ -22,6 +22,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import businesslogic.storagebl.CheckModel.CheckController;
+import businesslogic.storagebl.DriveModel.spaceBL;
 import dataservice.accountdataservice.AccountDataSer;
 import dataservice.accountdataservice.accountFactory;
 import presentation.mainui.mainui;
@@ -30,7 +31,18 @@ import vo.storageVO.InDepotInfVO;
 public class icwarehousemanui extends JFrame{
 	private String account;
 	private String state;
-	private JLabel warnJLabel;
+	private  JLabel warnJLabel1;
+	 public JLabel getWarnJLabel1() {
+		return warnJLabel1;
+	}
+	public JLabel getWarnJLabel2() {
+		return warnJLabel2;
+	}
+	public JLabel getWarnJLabel3() {
+		return warnJLabel3;
+	}
+	private JLabel warnJLabel2;
+	private  JLabel warnJLabel3;
 	private String[] args;
 	private JButton outjButton;
 	private icwarehousemanJpanel icwarehousemanJpanel;
@@ -74,10 +86,17 @@ public class icwarehousemanui extends JFrame{
 		this.account=account;
 		this.state=state;
 		this.args=args;
-		init();
+		try {
+			init();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			new InternetDialog(this);
+		}
 		registListener(this);
 	}
-	private void init(){
+	private void init() throws RemoteException{
+		ImageIcon hong=new ImageIcon("picture/红.png");
+		ImageIcon lv=new ImageIcon("picture/绿.png");
 		ImageIcon b1Icon=new ImageIcon("picture/出库.png");
 		ImageIcon b2Icon=new ImageIcon("picture/入库.png");
 		ImageIcon b3Icon=new ImageIcon("picture/库存查询.png");
@@ -96,10 +115,47 @@ public class icwarehousemanui extends JFrame{
 		tuichuButton.setBorderPainted(false);
 		icwarehousemanJpanel=new icwarehousemanJpanel();
 		operationJpanel=new icwarehousemanOperationJpanel(icwarehousemanJpanel);
-		warnJLabel=new JLabel();
-		warnJLabel.setOpaque(true);
+		String stateList[]=state.split("-");
+		spaceBL depot110=new spaceBL();
+		int[] used = depot110.usedSpaceInf(stateList[1]);
+		int[] all = depot110.allSpaceInf(stateList[1]);
+		if(((double)used[0]/(double)all[0])<0.8){
+//			System.out.println("航运区库存空余");
+			//这里要改变库存报警的图片
+			warnJLabel1=new JLabel(lv);
+			
+		}
+		else {
+			warnJLabel1=new JLabel(hong);
+		}
+		warnJLabel1.setOpaque(false);
+		warnJLabel1.setBounds(30,40, 60, 60);
+		 icwarehousemanJpanel.add(warnJLabel1);
+		if(((double)used[1]/(double)all[1])<0.8){
+//			System.out.println("铁运区库存空余");
+			//这里要改变库存报警的图片
+			warnJLabel2=new JLabel(lv);
+			
+		}else {
+			warnJLabel2=new JLabel(hong);
+		}
+		warnJLabel2.setOpaque(false);
+		warnJLabel2.setBounds(100,40, 60, 60);
+		 icwarehousemanJpanel.add(warnJLabel2);
+		if(((double)used[2]/(double)all[2])<0.8){
+//			System.out.println("汽运区库存空余");
+			//这里要改变库存报警的图片
+			 warnJLabel3=new JLabel(lv);
+			
+		}else {
+			 warnJLabel3=new JLabel(hong);
+		}
+		warnJLabel3.setOpaque(false);
+		warnJLabel3.setBounds(170,40, 60, 60);
+		icwarehousemanJpanel.add(warnJLabel3);
+		 
+		
 		//库存报警，后期添加方法改变
-		warnJLabel.setBackground(Color.GREEN);
 		b1=new JButton(b1Icon);
 		b2=new JButton(b2Icon);
 		b3=new JButton(b3Icon);
@@ -120,12 +176,12 @@ public class icwarehousemanui extends JFrame{
 		b5.setBounds(30,480 , 200, 50);
 		b6.setBounds(30, 570, 200, 50);
 
-		warnJLabel.setBounds(30,60, 30, 30);
+	
 		ImageIcon outIcon=new ImageIcon("picture/退出登录.png");
 		outjButton=new JButton(outIcon);
 		outjButton.setBounds(30, 650,  48,48);
 		outjButton.setContentAreaFilled(false);
-		 icwarehousemanJpanel.add(warnJLabel);
+		
 		 icwarehousemanJpanel.add(outjButton);
 		icwarehousemanJpanel.add(b1);
 		icwarehousemanJpanel.add(b2);

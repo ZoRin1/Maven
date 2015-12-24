@@ -35,9 +35,9 @@ public class b1icwarehousemanui extends JFrame{
 		this.account=account;
 		this.state=state;
 		init(icwarehousemanui);
-		registListener(this);
+		registListener(this,icwarehousemanui);
 	}
-	private void registListener(final b1icwarehousemanui b1icwarehousemanui) {
+	private void registListener(final b1icwarehousemanui b1icwarehousemanui,final icwarehousemanui icwarehousemanui) {
 		// TODO Auto-generated method stub
 		zuixiaohuaButton.addMouseListener(new MouseAdapter() {
 			ImageIcon zuixiaohuaIcon=new ImageIcon("picture/最小化.png");
@@ -89,7 +89,7 @@ public class b1icwarehousemanui extends JFrame{
 				// TODO 自动生成的方法存根
 				icwarehousemanJpanel.remove(operationJpanel);
 				b1icwarehousemanui.b1.setEnabled(false);
-				new b1Jpanel1(b1icwarehousemanui,icwarehousemanJpanel,account,state);
+				new b1Jpanel1(icwarehousemanui,b1icwarehousemanui,icwarehousemanJpanel,account,state);
 				icwarehousemanJpanel.repaint();
 			}
 		});

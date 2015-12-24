@@ -37,12 +37,13 @@ public class b1Jpanel2 extends JPanel{
 	private String code;
 	private String account;
 	private String state;
-	
+	private icwarehousemanui icwarehousemanui;
 	private documentController documentController;
 	private spaceBL depot110;
 
-	public b1Jpanel2(b1icwarehousemanui ui,icwarehousemanJpanel icwarehousemanJpanel,b1Jpanel1 b1Jpanel1,String code,String account,String state) {
+	public b1Jpanel2(icwarehousemanui icwarehousemanui,b1icwarehousemanui ui,icwarehousemanJpanel icwarehousemanJpanel,b1Jpanel1 b1Jpanel1,String code,String account,String state) {
 		// TODO Auto-generated constructor stub
+		this.icwarehousemanui=icwarehousemanui;
 		this.code=code;
 		this.account=account;
 		this.state=state;
@@ -184,6 +185,7 @@ public class b1Jpanel2 extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO 自动生成的方法存根
+				ImageIcon lv=new ImageIcon("picture/绿.png");
 				if (isFull()) {
 					try {
 						documentController.createBlock(new OutbillsPO(t1.getText(), "出库单", code, t6.getText(), account, t3.getText(), t4.getText(), t7.getText()));
@@ -204,16 +206,22 @@ public class b1Jpanel2 extends JPanel{
 					int[] used = depot110.usedSpaceInf(stateList[1]);
 					int[] all = depot110.allSpaceInf(stateList[1]);
 					if(((double)used[0]/(double)all[0])<0.8){
-						System.out.println("航运区库存空余");
+		//				System.out.println("航运区库存空余");
 						//这里要改变库存报警的图片
+						icwarehousemanui.getWarnJLabel1().setIcon(lv);
+						icwarehousemanui.repaint();
 					}
 					if(((double)used[1]/(double)all[1])<0.8){
-						System.out.println("铁运区库存空余");
+	//					System.out.println("铁运区库存空余");
 						//这里要改变库存报警的图片
+						icwarehousemanui.getWarnJLabel2().setIcon(lv);
+						icwarehousemanui.repaint();
 					}
 					if(((double)used[2]/(double)all[2])<0.8){
-						System.out.println("汽运区库存空余");
+		//				System.out.println("汽运区库存空余");
 						//这里要改变库存报警的图片
+						icwarehousemanui.getWarnJLabel3().setIcon(lv);
+						icwarehousemanui.repaint();
 					}
 					//这里要添加库存报警的功能！！！！
 					
