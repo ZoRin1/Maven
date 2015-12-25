@@ -78,7 +78,7 @@ public class b2FinanceChange extends JPanel {
 		}		
 		caiWuRenYuanB.setFont(sFont);
 		caiWuRenYuanB.setOpaque(false);
-		caiWuRenYuanB.setForeground(Color.WHITE);
+		caiWuRenYuanB.setForeground(Color.BLACK);
 		caiWuRenYuanB.setBounds(240, 250, 180, 40);
 		caiWuRenYuanB.setSelectedIndex(-1);
 		this.add(caiWuRenYuanB);
@@ -87,7 +87,7 @@ public class b2FinanceChange extends JPanel {
 			kongXian = new JComboBox(accountInfoController.getAccountList());
 			kongXian.setFont(sFont);
 			kongXian.setOpaque(false);
-			kongXian.setForeground(Color.WHITE);
+			kongXian.setForeground(Color.BLACK);
 			kongXian.setBounds(240, 300, 180, 40);
 			kongXian.setSelectedIndex(-1);
 			kongXian.setVisible(false);

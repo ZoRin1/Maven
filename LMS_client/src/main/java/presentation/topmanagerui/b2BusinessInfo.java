@@ -97,7 +97,7 @@ public class b2BusinessInfo extends JPanel {
 			kuaiDiYuanb = new JComboBox(businessController.getCourierList(ID));
 			kuaiDiYuanb.setFont(sFont);
 			kuaiDiYuanb.setOpaque(false);
-			kuaiDiYuanb.setForeground(Color.WHITE);
+			kuaiDiYuanb.setForeground(Color.BLACK);
 			kuaiDiYuanb.setBounds(120, 310, 180, 40);
 			this.add(kuaiDiYuanb);
 		}
@@ -106,7 +106,7 @@ public class b2BusinessInfo extends JPanel {
 			yeWuYuanb = new JComboBox(businessController.getBussinessmanList(ID));
 			yeWuYuanb.setFont(sFont);
 			yeWuYuanb.setOpaque(false);
-			yeWuYuanb.setForeground(Color.WHITE);
+			yeWuYuanb.setForeground(Color.BLACK);
 			yeWuYuanb.setBounds(330, 310, 180, 40);
 			this.add(yeWuYuanb);
 		}

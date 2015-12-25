@@ -62,7 +62,7 @@ public class b5DistanceConst extends JPanel {
 	    qiDianCity = new JComboBox(qiDianC);
 		qiDianCity.setFont(small);
 		qiDianCity.setOpaque(false);
-		qiDianCity.setForeground(Color.WHITE);
+		qiDianCity.setForeground(Color.BLACK);
 		qiDianCity.setBounds(320, 200, 200, 50);
 		this.add(qiDianCity);
 		
@@ -76,7 +76,7 @@ public class b5DistanceConst extends JPanel {
 		zhongDianCity = new JComboBox(zhongDianC);
 		zhongDianCity.setFont(small);
 		zhongDianCity.setOpaque(false);
-		zhongDianCity.setForeground(Color.WHITE);
+		zhongDianCity.setForeground(Color.BLACK);
 		zhongDianCity.setBounds(320, 280, 200, 50);
 		this.add(zhongDianCity);
 		

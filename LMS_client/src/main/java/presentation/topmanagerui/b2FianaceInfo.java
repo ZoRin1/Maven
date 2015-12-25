@@ -63,7 +63,7 @@ public class b2FianaceInfo extends JPanel {
 			caiWuRenYuanB = new JComboBox(financeController.getFinancersList());
 			caiWuRenYuanB.setFont(sFont);
 			caiWuRenYuanB.setOpaque(false);
-			caiWuRenYuanB.setForeground(Color.WHITE);
+			caiWuRenYuanB.setForeground(Color.BLACK);
 			caiWuRenYuanB.setBounds(240, 250, 180, 40);
 			this.add(caiWuRenYuanB);
 		}
