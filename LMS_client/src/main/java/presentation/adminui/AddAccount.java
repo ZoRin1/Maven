@@ -74,6 +74,8 @@ public class AddAccount extends JPanel {
 		
 		zhangHaoNo = new JTextField();
 		zhangHaoNo.setFont(font);
+		zhangHaoNo.setOpaque(false);
+		zhangHaoNo.setForeground(Color.WHITE);
 		zhangHaoNo.setBounds(180, 150, 150, 40);
 		zhangHaoNo.addKeyListener(new NumberFieldListener());
 		this.add(zhangHaoNo);
@@ -93,6 +95,8 @@ public class AddAccount extends JPanel {
 		
 		miMaF = new JTextField();
 		miMaF.setFont(font);
+		miMaF.setOpaque(false);
+		miMaF.setForeground(Color.WHITE);
 		miMaF.setBounds(180, 220, 150, 40);
 		this.add(miMaF);
 		
@@ -111,6 +115,8 @@ public class AddAccount extends JPanel {
 		
 		xinMingF = new JTextField();
 		xinMingF.setFont(font);
+		xinMingF.setForeground(Color.WHITE);
+		xinMingF.setOpaque(false);
 		xinMingF.setBounds(180, 300, 120, 40);
 		this.add(xinMingF);
 		
@@ -129,6 +135,8 @@ public class AddAccount extends JPanel {
 		
 		dianHuaF = new JTextField(11);
 		dianHuaF.setFont(font);
+		dianHuaF.setOpaque(false);
+		dianHuaF.setForeground(Color.WHITE);
 		dianHuaF.setBounds(180, 380, 150, 40);
 		dianHuaF.addKeyListener(new NumberFieldListener());
 		this.add(dianHuaF);
@@ -148,6 +156,8 @@ public class AddAccount extends JPanel {
 		
 		shenFenZhengHaoMaF = new JTextField(18);
 		shenFenZhengHaoMaF.addKeyListener(new NumberFieldListener());
+		shenFenZhengHaoMaF.setOpaque(false);
+		shenFenZhengHaoMaF.setForeground(Color.WHITE);
 		shenFenZhengHaoMaF.setFont(font);
 		shenFenZhengHaoMaF.setBounds(240, 460, 220, 40);
 		this.add(shenFenZhengHaoMaF);
