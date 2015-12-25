@@ -1,6 +1,7 @@
 package main;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,7 +9,7 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 public class ServiceFrame {
-	
+	private Font font=new Font("幼圆", Font.BOLD, 24);
 	private JFrame mainFrame;
 	public JFrame getMainFrame() {
 		return mainFrame;
@@ -20,7 +21,8 @@ public class ServiceFrame {
 	public void setResult(String result) {
 		this.result = result;
 		q1 = new JLabel(result);
-		q1.setBounds(250, 75, 100, 50);
+		q1.setBounds(200, 75, 250, 50);
+		q1.setFont(font);
 		q1.setForeground(Color.white);
 		mainPanel.add(q1);
 		mainPanel.repaint();
@@ -51,8 +53,9 @@ public class ServiceFrame {
 			 }
 		};
 		mainPanel.setLayout(null);
-		
+	
 		qidong = new JButton("启动");
+		qidong.setFont(font);
 		qidong.setBounds(50, 75, 100, 50);
 		qidong.setForeground(Color.white);
 //		qidong.setBorderPainted(false);
@@ -61,6 +64,7 @@ public class ServiceFrame {
 		zhongzhi = new JButton("终止");
 		zhongzhi.setBounds(50, 175, 100, 50);
 		zhongzhi.setForeground(Color.white);
+		zhongzhi.setFont(font);
 //		zhongzhi.setBorderPainted(false);
 		zhongzhi.setContentAreaFilled(false);
 		
