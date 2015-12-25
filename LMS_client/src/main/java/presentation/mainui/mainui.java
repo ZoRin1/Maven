@@ -61,7 +61,7 @@ class mainFrame extends JFrame{
 			super(s);
 			init();
 			//此方法为预览各个界面，之后删除
-			preview(this,args);
+		//	preview(this,args);
 			registerLister(this,args);
 		}
 		private void init() {
