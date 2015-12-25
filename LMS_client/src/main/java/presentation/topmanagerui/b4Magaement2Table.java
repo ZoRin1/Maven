@@ -47,7 +47,7 @@ public class b4Magaement2Table {
 	
 	private void initTable(){
 
-		String[] inDepotName = new String[]{"收款单编号","收款日期","单据名","收款金额"};
+		String[] inDepotName = new String[]{"付款单编号","收款日期","单据名","收款金额"};
 
 		Object[][] inDepotValue = new Object[PayList.size()][4];
 		for(int i = 0 ; i < PayList.size();i++){
