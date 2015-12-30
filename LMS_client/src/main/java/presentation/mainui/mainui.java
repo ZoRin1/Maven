@@ -42,6 +42,10 @@ public class mainui  {
 	}
 }
 class mainFrame extends JFrame{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private AccountLoginController accountLoginController;
 	private documentController documentController;
 	private JTextField codeJTextField; 

@@ -1,10 +1,6 @@
 package presentation.icwarehousemanui;
 
-import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Graphics;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,21 +8,13 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-
-import businesslogic.storagebl.CheckModel.CheckController;
 import businesslogic.storagebl.DriveModel.spaceBL;
-import dataservice.accountdataservice.AccountDataSer;
-import dataservice.accountdataservice.accountFactory;
 import presentation.mainui.mainui;
-import vo.storageVO.InDepotInfVO;
 
 public class icwarehousemanui extends JFrame{
 	private String account;
