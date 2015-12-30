@@ -61,7 +61,7 @@ class mainFrame extends JFrame{
 			super(s);
 			init();
 			//此方法为预览各个界面，之后删除
-		//	preview(this,args);
+			//preview(this,args);
 			registerLister(this,args);
 		}
 		private void init() {
@@ -121,6 +121,7 @@ class mainFrame extends JFrame{
 			checkButton.setBounds(710,250,64,64);
 			loginButton.setBounds(590,520 , 64, 64);
 			aboutButton.setBounds(840, 640, 150, 50);
+			aboutButton.setBorderPainted(false);
 			numberJLabel.setBounds(300, 400, 100, 30);
 			numberIconJLabel.setBounds(220, 380,52, 52);
 			passwordJLabel.setBounds(300, 460,100, 30);
