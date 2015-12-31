@@ -290,6 +290,7 @@ class OverWriteDialog extends JDialog{
 		});
 	}
 }
+//添加车辆或者司机时编号似乎是进行填写的，不是自动化的
 class codeDialog extends JDialog{
 	/**
 	 * 

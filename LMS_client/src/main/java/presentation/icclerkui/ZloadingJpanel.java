@@ -217,7 +217,7 @@ public class ZloadingJpanel extends JPanel{
 						// TODO Auto-generated catch block
 						new InternetDialog(ui);
 					}
-					if(stri.equals(null)){
+					if(stri==null){
 						b=true;
 						str3=list1[i];
 						break;
@@ -247,10 +247,10 @@ public class ZloadingJpanel extends JPanel{
 					documentController co=new documentController();
 					String str=null;
 					try {
-						if(state=="特快专递"){
+						if(state.equals("特快专递")){
 							str=df.format(co.getCost(split[1], arrival2, state1, 50000));
 						}
-						else if(state=="普通快递"){
+						else if(state.equals("普通快递")){
 							str=df.format(co.getCost(split[1], arrival2, state1, 2000000));
 						}
 						else{
