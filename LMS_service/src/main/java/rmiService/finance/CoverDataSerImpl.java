@@ -21,10 +21,20 @@ public class CoverDataSerImpl extends UnicastRemoteObject implements CoverDataSe
 	 * 
 	 */
 	private static final long serialVersionUID = 8859049058295725046L;
+	
+	private static CoverDataSerImpl CoverData = null;
 
-	public CoverDataSerImpl() throws RemoteException {
+	private CoverDataSerImpl() throws RemoteException {
 		super();
 		// TODO 自动生成的构造函数存根
+	}
+	
+	public static CoverDataSerImpl getInstance() throws RemoteException{
+		if(CoverData == null){
+			CoverData = new CoverDataSerImpl();
+		}
+		
+		return CoverData;
 	}
 
 	@Override

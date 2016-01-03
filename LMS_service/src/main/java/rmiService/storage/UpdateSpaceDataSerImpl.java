@@ -19,11 +19,21 @@ public class UpdateSpaceDataSerImpl extends UnicastRemoteObject implements Updat
 	 * 
 	 */
 	private static final long serialVersionUID = 3234821361500843438L;
+	
+	private static UpdateSpaceDataSerImpl UpdateSpace = null;
 
-	public UpdateSpaceDataSerImpl() throws RemoteException {
+	private UpdateSpaceDataSerImpl() throws RemoteException {
 		super();
 		// TODO 自动生成的构造函数存根
 	}
+	
+	public static UpdateSpaceDataSerImpl getInstance() throws RemoteException{
+		if(UpdateSpace==null){
+			UpdateSpace = new UpdateSpaceDataSerImpl();
+			}
+		return UpdateSpace;
+	}
+	
 
 	@Override
 	public void updateDrive(int shipping, int trains, int motor,String city)  throws RemoteException{

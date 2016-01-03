@@ -20,10 +20,19 @@ public class StorageProDataSerImpl extends UnicastRemoteObject implements Storag
 	 * 
 	 */
 	private static final long serialVersionUID = 406260526492263555L;
+	
+	private static StorageProDataSerImpl StoragePro = null;
 
-	public StorageProDataSerImpl() throws RemoteException {
+	private StorageProDataSerImpl() throws RemoteException {
 		super();
 		// TODO 自动生成的构造函数存根
+	}
+	
+	public static StorageProDataSerImpl getInstance() throws RemoteException{
+		if(StoragePro==null){
+			StoragePro = new StorageProDataSerImpl();
+		}
+		return StoragePro;
 	}
 
 	@Override

@@ -23,10 +23,19 @@ public class ProfitListDataSerImpl extends UnicastRemoteObject implements Profit
 	 * 
 	 */
 	private static final long serialVersionUID = 2210372149181793909L;
+	
+	private static ProfitListDataSerImpl ProfitList = null;
 
-	public ProfitListDataSerImpl() throws RemoteException {
+	private ProfitListDataSerImpl() throws RemoteException {
 		super();
 		// TODO 自动生成的构造函数存根
+	}
+	
+	public static ProfitListDataSerImpl getInstance() throws RemoteException{
+		if(ProfitList==null){
+			ProfitList = new ProfitListDataSerImpl();
+		}
+		return ProfitList;
 	}
 
 	@Override

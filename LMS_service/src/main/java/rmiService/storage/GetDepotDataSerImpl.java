@@ -21,10 +21,19 @@ public class GetDepotDataSerImpl extends UnicastRemoteObject implements GetDepot
 	 * 
 	 */
 	private static final long serialVersionUID = -9159493132460553460L;
+	
+	private static GetDepotDataSerImpl GetDepot = null;
 
-	public GetDepotDataSerImpl() throws RemoteException {
+	private GetDepotDataSerImpl() throws RemoteException {
 		super();
 		// TODO 自动生成的构造函数存根
+	}
+	
+	public static GetDepotDataSerImpl getInstance() throws RemoteException{
+		if(GetDepot==null){
+			GetDepot = new GetDepotDataSerImpl();
+			}
+		return GetDepot;
 	}
 
 	@Override

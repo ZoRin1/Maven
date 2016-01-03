@@ -17,10 +17,19 @@ public class GetReceivablesBillsDataSerImpl extends UnicastRemoteObject implemen
 	 * 
 	 */
 	private static final long serialVersionUID = -3837846709835354119L;
+	
+	private static GetReceivablesBillsDataSerImpl GetReceiveabales = null;
 
-	public GetReceivablesBillsDataSerImpl() throws RemoteException {
+	private GetReceivablesBillsDataSerImpl() throws RemoteException {
 		super();
 		// TODO 自动生成的构造函数存根
+	}
+	
+	public static GetReceivablesBillsDataSerImpl getInstance() throws RemoteException{
+		if(GetReceiveabales == null){
+			GetReceiveabales = new GetReceivablesBillsDataSerImpl();
+		}
+		return GetReceiveabales;
 	}
 
 	@Override

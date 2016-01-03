@@ -22,10 +22,19 @@ public class GetCountDataSerImpl extends UnicastRemoteObject implements GetCount
 	 * 
 	 */
 	private static final long serialVersionUID = -1373268748225869690L;
+	
+	private static GetCountDataSerImpl GetCount = null;
 
-	public GetCountDataSerImpl() throws RemoteException {
+	private GetCountDataSerImpl() throws RemoteException {
 		super();
 		// TODO 自动生成的构造函数存根
+	}
+	
+	public static GetCountDataSerImpl getInstance() throws RemoteException{
+		if(GetCount==null){
+			GetCount = new GetCountDataSerImpl();
+		}
+		return GetCount;
 	}
 
 	@Override

@@ -24,10 +24,19 @@ public class GetDepotExcelDataSerImpl extends UnicastRemoteObject implements Get
 	 * 
 	 */
 	private static final long serialVersionUID = -7976806849167294036L;
+	
+	private static GetDepotExcelDataSerImpl GetDepotExcel = null;
 
-	protected GetDepotExcelDataSerImpl() throws RemoteException {
+	private GetDepotExcelDataSerImpl() throws RemoteException {
 		super();
 		// TODO 自动生成的构造函数存根
+	}
+	
+	public static GetDepotExcelDataSerImpl getInstance() throws RemoteException{
+		if(GetDepotExcel==null){
+			GetDepotExcel = new GetDepotExcelDataSerImpl();
+		}
+		return GetDepotExcel;
 	}
 
 	@Override

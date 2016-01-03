@@ -22,10 +22,19 @@ public class GetBooksDataSerImpl extends UnicastRemoteObject implements GetBooks
 	 * 
 	 */
 	private static final long serialVersionUID = -1237461001825577424L;
+	
+	private static GetBooksDataSerImpl GetBooks = null;
 
-	public GetBooksDataSerImpl() throws RemoteException {
+	private GetBooksDataSerImpl() throws RemoteException {
 		super();
 		// TODO 自动生成的构造函数存根
+	}
+	
+	public static GetBooksDataSerImpl getInstance() throws RemoteException{
+		if(GetBooks==null){
+			GetBooks = new GetBooksDataSerImpl();
+		}
+		return GetBooks;
 	}
 
 	@Override

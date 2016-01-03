@@ -21,10 +21,19 @@ public class OutDepotDataSerImpl extends UnicastRemoteObject implements OutDepot
 	 * 
 	 */
 	private static final long serialVersionUID = -7266703194896409949L;
+	
+	private static OutDepotDataSerImpl OutDepot = null;
 
-	protected OutDepotDataSerImpl() throws RemoteException {
+	private OutDepotDataSerImpl() throws RemoteException {
 		super();
 		// TODO 自动生成的构造函数存根
+	}
+	
+	public static OutDepotDataSerImpl getInstance() throws RemoteException{
+		if(OutDepot == null){
+			OutDepot = new OutDepotDataSerImpl();
+		}
+		return OutDepot;
 	}
 
 	@Override

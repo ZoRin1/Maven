@@ -19,10 +19,19 @@ public class ReturnSpaceDataSerImpl extends UnicastRemoteObject implements Retur
 	 * 
 	 */
 	private static final long serialVersionUID = 7725685187189213273L;
+	
+	private static ReturnSpaceDataSerImpl ReturnSpace = null;
 
-	public ReturnSpaceDataSerImpl() throws RemoteException {
+	private ReturnSpaceDataSerImpl() throws RemoteException {
 		super();
 		// TODO 自动生成的构造函数存根
+	}
+	
+	public static ReturnSpaceDataSerImpl getInstance() throws RemoteException{
+		if(ReturnSpace==null){
+			ReturnSpace = new ReturnSpaceDataSerImpl();
+		}
+		return ReturnSpace;
 	}
 
 	@Override

@@ -24,10 +24,20 @@ public class ChangeAccountDataSerImpl extends UnicastRemoteObject implements Cha
 	 * 
 	 */
 	private static final long serialVersionUID = -7023399732468707278L;
+	
+	private static ChangeAccountDataSerImpl ChangeAccount = null;
 
-	protected ChangeAccountDataSerImpl() throws RemoteException {
+	private ChangeAccountDataSerImpl() throws RemoteException {
 		super();
 		// TODO 自动生成的构造函数存根
+	}
+	
+	public static ChangeAccountDataSerImpl getInstance() throws RemoteException{
+		if(ChangeAccount==null){
+			ChangeAccount = new ChangeAccountDataSerImpl();
+		}
+		
+		return ChangeAccount;
 	}
 
 	@Override

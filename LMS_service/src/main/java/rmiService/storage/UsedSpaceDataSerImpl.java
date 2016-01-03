@@ -20,10 +20,19 @@ public class UsedSpaceDataSerImpl extends UnicastRemoteObject implements UsedSpa
 	 * 
 	 */
 	private static final long serialVersionUID = 3977217484673723280L;
+	
+	private static UsedSpaceDataSerImpl UsedSpace = null;
 
-	public UsedSpaceDataSerImpl() throws RemoteException {
+	private UsedSpaceDataSerImpl() throws RemoteException {
 		super();
 		// TODO 自动生成的构造函数存根
+	} 
+	
+	public static UsedSpaceDataSerImpl getInstance() throws RemoteException{
+		if(UsedSpace==null){
+			UsedSpace = new UsedSpaceDataSerImpl();
+		}
+		return UsedSpace;
 	}
 
 	@Override

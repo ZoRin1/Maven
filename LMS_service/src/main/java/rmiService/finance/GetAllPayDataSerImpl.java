@@ -22,10 +22,19 @@ public class GetAllPayDataSerImpl extends UnicastRemoteObject implements GetAllP
 	 * 
 	 */
 	private static final long serialVersionUID = -1800323976608159048L;
+	
+	private static GetAllPayDataSerImpl GetAllPay = null;
 
-	public GetAllPayDataSerImpl() throws RemoteException {
+	private GetAllPayDataSerImpl() throws RemoteException {
 		super();
 		// TODO 自动生成的构造函数存根
+	}
+	
+	public static GetAllPayDataSerImpl getInstance() throws RemoteException{
+		if(GetAllPay==null){
+			GetAllPay = new GetAllPayDataSerImpl();
+		}
+		return GetAllPay;
 	}
 
 

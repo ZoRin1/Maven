@@ -20,10 +20,19 @@ public class InDepotDataSerImpl extends UnicastRemoteObject implements InDepotDa
 	 * 
 	 */
 	private static final long serialVersionUID = -6673633418400744648L;
+	
+	private static InDepotDataSerImpl InDepot = null;
 
-	public InDepotDataSerImpl() throws RemoteException {
+	private InDepotDataSerImpl() throws RemoteException {
 		super();
 		// TODO 自动生成的构造函数存根
+	}
+	
+	public static InDepotDataSerImpl getInstance() throws RemoteException{
+		if(InDepot==null){
+			InDepot = new InDepotDataSerImpl();
+		}
+		return InDepot;
 	}
 
 	@Override

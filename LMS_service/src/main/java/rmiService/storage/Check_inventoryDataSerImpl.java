@@ -17,10 +17,19 @@ public class Check_inventoryDataSerImpl extends UnicastRemoteObject implements C
 	 * 
 	 */
 	private static final long serialVersionUID = 697980109468505212L;
+	
+	private static Check_inventoryDataSerImpl Check;
 
-	public Check_inventoryDataSerImpl() throws RemoteException {
+	private Check_inventoryDataSerImpl() throws RemoteException {
 		super();
 		// TODO 自动生成的构造函数存根
+	}
+	
+	public static Check_inventoryDataSerImpl getInstance() throws RemoteException{
+		if(Check==null){
+			Check = new Check_inventoryDataSerImpl();
+		}
+		return Check;
 	}
 
 

@@ -16,6 +16,7 @@ import dataservice.financedataservice.StorageProDataSer;
 import dataservice.financedataservice.financeFactory;
 
 public class financeFactoryImpl extends UnicastRemoteObject implements financeFactory{
+	
 
 	/**
 	 * 
@@ -31,44 +32,44 @@ public class financeFactoryImpl extends UnicastRemoteObject implements financeFa
 	public AddBooksDataSer createAddBooksDataSer() throws RemoteException {
 		// TODO 自动生成的方法存根
 		
-		return new AddBooksDataSerImpl();
+		return AddBooksDataSerImpl.getInstance();
 	}
 
 	@Override
 	public CoverDataSer createCoverDataSer() throws RemoteException {
 		// TODO 自动生成的方法存根
-		return new CoverDataSerImpl();
+		return CoverDataSerImpl.getInstance();
 	}
 
 	@Override
 	public GetAccountDataSer createGetAccountDataSer() throws RemoteException {
 		// TODO 自动生成的方法存根
-		return new GetAccountDataSerImpl();
+		return GetAccountDataSerImpl.getInstance();
 	}
 
 	@Override
 	public GetAllPayDataSer createGetAllPayDataSer() throws RemoteException {
 		// TODO 自动生成的方法存根
-		return new GetAllPayDataSerImpl();
+		return GetAllPayDataSerImpl.getInstance();
 	}
 
 	@Override
 	public GetBooksDataSer createGetBooksDataSer() throws RemoteException {
 		// TODO 自动生成的方法存根
-		return new GetBooksDataSerImpl();
+		return GetBooksDataSerImpl.getInstance();
 	}
 
 	@Override
 	public GetReceivablesBillsDataSer createGetReceivablesBillsDataSer()
 			throws RemoteException {
 		// TODO 自动生成的方法存根
-		return new GetReceivablesBillsDataSerImpl();
+		return GetReceivablesBillsDataSerImpl.getInstance();
 	}
 
 	@Override
 	public ProfitListDataSer createProfitListDataSer() throws RemoteException {
 		// TODO 自动生成的方法存根
-		return new ProfitListDataSerImpl();
+		return ProfitListDataSerImpl.getInstance();
 	}
 
 	@Override
@@ -81,14 +82,14 @@ public class financeFactoryImpl extends UnicastRemoteObject implements financeFa
 	@Override
 	public StorageProDataSer createStorageProDataSer() throws RemoteException {
 		// TODO 自动生成的方法存根
-		return new StorageProDataSerImpl();
+		return StorageProDataSerImpl.getInstance();
 	}
 
 	@Override
 	public ChangeAccountDataSer createChangeAccountDateSer()
 			throws RemoteException {
 		// TODO 自动生成的方法存根
-		return new ChangeAccountDataSerImpl();
+		return ChangeAccountDataSerImpl.getInstance();
 	}
 	
 }

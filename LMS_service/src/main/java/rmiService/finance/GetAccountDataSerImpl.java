@@ -23,10 +23,20 @@ public class GetAccountDataSerImpl extends UnicastRemoteObject implements GetAcc
 	 * 
 	 */
 	private static final long serialVersionUID = 4464096386614953251L;
+	
+	private static  GetAccountDataSerImpl GetAccount = null;
+	
 
-	public  GetAccountDataSerImpl() throws RemoteException {
+	private  GetAccountDataSerImpl() throws RemoteException {
 		super();
 		// TODO 自动生成的构造函数存根
+	}
+	
+	public static GetAccountDataSerImpl getInstance() throws RemoteException{
+		if(GetAccount==null){
+			GetAccount = new GetAccountDataSerImpl();
+		}
+		return GetAccount;
 	}
 
 	@Override

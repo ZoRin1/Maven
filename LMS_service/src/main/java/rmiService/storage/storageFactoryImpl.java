@@ -29,56 +29,56 @@ public class storageFactoryImpl extends UnicastRemoteObject implements storageFa
 	public Check_inventoryDataSer createCheck_inventoryDataSer()
 			throws RemoteException {
 		// TODO 自动生成的方法存根
-		return new Check_inventoryDataSerImpl();
+		return Check_inventoryDataSerImpl.getInstance();
 	}
 
 	@Override
 	public GetCountDataSer createGetCountDataSer() throws RemoteException {
 		// TODO 自动生成的方法存根
-		return new GetCountDataSerImpl();
+		return GetCountDataSerImpl.getInstance();
 	}
 
 	@Override
 	public GetDepotDataSer createGetDepotDataSer() throws RemoteException {
 		// TODO 自动生成的方法存根
-		return new GetDepotDataSerImpl();
+		return GetDepotDataSerImpl.getInstance();
 	}
 
 	@Override
 	public InDepotDataSer createInDepotDataSer() throws RemoteException {
 		// TODO 自动生成的方法存根
-		return new InDepotDataSerImpl();
+		return InDepotDataSerImpl.getInstance();
 	}
 
 	@Override
 	public ReturnSpaceDataSer createReturnSpaceDataSer() throws RemoteException {
 		// TODO 自动生成的方法存根
-		return new ReturnSpaceDataSerImpl();
+		return ReturnSpaceDataSerImpl.getInstance();
 	}
 
 	@Override
 	public UpdateSpaceDataSer createUpdateSpaceDataSer() throws RemoteException {
 		// TODO 自动生成的方法存根
-		return new UpdateSpaceDataSerImpl();
+		return UpdateSpaceDataSerImpl.getInstance();
 	}
 
 	@Override
 	public UsedSpaceDataSer createUsedSpaceDataSer() throws RemoteException {
 		// TODO 自动生成的方法存根
-		return new UsedSpaceDataSerImpl();
+		return UsedSpaceDataSerImpl.getInstance();
 	}
 
 	@Override
 	public OutDepotDataSer createOutDepotDataSer() throws RemoteException {
 		// TODO 自动生成的方法存根
-		return new OutDepotDataSerImpl();
+		return OutDepotDataSerImpl.getInstance();
 	}
 
 	@Override
 	public GetDepotExcelDataSer createGetDepotExcelDataSer()
 			throws RemoteException {
 		// TODO 自动生成的方法存根
-		return new GetDepotExcelDataSerImpl();
+		return GetDepotExcelDataSerImpl.getInstance();
 	}
 
 }
