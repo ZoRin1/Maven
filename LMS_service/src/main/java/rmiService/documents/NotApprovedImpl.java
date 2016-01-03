@@ -20,11 +20,20 @@ public class NotApprovedImpl extends UnicastRemoteObject implements NotApproved{
 	 */
 	private static final long serialVersionUID = 7300743386580696508L;
 
-	public NotApprovedImpl() throws RemoteException {
+	private static NotApprovedImpl NotApproved= null;
+	
+	private NotApprovedImpl() throws RemoteException {
 		super();
 		// TODO 自动生成的构造函数存根
 	}
 
+	public static NotApprovedImpl getInstance() throws RemoteException{
+		if(NotApproved==null){
+			NotApproved = new NotApprovedImpl();
+		}
+		return NotApproved;
+	}
+	
 	@Override
 	public boolean NotApproved(String code, String doName) throws RemoteException{
 		// TODO 自动生成的方法存根
