@@ -30,65 +30,65 @@ public class documentsFactoryImpl extends UnicastRemoteObject implements documen
 	public addDocummentInfoDataSer createaddDocummentInfoDataSer()
 			throws RemoteException {
 		// TODO 自动生成的方法存根
-		return new addDocummentInfoDataSerImpl();
+		return addDocummentInfoDataSerImpl.getInstance();
 	}
 
 	@Override
 	public deleteDataSer createDeleteDataSer() throws RemoteException {
 		// TODO 自动生成的方法存根
-		return new deleteDataSerImpl();
+		return deleteDataSerImpl.getInstance();
 	}
 
 	@Override
 	public getBufferedCodeDataSer createGetBudderedCodeDataSer()
 			throws RemoteException {
 		// TODO 自动生成的方法存根
-		return new getBufferedCodeDataSerImpl();
+		return getBufferedCodeDataSerImpl.getInstance();
 	}
 
 	@Override
 	public getBufferedInfoDataSer createGetBufferedInfoDataSer()
 			throws RemoteException {
 		// TODO 自动生成的方法存根
-		return new getBufferedInfoDataSerImpl();
+		return getBufferedInfoDataSerImpl.getInstance();
 	}
 
 	@Override
 	public getCodeDataSer createGetCodeDataSer() throws RemoteException {
 		// TODO 自动生成的方法存根
-		return new getCodeDataSerImpl();
+		return getCodeDataSerImpl.getInstance();
 	}
 
 	@Override
 	public getDocumentInfoDataSer createGetDocumentInfoDataSer()
 			throws RemoteException {
 		// TODO 自动生成的方法存根
-		return new getDocumentInfoDataSerImpl();
+		return getDocumentInfoDataSerImpl.getInstance();
 	}
 
 	@Override
 	public getNotPassDocCode createGetNotPassDocCode() throws RemoteException {
 		// TODO 自动生成的方法存根
-		return new getNotPassDocCodeImpl();
+		return getNotPassDocCodeImpl.getInstance();
 	}
 
 	@Override
 	public NotApproved createNotApproved() throws RemoteException {
 		// TODO 自动生成的方法存根
-		return new NotApprovedImpl();
+		return NotApprovedImpl.getInstance();
 	}
 
 	@Override
 	public GetDocCodeDataSer createGetDocCodeDataSer() throws RemoteException {
 		// TODO Auto-generated method stub
-		return new GetDocCodeDataSerImpl();
+		return GetDocCodeDataSerImpl.getInstance();
 	}
 
 	@Override
 	public getWuliuInfoDataSer createGetWuliuInfoDataSer()
 			throws RemoteException {
 		// TODO Auto-generated method stub
-		return new getWuliuInfoDataSerImpl();
+		return getWuliuInfoDataSerImpl.getInstance();
 	}
 
 

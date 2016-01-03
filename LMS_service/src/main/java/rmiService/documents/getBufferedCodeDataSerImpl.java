@@ -21,12 +21,21 @@ public class getBufferedCodeDataSerImpl extends UnicastRemoteObject implements g
 	 * 
 	 */
 	private static final long serialVersionUID = 4403021728875475304L;
-
-	public getBufferedCodeDataSerImpl() throws RemoteException {
+	
+	private static getBufferedCodeDataSerImpl getBufferedCode= null;
+	
+	private getBufferedCodeDataSerImpl() throws RemoteException {
 		super();
 		// TODO 自动生成的构造函数存根
 	}
-
+	
+	public static getBufferedCodeDataSerImpl getInstance() throws RemoteException{
+		if(getBufferedCode==null){
+			getBufferedCode = new getBufferedCodeDataSerImpl();
+		}
+		return getBufferedCode;
+	}
+	
 	@Override
 	public ArrayList<String> getCode() throws RemoteException{
 		// TODO 自动生成的方法存根

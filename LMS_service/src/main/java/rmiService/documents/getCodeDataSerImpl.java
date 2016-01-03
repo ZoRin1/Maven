@@ -22,11 +22,20 @@ public class getCodeDataSerImpl extends UnicastRemoteObject implements getCodeDa
 	 */
 	private static final long serialVersionUID = 7578979922627164999L;
 
-	public getCodeDataSerImpl() throws RemoteException {
+	private static getCodeDataSerImpl getCodeData= null;
+	
+	private getCodeDataSerImpl() throws RemoteException {
 		super();
 		// TODO 自动生成的构造函数存根
 	}
 
+	public static getCodeDataSerImpl getInstance() throws RemoteException{
+		if(getCodeData==null){
+			getCodeData = new getCodeDataSerImpl();
+		}
+		return getCodeData;
+	}
+	
 	@Override
 	public ArrayList<String> getCode(String doName, String startTime,
 			String endTime) throws RemoteException{

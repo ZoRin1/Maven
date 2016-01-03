@@ -14,10 +14,8 @@ import java.util.ArrayList;
 
 import po.documentsPO.DocumentPO;
 import po.documentsPO.GetOrderPO;
-import po.documentsPO.InBillsPO;
 import po.documentsPO.LoadingPO;
 import po.documentsPO.OrderPO;
-import po.documentsPO.OutbillsPO;
 import po.documentsPO.PaymentPO;
 import po.documentsPO.ReceiptPO;
 import po.documentsPO.YDispatchPO;
@@ -36,12 +34,21 @@ public class getBufferedInfoDataSerImpl extends UnicastRemoteObject implements g
 	 * 
 	 */
 	private static final long serialVersionUID = 9064602574450436617L;
-
-	public getBufferedInfoDataSerImpl() throws RemoteException {
+	
+	private static getBufferedInfoDataSerImpl getBufferedInfo= null;
+	
+	private getBufferedInfoDataSerImpl() throws RemoteException {
 		super();
 		// TODO 自动生成的构造函数存根
 	}
-
+	
+	public static getBufferedInfoDataSerImpl getInstance() throws RemoteException{
+		if(getBufferedInfo==null){
+			getBufferedInfo = new getBufferedInfoDataSerImpl();
+		}
+		return getBufferedInfo;
+	}
+	
 	@Override
 	public DocumentPO getBufferedInfo(String code, String doName) throws RemoteException{
 		// TODO 自动生成的方法存根

@@ -34,11 +34,20 @@ public class getDocumentInfoDataSerImpl extends UnicastRemoteObject implements g
 	 */
 	private static final long serialVersionUID = -3394892968255679797L;
 
-	public  getDocumentInfoDataSerImpl() throws RemoteException {
+	private static getDocumentInfoDataSerImpl getDocumentInfo= null;
+	
+	private getDocumentInfoDataSerImpl() throws RemoteException {
 		super();
 		// TODO 自动生成的构造函数存根
 	}
 
+	public static getDocumentInfoDataSerImpl getInstance() throws RemoteException{
+		if(getDocumentInfo==null){
+			getDocumentInfo = new getDocumentInfoDataSerImpl();
+		}
+		return getDocumentInfo;
+	}
+	
 	@Override
 	public DocumentPO getDocumentInfo(String code, String doName) throws RemoteException {
 		// TODO 自动生成的方法存根

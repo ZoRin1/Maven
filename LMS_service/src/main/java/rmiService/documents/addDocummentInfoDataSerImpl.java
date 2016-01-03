@@ -32,12 +32,21 @@ public class addDocummentInfoDataSerImpl extends UnicastRemoteObject implements 
 	 * 
 	 */
 	private static final long serialVersionUID = 4615262875279176437L;
+	
+	private static addDocummentInfoDataSerImpl addDocumment= null;
 
-	public addDocummentInfoDataSerImpl() throws RemoteException {
+	private addDocummentInfoDataSerImpl() throws RemoteException {
 		super();
 		// TODO 自动生成的构造函数存根
 	}
-
+	
+	public static addDocummentInfoDataSerImpl getInstance() throws RemoteException{
+		if(addDocumment==null){
+			addDocumment = new addDocummentInfoDataSerImpl();
+		}
+		return addDocumment;
+	}
+	
 	@Override
 	public boolean addDocumentInfo(DocumentPO po)throws RemoteException {
 		// TODO 自动生成的方法存根

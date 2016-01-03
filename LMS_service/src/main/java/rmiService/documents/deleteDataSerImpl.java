@@ -22,12 +22,20 @@ public class deleteDataSerImpl extends UnicastRemoteObject implements deleteData
 	 */
 	private static final long serialVersionUID = 6945635844601249905L;
 
-	public deleteDataSerImpl() throws RemoteException {
+	private static deleteDataSerImpl delete= null;
+	
+	private deleteDataSerImpl() throws RemoteException {
 		super();
 		// TODO 自动生成的构造函数存根
 	}
 
-
+	public static deleteDataSerImpl getInstance() throws RemoteException{
+		if(delete==null){
+			delete = new deleteDataSerImpl();
+		}
+		return delete;
+	}
+	
 	@Override
 	public boolean delete(String code, String doName) throws RemoteException{
 		// TODO 自动生成的方法存根

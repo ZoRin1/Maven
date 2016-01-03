@@ -22,11 +22,20 @@ public class getWuliuInfoDataSerImpl extends UnicastRemoteObject implements getW
 	 */
 	private static final long serialVersionUID = 4615262875279176437L;
 	
-	protected getWuliuInfoDataSerImpl() throws RemoteException {
+	private static getWuliuInfoDataSerImpl getWuliuInfo= null;
+	
+	private getWuliuInfoDataSerImpl() throws RemoteException {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
+	public static getWuliuInfoDataSerImpl getInstance() throws RemoteException{
+		if(getWuliuInfo==null){
+			getWuliuInfo = new getWuliuInfoDataSerImpl();
+		}
+		return getWuliuInfo;
+	}
+	
 	@Override
 	public ArrayList<String> getWuliuInfo(String code) throws RemoteException{
 		// TODO Auto-generated method stub

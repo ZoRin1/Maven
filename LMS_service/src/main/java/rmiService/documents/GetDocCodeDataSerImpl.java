@@ -8,7 +8,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import po.documentsPO.DocumentPO;
 import dataservice.documentsdataservice.GetDocCodeDataSer;
 
 
@@ -23,11 +22,20 @@ public class GetDocCodeDataSerImpl extends UnicastRemoteObject implements GetDoc
 	 */
 	private static final long serialVersionUID = 4615262875279176437L;
 	
-	protected GetDocCodeDataSerImpl() throws RemoteException {
+	private static GetDocCodeDataSerImpl GetDocCode= null;
+	
+	private GetDocCodeDataSerImpl() throws RemoteException {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
+	public static GetDocCodeDataSerImpl getInstance() throws RemoteException{
+		if(GetDocCode==null){
+			GetDocCode = new GetDocCodeDataSerImpl();
+		}
+		return GetDocCode;
+	}
+	
 	@Override
 	public String getDocCode(String doName,String account) throws RemoteException{
 		// TODO Auto-generated method stub		

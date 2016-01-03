@@ -22,11 +22,20 @@ public class getNotPassDocCodeImpl extends UnicastRemoteObject implements getNot
 	 */
 	private static final long serialVersionUID = 5802629699384695078L;
 
-	public getNotPassDocCodeImpl() throws RemoteException {
+	private static getNotPassDocCodeImpl getNotPass= null;
+	
+	private getNotPassDocCodeImpl() throws RemoteException {
 		super();
 		// TODO 自动生成的构造函数存根
 	}
 
+	public static getNotPassDocCodeImpl getInstance() throws RemoteException{
+		if(getNotPass==null){
+			getNotPass = new getNotPassDocCodeImpl();
+		}
+		return getNotPass;
+	}
+	
 	@Override
 	public ArrayList<String> getNotPassDocCode(String account) throws RemoteException{
 		// TODO 自动生成的方法存根
