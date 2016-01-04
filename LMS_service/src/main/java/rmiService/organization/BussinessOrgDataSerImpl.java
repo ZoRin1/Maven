@@ -28,9 +28,16 @@ public class BussinessOrgDataSerImpl extends UnicastRemoteObject implements Buss
 	 */
 	private static final long serialVersionUID = -2065348468020344293L;
 
-	public BussinessOrgDataSerImpl() throws RemoteException {
+	private static BussinessOrgDataSerImpl bussinessOrgDataSerImpl = null;
+	private BussinessOrgDataSerImpl() throws RemoteException {
 		super();
 		// TODO 自动生成的构造函数存根
+	}
+	public static BussinessOrgDataSerImpl getInstance() throws RemoteException{
+		if (bussinessOrgDataSerImpl == null) {
+			bussinessOrgDataSerImpl = new BussinessOrgDataSerImpl();	
+		}
+		return bussinessOrgDataSerImpl;
 	}
 
 	@Override

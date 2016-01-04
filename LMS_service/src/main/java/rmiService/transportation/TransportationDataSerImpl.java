@@ -23,9 +23,16 @@ public class TransportationDataSerImpl extends UnicastRemoteObject implements Tr
 	 */
 	private static final long serialVersionUID = 8389026287336221175L;
 
-	public TransportationDataSerImpl() throws RemoteException {
+	private static TransportationDataSerImpl transportationDataSerImpl = null;
+	private TransportationDataSerImpl() throws RemoteException {
 		super();
 		// TODO 自动生成的构造函数存根
+	}
+	public static TransportationDataSerImpl getInstance() throws RemoteException{
+		if (transportationDataSerImpl == null) {
+			transportationDataSerImpl = new TransportationDataSerImpl();
+		}
+		return transportationDataSerImpl;
 	}
 
 	@Override

@@ -20,7 +20,7 @@ public class accountFactoryImpl extends UnicastRemoteObject implements accountFa
 	@Override
 	public AccountDataSer createAccountDataSer() throws RemoteException {
 		// TODO 自动生成的方法存根
-		return new AccountDataSerImpl();
+		return AccountDataSerImpl.getInstance();
 	}
 
 }

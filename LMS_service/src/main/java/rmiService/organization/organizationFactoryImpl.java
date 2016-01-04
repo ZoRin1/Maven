@@ -24,19 +24,19 @@ public class organizationFactoryImpl extends UnicastRemoteObject implements orga
 	public BussinessOrgDataSer createBussinessOrgDataSer()
 			throws RemoteException {
 		// TODO 自动生成的方法存根
-		return new BussinessOrgDataSerImpl();
+		return BussinessOrgDataSerImpl.getInstance();
 	}
 
 	@Override
 	public FinanceOrgDataSer createFinanceOrgDataSer() throws RemoteException {
 		// TODO 自动生成的方法存根
-		return new FinanceOrgDataSerImpl();
+		return FinanceOrgDataSerImpl.getInstance();
 	}
 
 	@Override
 	public MiddleOrgDataSer createMiddleOrgDataSer() throws RemoteException {
 		// TODO 自动生成的方法存根
-		return new MiddleOrgDataSerImpl();
+		return MiddleOrgDataSerImpl.getInstance();
 	}
 
 }

@@ -23,9 +23,16 @@ public class MiddleOrgDataSerImpl extends UnicastRemoteObject implements MiddleO
 	 */
 	private static final long serialVersionUID = -7743528877522797224L;
 
-	public MiddleOrgDataSerImpl() throws RemoteException {
+	private static MiddleOrgDataSerImpl middleOrgDataSerImpl = null;
+	private MiddleOrgDataSerImpl() throws RemoteException {
 		super();
 		// TODO 自动生成的构造函数存根
+	}
+	public static MiddleOrgDataSerImpl getInstance() throws RemoteException{
+		if (middleOrgDataSerImpl == null) {
+			middleOrgDataSerImpl = new MiddleOrgDataSerImpl();	
+		}
+		return middleOrgDataSerImpl;
 	}
 
 	@Override

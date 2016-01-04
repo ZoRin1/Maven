@@ -25,9 +25,17 @@ public class AccountDataSerImpl extends UnicastRemoteObject implements AccountDa
 	 */
 	private static final long serialVersionUID = -5539066964489916937L;
 
-	public AccountDataSerImpl() throws RemoteException {
+	private static AccountDataSerImpl accountDataSerImpl = null;
+	
+	private  AccountDataSerImpl() throws RemoteException {
 		super();
 		// TODO 自动生成的构造函数存根
+	}
+	public static AccountDataSerImpl getInstance() throws RemoteException {
+		if (accountDataSerImpl == null) {
+			accountDataSerImpl = new AccountDataSerImpl();
+		}
+		return accountDataSerImpl;
 	}
 	@Override
 	public String campare(long ID, String password) throws RemoteException {

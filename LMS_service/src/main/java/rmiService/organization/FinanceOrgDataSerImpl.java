@@ -22,9 +22,17 @@ public class FinanceOrgDataSerImpl extends UnicastRemoteObject implements Financ
 	 */
 	private static final long serialVersionUID = -2675461398567508092L;
 
-	public FinanceOrgDataSerImpl() throws RemoteException {
+	private static FinanceOrgDataSerImpl financeOrgDataSerImpl = null;
+	private FinanceOrgDataSerImpl() throws RemoteException {
 		super();
 		// TODO 自动生成的构造函数存根
+	}
+	
+	public static FinanceOrgDataSerImpl getInstance() throws RemoteException{
+		if (financeOrgDataSerImpl == null) {
+			financeOrgDataSerImpl = new FinanceOrgDataSerImpl();
+		}
+		return financeOrgDataSerImpl;
 	}
 
 	@Override

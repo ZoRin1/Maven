@@ -21,7 +21,7 @@ public class TransportationFactoryImpl extends UnicastRemoteObject implements Tr
 	public TransportationDataSer createTransportationDataSer()
 			throws RemoteException {
 		// TODO 自动生成的方法存根
-		return new TransportationDataSerImpl();
+		return TransportationDataSerImpl.getInstance();
 	}
 
 }
