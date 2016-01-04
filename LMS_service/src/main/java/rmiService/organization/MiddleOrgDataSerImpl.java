@@ -366,7 +366,7 @@ public class MiddleOrgDataSerImpl extends UnicastRemoteObject implements MiddleO
 		if (resultSet.getString(1)!=null) {
 			String bussinessHallList[]=resultSet.getString(1).split(",");
 			for (int i = 0; i < bussinessHallList.length; i++) {
-				BussinessOrgDataSerImpl bussinessOrgDataSerImpl=new BussinessOrgDataSerImpl();
+				BussinessOrgDataSerImpl bussinessOrgDataSerImpl=BussinessOrgDataSerImpl.getInstance();
 				bussinessOrgDataSerImpl.removeBussinessHall(ID+"-"+bussinessHallList[i], bussinessHallList[i]);
 			}
 		}if (resultSet.getString(2)!=null) {
