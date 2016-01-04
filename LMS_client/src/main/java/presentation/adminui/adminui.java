@@ -3,8 +3,8 @@ package presentation.adminui;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Graphics;
 import java.awt.HeadlessException;
+import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,24 +12,19 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 import java.rmi.RemoteException;
-
-import javax.naming.InitialContext;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JTextField;
-
 import businesslogic.accountbl.AccountInfoController;
-import businesslogic.financebl.AccountManageModel.addAccountBL;
 import presentation.mainui.mainui;
-import presentation.senderui.senderui;
-import vo.accountVO.AccountNumberVO;
-
+import presentation.adminui.MyDialog;
+import presentation.adminui.dialogJpanel;
 public class adminui extends JFrame{
+	static Point origin = new Point();
 			private String[] args;
 			JTextField accountField;
 			JButton searchButton;
@@ -138,6 +133,22 @@ public class adminui extends JFrame{
 				this.setVisible(true);
 			}
 			private void registListener(final adminui aui,final adminJpanel apl){
+				aui.addMouseListener(new MouseAdapter() {
+					public void mousePressed(MouseEvent e) {
+						// 当鼠标按下的时候获得窗口当前的位置
+						origin.x = e.getX();
+						origin.y = e.getY();
+					}
+				});
+				aui.addMouseMotionListener(new MouseMotionAdapter() {
+					public void mouseDragged(MouseEvent e) {
+						// 当鼠标拖动时获取窗口当前位置
+						Point p = aui.getLocation();
+						// 设置窗口的位置
+						// 窗口当前的位置 + 鼠标当前在窗口的位置 - 鼠标按下的时候在窗口的位置
+						aui.setLocation(p.x + e.getX() - origin.x, p.y + e.getY()- origin.y);
+					}
+				});
 				zuixiaohuaButton.addMouseListener(new MouseAdapter() {
 					ImageIcon zuixiaohuaIcon=new ImageIcon("picture/最小化.png");
 					ImageIcon zuixiaohuaIcon2=new ImageIcon("picture/最小化2.png");
@@ -232,7 +243,6 @@ public class adminui extends JFrame{
 								aui.repaint();
 							}else{
 								new DisplayDialog(aui, "未找到账号，请重新输入");
-//								JOptionPane.showMessageDialog(aui, "未找到账号，请重新输入");
 							}
 						} catch (HeadlessException e1) {
 							// TODO Auto-generated catch block
@@ -243,11 +253,9 @@ public class adminui extends JFrame{
 						}
 					}else {
 						new DisplayDialog(aui, "未找到账号，请重新输入");
-//						JOptionPane.showMessageDialog(aui, "请输入账号");
 					}					
 				}else {
 					new DisplayDialog(aui, "请输入账号");
-//					JOptionPane.showMessageDialog(aui, "请输入账号");
 				}
 				
 			}

@@ -2,11 +2,13 @@ package presentation.financialstaffui;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
@@ -19,6 +21,7 @@ import po.financePO.BooksPO;
 import businesslogic.financebl.BooksModel.BooksController;
 
 public class b5financialstaffui extends JFrame{
+	static Point origin = new Point();
 	private financialstaffJpanel financialstaffJpanel;
 	financialstaffb5OperationJpanel operationJpanel;
 	JButton b1,b2;
@@ -36,6 +39,22 @@ public class b5financialstaffui extends JFrame{
 	private void registListener(
 		final b5financialstaffui b5financialstaffui,
 		final 	financialstaffJpanel financialstaffJpanel) {
+		b5financialstaffui.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				// 当鼠标按下的时候获得窗口当前的位置
+				origin.x = e.getX();
+				origin.y = e.getY();
+			}
+		});
+		b5financialstaffui.addMouseMotionListener(new MouseMotionAdapter() {
+			public void mouseDragged(MouseEvent e) {
+				// 当鼠标拖动时获取窗口当前位置
+				Point p = b5financialstaffui.getLocation();
+				// 设置窗口的位置
+				// 窗口当前的位置 + 鼠标当前在窗口的位置 - 鼠标按下的时候在窗口的位置
+				b5financialstaffui.setLocation(p.x + e.getX() - origin.x, p.y + e.getY()- origin.y);
+			}
+		});
 		zuixiaohuaButton.addMouseListener(new MouseAdapter() {
 			ImageIcon zuixiaohuaIcon=new ImageIcon("picture/最小化.png");
 			ImageIcon zuixiaohuaIcon2=new ImageIcon("picture/最小化2.png");

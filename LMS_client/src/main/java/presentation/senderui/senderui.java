@@ -4,11 +4,13 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -22,6 +24,7 @@ import javax.swing.JScrollPane;
 import presentation.mainui.mainui;
 
 public class senderui extends JFrame{
+	static Point origin = new Point();
 	private String[] args;
 	private JLabel jLabel1;
 	private JLabel jLabel2;
@@ -139,6 +142,22 @@ public class senderui extends JFrame{
 		this.setVisible(true);
 	}
 	private void registerLister(final senderui s){
+		s.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				// 当鼠标按下的时候获得窗口当前的位置
+				origin.x = e.getX();
+				origin.y = e.getY();
+			}
+		});
+		s.addMouseMotionListener(new MouseMotionAdapter() {
+			public void mouseDragged(MouseEvent e) {
+				// 当鼠标拖动时获取窗口当前位置
+				Point p = s.getLocation();
+				// 设置窗口的位置
+				// 窗口当前的位置 + 鼠标当前在窗口的位置 - 鼠标按下的时候在窗口的位置
+				s.setLocation(p.x + e.getX() - origin.x, p.y + e.getY()- origin.y);
+			}
+		});
 		zuixiaohuaButton.addMouseListener(new MouseAdapter() {
 			ImageIcon zuixiaohuaIcon=new ImageIcon("picture/最小化.png");
 			ImageIcon zuixiaohuaIcon2=new ImageIcon("picture/最小化2.png");

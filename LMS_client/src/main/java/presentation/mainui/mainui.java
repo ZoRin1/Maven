@@ -3,15 +3,15 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionAdapter;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
@@ -45,6 +45,7 @@ class mainFrame extends JFrame{
 	/**
 	 * 
 	 */
+	static Point origin = new Point();
 	private static final long serialVersionUID = 1L;
 	private AccountLoginController accountLoginController;
 	private documentController documentController;
@@ -159,6 +160,22 @@ class mainFrame extends JFrame{
 			this.setVisible(true);
 		}
 		private void registerLister(final mainFrame mf,final String[] args) {
+			mf.addMouseListener(new MouseAdapter() {
+				public void mousePressed(MouseEvent e) {
+					// 当鼠标按下的时候获得窗口当前的位置
+					origin.x = e.getX();
+					origin.y = e.getY();
+				}
+			});
+			mf.addMouseMotionListener(new MouseMotionAdapter() {
+				public void mouseDragged(MouseEvent e) {
+					// 当鼠标拖动时获取窗口当前位置
+					Point p = mf.getLocation();
+					// 设置窗口的位置
+					// 窗口当前的位置 + 鼠标当前在窗口的位置 - 鼠标按下的时候在窗口的位置
+					mf.setLocation(p.x + e.getX() - origin.x, p.y + e.getY()- origin.y);
+				}
+			});
 			accountnumberJTextField.addKeyListener(new KeyAdapter() {
 				public void keyTyped(KeyEvent e) {
 					// TODO Auto-generated method stub
@@ -306,98 +323,98 @@ class mainFrame extends JFrame{
 			});
 		}
 //		此方法为预览各个界面，之后删除
-		private void preview(final mainFrame mf,final String[] args){
-			JLabel privewJLabel=new JLabel("预览界面");
-			 JButton b1,b2,b3,b4,b5,b6,b7;
-			b1=new JButton("admin");
-			b2=new JButton("bhclerk");
-			b3=new JButton("courier");
-			b4=new JButton("financialstaff");
-			b5=new JButton("icclerk");
-			b6=new JButton("icwarehouseman");
-			b7=new JButton("topmanager");
-			mainJPanel.add(privewJLabel);
-			mainJPanel.add(b1);
-			mainJPanel.add(b2);
-			mainJPanel.add(b3);
-			mainJPanel.add(b4);
-			mainJPanel.add(b5);
-			mainJPanel.add(b6);
-			mainJPanel.add(b7);
-			privewJLabel.setBounds(420, 520, 200, 50);
-			privewJLabel.setForeground(Color.white);
-			privewJLabel.setFont(new Font("幼圆",Font.BOLD,36));
-			b1.setBounds(150,600 , 80, 30);
-			b2.setBounds(250,600 , 80, 30);
-			b3.setBounds(350,600 , 80, 30);
-			b4.setBounds(450,600 , 80, 30);
-			b5.setBounds(550,600 , 80, 30);
-			b6.setBounds(650,600 , 80, 30);
-			b7.setBounds(750,600 , 80, 30);
-b1.addActionListener(new ActionListener() {
-				
-				public void actionPerformed(ActionEvent e) {
-					// TODO Auto-generated method stub
-
-					new adminui("管理员界面",args);
-					mf.dispose();
-				}
-			});
-b2.addActionListener(new ActionListener() {
-				
-				public void actionPerformed(ActionEvent e) {
-					// TODO Auto-generated method stub
-
-					new bhclerkui("营业厅业务员界面",args,"111","3-南京-仙林营业厅-001-001");
-					mf.dispose();
-				}
-			});
-b3.addActionListener(new ActionListener() {
-	
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-
-		new courierui("快递员界面",args,accountnumberJTextField.getText(),"");
-		mf.dispose();
-	}
-});
-b4.addActionListener(new ActionListener() {
-	
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-
-		new financialstaffui("财务人员界面",args,"1515","");
-		mf.dispose();
-	}
-});
-b5.addActionListener(new ActionListener() {
-	
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-
-		new icclerkui("中转中心业务员界面",args,"111","3-南京-南京中转中心-001");
-		mf.dispose();
-	}
-});
-b6.addActionListener(new ActionListener() {
-	
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-
-		new icwarehousemanui("中转中心仓库管理员界面",args,"1515","4-南京-中转中心-001");
-		mf.dispose();
-	}
-});
-b7.addActionListener(new ActionListener() {
-	
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-
-		new topmanagerui("总经理界面",args);
-		mf.dispose();
-	}
-});
-		}
+//		private void preview(final mainFrame mf,final String[] args){
+//			JLabel privewJLabel=new JLabel("预览界面");
+//			 JButton b1,b2,b3,b4,b5,b6,b7;
+//			b1=new JButton("admin");
+//			b2=new JButton("bhclerk");
+//			b3=new JButton("courier");
+//			b4=new JButton("financialstaff");
+//			b5=new JButton("icclerk");
+//			b6=new JButton("icwarehouseman");
+//			b7=new JButton("topmanager");
+//			mainJPanel.add(privewJLabel);
+//			mainJPanel.add(b1);
+//			mainJPanel.add(b2);
+//			mainJPanel.add(b3);
+//			mainJPanel.add(b4);
+//			mainJPanel.add(b5);
+//			mainJPanel.add(b6);
+//			mainJPanel.add(b7);
+//			privewJLabel.setBounds(420, 520, 200, 50);
+//			privewJLabel.setForeground(Color.white);
+//			privewJLabel.setFont(new Font("幼圆",Font.BOLD,36));
+//			b1.setBounds(150,600 , 80, 30);
+//			b2.setBounds(250,600 , 80, 30);
+//			b3.setBounds(350,600 , 80, 30);
+//			b4.setBounds(450,600 , 80, 30);
+//			b5.setBounds(550,600 , 80, 30);
+//			b6.setBounds(650,600 , 80, 30);
+//			b7.setBounds(750,600 , 80, 30);
+//b1.addActionListener(new ActionListener() {
+//				
+//				public void actionPerformed(ActionEvent e) {
+//					// TODO Auto-generated method stub
+//
+//					new adminui("管理员界面",args);
+//					mf.dispose();
+//				}
+//			});
+//b2.addActionListener(new ActionListener() {
+//				
+//				public void actionPerformed(ActionEvent e) {
+//					// TODO Auto-generated method stub
+//
+//					new bhclerkui("营业厅业务员界面",args,"111","3-南京-仙林营业厅-001-001");
+//					mf.dispose();
+//				}
+//			});
+//b3.addActionListener(new ActionListener() {
+//	
+//	public void actionPerformed(ActionEvent e) {
+//		// TODO Auto-generated method stub
+//
+//		new courierui("快递员界面",args,accountnumberJTextField.getText(),"");
+//		mf.dispose();
+//	}
+//});
+//b4.addActionListener(new ActionListener() {
+//	
+//	public void actionPerformed(ActionEvent e) {
+//		// TODO Auto-generated method stub
+//
+//		new financialstaffui("财务人员界面",args,"1515","");
+//		mf.dispose();
+//	}
+//});
+//b5.addActionListener(new ActionListener() {
+//	
+//	public void actionPerformed(ActionEvent e) {
+//		// TODO Auto-generated method stub
+//
+//		new icclerkui("中转中心业务员界面",args,"111","3-南京-南京中转中心-001");
+//		mf.dispose();
+//	}
+//});
+//b6.addActionListener(new ActionListener() {
+//	
+//	public void actionPerformed(ActionEvent e) {
+//		// TODO Auto-generated method stub
+//
+//		new icwarehousemanui("中转中心仓库管理员界面",args,"1515","4-南京-中转中心-001");
+//		mf.dispose();
+//	}
+//});
+//b7.addActionListener(new ActionListener() {
+//	
+//	public void actionPerformed(ActionEvent e) {
+//		// TODO Auto-generated method stub
+//
+//		new topmanagerui("总经理界面",args);
+//		mf.dispose();
+//	}
+//});
+//		}
 }
 class mainJpanel extends JPanel{
 	private ImageIcon backgroundIcon=new ImageIcon("picture/背景.png");
