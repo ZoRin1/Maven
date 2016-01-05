@@ -73,6 +73,7 @@ public class LoadingJpanel extends JPanel{
 	}
 	public void init(icclerkui ui){
 		list=state.split("-");
+		departure2=list[1];
 		Font font=new Font("幼圆",Font.BOLD,24);
 		code=new JLabel("单据编号：");
 		code.setForeground(Color.white);
@@ -212,7 +213,7 @@ public class LoadingJpanel extends JPanel{
 				int length=list1.length;
 				for(int i=0;i<length;i++){
 					String[] split1=list1[i].split("-");
-					if(str1.equals(split1[0]+"营业厅")){
+					if(str1.equals(split1[0])){
 						a=false;
 						break;
 					}
@@ -269,6 +270,7 @@ public class LoadingJpanel extends JPanel{
 						new InternetDialog(ui);
 					}
 					double charge=Double.parseDouble(str);
+					
 					po=new LoadingPO(date, code2, "营业厅装车单", account, departure2, arrival2, supervisor, supercargo, codeList, charge);
 					try {
 						new documentController().createBlock(po);

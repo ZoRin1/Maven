@@ -113,12 +113,14 @@ public class AcceptDocumentJpanel extends JPanel{
 		this.add(date1);
 		
 		departure=new JLabel("出发地："+split[1]+"中转中心");
+		departure2=split[1];
 		departure.setForeground(Color.white);
 		departure.setFont(font);
 		departure.setBounds(30,164,275,27);
 		this.add(departure);
 		
 		arrival=new JLabel("到达地："+split[2]+"营业厅");
+		arrival2=split[2];
 		arrival.setForeground(Color.white);
 		arrival.setFont(font);
 		arrival.setBounds(30,231,250,27);
@@ -301,7 +303,7 @@ class DispatchJpanel extends JPanel{
 		Tcode=new JLabel("订单条形码号："+tcode);
 		Tcode.setForeground(Color.white);
 		Tcode.setFont(font);
-		Tcode.setBounds(30,164,300,27);
+		Tcode.setBounds(30,164,500,27);
 		this.add(Tcode);
 		
 		member=new JLabel("派件员：");
@@ -335,10 +337,11 @@ class DispatchJpanel extends JPanel{
 				String[] split=state.split("-");
 				boolean a=true;
 				try {
-					String[] list=new BusinessController().getCourierList(split[4]+split[5]);
+					String[] list=new BusinessController().getCourierList(split[4]+"-"+split[5]);
 					int length=list.length;
 					for(int i=0;i<length;i++){
-						if(list[i].equals(Member.getText())){
+						String name[]=list[i].split("-");
+						if(name[1].equals(Member.getText())){
 							a=false;
 							break;
 						}

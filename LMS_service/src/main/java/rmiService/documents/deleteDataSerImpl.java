@@ -181,9 +181,9 @@ public class deleteDataSerImpl extends UnicastRemoteObject implements deleteData
 				resultSet2=preparedStatement.executeQuery();
 				resultSet2.next();	
 				s=resultSet2.getString(2).split(",");
-				String wuliu6=resultSet2.getString(1)+" 您的快递已离开"+resultSet2.getString(3)+"中转中心";
+				String wuliu4=resultSet2.getString(1)+" 您的快递已离开"+resultSet2.getString(3)+"中转中心";
 				for (int i = 0; i < s.length; i++) {
-				sql="update 物流信息 set wuliu6='"+wuliu6+"' where code ='"+s[i]+"'";
+				sql="update 物流信息 set wuliu4='"+wuliu4+"' where code ='"+s[i]+"'";
 				preparedStatement=connection.prepareStatement(sql);
 				preparedStatement.executeUpdate();
 			}

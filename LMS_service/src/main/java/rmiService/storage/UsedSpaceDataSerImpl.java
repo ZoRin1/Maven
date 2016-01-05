@@ -46,6 +46,7 @@ public class UsedSpaceDataSerImpl extends UnicastRemoteObject implements UsedSpa
 			PreparedStatement preparedStatement=connection.prepareStatement(sql);
 			ResultSet resultSet=preparedStatement.executeQuery();
 			resultSet.last();
+			System.out.println(resultSet.getRow());
 			space[0] = resultSet.getRow();
 			sql="SELECT AreaNum,RowNum,ShelvesNum,SositionNum from "+city+"中转中心仓库"+" where isFull=1 and (AreaNum=2 or AreaNum=6)";
 			preparedStatement=connection.prepareStatement(sql);

@@ -196,7 +196,7 @@ public class ZReceiveJpanel extends JPanel{
 						// TODO Auto-generated catch block
 						new InternetDialog(ui);
 					}
-					if(stri.equals(null)){
+					if(stri==null){
 						b=true;
 						str3=list1[i];
 						break;
@@ -206,7 +206,7 @@ public class ZReceiveJpanel extends JPanel{
 				if(depart.getText().equals("")||tcode.getText().equals("")){
 					new notFinishDialog(ui,"输入有误",true);
 				}
-				else if(b=true){
+				else if(b==true){
 					new notFindDialog(ui, "订单条形码号不存在", true, str3);
 				}
 				else{

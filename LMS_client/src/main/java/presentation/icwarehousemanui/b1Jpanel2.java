@@ -13,6 +13,7 @@ import java.util.Date;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -32,7 +33,8 @@ public class b1Jpanel2 extends JPanel{
 	private JButton returnButton;
 	private b1Jpanel1 b1Jpanel1;
 	private JLabel j1,j2,j3,j4,j5,j6,j7,j8,t1,t2,t5,t6;
-	private JTextField t3,t4,t7;
+	private JTextField t3,t7;
+	private JComboBox<String> t4;
 	private JButton yesButton;
 	private String code;
 	private String account;
@@ -98,7 +100,9 @@ public class b1Jpanel2 extends JPanel{
 		}
 		t2 = new JLabel(code);
 		t3 = new JTextField();
-		t4 = new JTextField();
+		final String type[]={"汽运","火运","航运"};
+		t4=new JComboBox<String>(type);		
+		t4.setEditable(false);
 		t5 = new JLabel("出库单");
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		t6 = new JLabel(dateFormat.format(new Date()));
@@ -112,7 +116,7 @@ public class b1Jpanel2 extends JPanel{
 		t1.setFont(new Font("幼圆",Font.BOLD,24));
 		t2.setFont(new Font("幼圆",Font.BOLD,24));
 		t3.setFont(new Font("幼圆",Font.BOLD,24));
-		t4.setFont(new Font("幼圆",Font.BOLD,24));
+		t4.setFont(new Font("幼圆",Font.BOLD,22));
 		t5.setFont(new Font("幼圆",Font.BOLD,24));
 		t6.setFont(new Font("幼圆",Font.BOLD,24));
 		t7.setFont(new Font("幼圆",Font.BOLD,24));
@@ -158,9 +162,6 @@ public class b1Jpanel2 extends JPanel{
 		if (t3.getText().equals("")) {
 			return false;
 		}
-		if (t4.getText().equals("")) {
-			return false;
-		}
 		if (t7.getText().equals("")) {
 			return false;
 		}
@@ -188,7 +189,7 @@ public class b1Jpanel2 extends JPanel{
 				ImageIcon lv=new ImageIcon("picture/绿.png");
 				if (isFull()) {
 					try {
-						documentController.createBlock(new OutbillsPO(t1.getText(), "出库单", code, t6.getText(), account, t3.getText(), t4.getText(), t7.getText()));
+						documentController.createBlock(new OutbillsPO(t1.getText(), "出库单", code, t6.getText(), account, t3.getText(), (String)t4.getSelectedItem(), t7.getText()));
 					} catch (RemoteException e) {
 						// TODO Auto-generated catch block
 						new InternetDialog(ui);
