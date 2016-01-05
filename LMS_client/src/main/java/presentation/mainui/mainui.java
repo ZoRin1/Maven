@@ -555,6 +555,7 @@ class checkFailDialog extends JDialog{
 		this.setLocation((screenWidth-dialogWidth)/2, (screenHeight-dialogHeight)/2);
 		this.setResizable(false);
 	}
+	
 	private void registerListener(){
 		jButton.addActionListener(new ActionListener() {		
 			public void actionPerformed(ActionEvent e) {
