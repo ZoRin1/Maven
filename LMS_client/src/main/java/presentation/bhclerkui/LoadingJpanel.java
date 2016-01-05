@@ -191,21 +191,21 @@ public class LoadingJpanel extends JPanel{
 				date = dateFormat.format( now );
 				
 				String str1=Carcode.getText();
-				boolean a=true;
-				String[] list1=null;
-				try {
-					list1 = new BhclerkController().getVehicleList(list[4]+list[5]);
-				} catch (RemoteException e1) {
-					// TODO Auto-generated catch block
-					new InternetDialog(ui);
-				}
-				int length=list1.length;
-				for(int i=0;i<length;i++){	
-					if(list[i].equals(str1)){
-						a=false;
-						break;
-					}
-				}
+//				boolean a=true;
+//				String[] list1=null;
+//				try {
+//					list1 = new BhclerkController().getVehicleList(list[4]+list[5]);
+//				} catch (RemoteException e1) {
+//					// TODO Auto-generated catch block
+//					new InternetDialog(ui);
+//				}
+//				int length=list1.length;
+//				for(int i=0;i<length;i++){	
+//					if(list[i].equals(str1)){
+//						a=false;
+//						break;
+//					}
+//				}
 				String[] list2=tcode.getText().split("，");//此处或许应该加以参数把英文逗号转为中文逗号或要求员工必须使用中文输入法
 				int size=list2.length;
 				codeList=new ArrayList<>();
@@ -231,9 +231,9 @@ public class LoadingJpanel extends JPanel{
 					new notFinishDialog(ui, "输入有误", true);
 					panel.repaint();
 				}
-				else if(a){
-					new notFindDialog(ui, "车辆编号不存在", true, "车辆编号");
-				}
+//				else if(a){
+//					new notFindDialog(ui, "车辆编号不存在", true, "车辆编号");
+//				}
 				else if(b){
 					new notFindDialog(ui, "订单条形码号不存在", true, str3);
 				}
