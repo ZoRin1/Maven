@@ -13,11 +13,9 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import presentation.financialstaffui.dialogJpanel;
 import vo.financeVO.AccountVO;
 import businesslogic.financebl.AccountManageModel.AccountManageBL;
 

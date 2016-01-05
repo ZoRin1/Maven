@@ -202,7 +202,8 @@ public class ReceiptJPanel extends JPanel{
 				int size1=list1.length;
 				boolean a=true;//a为真代表快递员不存在
 				for(int i=0;i<size1;i++){
-					if(name.getText().equals(list1[i])){
+					String cname[]=list1[i].split("-");
+					if(name.getText().equals(cname[1])){
 						a=false;
 						break;
 					}

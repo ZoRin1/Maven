@@ -9,6 +9,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import javax.swing.*;
@@ -17,8 +18,9 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
-
+import businesslogic.financebl.AccountManageModel.AccountManageBL;
 import vo.financeVO.AccountVO;
+import presentation.financialstaffui.dialogJpanel;
 
 public class b2b1Jpanel1JTable {
 	
@@ -294,18 +296,20 @@ public class b2b1Jpanel1JTable {
 						new panduanDialog(b2financialstaffui);
 						return;
 					}
-					String[] temp = inputSums.getText().split("\\.");
-					if(temp.length>2){
-						new geshiDialog(b2financialstaffui);
-						return;
+						String[] temp = inputSums.getText().split("\\.");
+						if(temp.length>2){
+							new geshiDialog(b2financialstaffui);
+							return;
+						}
+						theName = inputName.getText();
+						theSums = inputSums.getText();
+						b2.setEnabled(false);
+						b3.setEnabled(false);
+						b5.setEnabled(false);
+						xinzeng.dispose();
 					}
-					theName = inputName.getText();
-					theSums = inputSums.getText();
-					b2.setEnabled(false);
-					b3.setEnabled(false);
-					b5.setEnabled(false);
-					xinzeng.dispose();
-				}
+				
+				
 			});
 			
 			dialogPanel = new beijingPanel();

@@ -80,9 +80,9 @@ public class b4Jpanel2JTable {
 		for(int i = 0 ; i < receiptList.size();i++)
 			o3[i] = receiptList.get(i).getDate();
 		for(int i = 0 ; i < receiptList.size();i++)
-			o4[i] = receiptList.get(i).getAccount();
+			o5[i] = receiptList.get(i).getAccount();
 		for(int i = 0 ; i < receiptList.size();i++)
-			o5[i] = receiptList.get(i).getFund();
+			o4[i] = receiptList.get(i).getFund();
 		for(int i = 0 ; i < receiptList.size();i++)
 			o6[i] = "点击查看所有";
 		

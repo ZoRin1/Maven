@@ -230,15 +230,7 @@ public class b3b1Jpanel1 extends JPanel{
 				// TODO Auto-generated method stub
 				if (isFull()) {
 					//修改账户余额暂缺					
-					try {
-						documentController.createBlock(new PaymentPO(bianhaonumberJLabel.getText(), "付款单", riqi.getText(), account, Double.parseDouble(jineField.getText()), fukuanrenxingmingField.getText(), zhanghaoField.getText(), tiaomuJList.getSelectedValue(), beizhuJList.getSelectedValue()));
-					} catch (NumberFormatException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					} catch (RemoteException e1) {
-						// TODO Auto-generated catch block
-						new InternetDialog(b3financialstaffui);
-					}
+					
 				
 					//这里要加上改变账户余额的功能！！！
 					accountManage = new AccountManageBL();
@@ -257,7 +249,15 @@ public class b3b1Jpanel1 extends JPanel{
 					}else if(sign==-2){
 						new failDialog(b3financialstaffui, "余额不足", true,"余额不足，付款单创建不成功");
 					}else {
-						
+						try {
+							documentController.createBlock(new PaymentPO(bianhaonumberJLabel.getText(), "付款单", riqi.getText(), account, Double.parseDouble(jineField.getText()), fukuanrenxingmingField.getText(), zhanghaoField.getText(), tiaomuJList.getSelectedValue(), beizhuJList.getSelectedValue()));
+						} catch (NumberFormatException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (RemoteException e1) {
+							// TODO Auto-generated catch block
+							new InternetDialog(b3financialstaffui);
+						}
 						new finishDialog(b3financialstaffui, "新建付款单完成", true,"新建付款单完成");
 						financialstaffJpanel.remove(b3b1Jpanel1);
 						financialstaffJpanel.add(b3financialstaffui.operationJpanel);
